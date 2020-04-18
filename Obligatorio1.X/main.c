@@ -14,6 +14,8 @@
 
 
 unsigned short int cuenta, auxCuenta;
+char codigoEntrada[9];
+
 
 unsigned const char digito[] = {
     0b00000011, //digitos en binario del 0 al 9 (ánodo común)
@@ -38,15 +40,29 @@ void mostrarDigitos(unsigned int num) { //num debe ser el numero entero (por ej.
     
 }
 
+void configuracionTimer(){
+    OPTION_REG = 0b0001000; //Configuracion del timer, aumenta el timer en una unidad cada 1us
+}
+
+void iniciar_usart(){//función para iniciar el módulo USART PIC
+     TRISCbits.TRISC7=1;//pin RX como una entrada digital
+     TRISCbits.TRISC6=0;//pin TX como una salida digital
+     TXSTA=0b00100110;// 8bits, transmisión habilitada, asíncrono, alta velocidad
+     RCSTA=0b10010000;//habilitado el USART PIC, recepción 8 bits,  habilitada, asíncrono
+     SPBRG=25;//para una velocidad de 9600 baudios con un oscilador de 4Mhz
+    }
+
+
 void main(void) {
     
     //Seteo de entradas y salidas
     TRISA = 0x06; //Defino PORTA con RA1 Y RA2 como entradas (botones) y el resto salidas (leds(2))
     TRISB = 0x00; //Defino PORTC como salidas (Unidades)
     TRISD = 0x00; //Defino PORTD como salidas (Decenas)
+    INTCON = 0b11000000; //Habilito las interupciones
+    PIE1bits.RCIE=1;//habilita interrupción por recepción.
     
-
-    
+    iniciar_usart();//inicia el módulo USART PIC 
               
     
     if (eeprom_read(0x00) == 0xFF) {
@@ -55,13 +71,34 @@ void main(void) {
  
         
     }
-    
+    configuracionTimer();
     
     while(1) {
+        
+        TMR0 = 0;
+        
+        
+        
         
         
     }
     
     
     return;
+}
+
+void interrupt int_usart(){//rutina de atención a la interrupción por recepción
+    int i = 0;
+    int recibir = 1;
+    while(recibir){
+        if(RCIF == 1){
+            if(RCREG != 0x0D || RCREG != 0x0A){
+                codigoEntrada[i] = RCREG;
+                i++;
+            }
+            else{
+                recibir = 0;
+            }
+        }
+    }
 }
