@@ -11,9 +11,11 @@
 #define CANT_ART 15         //Cantidad de artículos
 
 #include <xc.h>
+#include <string.h>
 
 
 unsigned short int cuenta, auxCuenta;
+static short int huboInt = 0;
 char codigoEntrada[9];
 
 
@@ -33,6 +35,18 @@ unsigned const char *productos[] = {"01202001", "01202002"};
 unsigned const char *precios[] = {"010", "025"};
 
 void mostrarDigitos(unsigned int num) { //num debe ser el numero entero (por ej. 99,1 --> 99)
+    unsigned short int decimal;
+    //Verifico si puedo redondear el numero
+    if (num/10 < 99) {
+        decimal = num%10;
+        num =/10;
+        if (num%10 >= 5) {
+            num++;
+        }
+    }
+    else { 
+        num =/10;
+    }
     
     //Obtengo cociente y resto del numero dividido entre 10 para decenas y unidades: 
     PORTB=digito[(num/10)];
@@ -53,10 +67,82 @@ void iniciar_usart(){//función para iniciar el módulo USART PIC
     }
 
 
+void accionesAceptar(){
+    cuenta = 0;
+    auxCuenta = 0;
+    
+    mostrarDigitos(cuenta);
+    bailenLeds();
+}
+
+
+void accionesDeshacer(){
+    if (cuenta != auxCuenta){
+        cuenta = auxCuenta;
+        mostrarDigitos(cuenta);
+    }
+}
+
+
+
+
+void bailenLeds(){
+    unsigned short int i;
+    for (i = 0; i < 10; i++){
+        RA3 = 1;
+        __delay_ms(100);
+        RA4 = 1;
+        __delay_ms(100);
+        RA3 = 0;
+        __delay_ms(100);
+        RA4 = 0;
+    }
+}
+
+short int EEPROM_search(){
+    short int esta = 0;
+    short int direccion = 0;
+    short int numProd = 0;
+    short int precio;
+    while (esta < 8 || direccion < 96){
+        for(int i = 0; (i < LARGO_ART) && (esta != 0); i++){
+            if(codigoEntrada[i] == eeprom_read(direccion)){
+                esta++;
+            }
+            else{
+                esta = 0;
+            }
+            direccion++;
+        }
+        numProd++;
+    }
+    if (esta == 8){
+        precio = eeprom_read(96 + numProd*8); 
+    }
+    else{
+        precio = -1;
+    }
+    return precio;
+}
+
+void accionesPuertoSerial(){
+    short int Aux = 0;
+    char *stringCode;
+    
+    for (int i = 2; i < LARGO_ART; i++ ){
+        Aux += codigoEntrada[i];
+    }
+    
+    if(Aux == codigoEntrada[8]){
+        codigoEntrada[8] = 0; //Si funciona en ascii
+        stringCode = &codigoEntrada;
+        EEPROM_search();
+    }
+}
 void main(void) {
     
     //Seteo de entradas y salidas
-    TRISA = 0x06; //Defino PORTA con RA1 Y RA2 como entradas (botones) y el resto salidas (leds(2))
+    TRISA = 0x06; //Defino PORTA con RA1(Boton Aceptar) Y RA2(Boton deshacer) como entradas (botones) y el resto salidas (leds(2))
     TRISB = 0x00; //Defino PORTC como salidas (Unidades)
     TRISD = 0x00; //Defino PORTD como salidas (Decenas)
     INTCON = 0b11000000; //Habilito las interupciones
@@ -71,12 +157,18 @@ void main(void) {
  
         
     }
-    configuracionTimer();
     
     while(1) {
         
-        TMR0 = 0;
-        
+        if(RA1 == 1){
+            accionesAceptar();
+        }
+        else if(RA2 == 2){
+            accionesDeshacer();
+        }
+        else if(huboInt){
+            accionesPuertoSerial();
+        }
         
         
         
@@ -90,9 +182,10 @@ void main(void) {
 void interrupt int_usart(){//rutina de atención a la interrupción por recepción
     int i = 0;
     int recibir = 1;
+    huboInt = 1;
     while(recibir){
         if(RCIF == 1){
-            if(RCREG != 0x0D || RCREG != 0x0A){
+            if(RCREG != 0x0D || RCREG != 0x0A || i < 9){
                 codigoEntrada[i] = RCREG;
                 i++;
             }
