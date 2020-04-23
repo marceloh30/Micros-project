@@ -30,6 +30,7 @@
 
 
 
+
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -1743,7 +1744,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 23 "main.c" 2
+# 24 "main.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 1 3
 
@@ -1796,7 +1797,7 @@ extern char * strchr(const char *, int);
 extern char * strichr(const char *, int);
 extern char * strrchr(const char *, int);
 extern char * strrichr(const char *, int);
-# 24 "main.c" 2
+# 25 "main.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\math.h" 1 3
 
@@ -1831,13 +1832,13 @@ extern double ldexp(double, int);
 extern double fmod(double, double);
 extern double trunc(double);
 extern double round(double);
-# 25 "main.c" 2
+# 26 "main.c" 2
 
 
-unsigned short int cuenta, auxCuenta;
+
+static unsigned short int cuenta, auxCuenta;
 static short int huboInt = 0;
 static char codigoEntrada[9];
-
 
 static unsigned const char digito[] = {
     0b11111100,
@@ -1860,6 +1861,7 @@ static unsigned const char *productos[] = {(unsigned const char *)"01202001010",
 static unsigned short int prodIngresados = 0b0000000000000000;
 
 
+
 void mostrarDigitos(unsigned int num) {
     unsigned short int decimal;
 
@@ -1876,10 +1878,9 @@ void mostrarDigitos(unsigned int num) {
 
 
     PORTB=digito[(num/10)];
-    PORTD=digito[(num%10)];
+    PORTC=digito[(num%10)];
 
 }
-
 
 void iniciar_usart(){
      TRISCbits.TRISC7=1;
@@ -1887,11 +1888,11 @@ void iniciar_usart(){
      TXSTA=0b00100110;
      RCSTA=0b10010000;
      SPBRG=22;
-    }
+}
 
-void bailenLeds(){
+void bailenLeds() {
     unsigned short int i;
-    for (i = 0; i < 10; i++){
+    for (i = 0; i < 10; i++) {
         RA3 = 1;
         _delay((unsigned long)((200)*(3579545/4000.0)));
         RA4 = 1;
@@ -1903,17 +1904,14 @@ void bailenLeds(){
 }
 
 void accionesAceptar(){
-
     cuenta = 0;
     auxCuenta = 0;
-    prodIngresados = 0;
 
     mostrarDigitos(cuenta);
     bailenLeds();
 }
 
 void accionesDeshacer(){
-
     if (cuenta != auxCuenta){
         cuenta = auxCuenta;
         mostrarDigitos(cuenta);
@@ -1921,6 +1919,7 @@ void accionesDeshacer(){
 }
 
 short int EEPROM_search() {
+
 
     short int esta = 0;
     short int direccion = 0;
@@ -1945,6 +1944,7 @@ short int EEPROM_search() {
         direccion = direccion + 3;
         numProd++;
     }
+
     numProd--;
 
     if ( (esta == 8) && !( prodIngresados & (int) pow(2,numProd) ) ) {
@@ -1958,13 +1958,12 @@ short int EEPROM_search() {
         prodIngresados = prodIngresados | ((int) pow(2,numProd));
 
     }
-
     return precio;
 }
 
 void accionesPuertoSerial(){
-
     short int Aux = 0;
+
 
     for (int i = 0; i < 8; i++ ) {
         Aux += (codigoEntrada[i] - '0');
@@ -1992,6 +1991,7 @@ void accionesPuertoSerial(){
         RA4 = 0;
     }
 }
+
 void main(void) {
 
 
@@ -2000,7 +2000,6 @@ void main(void) {
     TRISD = 0x00;
     INTCON = 0b11000000;
     PIE1bits.RCIE=1;
-
     iniciar_usart();
 
 
@@ -2011,30 +2010,34 @@ void main(void) {
                 eeprom_write(0x00+(8 + 3)*i + j,(productos[i])[j]);
             }
         }
+
     }
 
     while(1) {
 
-        if(RA1 == 1) {
+        if(RA1) {
+            while(RA1);
             accionesAceptar();
         }
-        else if(RA2 == 1){
+        else if(RA2) {
+            while(RA2);
             accionesDeshacer();
         }
-        else if(huboInt){
+        else if(huboInt) {
             accionesPuertoSerial();
         }
-
     }
 
-    return;
 }
 
-void __attribute__((picinterrupt(("")))) int_usart(){
-    int i = 0;
-    int recibir = 1;
+
+void __attribute__((picinterrupt(("")))) int_usart() {
+
+    short int i = 0;
+    short int recibir = 1;
     huboInt = 1;
-    while(recibir){
+
+    while(recibir) {
         if(RCIF == 1){
             if(RCREG != 0x0D || RCREG != 0x0A || i < 9){
                 codigoEntrada[i] = RCREG;
