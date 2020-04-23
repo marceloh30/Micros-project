@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files (x86)\Microchip\xc8\v2.10\pic\dat\en_msgs.txt \
   -cs -h+dist/default/production\Obligatorio1.X.production.sym \
   --cmf=dist/default/production\Obligatorio1.X.production.cmf -z -Q16F877A \
-  -oC:\Users\Chelo\AppData\Local\Temp\s6rk.2 --defsym=__MPLAB_BUILD=1 \
+  -oC:\Users\Chelo\AppData\Local\Temp\scag.2 --defsym=__MPLAB_BUILD=1 \
   -Mdist/default/production/Obligatorio1.X.production.map -E1 -ver=XC8 \
   --acfsm=1493 -ASTACK=0110h-016Fh -pstack=STACK -ACODE=00h-07FFhx4 \
   -ASTRCODE=00h-01FFFh -ASTRING=00h-0FFhx32 -ACONST=00h-0FFhx32 \
@@ -18,7 +18,7 @@ Linker command line:
   -pfunctab=ENTRY -ACONFIG=02007h-02007h -pconfig=CONFIG -DCONFIG=2 \
   -AIDLOC=02000h-02003h -pidloc=IDLOC -DIDLOC=2 -AEEDATA=00h-0FFh/02100h \
   -peeprom_data=EEDATA -DEEDATA=2 -DCODE=2 -DSTRCODE=2 -DSTRING=2 -DCONST=2 \
-  -DENTRY=2 -k C:\Users\Chelo\AppData\Local\Temp\s6rk.o \
+  -DENTRY=2 -k C:\Users\Chelo\AppData\Local\Temp\scag.o \
   dist/default/production\Obligatorio1.X.production.o 
 
 Object code version is 3.11
@@ -28,7 +28,7 @@ Machine type is 16F877A
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\Chelo\AppData\Local\Temp\s6rk.o
+C:\Users\Chelo\AppData\Local\Temp\scag.o
                 end_init                             12       12        3        8       0
                 reset_vec                             0        0        3        0       0
                 config                             2007     2007        1     400E       0
@@ -49,7 +49,7 @@ dist/default/production\Obligatorio1.X.production.o
                 text20                             1D3B     1D3B        D     3A76       0
                 text19                              39D      39D      288        8       0
                 text18                             1EE4     1EE4       50     3DC8       0
-                text17                              805      805       29     100A       0
+                text17                              803      803       29     1006       0
                 text16                               3C       3C      361        8       0
                 text15                             13D2     13D2      11E     27A4       0
                 text14                             1103     1103       A4     2206       0
@@ -66,7 +66,7 @@ dist/default/production\Obligatorio1.X.production.o
                 text3                              106C     106C       97     20D8       0
                 text2                              1DEF     1DEF       37     3BDE       0
                 text1                              1D48     1D48        F     3A90       0
-                maintext                            82E      82E       CE     105C       0
+                maintext                            82C      82C       D0     1058       0
                 cstackBANK0                          20       20       50       20       1
                 cstackCOMMON                         70       70        9       70       1
                 cstackBANK1                          A0       A0       4E       A0       1
@@ -100,7 +100,7 @@ TOTAL           Name                               Link     Load   Length     Sp
                 text20                             1D3B     1D3B        D         0
                 text19                              39D      39D      288         0
                 text18                             1EE4     1EE4       50         0
-                text17                              805      805       29         0
+                text17                              803      803       29         0
                 text16                               3C       3C      361         0
                 text15                             13D2     13D2      11E         0
                 text14                             1103     1103       A4         0
@@ -117,7 +117,7 @@ TOTAL           Name                               Link     Load   Length     Sp
                 text3                              106C     106C       97         0
                 text2                              1DEF     1DEF       37         0
                 text1                              1D48     1D48        F         0
-                maintext                            82E      82E       CE         0
+                maintext                            82C      82C       D0         0
                 inittext                            7EB      7EB       13         0
                 idataBANK3                         1000     1000       1A         0
 
@@ -177,8 +177,8 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
                 cstackCOMMON                   000070  00000D  00007D        70       1  COMMON      1
                 cstackBANK1                    0000A0  00004E  0000EE        A0       1  BANK1       1
                 dataBANK3                      000190  000043  0001D3       190       1  BANK3       1
-                text17                         000805  000029  00082E      100A       0  CODE        2
-                maintext                       00082E  0000CE  0008FC      105C       0  CODE        2
+                text17                         000803  000029  00082C      1006       0  CODE        2
+                maintext                       00082C  0000D0  0008FC      1058       0  CODE        2
                 text5                          0008FC  00023B  000B37      11F8       0  CODE        2
                 text4                          000B37  000252  000D89      166E       0  CODE        2
                 text7                          000D89  000291  00101A      1B12       0  CODE        2
@@ -216,15 +216,15 @@ UNUSED ADDRESS RANGES
         BANK2            0110-016F             60           1
         BANK3            01D3-01EF             1D           1
         CODE             0003-0003              1           2
-                         07FE-0804              2
+                         07FE-0802              2
                          1904-1D3A            437
         COMMON           007D-007D              1           1
         CONST            0003-0003              1           2
-                         07FE-0804              2
+                         07FE-0802              2
                          1904-1D3A            100
         EEDATA           2100-21FF            100           2
         ENTRY            0003-0003              1           2
-                         07FE-0804              2
+                         07FE-0802              2
                          1904-1D3A            100
         IDLOC            2000-2003              4           2
         RAM              00EE-00EF              2           1
@@ -236,10 +236,10 @@ UNUSED ADDRESS RANGES
         SFR3             0180-018F             10           1
         STACK            0110-016F             60           1
         STRCODE          0003-0003              1           2
-                         07FE-0804              7
+                         07FE-0802              5
                          1904-1D3A            437
         STRING           0003-0003              1           2
-                         07FE-0804              2
+                         07FE-0802              2
                          1904-1D3A            100
 
                                   Symbol Table
@@ -280,7 +280,7 @@ _INTCON                        (abs)        000B
 _INTCONbits                    (abs)        000B
 _PIE1bits                      (abs)        008C
 _PORTB                         (abs)        0006
-_PORTC                         (abs)        0007
+_PORTD                         (abs)        0008
 _RA1                           (abs)        0029
 _RA2                           (abs)        002A
 _RA3                           (abs)        002B
@@ -389,7 +389,7 @@ __S0                           (abs)        2008
 __S1                           (abs)        01D3
 __S2                           (abs)        0000
 __S3                           (abs)        0000
-__Umul8_16                     text17       0805
+__Umul8_16                     text17       0803
 __Umul8_16@multiplicand        cstackBANK0  0020
 __Umul8_16@multiplier          cstackBANK0  0028
 __Umul8_16@product             cstackBANK0  0024
@@ -462,7 +462,7 @@ ___xxtofl@exp                  cstackBANK0  0029
 ___xxtofl@sign                 cstackBANK0  0028
 ___xxtofl@val                  cstackBANK0  0020
 __end_of_EEPROM_search         text4        0D89
-__end_of__Umul8_16             text17       082E
+__end_of__Umul8_16             text17       082C
 __end_of___bmul                text24       1D6E
 __end_of___fladd               text19       0625
 __end_of___fldiv               text21       1800
@@ -508,7 +508,7 @@ __pcstackCOMMON                cstackCOMMON 0070
 __pdataBANK3                   dataBANK3    0190
 __pidataBANK3                  idataBANK3   1000
 __pintentry                    intentry     0004
-__pmaintext                    maintext     082E
+__pmaintext                    maintext     082C
 __pstringtext                  stringtext   1800
 __ptext1                       text1        1D48
 __ptext10                      text10       078F
@@ -518,7 +518,7 @@ __ptext13                      text13       1F84
 __ptext14                      text14       1103
 __ptext15                      text15       13D2
 __ptext16                      text16       003C
-__ptext17                      text17       0805
+__ptext17                      text17       0803
 __ptext18                      text18       1EE4
 __ptext19                      text19       039D
 __ptext2                       text2        1DEF
@@ -596,7 +596,7 @@ _iniciar_usart                 text1        1D48
 _int_usart                     text31       101A
 _ldexp                         text8        130A
 _log                           text6        0625
-_main                          maintext     082E
+_main                          maintext     082C
 _mostrarDigitos                text27       11A7
 _pow                           text5        08FC
 _pow$960                       cstackBANK1  00D1
@@ -1707,7 +1707,7 @@ Total ram usage:        4 bytes
 
  *************** function _int_usart *****************
  Defined at:
-		line 224 in file "main.c"
+		line 225 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1790,7 +1790,7 @@ C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\sprcmul.c
 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\sprcmul.c estimated size: 866
 
 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\Umul8_16.c
-		__Umul8_16     		CODE           	0805	0000	42
+		__Umul8_16     		CODE           	0803	0000	42
 
 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\Umul8_16.c estimated size: 42
 
@@ -1854,14 +1854,14 @@ main.c
 		_accionesDeshacer		CODE           	1DA8	0000	33
 		_int_usart     		CODE           	101A	0000	83
 		_mostrarDigitos		CODE           	11A7	0000	168
-		_main          		CODE           	082E	0000	207
+		_main          		CODE           	082C	0000	209
 		_EEPROM_search 		CODE           	0B37	0000	595
 		_bailenLeds    		CODE           	1E26	0000	61
 		_accionesAceptar		CODE           	1D6E	0000	28
 		_iniciar_usart 		CODE           	1D48	0000	16
 		_accionesPuertoSerial		CODE           	106C	0000	152
 
-main.c estimated size: 1343
+main.c estimated size: 1345
 
 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\floor.c
 		_floor         		CODE           	14F0	0000	308

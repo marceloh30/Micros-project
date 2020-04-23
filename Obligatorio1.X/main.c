@@ -214,6 +214,7 @@ void main(void) {
             accionesDeshacer();
         }
         else if(huboInt) {
+            huboInt = 0; 
             accionesPuertoSerial();
         }         
     }

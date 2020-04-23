@@ -1878,7 +1878,7 @@ void mostrarDigitos(unsigned int num) {
 
 
     PORTB=digito[(num/10)];
-    PORTC=digito[(num%10)];
+    PORTD=digito[(num%10)];
 
 }
 
@@ -2024,6 +2024,7 @@ void main(void) {
             accionesDeshacer();
         }
         else if(huboInt) {
+            huboInt = 0;
             accionesPuertoSerial();
         }
     }
