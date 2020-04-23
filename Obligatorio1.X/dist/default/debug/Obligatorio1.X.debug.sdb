@@ -1,0 +1,528 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F877A ]
+[d frameptr 0 ]
+"4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\evalpoly.c
+[v _eval_poly eval_poly `(d  1 e 4 0 ]
+"12 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\exp.c
+[v _exp exp `(d  1 e 4 0 ]
+"4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\fleq.c
+[v ___fleq __fleq `(b  1 e 0 0 ]
+"4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\flge.c
+[v ___flge __flge `(b  1 e 0 0 ]
+"15 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\flneg.c
+[v ___flneg __flneg `(d  1 e 4 0 ]
+"13 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\floor.c
+[v _floor floor `(d  1 e 4 0 ]
+"43 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\fltol.c
+[v ___fltol __fltol `(l  1 e 4 0 ]
+"254 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\frexp.c
+[v _frexp frexp `(d  1 e 4 0 ]
+"277
+[v _ldexp ldexp `(d  1 e 4 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\log.c
+[v _log log `(d  1 e 4 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\pow.c
+[v _pow pow `(d  1 e 4 0 ]
+"10 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"242
+[v ___flsub __flsub `(d  1 e 4 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+"15 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+"4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\Umul8.c
+[v ___bmul __bmul `(uc  1 e 1 0 ]
+"4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"10 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\xxtofl.c
+[v ___xxtofl __xxtofl `(d  1 e 4 0 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\pic\__eeread.c
+[v _eeprom_read eeprom_read `(uc  1 e 1 0 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\pic\__eewrite.c
+[v _eeprom_write eeprom_write `(v  1 e 1 0 ]
+"55 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\main.c
+[v _mostrarDigitos mostrarDigitos `(v  1 e 1 0 ]
+"75
+[v _iniciar_usart iniciar_usart `(v  1 e 1 0 ]
+"83
+[v _bailenLeds bailenLeds `(v  1 e 1 0 ]
+"96
+[v _accionesAceptar accionesAceptar `(v  1 e 1 0 ]
+"104
+[v _accionesDeshacer accionesDeshacer `(v  1 e 1 0 ]
+"111
+[v _EEPROM_search EEPROM_search `(s  1 e 2 0 ]
+"154
+[v _accionesPuertoSerial accionesPuertoSerial `(v  1 e 1 0 ]
+"185
+[v _main main `(v  1 e 1 0 ]
+"224
+[v _int_usart int_usart `II(v  1 e 1 0 ]
+[s S196 . 1 `uc 1 C 1 0 :1:0 
+`uc 1 DC 1 0 :1:1 
+`uc 1 Z 1 0 :1:2 
+`uc 1 nPD 1 0 :1:3 
+`uc 1 nTO 1 0 :1:4 
+`uc 1 RP 1 0 :2:5 
+`uc 1 IRP 1 0 :1:7 
+]
+"99 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
+[s S204 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 RP0 1 0 :1:5 
+`uc 1 RP1 1 0 :1:6 
+]
+[s S208 . 1 `uc 1 CARRY 1 0 :1:0 
+`uc 1 . 1 0 :1:1 
+`uc 1 ZERO 1 0 :1:2 
+]
+[u S212 . 1 `S196 1 . 1 0 `S204 1 . 1 0 `S208 1 . 1 0 ]
+[v _STATUSbits STATUSbits `VES212  1 e 1 @3 ]
+"216
+[v _PORTB PORTB `VEuc  1 e 1 @6 ]
+"340
+[v _PORTD PORTD `VEuc  1 e 1 @8 ]
+"454
+[v _INTCON INTCON `VEuc  1 e 1 @11 ]
+[s S233 . 1 `uc 1 RBIF 1 0 :1:0 
+`uc 1 INTF 1 0 :1:1 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 RBIE 1 0 :1:3 
+`uc 1 INTE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+"477
+[s S242 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 T0IE 1 0 :1:5 
+]
+[u S247 . 1 `S233 1 . 1 0 `S242 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES247  1 e 1 @11 ]
+"964
+[v _RCSTA RCSTA `VEuc  1 e 1 @24 ]
+"1066
+[v _RCREG RCREG `VEuc  1 e 1 @26 ]
+"1325
+[v _TRISA TRISA `VEuc  1 e 1 @133 ]
+"1375
+[v _TRISB TRISB `VEuc  1 e 1 @134 ]
+[s S24 . 1 `uc 1 TRISC0 1 0 :1:0 
+`uc 1 TRISC1 1 0 :1:1 
+`uc 1 TRISC2 1 0 :1:2 
+`uc 1 TRISC3 1 0 :1:3 
+`uc 1 TRISC4 1 0 :1:4 
+`uc 1 TRISC5 1 0 :1:5 
+`uc 1 TRISC6 1 0 :1:6 
+`uc 1 TRISC7 1 0 :1:7 
+]
+"1454
+[u S33 . 1 `S24 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES33  1 e 1 @135 ]
+"1499
+[v _TRISD TRISD `VEuc  1 e 1 @136 ]
+[s S71 . 1 `uc 1 TMR1IE 1 0 :1:0 
+`uc 1 TMR2IE 1 0 :1:1 
+`uc 1 CCP1IE 1 0 :1:2 
+`uc 1 SSPIE 1 0 :1:3 
+`uc 1 TXIE 1 0 :1:4 
+`uc 1 RCIE 1 0 :1:5 
+`uc 1 ADIE 1 0 :1:6 
+`uc 1 PSPIE 1 0 :1:7 
+]
+"1635
+[u S80 . 1 `S71 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES80  1 e 1 @140 ]
+"1999
+[v _TXSTA TXSTA `VEuc  1 e 1 @152 ]
+"2080
+[v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
+"2288
+[v _EEDATA EEDATA `VEuc  1 e 1 @268 ]
+"2295
+[v _EEADR EEADR `VEuc  1 e 1 @269 ]
+"2316
+[v _EECON1 EECON1 `VEuc  1 e 1 @396 ]
+[s S176 . 1 `uc 1 RD 1 0 :1:0 
+`uc 1 WR 1 0 :1:1 
+`uc 1 WREN 1 0 :1:2 
+`uc 1 WRERR 1 0 :1:3 
+`uc 1 . 1 0 :3:4 
+`uc 1 EEPGD 1 0 :1:7 
+]
+"2331
+[u S183 . 1 `S176 1 . 1 0 ]
+[v _EECON1bits EECON1bits `VES183  1 e 1 @396 ]
+"2361
+[v _EECON2 EECON2 `VEuc  1 e 1 @397 ]
+"2659
+[v _RA1 RA1 `VEb  1 e 0 @41 ]
+"2662
+[v _RA2 RA2 `VEb  1 e 0 @42 ]
+"2665
+[v _RA3 RA3 `VEb  1 e 0 @43 ]
+"2668
+[v _RA4 RA4 `VEb  1 e 0 @44 ]
+"2743
+[v _RCIF RCIF `VEb  1 e 0 @101 ]
+"3 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\errno.c
+[v _errno errno `i  1 e 2 0 ]
+"29 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\main.c
+[v _cuenta cuenta `us  1 s 2 cuenta ]
+[v _auxCuenta auxCuenta `us  1 s 2 auxCuenta ]
+"30
+[v _huboInt huboInt `s  1 s 2 huboInt ]
+"31
+[v _codigoEntrada codigoEntrada `[9]uc  1 s 9 codigoEntrada ]
+"33
+[v _digito digito `DC[10]uc  1 s 10 digito ]
+"46
+[v _productos productos `[13]*.25DCuc  1 s 26 productos ]
+"51
+[v _prodIngresados prodIngresados `us  1 s 2 prodIngresados ]
+"185
+[v _main main `(v  1 e 1 0 ]
+{
+"199
+[v main@j j `s  1 a 2 76 ]
+"198
+[v main@i i `s  1 a 2 74 ]
+"221
+} 0
+"75
+[v _iniciar_usart iniciar_usart `(v  1 e 1 0 ]
+{
+"81
+} 0
+"6 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\pic\__eewrite.c
+[v _eeprom_write eeprom_write `(v  1 e 1 0 ]
+{
+[v eeprom_write@addr addr `uc  1 a 1 wreg ]
+[v eeprom_write@addr addr `uc  1 a 1 wreg ]
+[v eeprom_write@value value `uc  1 p 1 4 ]
+[v eeprom_write@addr addr `uc  1 a 1 6 ]
+"9
+} 0
+"154 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\main.c
+[v _accionesPuertoSerial accionesPuertoSerial `(v  1 e 1 0 ]
+{
+"158
+[v accionesPuertoSerial@i i `i  1 a 2 70 ]
+"155
+[v accionesPuertoSerial@Aux Aux `s  1 a 2 72 ]
+"183
+} 0
+"111
+[v _EEPROM_search EEPROM_search `(s  1 e 2 0 ]
+{
+"121
+[v EEPROM_search@i i `i  1 a 2 14 ]
+"116
+[v EEPROM_search@numProd numProd `s  1 a 2 16 ]
+"115
+[v EEPROM_search@direccion direccion `s  1 a 2 12 ]
+"114
+[v EEPROM_search@esta esta `s  1 a 2 10 ]
+"117
+[v EEPROM_search@precio precio `s  1 a 2 0 ]
+"152
+} 0
+"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\pow.c
+[v _pow pow `(d  1 e 4 0 ]
+{
+"8
+[v pow@yi yi `ul  1 a 4 58 ]
+"7
+[v pow@sign sign `uc  1 a 1 57 ]
+"5
+[v pow@x x `d  1 p 4 40 ]
+[v pow@y y `d  1 p 4 44 ]
+"31
+} 0
+"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\log.c
+[v _log log `(d  1 e 4 0 ]
+{
+"7
+[v log@exponent exponent `i  1 a 2 24 ]
+"5
+[v log@x x `d  1 p 4 20 ]
+"9
+[v log@coeff coeff `DC[9]d  1 s 36 coeff ]
+"36
+} 0
+"12 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\exp.c
+[v _exp exp `(d  1 e 4 0 ]
+{
+"14
+[v exp@exponent exponent `i  1 a 2 37 ]
+"15
+[v exp@sign sign `uc  1 a 1 39 ]
+"12
+[v exp@x x `d  1 p 4 28 ]
+"17
+[v exp@coeff coeff `DC[10]d  1 s 40 coeff ]
+"57
+} 0
+"277 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\frexp.c
+[v _ldexp ldexp `(d  1 e 4 0 ]
+{
+[v ldexp@value value `d  1 p 4 20 ]
+[v ldexp@newexp newexp `i  1 p 2 24 ]
+"307
+} 0
+"13 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\floor.c
+[v _floor floor `(d  1 e 4 0 ]
+{
+"15
+[v floor@i i `d  1 a 4 4 ]
+"16
+[v floor@expon expon `i  1 a 2 8 ]
+"13
+[v floor@x x `d  1 p 4 0 ]
+"30
+} 0
+"254 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\frexp.c
+[v _frexp frexp `(d  1 e 4 0 ]
+{
+[v frexp@value value `d  1 p 4 26 ]
+[v frexp@eptr eptr `*.4i  1 p 1 30 ]
+"274
+} 0
+"4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\fleq.c
+[v ___fleq __fleq `(b  1 e 0 0 ]
+{
+[v ___fleq@ff1 ff1 `d  1 p 4 14 ]
+[v ___fleq@ff2 ff2 `d  1 p 4 18 ]
+"12
+} 0
+"10 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\xxtofl.c
+[v ___xxtofl __xxtofl `(d  1 e 4 0 ]
+{
+[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
+"13
+[v ___xxtofl@arg arg `ul  1 a 4 10 ]
+"12
+[v ___xxtofl@exp exp `uc  1 a 1 9 ]
+"10
+[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
+[v ___xxtofl@val val `l  1 p 4 0 ]
+"15
+[v ___xxtofl@sign sign `uc  1 a 1 8 ]
+"44
+} 0
+"43 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\fltol.c
+[v ___fltol __fltol `(l  1 e 4 0 ]
+{
+"45
+[v ___fltol@exp1 exp1 `uc  1 a 1 24 ]
+[v ___fltol@sign1 sign1 `uc  1 a 1 23 ]
+"43
+[v ___fltol@f1 f1 `d  1 p 4 14 ]
+"70
+} 0
+"4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\flge.c
+[v ___flge __flge `(b  1 e 0 0 ]
+{
+[v ___flge@ff1 ff1 `d  1 p 4 0 ]
+[v ___flge@ff2 ff2 `d  1 p 4 4 ]
+"19
+} 0
+"4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\evalpoly.c
+[v _eval_poly eval_poly `(d  1 e 4 0 ]
+{
+"6
+[v eval_poly@res res `d  1 a 4 16 ]
+"4
+[v eval_poly@x x `d  1 p 4 0 ]
+[v eval_poly@d d `*.25DCd  1 p 2 4 ]
+[v eval_poly@n n `i  1 p 2 6 ]
+"12
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+{
+[s S541 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+"13
+[s S546 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S549 . 4 `l 1 i 4 0 `d 1 f 4 0 `S541 1 fAsBytes 4 0 `S546 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S549  1 a 4 53 ]
+"12
+[v ___flmul@grs grs `ul  1 a 4 47 ]
+[s S618 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+"14
+[u S621 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S618 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S621  1 a 2 57 ]
+"10
+[v ___flmul@bexp bexp `uc  1 a 1 52 ]
+"11
+[v ___flmul@aexp aexp `uc  1 a 1 51 ]
+"9
+[v ___flmul@sign sign `uc  1 a 1 46 ]
+"8
+[v ___flmul@b b `d  1 p 4 33 ]
+[v ___flmul@a a `d  1 p 4 37 ]
+"205
+} 0
+"4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+{
+[v __Umul8_16@multiplier multiplier `uc  1 a 1 wreg ]
+"6
+[v __Umul8_16@word_mpld word_mpld `ui  1 a 2 6 ]
+"5
+[v __Umul8_16@product product `ui  1 a 2 4 ]
+"4
+[v __Umul8_16@multiplier multiplier `uc  1 a 1 wreg ]
+[v __Umul8_16@multiplicand multiplicand `uc  1 p 1 0 ]
+[v __Umul8_16@multiplier multiplier `uc  1 a 1 8 ]
+"60
+} 0
+"242 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\sprcadd.c
+[v ___flsub __flsub `(d  1 e 4 0 ]
+{
+[v ___flsub@a a `d  1 p 4 0 ]
+[v ___flsub@b b `d  1 p 4 4 ]
+"250
+} 0
+"10
+[v ___fladd __fladd `(d  1 e 4 0 ]
+{
+"17
+[v ___fladd@grs grs `uc  1 a 1 78 ]
+"15
+[v ___fladd@bexp bexp `uc  1 a 1 77 ]
+"16
+[v ___fladd@aexp aexp `uc  1 a 1 76 ]
+"13
+[v ___fladd@signs signs `uc  1 a 1 75 ]
+"10
+[v ___fladd@b b `d  1 p 4 59 ]
+[v ___fladd@a a `d  1 p 4 63 ]
+"237
+} 0
+"15 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\flneg.c
+[v ___flneg __flneg `(d  1 e 4 0 ]
+{
+[v ___flneg@f1 f1 `d  1 p 4 0 ]
+"20
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+{
+"21
+[v ___fldiv@grs grs `ul  1 a 4 20 ]
+"22
+[v ___fldiv@rem rem `ul  1 a 4 13 ]
+"20
+[v ___fldiv@new_exp new_exp `i  1 a 2 18 ]
+"19
+[v ___fldiv@aexp aexp `uc  1 a 1 25 ]
+"18
+[v ___fldiv@bexp bexp `uc  1 a 1 24 ]
+"16
+[v ___fldiv@sign sign `uc  1 a 1 17 ]
+"8
+[v ___fldiv@a a `d  1 p 4 0 ]
+[v ___fldiv@b b `d  1 p 4 4 ]
+"185
+} 0
+"6 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\pic\__eeread.c
+[v _eeprom_read eeprom_read `(uc  1 e 1 0 ]
+{
+[v eeprom_read@addr addr `uc  1 a 1 wreg ]
+[v eeprom_read@addr addr `uc  1 a 1 wreg ]
+"9
+[v eeprom_read@addr addr `uc  1 a 1 1 ]
+"19
+} 0
+"15 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+{
+"17
+[v ___wmul@product product `ui  1 a 2 8 ]
+"15
+[v ___wmul@multiplier multiplier `ui  1 p 2 4 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 6 ]
+"53
+} 0
+"4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\Umul8.c
+[v ___bmul __bmul `(uc  1 e 1 0 ]
+{
+[v ___bmul@multiplier multiplier `uc  1 a 1 wreg ]
+"6
+[v ___bmul@product product `uc  1 a 1 2 ]
+"4
+[v ___bmul@multiplier multiplier `uc  1 a 1 wreg ]
+[v ___bmul@multiplicand multiplicand `uc  1 p 1 0 ]
+"6
+[v ___bmul@multiplier multiplier `uc  1 a 1 3 ]
+"51
+} 0
+"104 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\main.c
+[v _accionesDeshacer accionesDeshacer `(v  1 e 1 0 ]
+{
+"109
+} 0
+"96
+[v _accionesAceptar accionesAceptar `(v  1 e 1 0 ]
+{
+"102
+} 0
+"55
+[v _mostrarDigitos mostrarDigitos `(v  1 e 1 0 ]
+{
+[v mostrarDigitos@num num `ui  1 p 2 8 ]
+"73
+} 0
+"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+{
+"10
+[v ___lwmod@counter counter `uc  1 a 1 5 ]
+"5
+[v ___lwmod@divisor divisor `ui  1 p 2 0 ]
+[v ___lwmod@dividend dividend `ui  1 p 2 2 ]
+"25
+} 0
+"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+{
+"10
+[v ___lwdiv@quotient quotient `ui  1 a 2 5 ]
+"11
+[v ___lwdiv@counter counter `uc  1 a 1 7 ]
+"5
+[v ___lwdiv@divisor divisor `ui  1 p 2 0 ]
+[v ___lwdiv@dividend dividend `ui  1 p 2 2 ]
+"30
+} 0
+"83 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\main.c
+[v _bailenLeds bailenLeds `(v  1 e 1 0 ]
+{
+"84
+[v bailenLeds@i i `us  1 a 2 2 ]
+"94
+} 0
+"224
+[v _int_usart int_usart `II(v  1 e 1 0 ]
+{
+"226
+[v int_usart@i i `s  1 a 2 7 ]
+"227
+[v int_usart@recibir recibir `s  1 a 2 5 ]
+"241
+} 0
