@@ -878,12 +878,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 149 ]
 {
 "232
-[; ;main.c: 232:         if(RCIF == 1){
+[; ;main.c: 232:         if(RCIF == 1) {
 [e $ ! == -> _RCIF `i -> 1 `i 151  ]
 {
 "233
-[; ;main.c: 233:             if(RCREG != 0x0D || RCREG != 0x0A || i < 9){
-[e $ ! || || != -> _RCREG `i -> 13 `i != -> _RCREG `i -> 10 `i < -> _i `i -> 9 `i 152  ]
+[; ;main.c: 233:             if( (RCREG != 0x0D || RCREG != 0x0A) && i < 9) {
+[e $ ! && || != -> _RCREG `i -> 13 `i != -> _RCREG `i -> 10 `i < -> _i `i -> 9 `i 152  ]
 {
 "234
 [; ;main.c: 234:                 codigoEntrada[i] = RCREG;
@@ -903,23 +903,26 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 238:                 recibir = 0;
 [e = _recibir -> -> 0 `i `s ]
 "239
-[; ;main.c: 239:             }
+[; ;main.c: 239:                 RCIF = 0;
+[e = _RCIF -> -> 0 `i `b ]
+"240
+[; ;main.c: 240:             }
 }
 [e :U 153 ]
-"240
-[; ;main.c: 240:         }
+"241
+[; ;main.c: 241:         }
 }
 [e :U 151 ]
-"241
-[; ;main.c: 241:     }
+"242
+[; ;main.c: 242:     }
 }
 [e :U 148 ]
 "231
 [; ;main.c: 231:     while(recibir) {
 [e $ != -> _recibir `i -> 0 `i 149  ]
 [e :U 150 ]
-"242
-[; ;main.c: 242: }
+"244
+[; ;main.c: 244: }
 [e :UE 147 ]
 }
 [a 3C 48 50 50 48 50 48 48 49 48 48 55 0 ]

@@ -2039,14 +2039,16 @@ void __attribute__((picinterrupt(("")))) int_usart() {
     huboInt = 1;
 
     while(recibir) {
-        if(RCIF == 1){
-            if(RCREG != 0x0D || RCREG != 0x0A || i < 9){
+        if(RCIF == 1) {
+            if( (RCREG != 0x0D || RCREG != 0x0A) && i < 9) {
                 codigoEntrada[i] = RCREG;
                 i++;
             }
             else{
                 recibir = 0;
+                RCIF = 0;
             }
         }
     }
+
 }
