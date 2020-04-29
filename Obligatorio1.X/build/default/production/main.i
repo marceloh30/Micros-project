@@ -1838,7 +1838,7 @@ extern double round(double);
 
 static unsigned short int cuenta, auxCuenta;
 static short int huboInt = 0;
-static char codigoEntrada[9];
+static char codigoEntrada[32];
 
 static unsigned const char digito[] = {
     0b11111100,
@@ -1936,7 +1936,6 @@ short int EEPROM_search() {
             }
             else{
                 esta = 0;
-                i = 8;
             }
             direccion++;
         }
@@ -1969,7 +1968,7 @@ void accionesPuertoSerial(){
         Aux += (codigoEntrada[i] - '0');
     }
 
-    if (Aux == (codigoEntrada[8] - '0')) {
+    if ( (Aux%10) == (codigoEntrada[8] - '0')) {
 
         Aux = EEPROM_search();
 
@@ -2033,20 +2032,18 @@ void main(void) {
 
 
 void __attribute__((picinterrupt(("")))) int_usart() {
-
     short int i = 0;
     short int recibir = 1;
     huboInt = 1;
 
     while(recibir) {
         if(RCIF == 1) {
-            if( (RCREG != 0x0D || RCREG != 0x0A) && i < 9) {
+            if(RCREG != 0x0D || RCREG != 0x0A) {
                 codigoEntrada[i] = RCREG;
-                i++;
+
             }
             else{
                 recibir = 0;
-                RCIF = 0;
             }
         }
     }

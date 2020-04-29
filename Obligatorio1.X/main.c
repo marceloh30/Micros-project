@@ -28,7 +28,7 @@
 //Defino variables estaticas (debido a que cruzan funciones)
 static unsigned short int cuenta, auxCuenta;
 static short int huboInt = 0;
-static char codigoEntrada[9]; 
+static char codigoEntrada[32]; 
 
 static unsigned const char digito[] = {
     0b11111100, //digitos en binario del 0 al 9 (catodo comun)
@@ -124,9 +124,8 @@ short int EEPROM_search() {
             if(codigoEntrada[i] == eeprom_read(direccion)) {
                 esta++;
             }
-            else{
-                esta = 0;
-                i = LARGO_ART; //Para salir del for.
+            else{                
+                esta = 0;               
             }
             direccion++;
         }
@@ -159,7 +158,7 @@ void accionesPuertoSerial(){
         Aux += (codigoEntrada[i] - '0');
     }
     //Verifico checksum
-    if (Aux == (codigoEntrada[8] - '0')) {         
+    if ( (Aux%10) == (codigoEntrada[8] - '0')) {         
         //Busco precio en eeprom, sumo y muestro nueva cuenta (utilizo Aux para utilizar la menor memoria posible)
         Aux = EEPROM_search(); //Guardo precio del articulo ingresado
         
@@ -223,20 +222,18 @@ void main(void) {
 
 //rutina de atención a la interrupción por Rx serial
 void __interrupt() int_usart() {
-    
     short int i = 0;
     short int recibir = 1;
     huboInt = 1;
     
     while(recibir) {
         if(RCIF == 1) {
-            if( (RCREG != 0x0D || RCREG != 0x0A) && i < 9) { //Verifico que no me sobrepase de los datos esperados! 
+            if(RCREG != 0x0D || RCREG != 0x0A) { //Verifico que no me sobrepase de los datos esperados! 
                 codigoEntrada[i] = RCREG;
-                i++;
+
             }
             else{
                 recibir = 0;
-                RCIF = 0; //Tenemos que ver esto.
             }
         }
     }

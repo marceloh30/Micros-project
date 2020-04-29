@@ -3,6 +3,8 @@
 [d edition pro ]
 [d chip 16F877A ]
 [d frameptr 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
 "4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\evalpoly.c
 [v _eval_poly eval_poly `(d  1 e 4 0 ]
 "12 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\exp.c
@@ -65,11 +67,11 @@
 [v _accionesDeshacer accionesDeshacer `(v  1 e 1 0 ]
 "111
 [v _EEPROM_search EEPROM_search `(s  1 e 2 0 ]
-"154
+"153
 [v _accionesPuertoSerial accionesPuertoSerial `(v  1 e 1 0 ]
-"185
+"184
 [v _main main `(v  1 e 1 0 ]
-"225
+"224
 [v _int_usart int_usart `II(v  1 e 1 0 ]
 [s S196 . 1 `uc 1 C 1 0 :1:0 
 `uc 1 DC 1 0 :1:1 
@@ -187,21 +189,21 @@
 "30
 [v _huboInt huboInt `s  1 s 2 huboInt ]
 "31
-[v _codigoEntrada codigoEntrada `[9]uc  1 s 9 codigoEntrada ]
+[v _codigoEntrada codigoEntrada `[32]uc  1 s 32 codigoEntrada ]
 "33
 [v _digito digito `DC[10]uc  1 s 10 digito ]
 "46
 [v _productos productos `[13]*.25DCuc  1 s 26 productos ]
 "51
 [v _prodIngresados prodIngresados `us  1 s 2 prodIngresados ]
-"185
+"184
 [v _main main `(v  1 e 1 0 ]
 {
-"199
-[v main@j j `s  1 a 2 76 ]
 "198
+[v main@j j `s  1 a 2 76 ]
+"197
 [v main@i i `s  1 a 2 74 ]
-"222
+"221
 } 0
 "75
 [v _iniciar_usart iniciar_usart `(v  1 e 1 0 ]
@@ -217,29 +219,40 @@
 [v eeprom_write@addr addr `uc  1 a 1 6 ]
 "9
 } 0
-"154 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\main.c
+"153 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\main.c
 [v _accionesPuertoSerial accionesPuertoSerial `(v  1 e 1 0 ]
 {
-"158
+"157
 [v accionesPuertoSerial@i i `i  1 a 2 70 ]
-"155
+"154
 [v accionesPuertoSerial@Aux Aux `s  1 a 2 72 ]
-"183
+"182
 } 0
-"111
+"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+{
+"10
+[v ___awmod@sign sign `uc  1 a 1 6 ]
+[v ___awmod@counter counter `uc  1 a 1 5 ]
+"5
+[v ___awmod@divisor divisor `i  1 p 2 0 ]
+[v ___awmod@dividend dividend `i  1 p 2 2 ]
+"34
+} 0
+"111 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\main.c
 [v _EEPROM_search EEPROM_search `(s  1 e 2 0 ]
 {
 "121
-[v EEPROM_search@i i `i  1 a 2 14 ]
+[v EEPROM_search@i i `i  1 a 2 12 ]
 "116
 [v EEPROM_search@numProd numProd `s  1 a 2 16 ]
 "115
-[v EEPROM_search@direccion direccion `s  1 a 2 12 ]
+[v EEPROM_search@direccion direccion `s  1 a 2 14 ]
 "114
 [v EEPROM_search@esta esta `s  1 a 2 10 ]
 "117
 [v EEPROM_search@precio precio `s  1 a 2 0 ]
-"152
+"151
 } 0
 "5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\pow.c
 [v _pow pow `(d  1 e 4 0 ]
@@ -517,12 +530,12 @@
 [v bailenLeds@i i `us  1 a 2 2 ]
 "94
 } 0
-"225
+"224
 [v _int_usart int_usart `II(v  1 e 1 0 ]
 {
-"227
-[v int_usart@i i `s  1 a 2 7 ]
-"228
-[v int_usart@recibir recibir `s  1 a 2 5 ]
-"244
+"226
+[v int_usart@recibir recibir `s  1 a 2 6 ]
+"225
+[v int_usart@i i `s  1 a 2 4 ]
+"241
 } 0
