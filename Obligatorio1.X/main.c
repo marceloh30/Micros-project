@@ -28,6 +28,8 @@
 //Defino variables estaticas (debido a que cruzan funciones)
 static unsigned short int cuenta, auxCuenta;
 static short int huboInt = 0;
+static short int productoIngresado;
+static short int numProd;
 static char codigoEntrada[32]; 
 
 static unsigned const char digito[] = {
@@ -79,7 +81,8 @@ void iniciar_usart(){//función para iniciar el módulo USART PIC
      SPBRG = 25; //Valor aprox.(22,3) para una velocidad de 9600 baudios con un oscilador de 3.579545 Mhz 
 }
 
-void bailenLeds() {
+void bailenLeds() { 
+    //Secuecnia de leds
     unsigned short int i;
     for (i = 0; i < 10; i++) {
         RA3 = 1;
@@ -93,6 +96,7 @@ void bailenLeds() {
 }
 
 void accionesAceptar(){
+    //Vuelvo todo a su estado "Original"
     cuenta = 0;
     auxCuenta = 0;
     prodIngresados = 0b0000000000000000;
@@ -104,6 +108,8 @@ void accionesAceptar(){
 void accionesDeshacer(){
     if (cuenta != auxCuenta){
         cuenta = auxCuenta;
+        //Elimino el ultimo producto ingresado correctamente de la lista de productos ingresados
+        prodIngresados = !(prodIngresados & ((int) pow(2,productoIngresado))); 
         mostrarDigitos(cuenta);
     }
 }
@@ -113,7 +119,7 @@ short int EEPROM_search() {
     //Defino variables para la función
     short int esta = 0;
     short int direccion = 0;
-    short int numProd = 0;
+    numProd = 0;
     short int precio = -1;
     //Busco si lo leido en el puerto serial coincide con algun articulo de EEPROM y en ese caso devuelvo precio
     while (esta < LARGO_ART && direccion < (LARGO_ART + LARGO_PRECIO)*CANT_ART) {
@@ -164,9 +170,10 @@ void accionesPuertoSerial(){
         
         if ((cuenta + Aux) <= 999 && Aux != -1) { //Si la cuenta no sobrepasa 99,9, la compra es correcta.
             
+            productoIngresado = numProd; //Guardo el ultimo producto ingresado correctametne 
             cuenta += Aux;        
             mostrarDigitos(cuenta);     
-            RA3 = 1;
+            RA3 = 1; //Enciendo Led verde
             __delay_ms(1000);
             RA3 = 0; 
      
