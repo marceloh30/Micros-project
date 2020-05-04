@@ -1,11 +1,11 @@
 /*
  * File:   main.c
- * Authors: Juli醤 Ferreira y Marcelo Hernandez
+ * Authors: Juli谩n Ferreira y Marcelo Hernandez
  *
  * Created on 15 de abril de 2020, 06:59 PM
  */
 
-// Seteo de Bits de Configuraci髇 del PIC:
+// Seteo de Bits de Configuraci贸n del PIC:
 #pragma config FOSC = XT        // Oscillator Selection bits (XT oscillator)
 #pragma config WDTE = OFF       // Watchdog Timer Enable bit (WDT disabled)
 #pragma config PWRTE = OFF      // Power-up Timer Enable bit (PWRT disabled)
@@ -17,9 +17,9 @@
 
 //Macros:
 #define _XTAL_FREQ 4000000 //Frec. de Cristal que usamos (cristal de un NTSC color television receivers)
-#define LARGO_ART 8         //Largo en EEPROM de cada art韈ulo (2-TP, 6-Codigo)
+#define LARGO_ART 8         //Largo en EEPROM de cada art铆culo (2-TP, 6-Codigo)
 #define LARGO_PRECIO 3      //Largo en EEPROM de precio de c/art.
-#define CANT_ART 13         //Cantidad de art韈ulos
+#define CANT_ART 13         //Cantidad de art铆culos
 
 #include <xc.h>
 #include <string.h>
@@ -74,10 +74,10 @@ void mostrarDigitos(unsigned int num) { //num debe ser el numero entero (por ej.
     
 }
 
-void iniciar_usart(){//funci髇 para iniciar el m骴ulo USART PIC
+void iniciar_usart(){//funci贸n para iniciar el m贸dulo USART PIC
      TRISC = 0b10000000;//pin RX como una entrada digital pin TX como una salida digital
-     TXSTA = 0b00100110;// 8bits, transmisi髇 habilitada, as韓crono, alta velocidad
-     RCSTA = 0b10010000;//habilitado el USART PIC, recepci髇 8 bits,  habilitada, as韓crono
+     TXSTA = 0b00100110;// 8bits, transmisi贸n habilitada, as铆ncrono, alta velocidad
+     RCSTA = 0b10010000;//habilitado el USART PIC, recepci贸n 8 bits,  habilitada, as铆ncrono
      SPBRG = 25; //Valor aprox.(22,3) para una velocidad de 9600 baudios con un oscilador de 3.579545 Mhz 
 }
 
@@ -116,7 +116,7 @@ void accionesDeshacer(){
 
 short int EEPROM_search() { 
     
-    //Defino variables para la funci髇
+    //Defino variables para la funci贸n
     short int esta = 0;
     short int direccion = 0;
     numProd = 0;
@@ -126,7 +126,7 @@ short int EEPROM_search() {
         
         for(int i = 0; i < LARGO_ART; i++) {
             
-            //Verifico cada byte en cada art韈ulo
+            //Verifico cada byte en cada art铆culo
             if(codigoEntrada[i] == eeprom_read(direccion)) {
                 esta++;
             }
@@ -135,8 +135,9 @@ short int EEPROM_search() {
             }
             direccion++;
         }
+        esta = 0; //Para evitar sumas erroneas!
 
-        direccion = direccion + 3; //Evito el precio de cada art韈ulo
+        direccion = direccion + 3; //Evito el precio de cada art铆culo
         numProd++;
     }
     
@@ -189,7 +190,7 @@ void accionesPuertoSerial(){
     else {
         //Checksum erroneo: Enciendo led rojo
         RA5 = 1;
-        __delay_ms(10000);
+        __delay_ms(1000);
         RA5 = 0;
         
     }
@@ -203,12 +204,12 @@ void main(void) {
     TRISB = 0x00; //Defino PORTC como salidas (Unidades)
     TRISD = 0x00; //Defino PORTD como salidas (Decenas)
     INTCON = 0b11000000;    //Habilito las interupciones
-    RCIE = 1;        //habilita interrupci髇 por recepci髇.  
-    iniciar_usart();        //inicia el m骴ulo USART PIC (uso de puerto serial)
+    RCIE = 1;        //habilita interrupci贸n por recepci贸n.  
+    iniciar_usart();        //inicia el m贸dulo USART PIC (uso de puerto serial)
     cuenta = 0;
     auxCuenta = 0;
     mostrarDigitos(cuenta);
-    //Cargo los art韈ulos en EEPROM si es que no tiene mi c骴igo (supositoriamente)
+    //Cargo los art铆culos en EEPROM si es que no tiene mi c贸digo (supositoriamente)
     if (eeprom_read(0x00) != '0') {
         
         for(short int i = 0; i < CANT_ART; i++) {         
@@ -241,7 +242,7 @@ void main(void) {
     
 }
 
-//rutina de atenci髇 a la interrupci髇 por Rx serial
+//rutina de atenci贸n a la interrupci贸n por Rx serial
 void __interrupt() int_usart() {
     short int i = 0;
     short int recibir = 1;
