@@ -44,12 +44,7 @@ static unsigned const char digito[] = {
     0x7F,     //8
     0x6F };   //9.
 
-//Productos: Cada producto tiene TP+Codigo+Precio+byte Nulo, cada lugar corresponde a un producto!!
-static unsigned const char *productos[] =  {(unsigned const char *)"01202001010", (unsigned const char *)"01202002025",
-                                    (unsigned const char *)"02202001007",(unsigned const char *)"02202002011",(unsigned const char *)"02202003015",
-                                    (unsigned const char *)"03202001012",(unsigned const char *)"03202002023",
-                                    (unsigned const char *)"04202001016",(unsigned const char *)"04202002020",(unsigned const char *)"04202003023",
-                                    (unsigned const char *)"05202001041",(unsigned const char *)"05202001053",(unsigned const char *)"05202001065"};
+
 static unsigned short int prodIngresados = 0b0000000000000000; //16 lugares para 16 productos (extendible)
 //Agrego con un or y verifico con un and!
 
@@ -109,7 +104,7 @@ void accionesDeshacer(){
     if (cuenta != auxCuenta){
         cuenta = auxCuenta;
         //Elimino el ultimo producto ingresado correctamente de la lista de productos ingresados
-        prodIngresados = !(prodIngresados & ((int) pow(2,productoIngresado))); 
+        prodIngresados = (prodIngresados ^ ((int) pow(2,productoIngresado))); 
         mostrarDigitos(cuenta);
     }
 }
@@ -124,6 +119,7 @@ short int EEPROM_search() {
     //Busco si lo leido en el puerto serial coincide con algun articulo de EEPROM y en ese caso devuelvo precio
     while (esta < LARGO_ART && direccion < (LARGO_ART + LARGO_PRECIO)*CANT_ART) {
         
+        esta = 0; //Para evitar sumas erroneas!
         for(int i = 0; i < LARGO_ART; i++) {
             
             //Verifico cada byte en cada artículo
@@ -135,7 +131,7 @@ short int EEPROM_search() {
             }
             direccion++;
         }
-        esta = 0; //Para evitar sumas erroneas!
+        
 
         direccion = direccion + 3; //Evito el precio de cada artículo
         numProd++;
@@ -172,6 +168,7 @@ void accionesPuertoSerial(){
         if ((cuenta + Aux) <= 999 && Aux != -1) { //Si la cuenta no sobrepasa 99,9, la compra es correcta.
             
             productoIngresado = numProd; //Guardo el ultimo producto ingresado correctametne 
+            auxCuenta = cuenta;
             cuenta += Aux;        
             mostrarDigitos(cuenta);     
             RA3 = 1; //Enciendo Led verde
@@ -209,16 +206,7 @@ void main(void) {
     cuenta = 0;
     auxCuenta = 0;
     mostrarDigitos(cuenta);
-    //Cargo los artículos en EEPROM si es que no tiene mi código (supositoriamente)
-    if (eeprom_read(0x00) != '0') {
         
-        for(short int i = 0; i < CANT_ART; i++) {         
-            for(short int j = 0; j < (LARGO_ART + LARGO_PRECIO); j++) { //Cargo char a char!
-                eeprom_write(0x00+(LARGO_ART + LARGO_PRECIO)*i + j,(productos[i])[j]);  
-            }
-        } 
-        
-    }    
     //Bucle principal del programa
     
     while(1) {
@@ -234,9 +222,6 @@ void main(void) {
         else if(huboInt) {
             huboInt = 0; 
             accionesPuertoSerial();
-        }
-        else if(!strcmp(codigoEntrada, "012020016")){
-            RA0 = 1;
         }
     }
     

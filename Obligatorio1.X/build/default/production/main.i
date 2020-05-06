@@ -1838,26 +1838,23 @@ extern double round(double);
 
 static unsigned short int cuenta, auxCuenta;
 static short int huboInt = 0;
+static short int productoIngresado;
+static short int numProd;
 static char codigoEntrada[32];
 
 static unsigned const char digito[] = {
-    0b11111100,
-    0b01100000,
-    0b11011010,
-    0b11110010,
-    0b01100110,
-    0b10110110,
-    0b10111110,
-    0b11100010,
-    0b11111110,
-    0b11100110 };
+    0x3F,
+    0x06,
+    0x5B,
+    0x4F,
+    0x66,
+    0x6D,
+    0x7D,
+    0x07,
+    0x7F,
+    0x6F };
 
 
-static unsigned const char *productos[] = {(unsigned const char *)"01202001010", (unsigned const char *)"01202002025",
-                                    (unsigned const char *)"02202001007",(unsigned const char *)"02202002011",(unsigned const char *)"02202003015",
-                                    (unsigned const char *)"03202001012",(unsigned const char *)"03202002023",
-                                    (unsigned const char *)"04202001016",(unsigned const char *)"04202002020",(unsigned const char *)"04202003023",
-                                    (unsigned const char *)"05202001041",(unsigned const char *)"05202001053",(unsigned const char *)"05202001065"};
 static unsigned short int prodIngresados = 0b0000000000000000;
 
 
@@ -1883,29 +1880,31 @@ void mostrarDigitos(unsigned int num) {
 }
 
 void iniciar_usart(){
-     TRISCbits.TRISC7=1;
-     TRISCbits.TRISC6=0;
-     TXSTA=0b00100110;
-     RCSTA=0b10010000;
-     SPBRG=22;
+     TRISC = 0b10000000;
+     TXSTA = 0b00100110;
+     RCSTA = 0b10010000;
+     SPBRG = 25;
 }
 
 void bailenLeds() {
+
     unsigned short int i;
     for (i = 0; i < 10; i++) {
         RA3 = 1;
-        _delay((unsigned long)((200)*(3579545/4000.0)));
-        RA4 = 1;
-        _delay((unsigned long)((200)*(3579545/4000.0)));
+        _delay((unsigned long)((200)*(4000000/4000.0)));
+        RA5 = 1;
+        _delay((unsigned long)((200)*(4000000/4000.0)));
         RA3 = 0;
-        _delay((unsigned long)((200)*(3579545/4000.0)));
-        RA4 = 0;
+        _delay((unsigned long)((200)*(4000000/4000.0)));
+        RA5 = 0;
     }
 }
 
 void accionesAceptar(){
+
     cuenta = 0;
     auxCuenta = 0;
+    prodIngresados = 0b0000000000000000;
 
     mostrarDigitos(cuenta);
     bailenLeds();
@@ -1914,6 +1913,8 @@ void accionesAceptar(){
 void accionesDeshacer(){
     if (cuenta != auxCuenta){
         cuenta = auxCuenta;
+
+        prodIngresados = (prodIngresados ^ ((int) pow(2,productoIngresado)));
         mostrarDigitos(cuenta);
     }
 }
@@ -1923,11 +1924,12 @@ short int EEPROM_search() {
 
     short int esta = 0;
     short int direccion = 0;
-    short int numProd = 0;
+    numProd = 0;
     short int precio = -1;
 
     while (esta < 8 && direccion < (8 + 3)*13) {
 
+        esta = 0;
         for(int i = 0; i < 8; i++) {
 
 
@@ -1939,6 +1941,7 @@ short int EEPROM_search() {
             }
             direccion++;
         }
+
 
         direccion = direccion + 3;
         numProd++;
@@ -1972,45 +1975,49 @@ void accionesPuertoSerial(){
 
         Aux = EEPROM_search();
 
-        if ((cuenta + Aux) <= 999) {
+        if ((cuenta + Aux) <= 999 && Aux != -1) {
 
+            productoIngresado = numProd;
+            auxCuenta = cuenta;
             cuenta += Aux;
             mostrarDigitos(cuenta);
+            RA3 = 1;
+            _delay((unsigned long)((1000)*(4000000/4000.0)));
+            RA3 = 0;
+
         }
         else {
-            RA4 = 1;
-            _delay((unsigned long)((1000)*(3579545/4000.0)));
-            RA4 = 0;
+
+            RA5 = 1;
+            _delay((unsigned long)((1000)*(4000000/4000.0)));
+            RA5 = 0;
+
         }
     }
     else {
 
-        RA4 = 1;
-        _delay((unsigned long)((1000)*(3579545/4000.0)));
-        RA4 = 0;
+        RA5 = 1;
+        _delay((unsigned long)((1000)*(4000000/4000.0)));
+        RA5 = 0;
+
     }
 }
 
 void main(void) {
 
 
+    ADCON1 = 0b00000111;
     TRISA = 0x06;
     TRISB = 0x00;
     TRISD = 0x00;
     INTCON = 0b11000000;
-    PIE1bits.RCIE=1;
+    RCIE = 1;
     iniciar_usart();
+    cuenta = 0;
+    auxCuenta = 0;
+    mostrarDigitos(cuenta);
 
 
-    if (eeprom_read(0x00) != '0') {
-
-        for(short int i = 0; i < 13; i++) {
-            for(short int j = 0; j < (8 + 3); j++) {
-                eeprom_write(0x00+(8 + 3)*i + j,(productos[i])[j]);
-            }
-        }
-
-    }
 
     while(1) {
 
@@ -2038,9 +2045,9 @@ void __attribute__((picinterrupt(("")))) int_usart() {
 
     while(recibir) {
         if(RCIF == 1) {
-            if(RCREG != 0x0D || RCREG != 0x0A) {
+            if(RCREG != 0x0D && RCREG != 0x0A && i < 9) {
                 codigoEntrada[i] = RCREG;
-
+                i++;
             }
             else{
                 recibir = 0;
