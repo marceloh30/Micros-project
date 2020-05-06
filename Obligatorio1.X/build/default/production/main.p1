@@ -392,10 +392,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 81:     unsigned short int i;
 [v _i `us ~T0 @X0 1 a ]
 "82
-[; ;main.c: 82:     for (i = 0; i < 10; i++) {
+[; ;main.c: 82:     for (i = 0; i < 3; i++) {
 {
 [e = _i -> -> 0 `i `us ]
-[e $ < -> _i `ui -> -> 10 `i `ui 101  ]
+[e $ < -> _i `ui -> -> 3 `i `ui 101  ]
 [e $U 102  ]
 [e :U 101 ]
 {
@@ -424,7 +424,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 90:     }
 }
 [e ++ _i -> -> 1 `i `us ]
-[e $ < -> _i `ui -> -> 10 `i `ui 101  ]
+[e $ < -> _i `ui -> -> 3 `i `ui 101  ]
 [e :U 102 ]
 }
 "91

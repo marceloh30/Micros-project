@@ -11,7 +11,7 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\julia\AppData\Local\Temp\s15ps.o
+$C:\Users\julia\AppData\Local\Temp\s154o.o
 reset_vec CODE 0 0 0 3 2
 end_init CODE 0 12 12 3 2
 config CONFIG 0 2007 2007 1 2
@@ -113,23 +113,23 @@ STRING 1800-1CE1 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\Obligatorio1.X.production.o
-15 cinit CODE >732:C:\Users\julia\AppData\Local\Temp\s15ps.s
-15 cinit CODE >735:C:\Users\julia\AppData\Local\Temp\s15ps.s
-15 cinit CODE >788:C:\Users\julia\AppData\Local\Temp\s15ps.s
-16 cinit CODE >789:C:\Users\julia\AppData\Local\Temp\s15ps.s
-17 cinit CODE >792:C:\Users\julia\AppData\Local\Temp\s15ps.s
-18 cinit CODE >793:C:\Users\julia\AppData\Local\Temp\s15ps.s
-19 cinit CODE >794:C:\Users\julia\AppData\Local\Temp\s15ps.s
-1A cinit CODE >795:C:\Users\julia\AppData\Local\Temp\s15ps.s
-1B cinit CODE >796:C:\Users\julia\AppData\Local\Temp\s15ps.s
-20 cinit CODE >799:C:\Users\julia\AppData\Local\Temp\s15ps.s
-21 cinit CODE >800:C:\Users\julia\AppData\Local\Temp\s15ps.s
-22 cinit CODE >801:C:\Users\julia\AppData\Local\Temp\s15ps.s
-23 cinit CODE >802:C:\Users\julia\AppData\Local\Temp\s15ps.s
-24 cinit CODE >803:C:\Users\julia\AppData\Local\Temp\s15ps.s
-29 cinit CODE >809:C:\Users\julia\AppData\Local\Temp\s15ps.s
-29 cinit CODE >811:C:\Users\julia\AppData\Local\Temp\s15ps.s
-2A cinit CODE >812:C:\Users\julia\AppData\Local\Temp\s15ps.s
+15 cinit CODE >732:C:\Users\julia\AppData\Local\Temp\s154o.s
+15 cinit CODE >735:C:\Users\julia\AppData\Local\Temp\s154o.s
+15 cinit CODE >788:C:\Users\julia\AppData\Local\Temp\s154o.s
+16 cinit CODE >789:C:\Users\julia\AppData\Local\Temp\s154o.s
+17 cinit CODE >792:C:\Users\julia\AppData\Local\Temp\s154o.s
+18 cinit CODE >793:C:\Users\julia\AppData\Local\Temp\s154o.s
+19 cinit CODE >794:C:\Users\julia\AppData\Local\Temp\s154o.s
+1A cinit CODE >795:C:\Users\julia\AppData\Local\Temp\s154o.s
+1B cinit CODE >796:C:\Users\julia\AppData\Local\Temp\s154o.s
+20 cinit CODE >799:C:\Users\julia\AppData\Local\Temp\s154o.s
+21 cinit CODE >800:C:\Users\julia\AppData\Local\Temp\s154o.s
+22 cinit CODE >801:C:\Users\julia\AppData\Local\Temp\s154o.s
+23 cinit CODE >802:C:\Users\julia\AppData\Local\Temp\s154o.s
+24 cinit CODE >803:C:\Users\julia\AppData\Local\Temp\s154o.s
+29 cinit CODE >809:C:\Users\julia\AppData\Local\Temp\s154o.s
+29 cinit CODE >811:C:\Users\julia\AppData\Local\Temp\s154o.s
+2A cinit CODE >812:C:\Users\julia\AppData\Local\Temp\s154o.s
 4 intentry CODE >231:C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
 105E text31 CODE >231:C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
 105E text31 CODE >232:C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
@@ -809,16 +809,16 @@ D88 text4 CODE >154:C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obliga
 1F3D maintext CODE >223:C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
 1F3F maintext CODE >224:C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
 1F45 maintext CODE >225:C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
-1CE2 clrtext CODE >775:C:\Users\julia\AppData\Local\Temp\s15ps.s
-1CE2 clrtext CODE >776:C:\Users\julia\AppData\Local\Temp\s15ps.s
-1CE3 clrtext CODE >777:C:\Users\julia\AppData\Local\Temp\s15ps.s
-1CE3 clrtext CODE >778:C:\Users\julia\AppData\Local\Temp\s15ps.s
-1CE4 clrtext CODE >779:C:\Users\julia\AppData\Local\Temp\s15ps.s
-1CE5 clrtext CODE >780:C:\Users\julia\AppData\Local\Temp\s15ps.s
-1CE6 clrtext CODE >781:C:\Users\julia\AppData\Local\Temp\s15ps.s
-1CE7 clrtext CODE >782:C:\Users\julia\AppData\Local\Temp\s15ps.s
-1CE8 clrtext CODE >783:C:\Users\julia\AppData\Local\Temp\s15ps.s
-1CE9 clrtext CODE >784:C:\Users\julia\AppData\Local\Temp\s15ps.s
+1CE2 clrtext CODE >775:C:\Users\julia\AppData\Local\Temp\s154o.s
+1CE2 clrtext CODE >776:C:\Users\julia\AppData\Local\Temp\s154o.s
+1CE3 clrtext CODE >777:C:\Users\julia\AppData\Local\Temp\s154o.s
+1CE3 clrtext CODE >778:C:\Users\julia\AppData\Local\Temp\s154o.s
+1CE4 clrtext CODE >779:C:\Users\julia\AppData\Local\Temp\s154o.s
+1CE5 clrtext CODE >780:C:\Users\julia\AppData\Local\Temp\s154o.s
+1CE6 clrtext CODE >781:C:\Users\julia\AppData\Local\Temp\s154o.s
+1CE7 clrtext CODE >782:C:\Users\julia\AppData\Local\Temp\s154o.s
+1CE8 clrtext CODE >783:C:\Users\julia\AppData\Local\Temp\s154o.s
+1CE9 clrtext CODE >784:C:\Users\julia\AppData\Local\Temp\s154o.s
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -847,14 +847,14 @@ __size_of_accionesDeshacer 0 0 ABS 0 - dist/default/production\Obligatorio1.X.pr
 __Hstrings 0 0 ABS 0 strings -
 _RCIE 465 0 ABS 0 - dist/default/production\Obligatorio1.X.production.o
 _RCIF 65 0 ABS 0 - dist/default/production\Obligatorio1.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\julia\AppData\Local\Temp\s15ps.o
+___sp 0 0 STACK 2 stack C:\Users\julia\AppData\Local\Temp\s154o.o
 _main 3DE4 0 CODE 0 maintext dist/default/production\Obligatorio1.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production\Obligatorio1.X.production.o
 exp@x B8 0 BANK1 1 cstackBANK1 dist/default/production\Obligatorio1.X.production.o
 log@x B0 0 BANK1 1 cstackBANK1 dist/default/production\Obligatorio1.X.production.o
 pow@x C4 0 BANK1 1 cstackBANK1 dist/default/production\Obligatorio1.X.production.o
 pow@y C8 0 BANK1 1 cstackBANK1 dist/default/production\Obligatorio1.X.production.o
-start 24 0 CODE 0 init C:\Users\julia\AppData\Local\Temp\s15ps.o
+start 24 0 CODE 0 init C:\Users\julia\AppData\Local\Temp\s154o.o
 ___flmul@aexp 53 0 BANK0 1 cstackBANK0 dist/default/production\Obligatorio1.X.production.o
 ___flmul@bexp 54 0 BANK0 1 cstackBANK0 dist/default/production\Obligatorio1.X.production.o
 ___flmul@prod 55 0 BANK0 1 cstackBANK0 dist/default/production\Obligatorio1.X.production.o
@@ -878,12 +878,12 @@ pow@yi D6 0 BANK1 1 cstackBANK1 dist/default/production\Obligatorio1.X.productio
 __Hpowerup 0 0 CODE 0 powerup -
 log@coeff 2070 0 STRING 0 strings dist/default/production\Obligatorio1.X.production.o
 ___awmod@sign 26 0 BANK0 1 cstackBANK0 dist/default/production\Obligatorio1.X.production.o
-intlevel0 0 0 ENTRY 0 functab C:\Users\julia\AppData\Local\Temp\s15ps.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\julia\AppData\Local\Temp\s15ps.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\julia\AppData\Local\Temp\s15ps.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\julia\AppData\Local\Temp\s15ps.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\julia\AppData\Local\Temp\s15ps.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\julia\AppData\Local\Temp\s15ps.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\julia\AppData\Local\Temp\s154o.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\julia\AppData\Local\Temp\s154o.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\julia\AppData\Local\Temp\s154o.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\julia\AppData\Local\Temp\s154o.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\julia\AppData\Local\Temp\s154o.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\julia\AppData\Local\Temp\s154o.o
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
 __size_of_accionesAceptar 0 0 ABS 0 - dist/default/production\Obligatorio1.X.production.o
 __end_oflog@coeff 20B8 0 STRING 0 strings dist/default/production\Obligatorio1.X.production.o
@@ -925,8 +925,8 @@ __end_of_digito 2020 0 STRING 0 strings dist/default/production\Obligatorio1.X.p
 _prodIngresados E6 0 BANK1 1 bssBANK1 dist/default/production\Obligatorio1.X.production.o
 EEPROM_search@precio 1B4 0 BANK3 1 cstackBANK3 dist/default/production\Obligatorio1.X.production.o
 __Umul8_16@multiplicand 20 0 BANK0 1 cstackBANK0 dist/default/production\Obligatorio1.X.production.o
-___stackhi 0 0 ABS 0 - C:\Users\julia\AppData\Local\Temp\s15ps.o
-___stacklo 0 0 ABS 0 - C:\Users\julia\AppData\Local\Temp\s15ps.o
+___stackhi 0 0 ABS 0 - C:\Users\julia\AppData\Local\Temp\s154o.o
+___stacklo 0 0 ABS 0 - C:\Users\julia\AppData\Local\Temp\s154o.o
 ?_eval_poly A0 0 BANK1 1 cstackBANK1 dist/default/production\Obligatorio1.X.production.o
 _eeprom_read 3A2C 0 CODE 0 text5 dist/default/production\Obligatorio1.X.production.o
 ___lwdiv@quotient 25 0 BANK0 1 cstackBANK0 dist/default/production\Obligatorio1.X.production.o
@@ -952,7 +952,7 @@ __pcstackBANK1 A0 0 BANK1 1 cstackBANK1 dist/default/production\Obligatorio1.X.p
 __pcstackBANK3 1B4 0 BANK3 1 cstackBANK3 dist/default/production\Obligatorio1.X.production.o
 _iniciar_usart 39D4 0 CODE 0 text1 dist/default/production\Obligatorio1.X.production.o
 __size_of_mostrarDigitos 0 0 ABS 0 - dist/default/production\Obligatorio1.X.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\julia\AppData\Local\Temp\s15ps.o
+___int_sp 0 0 STACK 2 stack C:\Users\julia\AppData\Local\Temp\s154o.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -1035,7 +1035,7 @@ __Lintentry 8 0 CODE 0 intentry -
 __end_of_bailenLeds 3CA4 0 CODE 0 text30 dist/default/production\Obligatorio1.X.production.o
 __stringtab 2000 0 STRING 0 strings dist/default/production\Obligatorio1.X.production.o
 __size_of_iniciar_usart 0 0 ABS 0 - dist/default/production\Obligatorio1.X.production.o
-reset_vec 0 0 CODE 0 reset_vec C:\Users\julia\AppData\Local\Temp\s15ps.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\julia\AppData\Local\Temp\s154o.o
 __end_of___xxtofl 2788 0 CODE 0 text16 dist/default/production\Obligatorio1.X.production.o
 __size_of___bmul 0 0 ABS 0 - dist/default/production\Obligatorio1.X.production.o
 __size_of___fleq 0 0 ABS 0 - dist/default/production\Obligatorio1.X.production.o

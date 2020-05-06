@@ -79,7 +79,7 @@ void iniciar_usart(){//función para iniciar el módulo USART PIC
 void bailenLeds() { 
     //Secuecnia de leds
     unsigned short int i;
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < 3; i++) {
         RA3 = 1;
         __delay_ms(200);
         RA5 = 1;

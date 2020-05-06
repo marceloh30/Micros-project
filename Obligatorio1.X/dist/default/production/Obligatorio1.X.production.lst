@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.10 build 88905656 
-                                                                                               Tue May 05 23:53:58 2020
+                                                                                               Wed May 06 17:43:16 2020
 
 Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1 
      1                           	processor	16F877A
@@ -9832,7 +9832,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   9807                           ; Regs used in _bailenLeds: [wreg+status,2]
   9808                           
   9809                           
-  9810                           ;main.c: 81:     unsigned short int i;;main.c: 82:     for (i = 0; i < 10; i++) {
+  9810                           ;main.c: 81:     unsigned short int i;;main.c: 82:     for (i = 0; i < 3; i++) {
   9811  1E07  1283               	bcf	3,5	;RP0=0, select bank0
   9812  1E08  1303               	bcf	3,6	;RP1=0, select bank0
   9813  1E09  01A3               	clrf	bailenLeds@i
@@ -9924,7 +9924,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   9899  1E47  07A4               	addwf	bailenLeds@i+1,f
   9900  1E48  3000               	movlw	0
   9901  1E49  0224               	subwf	bailenLeds@i+1,w
-  9902  1E4A  300A               	movlw	10
+  9902  1E4A  3003               	movlw	3
   9903  1E4B  1903               	skipnz
   9904  1E4C  0223               	subwf	bailenLeds@i,w
   9905  1E4D  1C03               	skipc
@@ -10829,7 +10829,7 @@ DATA                 0      0      DD      12        0.0%
 
 
 Microchip Technology PIC Macro Assembler V2.10 build 88905656 
-Symbol Table                                                                                   Tue May 05 23:53:58 2020
+Symbol Table                                                                                   Wed May 06 17:43:16 2020
 
                  ___fldiv@aexp 0039                   ___fldiv@bexp 0038                              pc 0002  
                  ___fldiv@sign 0031                 ___bmul@product 0022                    __CFG_CP$OFF 0000  

@@ -1889,7 +1889,7 @@ void iniciar_usart(){
 void bailenLeds() {
 
     unsigned short int i;
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < 3; i++) {
         RA3 = 1;
         _delay((unsigned long)((200)*(4000000/4000.0)));
         RA5 = 1;
