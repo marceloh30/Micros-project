@@ -279,8 +279,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 32: static short int numProd;
 [v _numProd `s ~T0 @X0 1 s ]
 "33
-[; ;main.c: 33: static char codigoEntrada[32];
-[v _codigoEntrada `uc ~T0 @X0 -> 32 `i s ]
+[; ;main.c: 33: static char codigoEntrada[9];
+[v _codigoEntrada `uc ~T0 @X0 -> 9 `i s ]
 "35
 [; ;main.c: 35: static unsigned const char digito[] = {
 [v _digito `Cuc ~T0 @X0 -> 10 `i s ]

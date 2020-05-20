@@ -135,7 +135,7 @@
 "32
 [v _numProd numProd `s  1 s 2 numProd ]
 "33
-[v _codigoEntrada codigoEntrada `[32]uc  1 s 32 codigoEntrada ]
+[v _codigoEntrada codigoEntrada `[9]uc  1 s 9 codigoEntrada ]
 "35
 [v _digito digito `DC[10]uc  1 s 10 digito ]
 "48

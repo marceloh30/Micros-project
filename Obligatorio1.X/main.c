@@ -30,7 +30,7 @@ static unsigned short int cuenta, auxCuenta;
 static short int huboInt = 0;
 static short int productoIngresado;
 static short int numProd;
-static char codigoEntrada[32]; 
+static char codigoEntrada[9]; 
 
 static unsigned const char digito[] = {
     0x3F, //digitos en binario del 0 al 9 (catodo comun)
