@@ -53,23 +53,23 @@
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
 "6 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\pic\__eeread.c
 [v _eeprom_read eeprom_read `(uc  1 e 1 0 ]
-"52 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
+"53 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
 [v _mostrarDigitos mostrarDigitos `(v  1 e 1 0 ]
-"72
+"71
 [v _iniciar_usart iniciar_usart `(v  1 e 1 0 ]
-"79
+"78
 [v _bailenLeds bailenLeds `(v  1 e 1 0 ]
-"93
+"92
 [v _accionesAceptar accionesAceptar `(v  1 e 1 0 ]
-"103
+"102
 [v _accionesDeshacer accionesDeshacer `(v  1 e 1 0 ]
-"112
+"111
 [v _EEPROM_search EEPROM_search `(s  1 e 2 0 ]
-"156
+"155
 [v _accionesPuertoSerial accionesPuertoSerial `(v  1 e 1 0 ]
-"196
+"195
 [v _main main `(v  1 e 1 0 ]
-"231
+"230
 [v _int_usart int_usart `II(v  1 e 1 0 ]
 "216 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [v _PORTB PORTB `VEuc  1 e 1 @6 ]
@@ -101,7 +101,7 @@
 [v _EEADR EEADR `VEuc  1 e 1 @269 ]
 "2316
 [v _EECON1 EECON1 `VEuc  1 e 1 @396 ]
-[s S100 . 1 `uc 1 RD 1 0 :1:0 
+[s S98 . 1 `uc 1 RD 1 0 :1:0 
 `uc 1 WR 1 0 :1:1 
 `uc 1 WREN 1 0 :1:2 
 `uc 1 WRERR 1 0 :1:3 
@@ -109,8 +109,8 @@
 `uc 1 EEPGD 1 0 :1:7 
 ]
 "2331
-[u S107 . 1 `S100 1 . 1 0 ]
-[v _EECON1bits EECON1bits `VES107  1 e 1 @396 ]
+[u S105 . 1 `S98 1 . 1 0 ]
+[v _EECON1bits EECON1bits `VES105  1 e 1 @396 ]
 "2659
 [v _RA1 RA1 `VEb  1 e 0 @41 ]
 "2662
@@ -131,33 +131,35 @@
 "30
 [v _huboInt huboInt `s  1 s 2 huboInt ]
 "31
-[v _productoIngresado productoIngresado `s  1 s 2 productoIngresado ]
+[v _serial serial `uc  1 s 1 serial ]
 "32
-[v _numProd numProd `s  1 s 2 numProd ]
+[v _productoIngresado productoIngresado `s  1 s 2 productoIngresado ]
 "33
+[v _numProd numProd `s  1 s 2 numProd ]
+"34
 [v _codigoEntrada codigoEntrada `[9]uc  1 s 9 codigoEntrada ]
-"35
+"36
 [v _digito digito `DC[10]uc  1 s 10 digito ]
-"48
+"49
 [v _prodIngresados prodIngresados `us  1 s 2 prodIngresados ]
-"196
+"195
 [v _main main `(v  1 e 1 0 ]
 {
-"228
+"227
 } 0
-"72
+"71
 [v _iniciar_usart iniciar_usart `(v  1 e 1 0 ]
 {
-"77
+"76
 } 0
-"156
+"155
 [v _accionesPuertoSerial accionesPuertoSerial `(v  1 e 1 0 ]
 {
-"160
-[v accionesPuertoSerial@i i `i  1 a 2 66 ]
-"157
-[v accionesPuertoSerial@Aux Aux `s  1 a 2 68 ]
-"194
+"159
+[v accionesPuertoSerial@i i `i  1 a 2 3 ]
+"156
+[v accionesPuertoSerial@Aux Aux `s  1 a 2 5 ]
+"193
 } 0
 "5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
@@ -170,18 +172,18 @@
 [v ___awmod@dividend dividend `i  1 p 2 2 ]
 "34
 } 0
-"112 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
+"111 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
 [v _EEPROM_search EEPROM_search `(s  1 e 2 0 ]
 {
-"123
-[v EEPROM_search@i i `i  1 a 2 12 ]
-"116
-[v EEPROM_search@direccion direccion `s  1 a 2 14 ]
+"122
+[v EEPROM_search@i i `i  1 a 2 75 ]
 "115
-[v EEPROM_search@esta esta `s  1 a 2 10 ]
-"118
-[v EEPROM_search@precio precio `s  1 a 2 0 ]
-"154
+[v EEPROM_search@direccion direccion `s  1 a 2 77 ]
+"114
+[v EEPROM_search@esta esta `s  1 a 2 73 ]
+"117
+[v EEPROM_search@precio precio `s  1 a 2 63 ]
+"153
 } 0
 "6 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\pic\__eeread.c
 [v _eeprom_read eeprom_read `(uc  1 e 1 0 ]
@@ -215,10 +217,10 @@
 [v ___bmul@multiplier multiplier `uc  1 a 1 3 ]
 "51
 } 0
-"103 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
+"102 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
 [v _accionesDeshacer accionesDeshacer `(v  1 e 1 0 ]
 {
-"110
+"109
 } 0
 "5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\pow.c
 [v _pow pow `(d  1 e 4 0 ]
@@ -334,21 +336,21 @@
 "8 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S409 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+[s S407 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
 "13
-[s S414 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
-[u S417 . 4 `l 1 i 4 0 `d 1 f 4 0 `S409 1 fAsBytes 4 0 `S414 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S417  1 a 4 53 ]
+[s S412 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S415 . 4 `l 1 i 4 0 `d 1 f 4 0 `S407 1 fAsBytes 4 0 `S412 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S415  1 a 4 53 ]
 "12
-[v ___flmul@grs grs `ul  1 a 4 47 ]
-[s S486 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+[v ___flmul@grs grs `ul  1 a 4 48 ]
+[s S484 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
-[u S489 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S486 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S489  1 a 2 57 ]
+[u S487 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S484 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S487  1 a 2 57 ]
 "10
 [v ___flmul@bexp bexp `uc  1 a 1 52 ]
 "11
-[v ___flmul@aexp aexp `uc  1 a 1 51 ]
+[v ___flmul@aexp aexp `uc  1 a 1 47 ]
 "9
 [v ___flmul@sign sign `uc  1 a 1 46 ]
 "8
@@ -419,16 +421,16 @@
 [v ___fldiv@b b `d  1 p 4 4 ]
 "185
 } 0
-"93 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
+"92 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
 [v _accionesAceptar accionesAceptar `(v  1 e 1 0 ]
 {
-"101
+"100
 } 0
-"52
+"53
 [v _mostrarDigitos mostrarDigitos `(v  1 e 1 0 ]
 {
 [v mostrarDigitos@num num `ui  1 p 2 8 ]
-"70
+"69
 } 0
 "5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\lwmod.c
 [v ___lwmod __lwmod `(ui  1 e 2 0 ]
@@ -444,27 +446,23 @@
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
 {
 "10
-[v ___lwdiv@quotient quotient `ui  1 a 2 5 ]
+[v ___lwdiv@quotient quotient `ui  1 a 2 6 ]
 "11
-[v ___lwdiv@counter counter `uc  1 a 1 7 ]
+[v ___lwdiv@counter counter `uc  1 a 1 5 ]
 "5
 [v ___lwdiv@divisor divisor `ui  1 p 2 0 ]
 [v ___lwdiv@dividend dividend `ui  1 p 2 2 ]
 "30
 } 0
-"79 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
+"78 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
 [v _bailenLeds bailenLeds `(v  1 e 1 0 ]
 {
-"81
+"80
 [v bailenLeds@i i `us  1 a 2 3 ]
-"91
+"90
 } 0
-"231
+"230
 [v _int_usart int_usart `II(v  1 e 1 0 ]
 {
-"232
-[v int_usart@i i `s  1 a 2 7 ]
-"233
-[v int_usart@recibir recibir `s  1 a 2 5 ]
-"248
+"244
 } 0

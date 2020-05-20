@@ -28,6 +28,7 @@
 //Defino variables estaticas (debido a que cruzan funciones)
 static unsigned short int cuenta, auxCuenta;
 static short int huboInt = 0;
+static char serial = '0';
 static short int productoIngresado;
 static short int numProd;
 static char codigoEntrada[9]; 
@@ -50,10 +51,8 @@ static unsigned short int prodIngresados = 0b0000000000000000; //16 lugares para
 
 
 void mostrarDigitos(unsigned int num) { //num debe ser el numero entero (por ej. 99,1 --> 99)
-    unsigned short int decimal;
     //Verifico si puedo redondear el numero
     if (num/10 < 99) {
-        decimal = num%10;
         num = num/10;
         if (num%10 >= 5) {
             num++;
@@ -73,7 +72,7 @@ void iniciar_usart(){//función para iniciar el módulo USART PIC
      TRISC = 0b10000000;//pin RX como una entrada digital pin TX como una salida digital
      TXSTA = 0b00100110;// 8bits, transmisión habilitada, asíncrono, alta velocidad
      RCSTA = 0b10010000;//habilitado el USART PIC, recepción 8 bits,  habilitada, asíncrono
-     SPBRG = 25; //Valor aprox.(22,3) para una velocidad de 9600 baudios con un oscilador de 3.579545 Mhz 
+     SPBRG = 25; //Valor  para una velocidad de 9600 baudios con un oscilador de 4 Mhz 
 }
 
 void bailenLeds() { 
@@ -117,10 +116,10 @@ short int EEPROM_search() {
     numProd = 0;
     short int precio = -1;
     //Busco si lo leido en el puerto serial coincide con algun articulo de EEPROM y en ese caso devuelvo precio
-    while (esta < LARGO_ART && direccion < (LARGO_ART + LARGO_PRECIO)*CANT_ART) {
+    while (esta < 2 && direccion < (2 + LARGO_PRECIO)*CANT_ART) {
         
         esta = 0; //Para evitar sumas erroneas!
-        for(int i = 0; i < LARGO_ART; i++) {
+        for(int i = 0; i < 2; i++) {
             
             //Verifico cada byte en cada artículo
             if(codigoEntrada[i] == eeprom_read(direccion)) {
@@ -139,12 +138,12 @@ short int EEPROM_search() {
     
     numProd--; //resto -1 para tener el offset necesario en memoria
     //Me fijo si el producto esta ingresado y el codigo es correcto (esta)    
-    if ( (esta == LARGO_ART) && !( prodIngresados & (int) pow(2,numProd) ) ) {   
+    if ( (esta == 2) && !( prodIngresados & (int) pow(2,numProd) ) ) {   
         
         //Convierto cada cifra del precio para obtenerlo correctamente
-        precio =(short int) ( 100*(eeprom_read( numProd*(LARGO_ART + LARGO_PRECIO) + LARGO_ART ) - '0') );
-        precio += (short int) ( 10*(eeprom_read( numProd*(LARGO_ART + LARGO_PRECIO) + LARGO_ART + 1) - '0') );
-        precio += (short int) ( eeprom_read( numProd*(LARGO_ART + LARGO_PRECIO) + LARGO_ART + 2) - '0');
+        precio =(short int) ( 100*(eeprom_read( numProd*(2 + LARGO_PRECIO) + 2 ) - '0') );
+        precio += (short int) ( 10*(eeprom_read( numProd*(2 + LARGO_PRECIO) + 2 + 1) - '0') );
+        precio += (short int) ( eeprom_read( numProd*(2 + LARGO_PRECIO) + 2 + 2) - '0');
         
         //Realizo un or para guardar el producto ingresado
         prodIngresados = prodIngresados | ((int) pow(2,numProd));
@@ -229,20 +228,17 @@ void main(void) {
 
 //rutina de atención a la interrupción por Rx serial
 void __interrupt() int_usart() {
-    short int i = 0;
-    short int recibir = 1;
-    huboInt = 1;
     
-    while(recibir) {
-        if(RCIF == 1) {
-            if(RCREG != 0x0D && RCREG != 0x0A && i < 9) { //Verifico que no me sobrepase de los datos esperados! 
-                codigoEntrada[i] = RCREG;
-                i++;
-            }
-            else{
-                recibir = 0;
-            }
+    if(RCIF == 1) {
+        if(RCREG != 0x0D && RCREG != 0x0A && (serial - '0') < 9) { //Verifico que no me sobrepase de los datos esperados! 
+            codigoEntrada[(serial - '0')] = RCREG;
+            serial++;
+        }
+        else{
+            serial = '0';
+            huboInt = 1;
         }
     }
+    
     
 }

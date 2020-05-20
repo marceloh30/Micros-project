@@ -1838,6 +1838,7 @@ extern double round(double);
 
 static unsigned short int cuenta, auxCuenta;
 static short int huboInt = 0;
+static char serial = '0';
 static short int productoIngresado;
 static short int numProd;
 static char codigoEntrada[9];
@@ -1860,10 +1861,8 @@ static unsigned short int prodIngresados = 0b0000000000000000;
 
 
 void mostrarDigitos(unsigned int num) {
-    unsigned short int decimal;
 
     if (num/10 < 99) {
-        decimal = num%10;
         num = num/10;
         if (num%10 >= 5) {
             num++;
@@ -1927,10 +1926,10 @@ short int EEPROM_search() {
     numProd = 0;
     short int precio = -1;
 
-    while (esta < 8 && direccion < (8 + 3)*13) {
+    while (esta < 2 && direccion < (2 + 3)*13) {
 
         esta = 0;
-        for(int i = 0; i < 8; i++) {
+        for(int i = 0; i < 2; i++) {
 
 
             if(codigoEntrada[i] == eeprom_read(direccion)) {
@@ -1949,12 +1948,12 @@ short int EEPROM_search() {
 
     numProd--;
 
-    if ( (esta == 8) && !( prodIngresados & (int) pow(2,numProd) ) ) {
+    if ( (esta == 2) && !( prodIngresados & (int) pow(2,numProd) ) ) {
 
 
-        precio =(short int) ( 100*(eeprom_read( numProd*(8 + 3) + 8 ) - '0') );
-        precio += (short int) ( 10*(eeprom_read( numProd*(8 + 3) + 8 + 1) - '0') );
-        precio += (short int) ( eeprom_read( numProd*(8 + 3) + 8 + 2) - '0');
+        precio =(short int) ( 100*(eeprom_read( numProd*(2 + 3) + 2 ) - '0') );
+        precio += (short int) ( 10*(eeprom_read( numProd*(2 + 3) + 2 + 1) - '0') );
+        precio += (short int) ( eeprom_read( numProd*(2 + 3) + 2 + 2) - '0');
 
 
         prodIngresados = prodIngresados | ((int) pow(2,numProd));
@@ -2039,20 +2038,17 @@ void main(void) {
 
 
 void __attribute__((picinterrupt(("")))) int_usart() {
-    short int i = 0;
-    short int recibir = 1;
-    huboInt = 1;
 
-    while(recibir) {
-        if(RCIF == 1) {
-            if(RCREG != 0x0D && RCREG != 0x0A && i < 9) {
-                codigoEntrada[i] = RCREG;
-                i++;
-            }
-            else{
-                recibir = 0;
-            }
+    if(RCIF == 1) {
+        if(RCREG != 0x0D && RCREG != 0x0A && (serial - '0') < 9) {
+            codigoEntrada[(serial - '0')] = RCREG;
+            serial++;
+        }
+        else{
+            serial = '0';
+            huboInt = 1;
         }
     }
+
 
 }
