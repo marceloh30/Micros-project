@@ -35,7 +35,7 @@ static char codigoEntrada[9];
 static char ventasLote = 0;
 static unsigned short int montosLote = 0;
 static char nroLote = 1;
-
+unsigned char prodIngresados[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0};; //99 lugares para 99 productos
 
 static unsigned const char BMS[] = {
     0b00000000,
@@ -50,8 +50,49 @@ static unsigned const char BMS[] = {
     0b10010000,
 };
 
+void ingresoProd(short int tp) {
 
-static unsigned short int prodIngresados = 0b0000000000000000; //16 lugares para 16 productos (extendible)
+    for(short int i = 12; i>=0; i--) { //Busco el byte que corresponde para setear bandera de ese TP en 1
+        if( tp >= 8*i) {
+
+            tp = tp - 8*i;
+            prodIngresados[i] = prodIngresados[i] | ((unsigned int)pow(2,tp));
+            i = 0;// lo pongo a 0 para salir (encontre su byte)
+
+        }
+    }
+}
+
+char verificarProd(short int tp) {
+    char ret = 0;
+    for(short int i = 12; i>=0; i--) { //Busco el byte que corresponde para setear bandera de ese TP en 1
+        if( tp >= 8*i) {
+
+            tp = tp - 8*i;
+            if(prodIngresados[i] & ((unsigned int)pow(2,tp))) {
+                ret = 1;
+            }
+            i = 0;// lo pongo a 0 para salir (encontre su byte)
+
+        }
+    }
+
+    return ret;
+}
+
+void eliminarProd(short int tp){
+        for(short int i = 12; i>=0; i--) { //Busco el byte que corresponde para setear bandera de ese TP en 1
+        if( tp >= 8*i) {
+
+            tp = tp - 8*i;
+            prodIngresados[i] = prodIngresados[i] ^ ((unsigned int)pow(2,tp));
+            i = 0;// lo pongo a 0 para salir (encontre su byte)
+
+        }
+    }
+
+}
+ 
 //Agrego con un or y verifico con un and!
 
 
@@ -90,7 +131,9 @@ void accionesAceptar(){
     montosLote+=cuenta;
     cuenta = 0;
     auxCuenta = 0;
-    prodIngresados = 0b0000000000000000;
+    for(short int i = 0; i < 13; i++){
+        prodIngresados[i] = 0;
+    }
     mostrarDigitos(cuenta);
     bailenLeds();
 }
@@ -99,52 +142,23 @@ void accionesDeshacer(){
     if (cuenta != auxCuenta){
         cuenta = auxCuenta;
         //Elimino el ultimo producto ingresado correctamente de la lista de productos ingresados
-        prodIngresados = (prodIngresados ^ ((int) pow(2,productoIngresado))); 
+        eliminarProd(productoIngresado); 
         mostrarDigitos(cuenta);
     }
 }
 
-short int EEPROM_search() { 
+short int EEPROM_search(unsigned char tp) { 
     
-    //Defino variables para la función
-    short int esta = 0;
-    short int direccion = 0;
-    numProd = 0;
-    short int precio = -1;
-    //Busco si lo leido en el puerto serial coincide con algun articulo de EEPROM y en ese caso devuelvo precio
-    while (esta < 2 && direccion < (2 + LARGO_PRECIO)*CANT_ART) {
-        
-        esta = 0; //Para evitar sumas erroneas!
-        for(int i = 0; i < 2; i++) {
-            
-            //Verifico cada byte en cada artículo
-            if(codigoEntrada[i] == eeprom_read(direccion)) {
-                esta++;
-            }
-            else{                
-                esta = 0;               
-            }
-            direccion++;
-        }
-        
-
-        direccion = direccion + 3; //Evito el precio de cada artículo
-        numProd++;
+    short int precio;
+    tp--;
+    tp = tp*2;
+    precio = (eeprom_read(tp) << 8) | (eeprom_read(tp+1)); //FALTA AGREGAR Comprobante de tp=>0
+    
+    if( (precio < 0 || precio > 999) || verificarProd(tp/2)){
+        precio = -1;
     }
     
-    numProd--; //resto -1 para tener el offset necesario en memoria
-    //Me fijo si el producto esta ingresado y el codigo es correcto (esta)    
-    if ( (esta == 2) && !( prodIngresados & (int) pow(2,numProd) ) ) {   
-        
-        //Convierto cada cifra del precio para obtenerlo correctamente
-        precio =(short int) ( 100*(eeprom_read( numProd*(2 + LARGO_PRECIO) + 2 ) - '0') );
-        precio += (short int) ( 10*(eeprom_read( numProd*(2 + LARGO_PRECIO) + 2 + 1) - '0') );
-        precio += (short int) ( eeprom_read( numProd*(2 + LARGO_PRECIO) + 2 + 2) - '0');
-        
-        //Realizo un or para guardar el producto ingresado
-        prodIngresados = prodIngresados | ((int) pow(2,numProd));
-         
-    }
+    
     return precio;
 }
 
@@ -158,11 +172,13 @@ void accionesPuertoSerial(){
     //Verifico checksum
     if ( (Aux%10) == (codigoEntrada[8] - '0')) {         
         //Busco precio en eeprom, sumo y muestro nueva cuenta (utilizo Aux para utilizar la menor memoria posible)
-        Aux = EEPROM_search(); //Guardo precio del articulo ingresado
+        unsigned char tp = 10*(codigoEntrada[0]-'0') + (codigoEntrada[1] - '0'); //tomo el valor de tipo de producto
+        Aux = EEPROM_search(tp); //Guardo precio del articulo ingresado
         
         if ((cuenta + Aux) <= 999 && Aux != -1) { //Si la cuenta no sobrepasa 99,9, la compra es correcta.
-            
-            productoIngresado = numProd; //Guardo el ultimo producto ingresado correctametne 
+            tp--;
+            ingresoProd(tp);
+            productoIngresado = tp; //Guardo el ultimo producto ingresado correctametne 
             auxCuenta = cuenta;
             cuenta += Aux;        
             mostrarDigitos(cuenta);     
@@ -203,7 +219,7 @@ void main(void) {
     mostrarDigitos(cuenta);
         
     //Bucle principal del programa
-    
+   
     while(1) {
         
         if(RA1) {

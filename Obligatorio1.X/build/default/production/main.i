@@ -1842,6 +1842,10 @@ static char serial = 0;
 static short int productoIngresado;
 static short int numProd;
 static char codigoEntrada[9];
+static char ventasLote = 0;
+static unsigned short int montosLote = 0;
+static char nroLote = 1;
+unsigned char prodIngresados[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0};;
 
 static unsigned const char BMS[] = {
     0b00000000,
@@ -1856,8 +1860,49 @@ static unsigned const char BMS[] = {
     0b10010000,
 };
 
+void ingresoProd(short int tp) {
 
-static unsigned short int prodIngresados = 0b0000000000000000;
+    for(short int i = 12; i>=0; i--) {
+        if( tp >= 8*i) {
+
+            tp = tp - 8*i;
+            prodIngresados[i] = prodIngresados[i] | ((unsigned int)pow(2,tp));
+            i = 0;
+
+        }
+    }
+}
+
+char verificarProd(short int tp) {
+    char ret = 0;
+    for(short int i = 12; i>=0; i--) {
+        if( tp >= 8*i) {
+
+            tp = tp - 8*i;
+            if(prodIngresados[i] & ((unsigned int)pow(2,tp))) {
+                ret = 1;
+            }
+            i = 0;
+
+        }
+    }
+
+    return ret;
+}
+
+void eliminarProd(short int tp){
+        for(short int i = 12; i>=0; i--) {
+        if( tp >= 8*i) {
+
+            tp = tp - 8*i;
+            prodIngresados[i] = prodIngresados[i] ^ ((unsigned int)pow(2,tp));
+            i = 0;
+
+        }
+    }
+
+}
+
 
 
 
@@ -1892,10 +1937,13 @@ void bailenLeds() {
 
 void accionesAceptar(){
 
+    ventasLote++;
+    montosLote+=cuenta;
     cuenta = 0;
     auxCuenta = 0;
-    prodIngresados = 0b0000000000000000;
-
+    for(short int i = 0; i < 13; i++){
+        prodIngresados[i] = 0;
+    }
     mostrarDigitos(cuenta);
     bailenLeds();
 }
@@ -1904,52 +1952,23 @@ void accionesDeshacer(){
     if (cuenta != auxCuenta){
         cuenta = auxCuenta;
 
-        prodIngresados = (prodIngresados ^ ((int) pow(2,productoIngresado)));
+        eliminarProd(productoIngresado);
         mostrarDigitos(cuenta);
     }
 }
 
-short int EEPROM_search() {
+short int EEPROM_search(unsigned char tp) {
 
+    short int precio;
+    tp--;
+    tp = tp*2;
+    precio = (eeprom_read(tp) << 8) | (eeprom_read(tp+1));
 
-    short int esta = 0;
-    short int direccion = 0;
-    numProd = 0;
-    short int precio = -1;
-
-    while (esta < 2 && direccion < (2 + 3)*13) {
-
-        esta = 0;
-        for(int i = 0; i < 2; i++) {
-
-
-            if(codigoEntrada[i] == eeprom_read(direccion)) {
-                esta++;
-            }
-            else{
-                esta = 0;
-            }
-            direccion++;
-        }
-
-
-        direccion = direccion + 3;
-        numProd++;
+    if( (precio < 0 || precio > 999) || verificarProd(tp/2)){
+        precio = -1;
     }
 
-    numProd--;
 
-    if ( (esta == 2) && !( prodIngresados & (int) pow(2,numProd) ) ) {
-
-
-        precio =(short int) ( 100*(eeprom_read( numProd*(2 + 3) + 2 ) - '0') );
-        precio += (short int) ( 10*(eeprom_read( numProd*(2 + 3) + 2 + 1) - '0') );
-        precio += (short int) ( eeprom_read( numProd*(2 + 3) + 2 + 2) - '0');
-
-
-        prodIngresados = prodIngresados | ((int) pow(2,numProd));
-
-    }
     return precio;
 }
 
@@ -1963,11 +1982,13 @@ void accionesPuertoSerial(){
 
     if ( (Aux%10) == (codigoEntrada[8] - '0')) {
 
-        Aux = EEPROM_search();
+        unsigned char tp = 10*(codigoEntrada[0]-'0') + (codigoEntrada[1] - '0');
+        Aux = EEPROM_search(tp);
 
         if ((cuenta + Aux) <= 999 && Aux != -1) {
-
-            productoIngresado = numProd;
+            tp--;
+            ingresoProd(tp);
+            productoIngresado = tp;
             auxCuenta = cuenta;
             cuenta += Aux;
             mostrarDigitos(cuenta);
