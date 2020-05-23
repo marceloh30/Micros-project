@@ -28,22 +28,27 @@
 //Defino variables estaticas (debido a que cruzan funciones)
 static unsigned short int cuenta, auxCuenta;
 static short int huboInt = 0;
-static char serial = '0';
+static char serial = 0;
 static short int productoIngresado;
 static short int numProd;
-static char codigoEntrada[9]; 
+static char codigoEntrada[9];
+static char ventasLote = 0;
+static unsigned short int montosLote = 0;
+static char nroLote = 1;
 
-static unsigned const char digito[] = {
-    0x3F, //digitos en binario del 0 al 9 (catodo comun)
-    0x06,     //1...
-    0x5B,
-    0x4F,
-    0x66,
-    0x6D,
-    0x7D,
-    0x07,
-    0x7F,     //8
-    0x6F };   //9.
+
+static unsigned const char BMS[] = {
+    0b00000000,
+    0b00010000,
+    0b00100000,
+    0b00110000,
+    0b01000000,
+    0b01010000,
+    0b01100000,
+    0b01110000,
+    0b10000000,
+    0b10010000,
+};
 
 
 static unsigned short int prodIngresados = 0b0000000000000000; //16 lugares para 16 productos (extendible)
@@ -51,21 +56,11 @@ static unsigned short int prodIngresados = 0b0000000000000000; //16 lugares para
 
 
 void mostrarDigitos(unsigned int num) { //num debe ser el numero entero (por ej. 99,1 --> 99)
-    //Verifico si puedo redondear el numero
-    if (num/10 < 99) {
-        num = num/10;
-        if (num%10 >= 5) {
-            num++;
-        }
-    }
-    else { 
-        num = num/10;
-    }
-    
-    //Obtengo cociente y resto del numero dividido entre 10 para decenas y unidades: 
-    PORTB=digito[(num/10)];
-    PORTD=digito[(num%10)];
-    
+    //Verifico si puedo redondear el numero 
+    PORTB = BMS[num/100]; // Tomo las decenas
+    PORTB = PORTB | ((num%100)/10); // Tomo la unidad
+    PORTD = BMS[(num%100)%10]; // Tomo la decima
+     
 }
 
 void iniciar_usart(){//función para iniciar el módulo USART PIC
@@ -91,10 +86,11 @@ void bailenLeds() {
 
 void accionesAceptar(){
     //Vuelvo todo a su estado "Original"
+    ventasLote++;
+    montosLote+=cuenta;
     cuenta = 0;
     auxCuenta = 0;
     prodIngresados = 0b0000000000000000;
-    
     mostrarDigitos(cuenta);
     bailenLeds();
 }
@@ -230,12 +226,12 @@ void main(void) {
 void __interrupt() int_usart() {
     
     if(RCIF == 1) {
-        if(RCREG != 0x0D && RCREG != 0x0A && (serial - '0') < 9) { //Verifico que no me sobrepase de los datos esperados! 
-            codigoEntrada[(serial - '0')] = RCREG;
+        if(RCREG != 0x0D && RCREG != 0x0A && serial < 9) { //Verifico que no me sobrepase de los datos esperados! 
+            codigoEntrada[serial] = RCREG;
             serial++;
         }
         else{
-            serial = '0';
+            serial = 0;
             huboInt = 1;
         }
     }

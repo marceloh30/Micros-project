@@ -273,10 +273,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> -> 0 `i `s
 ]
 "31
-[; ;main.c: 31: static char serial = '0';
+[; ;main.c: 31: static char serial = 0;
 [v _serial `uc ~T0 @X0 1 s ]
 [i _serial
--> -> 48 `ui `uc
+-> -> 0 `i `uc
 ]
 "32
 [; ;main.c: 32: static short int productoIngresado;
@@ -288,572 +288,542 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 34: static char codigoEntrada[9];
 [v _codigoEntrada `uc ~T0 @X0 -> 9 `i s ]
 "36
-[; ;main.c: 36: static unsigned const char digito[] = {
-[v _digito `Cuc ~T0 @X0 -> 10 `i s ]
-[i _digito
+[; ;main.c: 36: static unsigned const char BMS[] = {
+[v _BMS `Cuc ~T0 @X0 -> 10 `i s ]
+[i _BMS
 :U ..
--> -> 63 `i `uc
--> -> 6 `i `uc
--> -> 91 `i `uc
--> -> 79 `i `uc
--> -> 102 `i `uc
--> -> 109 `i `uc
--> -> 125 `i `uc
--> -> 7 `i `uc
--> -> 127 `i `uc
--> -> 111 `i `uc
+-> -> 0 `i `uc
+-> -> 16 `i `uc
+-> -> 32 `i `uc
+-> -> 48 `i `uc
+-> -> 64 `i `uc
+-> -> 80 `i `uc
+-> -> 96 `i `uc
+-> -> 112 `i `uc
+-> -> 128 `i `uc
+-> -> 144 `i `uc
 ..
 ]
-"49
-[; ;main.c: 49: static unsigned short int prodIngresados = 0b0000000000000000;
+"50
+[; ;main.c: 50: static unsigned short int prodIngresados = 0b0000000000000000;
 [v _prodIngresados `us ~T0 @X0 1 s ]
 [i _prodIngresados
 -> -> 0 `i `us
 ]
-"53
-[; ;main.c: 53: void mostrarDigitos(unsigned int num) {
+"54
+[; ;main.c: 54: void mostrarDigitos(unsigned int num) {
 [v _mostrarDigitos `(v ~T0 @X0 1 ef1`ui ]
 {
 [e :U _mostrarDigitos ]
 [v _num `ui ~T0 @X0 1 r1 ]
 [f ]
-"55
-[; ;main.c: 55:     if (num/10 < 99) {
-[e $ ! < / _num -> -> 10 `i `ui -> -> 99 `i `ui 96  ]
-{
 "56
-[; ;main.c: 56:         num = num/10;
-[e = _num / _num -> -> 10 `i `ui ]
+[; ;main.c: 56:     PORTB = BMS[num/100];
+[e = _PORTB *U + &U _BMS * -> / _num -> -> 100 `i `ui `ux -> -> # *U &U _BMS `ui `ux ]
 "57
-[; ;main.c: 57:         if (num%10 >= 5) {
-[e $ ! >= % _num -> -> 10 `i `ui -> -> 5 `i `ui 97  ]
-{
+[; ;main.c: 57:     PORTB = PORTB | ((num%100)/10);
+[e = _PORTB -> | -> _PORTB `ui / % _num -> -> 100 `i `ui -> -> 10 `i `ui `uc ]
 "58
-[; ;main.c: 58:             num++;
-[e ++ _num -> -> 1 `i `ui ]
-"59
-[; ;main.c: 59:         }
-}
-[e :U 97 ]
+[; ;main.c: 58:     PORTD = BMS[(num%100)%10];
+[e = _PORTD *U + &U _BMS * -> % % _num -> -> 100 `i `ui -> -> 10 `i `ui `ux -> -> # *U &U _BMS `ui `ux ]
 "60
-[; ;main.c: 60:     }
-}
-[e $U 98  ]
-"61
-[; ;main.c: 61:     else {
-[e :U 96 ]
-{
-"62
-[; ;main.c: 62:         num = num/10;
-[e = _num / _num -> -> 10 `i `ui ]
-"63
-[; ;main.c: 63:     }
-}
-[e :U 98 ]
-"66
-[; ;main.c: 66:     PORTB=digito[(num/10)];
-[e = _PORTB *U + &U _digito * -> / _num -> -> 10 `i `ui `ux -> -> # *U &U _digito `ui `ux ]
-"67
-[; ;main.c: 67:     PORTD=digito[(num%10)];
-[e = _PORTD *U + &U _digito * -> % _num -> -> 10 `i `ui `ux -> -> # *U &U _digito `ui `ux ]
-"69
-[; ;main.c: 69: }
+[; ;main.c: 60: }
 [e :UE 95 ]
 }
-"71
-[; ;main.c: 71: void iniciar_usart(){
+"62
+[; ;main.c: 62: void iniciar_usart(){
 [v _iniciar_usart `(v ~T0 @X0 1 ef ]
 {
 [e :U _iniciar_usart ]
 [f ]
-"72
-[; ;main.c: 72:      TRISC = 0b10000000;
+"63
+[; ;main.c: 63:      TRISC = 0b10000000;
 [e = _TRISC -> -> 128 `i `uc ]
-"73
-[; ;main.c: 73:      TXSTA = 0b00100110;
+"64
+[; ;main.c: 64:      TXSTA = 0b00100110;
 [e = _TXSTA -> -> 38 `i `uc ]
-"74
-[; ;main.c: 74:      RCSTA = 0b10010000;
+"65
+[; ;main.c: 65:      RCSTA = 0b10010000;
 [e = _RCSTA -> -> 144 `i `uc ]
-"75
-[; ;main.c: 75:      SPBRG = 25;
+"66
+[; ;main.c: 66:      SPBRG = 25;
 [e = _SPBRG -> -> 25 `i `uc ]
-"76
-[; ;main.c: 76: }
-[e :UE 99 ]
+"67
+[; ;main.c: 67: }
+[e :UE 96 ]
 }
-"78
-[; ;main.c: 78: void bailenLeds() {
+"69
+[; ;main.c: 69: void bailenLeds() {
 [v _bailenLeds `(v ~T0 @X0 1 ef ]
 {
 [e :U _bailenLeds ]
 [f ]
-"80
-[; ;main.c: 80:     unsigned short int i;
+"71
+[; ;main.c: 71:     unsigned short int i;
 [v _i `us ~T0 @X0 1 a ]
-"81
-[; ;main.c: 81:     for (i = 0; i < 3; i++) {
+"72
+[; ;main.c: 72:     for (i = 0; i < 3; i++) {
 {
 [e = _i -> -> 0 `i `us ]
-[e $ < -> _i `ui -> -> 3 `i `ui 101  ]
-[e $U 102  ]
-[e :U 101 ]
+[e $ < -> _i `ui -> -> 3 `i `ui 98  ]
+[e $U 99  ]
+[e :U 98 ]
 {
-"82
-[; ;main.c: 82:         RA3 = 1;
+"73
+[; ;main.c: 73:         RA3 = 1;
 [e = _RA3 -> -> 1 `i `b ]
-"83
-[; ;main.c: 83:         _delay((unsigned long)((200)*(4000000/4000.0)));
+"74
+[; ;main.c: 74:         _delay((unsigned long)((200)*(4000000/4000.0)));
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"84
-[; ;main.c: 84:         RA5 = 1;
+"75
+[; ;main.c: 75:         RA5 = 1;
 [e = _RA5 -> -> 1 `i `b ]
-"85
-[; ;main.c: 85:         _delay((unsigned long)((200)*(4000000/4000.0)));
+"76
+[; ;main.c: 76:         _delay((unsigned long)((200)*(4000000/4000.0)));
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"86
-[; ;main.c: 86:         RA3 = 0;
+"77
+[; ;main.c: 77:         RA3 = 0;
 [e = _RA3 -> -> 0 `i `b ]
-"87
-[; ;main.c: 87:         _delay((unsigned long)((200)*(4000000/4000.0)));
+"78
+[; ;main.c: 78:         _delay((unsigned long)((200)*(4000000/4000.0)));
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"88
-[; ;main.c: 88:         RA5 = 0;
+"79
+[; ;main.c: 79:         RA5 = 0;
 [e = _RA5 -> -> 0 `i `b ]
-"89
-[; ;main.c: 89:     }
+"80
+[; ;main.c: 80:     }
 }
 [e ++ _i -> -> 1 `i `us ]
-[e $ < -> _i `ui -> -> 3 `i `ui 101  ]
-[e :U 102 ]
+[e $ < -> _i `ui -> -> 3 `i `ui 98  ]
+[e :U 99 ]
 }
-"90
-[; ;main.c: 90: }
-[e :UE 100 ]
+"81
+[; ;main.c: 81: }
+[e :UE 97 ]
 }
-"92
-[; ;main.c: 92: void accionesAceptar(){
+"83
+[; ;main.c: 83: void accionesAceptar(){
 [v _accionesAceptar `(v ~T0 @X0 1 ef ]
 {
 [e :U _accionesAceptar ]
 [f ]
-"94
-[; ;main.c: 94:     cuenta = 0;
+"85
+[; ;main.c: 85:     cuenta = 0;
 [e = _cuenta -> -> 0 `i `us ]
-"95
-[; ;main.c: 95:     auxCuenta = 0;
+"86
+[; ;main.c: 86:     auxCuenta = 0;
 [e = _auxCuenta -> -> 0 `i `us ]
-"96
-[; ;main.c: 96:     prodIngresados = 0b0000000000000000;
+"87
+[; ;main.c: 87:     prodIngresados = 0b0000000000000000;
 [e = _prodIngresados -> -> 0 `i `us ]
-"98
-[; ;main.c: 98:     mostrarDigitos(cuenta);
+"89
+[; ;main.c: 89:     mostrarDigitos(cuenta);
 [e ( _mostrarDigitos (1 -> _cuenta `ui ]
-"99
-[; ;main.c: 99:     bailenLeds();
+"90
+[; ;main.c: 90:     bailenLeds();
 [e ( _bailenLeds ..  ]
-"100
-[; ;main.c: 100: }
-[e :UE 104 ]
+"91
+[; ;main.c: 91: }
+[e :UE 101 ]
 }
-"102
-[; ;main.c: 102: void accionesDeshacer(){
+"93
+[; ;main.c: 93: void accionesDeshacer(){
 [v _accionesDeshacer `(v ~T0 @X0 1 ef ]
 {
 [e :U _accionesDeshacer ]
 [f ]
-"103
-[; ;main.c: 103:     if (cuenta != auxCuenta){
-[e $ ! != -> _cuenta `ui -> _auxCuenta `ui 106  ]
+"94
+[; ;main.c: 94:     if (cuenta != auxCuenta){
+[e $ ! != -> _cuenta `ui -> _auxCuenta `ui 103  ]
 {
-"104
-[; ;main.c: 104:         cuenta = auxCuenta;
+"95
+[; ;main.c: 95:         cuenta = auxCuenta;
 [e = _cuenta _auxCuenta ]
-"106
-[; ;main.c: 106:         prodIngresados = (prodIngresados ^ ((int) pow(2,productoIngresado)));
+"97
+[; ;main.c: 97:         prodIngresados = (prodIngresados ^ ((int) pow(2,productoIngresado)));
 [e = _prodIngresados -> ^ -> _prodIngresados `ui -> -> ( _pow (2 , -> -> 2 `i `d -> _productoIngresado `d `i `ui `us ]
-"107
-[; ;main.c: 107:         mostrarDigitos(cuenta);
+"98
+[; ;main.c: 98:         mostrarDigitos(cuenta);
 [e ( _mostrarDigitos (1 -> _cuenta `ui ]
-"108
-[; ;main.c: 108:     }
+"99
+[; ;main.c: 99:     }
 }
-[e :U 106 ]
-"109
-[; ;main.c: 109: }
-[e :UE 105 ]
+[e :U 103 ]
+"100
+[; ;main.c: 100: }
+[e :UE 102 ]
 }
-"111
-[; ;main.c: 111: short int EEPROM_search() {
+"102
+[; ;main.c: 102: short int EEPROM_search() {
 [v _EEPROM_search `(s ~T0 @X0 1 ef ]
 {
 [e :U _EEPROM_search ]
 [f ]
-"114
-[; ;main.c: 114:     short int esta = 0;
+"105
+[; ;main.c: 105:     short int esta = 0;
 [v _esta `s ~T0 @X0 1 a ]
 [e = _esta -> -> 0 `i `s ]
-"115
-[; ;main.c: 115:     short int direccion = 0;
+"106
+[; ;main.c: 106:     short int direccion = 0;
 [v _direccion `s ~T0 @X0 1 a ]
 [e = _direccion -> -> 0 `i `s ]
-"116
-[; ;main.c: 116:     numProd = 0;
+"107
+[; ;main.c: 107:     numProd = 0;
 [e = _numProd -> -> 0 `i `s ]
-"117
-[; ;main.c: 117:     short int precio = -1;
+"108
+[; ;main.c: 108:     short int precio = -1;
 [v _precio `s ~T0 @X0 1 a ]
 [e = _precio -> -U -> 1 `i `s ]
-"119
-[; ;main.c: 119:     while (esta < 2 && direccion < (2 + 3)*13) {
-[e $U 108  ]
-[e :U 109 ]
+"110
+[; ;main.c: 110:     while (esta < 2 && direccion < (2 + 3)*13) {
+[e $U 105  ]
+[e :U 106 ]
 {
-"121
-[; ;main.c: 121:         esta = 0;
+"112
+[; ;main.c: 112:         esta = 0;
 [e = _esta -> -> 0 `i `s ]
-"122
-[; ;main.c: 122:         for(int i = 0; i < 2; i++) {
+"113
+[; ;main.c: 113:         for(int i = 0; i < 2; i++) {
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e $ < _i -> 2 `i 111  ]
+[e $ < _i -> 2 `i 108  ]
+[e $U 109  ]
+[e :U 108 ]
+{
+"116
+[; ;main.c: 116:             if(codigoEntrada[i] == eeprom_read(direccion)) {
+[e $ ! == -> *U + &U _codigoEntrada * -> -> _i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `i -> ( _eeprom_read (1 -> _direccion `uc `i 111  ]
+{
+"117
+[; ;main.c: 117:                 esta++;
+[e ++ _esta -> -> 1 `i `s ]
+"118
+[; ;main.c: 118:             }
+}
 [e $U 112  ]
+"119
+[; ;main.c: 119:             else{
 [e :U 111 ]
 {
-"125
-[; ;main.c: 125:             if(codigoEntrada[i] == eeprom_read(direccion)) {
-[e $ ! == -> *U + &U _codigoEntrada * -> -> _i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `i -> ( _eeprom_read (1 -> _direccion `uc `i 114  ]
-{
-"126
-[; ;main.c: 126:                 esta++;
-[e ++ _esta -> -> 1 `i `s ]
-"127
-[; ;main.c: 127:             }
-}
-[e $U 115  ]
-"128
-[; ;main.c: 128:             else{
-[e :U 114 ]
-{
-"129
-[; ;main.c: 129:                 esta = 0;
+"120
+[; ;main.c: 120:                 esta = 0;
 [e = _esta -> -> 0 `i `s ]
-"130
-[; ;main.c: 130:             }
+"121
+[; ;main.c: 121:             }
 }
-[e :U 115 ]
-"131
-[; ;main.c: 131:             direccion++;
+[e :U 112 ]
+"122
+[; ;main.c: 122:             direccion++;
 [e ++ _direccion -> -> 1 `i `s ]
-"132
-[; ;main.c: 132:         }
+"123
+[; ;main.c: 123:         }
 }
 [e ++ _i -> 1 `i ]
-[e $ < _i -> 2 `i 111  ]
-[e :U 112 ]
+[e $ < _i -> 2 `i 108  ]
+[e :U 109 ]
 }
-"135
-[; ;main.c: 135:         direccion = direccion + 3;
+"126
+[; ;main.c: 126:         direccion = direccion + 3;
 [e = _direccion -> + -> _direccion `i -> 3 `i `s ]
-"136
-[; ;main.c: 136:         numProd++;
+"127
+[; ;main.c: 127:         numProd++;
 [e ++ _numProd -> -> 1 `i `s ]
-"137
-[; ;main.c: 137:     }
+"128
+[; ;main.c: 128:     }
 }
-[e :U 108 ]
-"119
-[; ;main.c: 119:     while (esta < 2 && direccion < (2 + 3)*13) {
-[e $ && < -> _esta `i -> 2 `i < -> _direccion `i * + -> 2 `i -> 3 `i -> 13 `i 109  ]
-[e :U 110 ]
-"139
-[; ;main.c: 139:     numProd--;
+[e :U 105 ]
+"110
+[; ;main.c: 110:     while (esta < 2 && direccion < (2 + 3)*13) {
+[e $ && < -> _esta `i -> 2 `i < -> _direccion `i * + -> 2 `i -> 3 `i -> 13 `i 106  ]
+[e :U 107 ]
+"130
+[; ;main.c: 130:     numProd--;
 [e -- _numProd -> -> 1 `i `s ]
-"141
-[; ;main.c: 141:     if ( (esta == 2) && !( prodIngresados & (int) pow(2,numProd) ) ) {
-[e $ ! && == -> _esta `i -> 2 `i ! != & -> _prodIngresados `ui -> -> ( _pow (2 , -> -> 2 `i `d -> _numProd `d `i `ui -> -> 0 `i `ui 116  ]
+"132
+[; ;main.c: 132:     if ( (esta == 2) && !( prodIngresados & (int) pow(2,numProd) ) ) {
+[e $ ! && == -> _esta `i -> 2 `i ! != & -> _prodIngresados `ui -> -> ( _pow (2 , -> -> 2 `i `d -> _numProd `d `i `ui -> -> 0 `i `ui 113  ]
 {
-"144
-[; ;main.c: 144:         precio =(short int) ( 100*(eeprom_read( numProd*(2 + 3) + 2 ) - '0') );
+"135
+[; ;main.c: 135:         precio =(short int) ( 100*(eeprom_read( numProd*(2 + 3) + 2 ) - '0') );
 [e = _precio -> * -> -> 100 `i `ui - -> ( _eeprom_read (1 -> + * -> _numProd `i + -> 2 `i -> 3 `i -> 2 `i `uc `ui -> 48 `ui `s ]
-"145
-[; ;main.c: 145:         precio += (short int) ( 10*(eeprom_read( numProd*(2 + 3) + 2 + 1) - '0') );
+"136
+[; ;main.c: 136:         precio += (short int) ( 10*(eeprom_read( numProd*(2 + 3) + 2 + 1) - '0') );
 [e =+ _precio -> -> * -> -> 10 `i `ui - -> ( _eeprom_read (1 -> + + * -> _numProd `i + -> 2 `i -> 3 `i -> 2 `i -> 1 `i `uc `ui -> 48 `ui `s `s ]
-"146
-[; ;main.c: 146:         precio += (short int) ( eeprom_read( numProd*(2 + 3) + 2 + 2) - '0');
+"137
+[; ;main.c: 137:         precio += (short int) ( eeprom_read( numProd*(2 + 3) + 2 + 2) - '0');
 [e =+ _precio -> -> - -> ( _eeprom_read (1 -> + + * -> _numProd `i + -> 2 `i -> 3 `i -> 2 `i -> 2 `i `uc `ui -> 48 `ui `s `s ]
-"149
-[; ;main.c: 149:         prodIngresados = prodIngresados | ((int) pow(2,numProd));
+"140
+[; ;main.c: 140:         prodIngresados = prodIngresados | ((int) pow(2,numProd));
 [e = _prodIngresados -> | -> _prodIngresados `ui -> -> ( _pow (2 , -> -> 2 `i `d -> _numProd `d `i `ui `us ]
-"151
-[; ;main.c: 151:     }
+"142
+[; ;main.c: 142:     }
 }
-[e :U 116 ]
-"152
-[; ;main.c: 152:     return precio;
+[e :U 113 ]
+"143
+[; ;main.c: 143:     return precio;
 [e ) _precio ]
-[e $UE 107  ]
-"153
-[; ;main.c: 153: }
-[e :UE 107 ]
+[e $UE 104  ]
+"144
+[; ;main.c: 144: }
+[e :UE 104 ]
 }
-"155
-[; ;main.c: 155: void accionesPuertoSerial(){
+"146
+[; ;main.c: 146: void accionesPuertoSerial(){
 [v _accionesPuertoSerial `(v ~T0 @X0 1 ef ]
 {
 [e :U _accionesPuertoSerial ]
 [f ]
-"156
-[; ;main.c: 156:     short int Aux = 0;
+"147
+[; ;main.c: 147:     short int Aux = 0;
 [v _Aux `s ~T0 @X0 1 a ]
 [e = _Aux -> -> 0 `i `s ]
-"159
-[; ;main.c: 159:     for (int i = 0; i < 8; i++ ) {
+"150
+[; ;main.c: 150:     for (int i = 0; i < 8; i++ ) {
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e $ < _i -> 8 `i 118  ]
-[e $U 119  ]
-[e :U 118 ]
+[e $ < _i -> 8 `i 115  ]
+[e $U 116  ]
+[e :U 115 ]
 {
-"160
-[; ;main.c: 160:         Aux += (codigoEntrada[i] - '0');
+"151
+[; ;main.c: 151:         Aux += (codigoEntrada[i] - '0');
 [e =+ _Aux -> - -> *U + &U _codigoEntrada * -> -> _i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui `s ]
-"161
-[; ;main.c: 161:     }
+"152
+[; ;main.c: 152:     }
 }
 [e ++ _i -> 1 `i ]
-[e $ < _i -> 8 `i 118  ]
-[e :U 119 ]
+[e $ < _i -> 8 `i 115  ]
+[e :U 116 ]
 }
-"163
-[; ;main.c: 163:     if ( (Aux%10) == (codigoEntrada[8] - '0')) {
-[e $ ! == -> % -> _Aux `i -> 10 `i `ui - -> *U + &U _codigoEntrada * -> -> -> 8 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui 121  ]
+"154
+[; ;main.c: 154:     if ( (Aux%10) == (codigoEntrada[8] - '0')) {
+[e $ ! == -> % -> _Aux `i -> 10 `i `ui - -> *U + &U _codigoEntrada * -> -> -> 8 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui 118  ]
 {
-"165
-[; ;main.c: 165:         Aux = EEPROM_search();
+"156
+[; ;main.c: 156:         Aux = EEPROM_search();
 [e = _Aux ( _EEPROM_search ..  ]
-"167
-[; ;main.c: 167:         if ((cuenta + Aux) <= 999 && Aux != -1) {
-[e $ ! && <= + -> _cuenta `ui -> _Aux `ui -> -> 999 `i `ui != -> _Aux `i -U -> 1 `i 122  ]
+"158
+[; ;main.c: 158:         if ((cuenta + Aux) <= 999 && Aux != -1) {
+[e $ ! && <= + -> _cuenta `ui -> _Aux `ui -> -> 999 `i `ui != -> _Aux `i -U -> 1 `i 119  ]
 {
-"169
-[; ;main.c: 169:             productoIngresado = numProd;
+"160
+[; ;main.c: 160:             productoIngresado = numProd;
 [e = _productoIngresado _numProd ]
-"170
-[; ;main.c: 170:             auxCuenta = cuenta;
+"161
+[; ;main.c: 161:             auxCuenta = cuenta;
 [e = _auxCuenta _cuenta ]
-"171
-[; ;main.c: 171:             cuenta += Aux;
+"162
+[; ;main.c: 162:             cuenta += Aux;
 [e =+ _cuenta -> _Aux `us ]
-"172
-[; ;main.c: 172:             mostrarDigitos(cuenta);
+"163
+[; ;main.c: 163:             mostrarDigitos(cuenta);
 [e ( _mostrarDigitos (1 -> _cuenta `ui ]
-"173
-[; ;main.c: 173:             RA3 = 1;
+"164
+[; ;main.c: 164:             RA3 = 1;
 [e = _RA3 -> -> 1 `i `b ]
-"174
-[; ;main.c: 174:             _delay((unsigned long)((1000)*(4000000/4000.0)));
+"165
+[; ;main.c: 165:             _delay((unsigned long)((1000)*(4000000/4000.0)));
 [e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"175
-[; ;main.c: 175:             RA3 = 0;
+"166
+[; ;main.c: 166:             RA3 = 0;
 [e = _RA3 -> -> 0 `i `b ]
+"168
+[; ;main.c: 168:         }
+}
+[e $U 120  ]
+"169
+[; ;main.c: 169:         else {
+[e :U 119 ]
+{
+"171
+[; ;main.c: 171:             RA5 = 1;
+[e = _RA5 -> -> 1 `i `b ]
+"172
+[; ;main.c: 172:             _delay((unsigned long)((1000)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"173
+[; ;main.c: 173:             RA5 = 0;
+[e = _RA5 -> -> 0 `i `b ]
+"175
+[; ;main.c: 175:         }
+}
+[e :U 120 ]
+"176
+[; ;main.c: 176:     }
+}
+[e $U 121  ]
 "177
-[; ;main.c: 177:         }
-}
-[e $U 123  ]
-"178
-[; ;main.c: 178:         else {
-[e :U 122 ]
+[; ;main.c: 177:     else {
+[e :U 118 ]
 {
+"179
+[; ;main.c: 179:         RA5 = 1;
+[e = _RA5 -> -> 1 `i `b ]
 "180
-[; ;main.c: 180:             RA5 = 1;
-[e = _RA5 -> -> 1 `i `b ]
+[; ;main.c: 180:         _delay((unsigned long)((1000)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "181
-[; ;main.c: 181:             _delay((unsigned long)((1000)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"182
-[; ;main.c: 182:             RA5 = 0;
+[; ;main.c: 181:         RA5 = 0;
 [e = _RA5 -> -> 0 `i `b ]
-"184
-[; ;main.c: 184:         }
+"183
+[; ;main.c: 183:     }
 }
-[e :U 123 ]
-"185
-[; ;main.c: 185:     }
-}
-[e $U 124  ]
-"186
-[; ;main.c: 186:     else {
 [e :U 121 ]
-{
-"188
-[; ;main.c: 188:         RA5 = 1;
-[e = _RA5 -> -> 1 `i `b ]
-"189
-[; ;main.c: 189:         _delay((unsigned long)((1000)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"190
-[; ;main.c: 190:         RA5 = 0;
-[e = _RA5 -> -> 0 `i `b ]
-"192
-[; ;main.c: 192:     }
-}
-[e :U 124 ]
-"193
-[; ;main.c: 193: }
-[e :UE 117 ]
+"184
+[; ;main.c: 184: }
+[e :UE 114 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"195
-[; ;main.c: 195: void main(void) {
+"186
+[; ;main.c: 186: void main(void) {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"198
-[; ;main.c: 198:     ADCON1 = 0b00000111;
+"189
+[; ;main.c: 189:     ADCON1 = 0b00000111;
 [e = _ADCON1 -> -> 7 `i `uc ]
-"199
-[; ;main.c: 199:     TRISA = 0x06;
+"190
+[; ;main.c: 190:     TRISA = 0x06;
 [e = _TRISA -> -> 6 `i `uc ]
-"200
-[; ;main.c: 200:     TRISB = 0x00;
+"191
+[; ;main.c: 191:     TRISB = 0x00;
 [e = _TRISB -> -> 0 `i `uc ]
-"201
-[; ;main.c: 201:     TRISD = 0x00;
+"192
+[; ;main.c: 192:     TRISD = 0x00;
 [e = _TRISD -> -> 0 `i `uc ]
-"202
-[; ;main.c: 202:     INTCON = 0b11000000;
+"193
+[; ;main.c: 193:     INTCON = 0b11000000;
 [e = _INTCON -> -> 192 `i `uc ]
-"203
-[; ;main.c: 203:     RCIE = 1;
+"194
+[; ;main.c: 194:     RCIE = 1;
 [e = _RCIE -> -> 1 `i `b ]
-"204
-[; ;main.c: 204:     iniciar_usart();
+"195
+[; ;main.c: 195:     iniciar_usart();
 [e ( _iniciar_usart ..  ]
-"205
-[; ;main.c: 205:     cuenta = 0;
+"196
+[; ;main.c: 196:     cuenta = 0;
 [e = _cuenta -> -> 0 `i `us ]
-"206
-[; ;main.c: 206:     auxCuenta = 0;
+"197
+[; ;main.c: 197:     auxCuenta = 0;
 [e = _auxCuenta -> -> 0 `i `us ]
-"207
-[; ;main.c: 207:     mostrarDigitos(cuenta);
+"198
+[; ;main.c: 198:     mostrarDigitos(cuenta);
 [e ( _mostrarDigitos (1 -> _cuenta `ui ]
-"211
-[; ;main.c: 211:     while(1) {
-[e :U 127 ]
+"202
+[; ;main.c: 202:     while(1) {
+[e :U 124 ]
 {
-"213
-[; ;main.c: 213:         if(RA1) {
-[e $ ! _RA1 129  ]
+"204
+[; ;main.c: 204:         if(RA1) {
+[e $ ! _RA1 126  ]
 {
-"214
-[; ;main.c: 214:             while(RA1);
-[e $U 130  ]
-[e :U 131 ]
-[e :U 130 ]
-[e $ _RA1 131  ]
-[e :U 132 ]
-"215
-[; ;main.c: 215:             accionesAceptar();
-[e ( _accionesAceptar ..  ]
-"216
-[; ;main.c: 216:         }
-}
-[e $U 133  ]
-"217
-[; ;main.c: 217:         else if(RA2) {
-[e :U 129 ]
-[e $ ! _RA2 134  ]
-{
-"218
-[; ;main.c: 218:             while(RA2);
-[e $U 135  ]
-[e :U 136 ]
-[e :U 135 ]
-[e $ _RA2 136  ]
-[e :U 137 ]
-"219
-[; ;main.c: 219:             accionesDeshacer();
-[e ( _accionesDeshacer ..  ]
-"220
-[; ;main.c: 220:         }
-}
-[e $U 138  ]
-"221
-[; ;main.c: 221:         else if(huboInt) {
-[e :U 134 ]
-[e $ ! != -> _huboInt `i -> 0 `i 139  ]
-{
-"222
-[; ;main.c: 222:             huboInt = 0;
-[e = _huboInt -> -> 0 `i `s ]
-"223
-[; ;main.c: 223:             accionesPuertoSerial();
-[e ( _accionesPuertoSerial ..  ]
-"224
-[; ;main.c: 224:         }
-}
-[e :U 139 ]
-[e :U 138 ]
-[e :U 133 ]
-"225
-[; ;main.c: 225:     }
-}
-[e :U 126 ]
+"205
+[; ;main.c: 205:             while(RA1);
 [e $U 127  ]
 [e :U 128 ]
-"227
-[; ;main.c: 227: }
-[e :UE 125 ]
+[e :U 127 ]
+[e $ _RA1 128  ]
+[e :U 129 ]
+"206
+[; ;main.c: 206:             accionesAceptar();
+[e ( _accionesAceptar ..  ]
+"207
+[; ;main.c: 207:         }
+}
+[e $U 130  ]
+"208
+[; ;main.c: 208:         else if(RA2) {
+[e :U 126 ]
+[e $ ! _RA2 131  ]
+{
+"209
+[; ;main.c: 209:             while(RA2);
+[e $U 132  ]
+[e :U 133 ]
+[e :U 132 ]
+[e $ _RA2 133  ]
+[e :U 134 ]
+"210
+[; ;main.c: 210:             accionesDeshacer();
+[e ( _accionesDeshacer ..  ]
+"211
+[; ;main.c: 211:         }
+}
+[e $U 135  ]
+"212
+[; ;main.c: 212:         else if(huboInt) {
+[e :U 131 ]
+[e $ ! != -> _huboInt `i -> 0 `i 136  ]
+{
+"213
+[; ;main.c: 213:             huboInt = 0;
+[e = _huboInt -> -> 0 `i `s ]
+"214
+[; ;main.c: 214:             accionesPuertoSerial();
+[e ( _accionesPuertoSerial ..  ]
+"215
+[; ;main.c: 215:         }
+}
+[e :U 136 ]
+[e :U 135 ]
+[e :U 130 ]
+"216
+[; ;main.c: 216:     }
+}
+[e :U 123 ]
+[e $U 124  ]
+[e :U 125 ]
+"218
+[; ;main.c: 218: }
+[e :UE 122 ]
 }
 [v $root$_int_usart `(v ~T0 @X0 0 e ]
-"230
-[; ;main.c: 230: void __attribute__((picinterrupt(("")))) int_usart() {
+"221
+[; ;main.c: 221: void __attribute__((picinterrupt(("")))) int_usart() {
 [v _int_usart `(v ~T1 @X0 1 ef ]
 {
 [e :U _int_usart ]
 [f ]
-"232
-[; ;main.c: 232:     if(RCIF == 1) {
-[e $ ! == -> _RCIF `i -> 1 `i 141  ]
+"223
+[; ;main.c: 223:     if(RCIF == 1) {
+[e $ ! == -> _RCIF `i -> 1 `i 138  ]
 {
-"233
-[; ;main.c: 233:         if(RCREG != 0x0D && RCREG != 0x0A && (serial - '0') < 9) {
-[e $ ! && && != -> _RCREG `i -> 13 `i != -> _RCREG `i -> 10 `i < - -> _serial `ui -> 48 `ui -> -> 9 `i `ui 142  ]
+"224
+[; ;main.c: 224:         if(RCREG != 0x0D && RCREG != 0x0A && serial < 9) {
+[e $ ! && && != -> _RCREG `i -> 13 `i != -> _RCREG `i -> 10 `i < -> _serial `i -> 9 `i 139  ]
 {
-"234
-[; ;main.c: 234:             codigoEntrada[(serial - '0')] = RCREG;
-[e = *U + &U _codigoEntrada * -> - -> _serial `ui -> 48 `ui `ux -> -> # *U &U _codigoEntrada `ui `ux -> _RCREG `uc ]
-"235
-[; ;main.c: 235:             serial++;
+"225
+[; ;main.c: 225:             codigoEntrada[serial] = RCREG;
+[e = *U + &U _codigoEntrada * -> _serial `ux -> -> # *U &U _codigoEntrada `ui `ux -> _RCREG `uc ]
+"226
+[; ;main.c: 226:             serial++;
 [e ++ _serial -> -> 1 `i `uc ]
-"236
-[; ;main.c: 236:         }
+"227
+[; ;main.c: 227:         }
 }
-[e $U 143  ]
-"237
-[; ;main.c: 237:         else{
-[e :U 142 ]
+[e $U 140  ]
+"228
+[; ;main.c: 228:         else{
+[e :U 139 ]
 {
-"238
-[; ;main.c: 238:             serial = '0';
-[e = _serial -> -> 48 `ui `uc ]
-"239
-[; ;main.c: 239:             huboInt = 1;
+"229
+[; ;main.c: 229:             serial = 0;
+[e = _serial -> -> 0 `i `uc ]
+"230
+[; ;main.c: 230:             huboInt = 1;
 [e = _huboInt -> -> 1 `i `s ]
-"240
-[; ;main.c: 240:         }
+"231
+[; ;main.c: 231:         }
 }
-[e :U 143 ]
-"241
-[; ;main.c: 241:     }
+[e :U 140 ]
+"232
+[; ;main.c: 232:     }
 }
-[e :U 141 ]
-"244
-[; ;main.c: 244: }
-[e :UE 140 ]
+[e :U 138 ]
+"235
+[; ;main.c: 235: }
+[e :UE 137 ]
 }

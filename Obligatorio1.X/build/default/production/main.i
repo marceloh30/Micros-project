@@ -1838,22 +1838,23 @@ extern double round(double);
 
 static unsigned short int cuenta, auxCuenta;
 static short int huboInt = 0;
-static char serial = '0';
+static char serial = 0;
 static short int productoIngresado;
 static short int numProd;
 static char codigoEntrada[9];
 
-static unsigned const char digito[] = {
-    0x3F,
-    0x06,
-    0x5B,
-    0x4F,
-    0x66,
-    0x6D,
-    0x7D,
-    0x07,
-    0x7F,
-    0x6F };
+static unsigned const char BMS[] = {
+    0b00000000,
+    0b00010000,
+    0b00100000,
+    0b00110000,
+    0b01000000,
+    0b01010000,
+    0b01100000,
+    0b01110000,
+    0b10000000,
+    0b10010000,
+};
 
 
 static unsigned short int prodIngresados = 0b0000000000000000;
@@ -1862,19 +1863,9 @@ static unsigned short int prodIngresados = 0b0000000000000000;
 
 void mostrarDigitos(unsigned int num) {
 
-    if (num/10 < 99) {
-        num = num/10;
-        if (num%10 >= 5) {
-            num++;
-        }
-    }
-    else {
-        num = num/10;
-    }
-
-
-    PORTB=digito[(num/10)];
-    PORTD=digito[(num%10)];
+    PORTB = BMS[num/100];
+    PORTB = PORTB | ((num%100)/10);
+    PORTD = BMS[(num%100)%10];
 
 }
 
@@ -2040,12 +2031,12 @@ void main(void) {
 void __attribute__((picinterrupt(("")))) int_usart() {
 
     if(RCIF == 1) {
-        if(RCREG != 0x0D && RCREG != 0x0A && (serial - '0') < 9) {
-            codigoEntrada[(serial - '0')] = RCREG;
+        if(RCREG != 0x0D && RCREG != 0x0A && serial < 9) {
+            codigoEntrada[serial] = RCREG;
             serial++;
         }
         else{
-            serial = '0';
+            serial = 0;
             huboInt = 1;
         }
     }
