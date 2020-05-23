@@ -3,6 +3,8 @@
 [d edition pro ]
 [d chip 16F877A ]
 [d frameptr 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
 "5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
 "4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\evalpoly.c
@@ -39,8 +41,6 @@
 [v ___fldiv __fldiv `(d  1 e 4 0 ]
 "8 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
-"15 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\Umul16.c
-[v ___wmul __wmul `(ui  1 e 2 0 ]
 "4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\Umul8.c
 [v ___bmul __bmul `(uc  1 e 1 0 ]
 "4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\Umul8_16.c
@@ -53,23 +53,29 @@
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
 "6 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\pic\__eeread.c
 [v _eeprom_read eeprom_read `(uc  1 e 1 0 ]
-"54 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
-[v _mostrarDigitos mostrarDigitos `(v  1 e 1 0 ]
-"62
-[v _iniciar_usart iniciar_usart `(v  1 e 1 0 ]
-"69
-[v _bailenLeds bailenLeds `(v  1 e 1 0 ]
+"53 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
+[v _ingresoProd ingresoProd `(v  1 e 1 0 ]
+"66
+[v _verificarProd verificarProd `(uc  1 e 1 0 ]
 "83
+[v _eliminarProd eliminarProd `(v  1 e 1 0 ]
+"99
+[v _mostrarDigitos mostrarDigitos `(v  1 e 1 0 ]
+"107
+[v _iniciar_usart iniciar_usart `(v  1 e 1 0 ]
+"114
+[v _bailenLeds bailenLeds `(v  1 e 1 0 ]
+"128
 [v _accionesAceptar accionesAceptar `(v  1 e 1 0 ]
-"93
+"141
 [v _accionesDeshacer accionesDeshacer `(v  1 e 1 0 ]
-"102
+"150
 [v _EEPROM_search EEPROM_search `(s  1 e 2 0 ]
-"146
+"165
 [v _accionesPuertoSerial accionesPuertoSerial `(v  1 e 1 0 ]
-"186
+"207
 [v _main main `(v  1 e 1 0 ]
-"221
+"242
 [v _int_usart int_usart `II(v  1 e 1 0 ]
 "216 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [v _PORTB PORTB `VEuc  1 e 1 @6 ]
@@ -101,7 +107,7 @@
 [v _EEADR EEADR `VEuc  1 e 1 @269 ]
 "2316
 [v _EECON1 EECON1 `VEuc  1 e 1 @396 ]
-[s S98 . 1 `uc 1 RD 1 0 :1:0 
+[s S114 . 1 `uc 1 RD 1 0 :1:0 
 `uc 1 WR 1 0 :1:1 
 `uc 1 WREN 1 0 :1:2 
 `uc 1 WRERR 1 0 :1:3 
@@ -109,8 +115,8 @@
 `uc 1 EEPGD 1 0 :1:7 
 ]
 "2331
-[u S105 . 1 `S98 1 . 1 0 ]
-[v _EECON1bits EECON1bits `VES105  1 e 1 @396 ]
+[u S121 . 1 `S114 1 . 1 0 ]
+[v _EECON1bits EECON1bits `VES121  1 e 1 @396 ]
 "2659
 [v _RA1 RA1 `VEb  1 e 0 @41 ]
 "2662
@@ -134,75 +140,45 @@
 [v _serial serial `uc  1 s 1 serial ]
 "32
 [v _productoIngresado productoIngresado `s  1 s 2 productoIngresado ]
-"33
-[v _numProd numProd `s  1 s 2 numProd ]
 "34
 [v _codigoEntrada codigoEntrada `[9]uc  1 s 9 codigoEntrada ]
+"35
+[v _ventasLote ventasLote `uc  1 s 1 ventasLote ]
 "36
+[v _montosLote montosLote `us  1 s 2 montosLote ]
+"38
+[v _prodIngresados prodIngresados `[13]uc  1 e 13 0 ]
+"40
 [v _BMS BMS `DC[10]uc  1 s 10 BMS ]
-"50
-[v _prodIngresados prodIngresados `us  1 s 2 prodIngresados ]
-"186
+"207
 [v _main main `(v  1 e 1 0 ]
 {
-"218
+"239
 } 0
-"62
+"107
 [v _iniciar_usart iniciar_usart `(v  1 e 1 0 ]
 {
-"67
+"112
 } 0
-"146
+"165
 [v _accionesPuertoSerial accionesPuertoSerial `(v  1 e 1 0 ]
 {
-"150
-[v accionesPuertoSerial@i i `i  1 a 2 3 ]
-"147
-[v accionesPuertoSerial@Aux Aux `s  1 a 2 5 ]
-"184
+"175
+[v accionesPuertoSerial@tp tp `uc  1 a 1 8 ]
+"169
+[v accionesPuertoSerial@i i `i  1 a 2 6 ]
+"166
+[v accionesPuertoSerial@Aux Aux `s  1 a 2 9 ]
+"205
 } 0
-"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\awmod.c
-[v ___awmod __awmod `(i  1 e 2 0 ]
-{
-"10
-[v ___awmod@sign sign `uc  1 a 1 6 ]
-[v ___awmod@counter counter `uc  1 a 1 5 ]
-"5
-[v ___awmod@divisor divisor `i  1 p 2 0 ]
-[v ___awmod@dividend dividend `i  1 p 2 2 ]
-"34
-} 0
-"102 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
-[v _EEPROM_search EEPROM_search `(s  1 e 2 0 ]
-{
-"113
-[v EEPROM_search@i i `i  1 a 2 72 ]
-"106
-[v EEPROM_search@direccion direccion `s  1 a 2 74 ]
-"105
-[v EEPROM_search@esta esta `s  1 a 2 70 ]
-"108
-[v EEPROM_search@precio precio `s  1 a 2 60 ]
-"144
-} 0
-"6 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\pic\__eeread.c
-[v _eeprom_read eeprom_read `(uc  1 e 1 0 ]
-{
-[v eeprom_read@addr addr `uc  1 a 1 wreg ]
-[v eeprom_read@addr addr `uc  1 a 1 wreg ]
-"9
-[v eeprom_read@addr addr `uc  1 a 1 5 ]
-"19
-} 0
-"15 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\Umul16.c
-[v ___wmul __wmul `(ui  1 e 2 0 ]
-{
-"17
-[v ___wmul@product product `ui  1 a 2 6 ]
-"15
-[v ___wmul@multiplier multiplier `ui  1 p 2 2 ]
-[v ___wmul@multiplicand multiplicand `ui  1 p 2 4 ]
 "53
+[v _ingresoProd ingresoProd `(v  1 e 1 0 ]
+{
+"55
+[v ingresoProd@i i `s  1 a 2 69 ]
+"53
+[v ingresoProd@tp tp `s  1 p 2 56 ]
+"64
 } 0
 "4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\Umul8.c
 [v ___bmul __bmul `(uc  1 e 1 0 ]
@@ -217,28 +193,93 @@
 [v ___bmul@multiplier multiplier `uc  1 a 1 1 ]
 "51
 } 0
-"93 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
+"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+{
+"10
+[v ___awmod@sign sign `uc  1 a 1 5 ]
+[v ___awmod@counter counter `uc  1 a 1 4 ]
+"5
+[v ___awmod@divisor divisor `i  1 p 2 0 ]
+[v ___awmod@dividend dividend `i  1 p 2 2 ]
+"34
+} 0
+"150 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
+[v _EEPROM_search EEPROM_search `(s  1 e 2 0 ]
+{
+[v EEPROM_search@tp tp `uc  1 a 1 wreg ]
+"152
+[v EEPROM_search@precio precio `s  1 a 2 0 ]
+"150
+[v EEPROM_search@tp tp `uc  1 a 1 wreg ]
+"153
+[v EEPROM_search@tp tp `uc  1 a 1 2 ]
+"163
+} 0
+"66
+[v _verificarProd verificarProd `(uc  1 e 1 0 ]
+{
+"68
+[v verificarProd@i i `s  1 a 2 70 ]
+"67
+[v verificarProd@ret ret `uc  1 a 1 69 ]
+"66
+[v verificarProd@tp tp `s  1 p 2 56 ]
+"81
+} 0
+"6 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\pic\__eeread.c
+[v _eeprom_read eeprom_read `(uc  1 e 1 0 ]
+{
+[v eeprom_read@addr addr `uc  1 a 1 wreg ]
+[v eeprom_read@addr addr `uc  1 a 1 wreg ]
+"9
+[v eeprom_read@addr addr `uc  1 a 1 5 ]
+"19
+} 0
+"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"10
+[v ___awdiv@quotient quotient `i  1 a 2 6 ]
+"11
+[v ___awdiv@sign sign `uc  1 a 1 5 ]
+[v ___awdiv@counter counter `uc  1 a 1 4 ]
+"5
+[v ___awdiv@divisor divisor `i  1 p 2 0 ]
+[v ___awdiv@dividend dividend `i  1 p 2 2 ]
+"41
+} 0
+"141 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
 [v _accionesDeshacer accionesDeshacer `(v  1 e 1 0 ]
 {
-"100
+"148
+} 0
+"83
+[v _eliminarProd eliminarProd `(v  1 e 1 0 ]
+{
+"84
+[v eliminarProd@i i `s  1 a 2 69 ]
+"83
+[v eliminarProd@tp tp `s  1 p 2 56 ]
+"94
 } 0
 "5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\pow.c
 [v _pow pow `(d  1 e 4 0 ]
 {
 "8
-[v pow@yi yi `ul  1 a 4 51 ]
+[v pow@yi yi `ul  1 a 4 52 ]
 "7
-[v pow@sign sign `uc  1 a 1 50 ]
+[v pow@sign sign `uc  1 a 1 51 ]
 "5
-[v pow@x x `d  1 p 4 33 ]
-[v pow@y y `d  1 p 4 37 ]
+[v pow@x x `d  1 p 4 34 ]
+[v pow@y y `d  1 p 4 38 ]
 "31
 } 0
 "5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\log.c
 [v _log log `(d  1 e 4 0 ]
 {
 "7
-[v log@exponent exponent `i  1 a 2 77 ]
+[v log@exponent exponent `i  1 a 2 78 ]
 "5
 [v log@x x `d  1 p 4 16 ]
 "9
@@ -249,9 +290,9 @@
 [v _exp exp `(d  1 e 4 0 ]
 {
 "14
-[v exp@exponent exponent `i  1 a 2 30 ]
+[v exp@exponent exponent `i  1 a 2 31 ]
 "15
-[v exp@sign sign `uc  1 a 1 32 ]
+[v exp@sign sign `uc  1 a 1 33 ]
 "12
 [v exp@x x `d  1 p 4 22 ]
 "17
@@ -336,17 +377,17 @@
 "8 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S407 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+[s S423 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
 "13
-[s S412 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
-[u S415 . 4 `l 1 i 4 0 `d 1 f 4 0 `S407 1 fAsBytes 4 0 `S412 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S415  1 a 4 51 ]
+[s S428 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S431 . 4 `l 1 i 4 0 `d 1 f 4 0 `S423 1 fAsBytes 4 0 `S428 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S431  1 a 4 51 ]
 "12
 [v ___flmul@grs grs `ul  1 a 4 46 ]
-[s S484 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+[s S500 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
-[u S487 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S484 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S487  1 a 2 55 ]
+[u S503 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S500 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S503  1 a 2 55 ]
 "10
 [v ___flmul@bexp bexp `uc  1 a 1 50 ]
 "11
@@ -421,16 +462,18 @@
 [v ___fldiv@b b `d  1 p 4 4 ]
 "185
 } 0
-"83 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
+"128 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
 [v _accionesAceptar accionesAceptar `(v  1 e 1 0 ]
 {
-"91
+"134
+[v accionesAceptar@i i `s  1 a 2 17 ]
+"139
 } 0
-"54
+"99
 [v _mostrarDigitos mostrarDigitos `(v  1 e 1 0 ]
 {
-[v mostrarDigitos@num num `ui  1 p 2 11 ]
-"60
+[v mostrarDigitos@num num `ui  1 p 2 12 ]
+"105
 } 0
 "5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\lwmod.c
 [v ___lwmod __lwmod `(ui  1 e 2 0 ]
@@ -448,21 +491,21 @@
 "10
 [v ___lwdiv@quotient quotient `ui  1 a 2 9 ]
 "11
-[v ___lwdiv@counter counter `uc  1 a 1 8 ]
+[v ___lwdiv@counter counter `uc  1 a 1 11 ]
 "5
 [v ___lwdiv@divisor divisor `ui  1 p 2 4 ]
 [v ___lwdiv@dividend dividend `ui  1 p 2 6 ]
 "30
 } 0
-"69 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
+"114 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
 [v _bailenLeds bailenLeds `(v  1 e 1 0 ]
 {
-"71
-[v bailenLeds@i i `us  1 a 2 0 ]
-"81
+"116
+[v bailenLeds@i i `us  1 a 2 4 ]
+"126
 } 0
-"221
+"242
 [v _int_usart int_usart `II(v  1 e 1 0 ]
 {
-"235
+"256
 } 0
