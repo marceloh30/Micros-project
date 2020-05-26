@@ -18,6 +18,8 @@ void lecturaMas(void);
 
 void lecturaMenos(void);
 
+void lecturaConsulta(void); 
+
 void lecturaComando(void);
 
 #endif	/* LECTURA_H */
