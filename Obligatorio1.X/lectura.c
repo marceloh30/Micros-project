@@ -8,10 +8,10 @@ short int EEPROM_search(unsigned char tp) {
     
     short int precio;
     tp--;
-    tp = tp*2;
-    precio = (eeprom_read(tp) << 8) | (eeprom_read(tp+1)); //FALTA AGREGAR Comprobante de tp=>0
+    tp = tp*LARGO_PRECIO;
+    precio = (eeprom_read(tp) << LARGO_ART) | (eeprom_read(tp+1)); //FALTA AGREGAR Comprobante de tp=>0
     
-    if( (precio < 0 || precio > 999) || verificarProd(tp/2)){
+    if( (precio < 0 || precio > PRECIO_MAX) || verificarProd(tp/LARGO_PRECIO)) {
         precio = -1;
     }
     
@@ -23,7 +23,7 @@ void lecturaEtiqueta(){
     short int Aux = 0;
     
     //Realizo suma para checksum
-    for (int i = 0; i < 8; i++ ) {
+    for (int i = 0; i < LARGO_ART; i++ ) {
         Aux += (codigoEntrada[i] - '0');
     }
     //Verifico checksum
@@ -32,7 +32,7 @@ void lecturaEtiqueta(){
         unsigned char tp = 10*(codigoEntrada[0]-'0') + (codigoEntrada[1] - '0'); //tomo el valor de tipo de producto
         Aux = EEPROM_search(tp); //Guardo precio del articulo ingresado
         
-        if ((cuenta + Aux) <= 999 && Aux != -1) { //Si la cuenta no sobrepasa 99,9, la compra es correcta.
+        if ((cuenta + Aux) <= PRECIO_MAX && Aux != -1) { //Si la cuenta no sobrepasa 99,9, la compra es correcta.
             tp--;
             ingresoProd(tp);
             productoIngresado = tp; //Guardo el ultimo producto ingresado correctametne 
@@ -44,7 +44,7 @@ void lecturaEtiqueta(){
             RA3 = 0; 
      
         }
-        else { //Cuenta >99,9: Enciendo led rojo
+        else { //Cuenta > PRECIO_MAX o caso erroneo: Enciendo led rojo
         
             RA5 = 1;
             __delay_ms(1000);
@@ -61,10 +61,10 @@ void lecturaEtiqueta(){
     }
 }
 
-int verificacionEntrada(){ // Verifico para el ingreso de consulta que desea modificar o agregar un producto
-    int i = 1;
-    int ret = 0;
-    while(((codigoEntrada[i] <= '9') && (codigoEntrada[i] >= '0')) || codigoEntrada[i] == '='){
+char verificacionEntrada(){ //Verifico el ingreso para modificar o agregar precio (luego del '+' espero:"NN=NNN", N=Numero del 0 al 9)
+    char i = 1;
+    char ret = 0;
+    while( (((codigoEntrada[i] <= '9') && (codigoEntrada[i] >= '0')) || codigoEntrada[i] == '=') && (i<=6) ) {
         i++;
         ret++;
     }
@@ -75,7 +75,7 @@ void lecturaMas(){
     if (codigoEntrada[1] == 'L'){
         //cierreLote()
     }
-    else if(verificacionEntrada() == 5){
+    else if(verificacionEntrada() == 6){ //Es 6 para verificar por ejemplo 12=203: 6 caracteres!
         //agregarModificarPrecio()
     }
     else if(codigoEntrada[1] == 'D'){
@@ -103,7 +103,7 @@ void lecturaComando(){
     else if(codigoEntrada[0] == '+'){
         lecturaMas();
     }
-    else{
+    else{ //Ya verifique que fuese uno de los 3 ('?','+' o '-')
         lecturaMenos();
     }
 }
