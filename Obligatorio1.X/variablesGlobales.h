@@ -13,6 +13,7 @@
 #define LARGO_ART 8         //Largo de cada artículo recibido(2-TP, 6-Codigo)
 #define LARGO_PRECIO 2      //Largo en EEPROM de precio de c/art.
 #define CANT_ART 13         //Cantidad de artículos
+#define PRECIOMAX 999       //Valor maximo de la cuenta
 
 //Defino variables externas (debido a que cruzan archivos y funciones)
 extern unsigned short int cuenta, auxCuenta;
