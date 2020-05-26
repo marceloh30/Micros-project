@@ -12,7 +12,7 @@ short int EEPROM_search(unsigned char tp);
 
 void lecturaEtiqueta(void);
 
-int verificacionEntrada(void);
+char verificacionEntrada(void);
 
 void lecturaMas(void);
 
