@@ -14,7 +14,7 @@
 #define LARGO_PRECIO 2      //Largo en EEPROM de precio de c/art.
 #define CANT_ART 13         //Cantidad de artículos
 
-//Defino variables estaticas (debido a que cruzan funciones)
+//Defino variables externas (debido a que cruzan archivos y funciones)
 extern unsigned short int cuenta, auxCuenta;
 extern short int huboInt;
 extern char serial;
@@ -22,10 +22,10 @@ extern char modoDebug;
 extern short int productoIngresado;
 extern short int numProd;
 extern char codigoEntrada[10];
-extern char ventasLote;
+extern unsigned char ventasLote;
 extern unsigned short int montosLote;
 extern char nroLote;
-extern unsigned char prodIngresados[13]; //99 lugares para 99 productos
+extern unsigned char prodIngresados[13]; //Para guardar datos/uso de 99 prod. en 99 bits!
 
 #endif	/* VARIABLESGLOBALES_H */
 
