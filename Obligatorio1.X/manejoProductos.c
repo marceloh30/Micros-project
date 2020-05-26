@@ -1,4 +1,5 @@
 #include <xc.h>
+#include "manejarProductos.h"
 #include "mostrarInicializar.h"
 #include "variablesGlobales.h"
 
