@@ -1746,102 +1746,15 @@ extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
 # 24 "main.c" 2
 
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 1 3
-
-
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\__size_t.h" 1 3
-
-
-
-typedef unsigned size_t;
-# 6 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 2 3
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\__null.h" 1 3
-# 7 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 2 3
-
-
-
-
-
-
-
-extern void * memcpy(void *, const void *, size_t);
-extern void * memmove(void *, const void *, size_t);
-extern void * memset(void *, int, size_t);
-# 36 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 3
-extern char * strcat(char *, const char *);
-extern char * strcpy(char *, const char *);
-extern char * strncat(char *, const char *, size_t);
-extern char * strncpy(char *, const char *, size_t);
-extern char * strdup(const char *);
-extern char * strtok(char *, const char *);
-
-
-extern int memcmp(const void *, const void *, size_t);
-extern int strcmp(const char *, const char *);
-extern int stricmp(const char *, const char *);
-extern int strncmp(const char *, const char *, size_t);
-extern int strnicmp(const char *, const char *, size_t);
-extern void * memchr(const void *, int, size_t);
-extern size_t strcspn(const char *, const char *);
-extern char * strpbrk(const char *, const char *);
-extern size_t strspn(const char *, const char *);
-extern char * strstr(const char *, const char *);
-extern char * stristr(const char *, const char *);
-extern char * strerror(int);
-extern size_t strlen(const char *);
-extern char * strchr(const char *, int);
-extern char * strichr(const char *, int);
-extern char * strrchr(const char *, int);
-extern char * strrichr(const char *, int);
-# 25 "main.c" 2
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\math.h" 1 3
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\__unsupported.h" 1 3
-# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\math.h" 2 3
-# 30 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\math.h" 3
-extern double fabs(double);
-extern double floor(double);
-extern double ceil(double);
-extern double modf(double, double *);
-extern double sqrt(double);
-extern double atof(const char *);
-extern double sin(double) ;
-extern double cos(double) ;
-extern double tan(double) ;
-extern double asin(double) ;
-extern double acos(double) ;
-extern double atan(double);
-extern double atan2(double, double) ;
-extern double log(double);
-extern double log10(double);
-extern double pow(double, double) ;
-extern double exp(double) ;
-extern double sinh(double) ;
-extern double cosh(double) ;
-extern double tanh(double);
-extern double eval_poly(double, const double *, int);
-extern double frexp(double, int *);
-extern double ldexp(double, int);
-extern double fmod(double, double);
-extern double trunc(double);
-extern double round(double);
-# 26 "main.c" 2
-
 
 
 static unsigned short int cuenta, auxCuenta;
 static short int huboInt = 0;
 static char serial = 0;
+static char modoDebug = 0;
 static short int productoIngresado;
 static short int numProd;
-static char codigoEntrada[9];
+static char codigoEntrada[10];
 static char ventasLote = 0;
 static unsigned short int montosLote = 0;
 static char nroLote = 1;
@@ -1859,6 +1772,20 @@ static unsigned const char BMS[] = {
     0b10000000,
     0b10010000,
 };
+
+unsigned int pow(unsigned int numero,unsigned int potencia){
+    unsigned int resultado = 0;
+
+    for (int i = 0; i <= potencia; i++){
+        if (i == 0){
+        resultado = 1;
+        }
+        else{
+            resultado = resultado * numero;
+        }
+    }
+    return resultado;
+}
 
 void ingresoProd(short int tp) {
 
@@ -1972,7 +1899,7 @@ short int EEPROM_search(unsigned char tp) {
     return precio;
 }
 
-void accionesPuertoSerial(){
+void lecturaEtiqueta(){
     short int Aux = 0;
 
 
@@ -2012,6 +1939,69 @@ void accionesPuertoSerial(){
         RA5 = 0;
 
     }
+}
+
+int verificacionEntrada(){
+    int i = 1;
+    int ret = 0;
+    while(((codigoEntrada[i] <= '9') && (codigoEntrada[i] >= '0')) || codigoEntrada[i] == '='){
+        i++;
+        ret++;
+    }
+    return ret;
+}
+
+void lecturaMas(){
+    if (codigoEntrada[1] == 'L'){
+
+    }
+    else if(verificacionEntrada() == 5){
+
+    }
+    else if(codigoEntrada[1] == 'D'){
+        modoDebug = 1;
+    }
+    else{
+
+    }
+}
+
+void lecturaMenos(){
+    if(codigoEntrada[1] == 'D'){
+        modoDebug = 0;
+
+    }
+    else{
+
+    }
+}
+
+void lecturaComando(){
+    if(codigoEntrada[0] == '?'){
+
+    }
+    else if(codigoEntrada[0] == '+'){
+        lecturaMas();
+    }
+    else{
+        lecturaMenos();
+    }
+}
+
+void accionesPuertoSerial(){
+    if ((codigoEntrada[0] == '?') || (codigoEntrada[0] == '+') || (codigoEntrada[0] == '-')){
+        lecturaComando();
+    }
+    else if(codigoEntrada[0] <= '9' && codigoEntrada[0] >= '0'){
+        lecturaEtiqueta();
+    }
+    else{
+
+        RA5 = 1;
+        _delay((unsigned long)((1000)*(4000000/4000.0)));
+        RA5 = 0;
+    }
+
 }
 
 void main(void) {

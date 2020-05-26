@@ -22,16 +22,15 @@
 #define CANT_ART 13         //Cantidad de artículos
 
 #include <xc.h>
-#include <string.h>
-#include <math.h>
 
 //Defino variables estaticas (debido a que cruzan funciones)
 static unsigned short int cuenta, auxCuenta;
 static short int huboInt = 0;
 static char serial = 0;
+static char modoDebug = 0;
 static short int productoIngresado;
 static short int numProd;
-static char codigoEntrada[9];
+static char codigoEntrada[10];
 static char ventasLote = 0;
 static unsigned short int montosLote = 0;
 static char nroLote = 1;
@@ -49,6 +48,20 @@ static unsigned const char BMS[] = {
     0b10000000,
     0b10010000,
 };
+
+unsigned int pow(unsigned int numero,unsigned int potencia){
+    unsigned int resultado = 0;
+    
+    for (int i = 0; i <= potencia; i++){
+        if (i == 0){
+        resultado = 1;
+        }
+        else{
+            resultado = resultado * numero;
+        }
+    }
+    return resultado;
+}
 
 void ingresoProd(short int tp) {
 
@@ -162,7 +175,7 @@ short int EEPROM_search(unsigned char tp) {
     return precio;
 }
 
-void accionesPuertoSerial(){
+void lecturaEtiqueta(){
     short int Aux = 0;
     
     //Realizo suma para checksum
@@ -202,6 +215,69 @@ void accionesPuertoSerial(){
         RA5 = 0;
         
     }
+}
+
+int verificacionEntrada(){ // Verifico para el ingreso de consulta que desea modificar o agregar un producto
+    int i = 1;
+    int ret = 0;
+    while(((codigoEntrada[i] <= '9') && (codigoEntrada[i] >= '0')) || codigoEntrada[i] == '='){
+        i++;
+        ret++;
+    }
+    return ret;
+}
+
+void lecturaMas(){
+    if (codigoEntrada[1] == 'L'){
+        //cierreLote()
+    }
+    else if(verificacionEntrada() == 5){
+        //agregarModificarPrecio()
+    }
+    else if(codigoEntrada[1] == 'D'){
+        modoDebug = 1;
+    }
+    else{
+        //codigoNoreconocido();
+    }
+}
+
+void lecturaMenos(){
+    if(codigoEntrada[1] == 'D'){
+        modoDebug = 0;
+        //Se podria enviar un mensaje que diga modo debug desactivado o algo del estilo 
+    }
+    else{
+        //codigoNoreconocido();
+    }
+}
+
+void lecturaComando(){
+    if(codigoEntrada[0] == '?'){
+        //lecturaConsulta();
+    }
+    else if(codigoEntrada[0] == '+'){
+        lecturaMas();
+    }
+    else{
+        lecturaMenos();
+    }
+}
+
+void accionesPuertoSerial(){
+    if ((codigoEntrada[0] == '?') || (codigoEntrada[0] == '+') || (codigoEntrada[0] == '-')){
+        lecturaComando();
+    }
+    else if(codigoEntrada[0] <= '9' && codigoEntrada[0] >= '0'){
+        lecturaEtiqueta();
+    }
+    else{
+        //Entrada erronea: Enciendo led rojo
+        RA5 = 1;
+        __delay_ms(1000);
+        RA5 = 0;
+    }
+        
 }
 
 void main(void) {
