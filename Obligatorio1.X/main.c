@@ -44,7 +44,7 @@ void main(void) {
 void __interrupt() int_usart() {
     
     if(RCIF == 1) {
-        if(RCREG != 0x0D && RCREG != 0x0A && serial < 9) { //Verifico que no me sobrepase de los datos esperados! 
+        if(RCREG != 0x0D && RCREG != 0x0A && serial < (SERIALMAX-1)) { //Verifico que no me sobrepase de los datos esperados! 
             codigoEntrada[serial] = RCREG;
             serial++;
         }
