@@ -22,187 +22,25 @@
 #define CANT_ART 13         //Cantidad de artículos
 
 #include <xc.h>
-#include <string.h>
-#include <math.h>
-
+#include "variablesGlobales.h"
+#include "mostrarInicializar.h"
+#include "manejarProductos.h"
+#include "lectura.h"
+#include "acciones.h"
 //Defino variables estaticas (debido a que cruzan funciones)
-static unsigned short int cuenta, auxCuenta;
-static short int huboInt = 0;
-static char serial = 0;
-static short int productoIngresado;
-static short int numProd;
-static char codigoEntrada[9];
-static char ventasLote = 0;
-static unsigned short int montosLote = 0;
-static char nroLote = 1;
-unsigned char prodIngresados[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0};; //99 lugares para 99 productos
-
-static unsigned const char BMS[] = {
-    0b00000000,
-    0b00010000,
-    0b00100000,
-    0b00110000,
-    0b01000000,
-    0b01010000,
-    0b01100000,
-    0b01110000,
-    0b10000000,
-    0b10010000,
-};
-
-void ingresoProd(short int tp) {
-
-    for(short int i = 12; i>=0; i--) { //Busco el byte que corresponde para setear bandera de ese TP en 1
-        if( tp >= 8*i) {
-
-            tp = tp - 8*i;
-            prodIngresados[i] = prodIngresados[i] | ((unsigned int)pow(2,tp));
-            i = 0;// lo pongo a 0 para salir (encontre su byte)
-
-        }
-    }
-}
-
-char verificarProd(short int tp) {
-    char ret = 0;
-    for(short int i = 12; i>=0; i--) { //Busco el byte que corresponde para setear bandera de ese TP en 1
-        if( tp >= 8*i) {
-
-            tp = tp - 8*i;
-            if(prodIngresados[i] & ((unsigned int)pow(2,tp))) {
-                ret = 1;
-            }
-            i = 0;// lo pongo a 0 para salir (encontre su byte)
-
-        }
-    }
-
-    return ret;
-}
-
-void eliminarProd(short int tp){
-        for(short int i = 12; i>=0; i--) { //Busco el byte que corresponde para setear bandera de ese TP en 1
-        if( tp >= 8*i) {
-
-            tp = tp - 8*i;
-            prodIngresados[i] = prodIngresados[i] ^ ((unsigned int)pow(2,tp));
-            i = 0;// lo pongo a 0 para salir (encontre su byte)
-
-        }
-    }
-
-}
- 
-//Agrego con un or y verifico con un and!
+unsigned short int cuenta, auxCuenta;
+short int huboInt = 0;
+char serial = 0;
+char modoDebug = 0;
+short int productoIngresado;
+short int numProd;
+char codigoEntrada[10];
+char ventasLote = 0;
+unsigned short int montosLote = 0;
+char nroLote = 1;
+unsigned char prodIngresados[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0}; //99 lugares para 99 productos
 
 
-void mostrarDigitos(unsigned int num) { //num debe ser el numero entero (por ej. 99,1 --> 99)
-    //Verifico si puedo redondear el numero 
-    PORTB = BMS[num/100]; // Tomo las decenas
-    PORTB = PORTB | ((num%100)/10); // Tomo la unidad
-    PORTD = BMS[(num%100)%10]; // Tomo la decima
-     
-}
-
-void iniciar_usart(){//función para iniciar el módulo USART PIC
-     TRISC = 0b10000000;//pin RX como una entrada digital pin TX como una salida digital
-     TXSTA = 0b00100110;// 8bits, transmisión habilitada, asíncrono, alta velocidad
-     RCSTA = 0b10010000;//habilitado el USART PIC, recepción 8 bits,  habilitada, asíncrono
-     SPBRG = 25; //Valor  para una velocidad de 9600 baudios con un oscilador de 4 Mhz 
-}
-
-void bailenLeds() { 
-    //Secuecnia de leds
-    unsigned short int i;
-    for (i = 0; i < 3; i++) {
-        RA3 = 1;
-        __delay_ms(200);
-        RA5 = 1;
-        __delay_ms(200);
-        RA3 = 0;
-        __delay_ms(200);
-        RA5 = 0;
-    }
-}
-
-void accionesAceptar(){
-    //Vuelvo todo a su estado "Original"
-    ventasLote++;
-    montosLote+=cuenta;
-    cuenta = 0;
-    auxCuenta = 0;
-    for(short int i = 0; i < 13; i++){
-        prodIngresados[i] = 0;
-    }
-    mostrarDigitos(cuenta);
-    bailenLeds();
-}
-
-void accionesDeshacer(){
-    if (cuenta != auxCuenta){
-        cuenta = auxCuenta;
-        //Elimino el ultimo producto ingresado correctamente de la lista de productos ingresados
-        eliminarProd(productoIngresado); 
-        mostrarDigitos(cuenta);
-    }
-}
-
-short int EEPROM_search(unsigned char tp) { 
-    
-    short int precio;
-    tp--;
-    tp = tp*2;
-    precio = (eeprom_read(tp) << 8) | (eeprom_read(tp+1)); //FALTA AGREGAR Comprobante de tp=>0
-    
-    if( (precio < 0 || precio > 999) || verificarProd(tp/2)){
-        precio = -1;
-    }
-    
-    
-    return precio;
-}
-
-void accionesPuertoSerial(){
-    short int Aux = 0;
-    
-    //Realizo suma para checksum
-    for (int i = 0; i < LARGO_ART; i++ ) {
-        Aux += (codigoEntrada[i] - '0');
-    }
-    //Verifico checksum
-    if ( (Aux%10) == (codigoEntrada[8] - '0')) {         
-        //Busco precio en eeprom, sumo y muestro nueva cuenta (utilizo Aux para utilizar la menor memoria posible)
-        unsigned char tp = 10*(codigoEntrada[0]-'0') + (codigoEntrada[1] - '0'); //tomo el valor de tipo de producto
-        Aux = EEPROM_search(tp); //Guardo precio del articulo ingresado
-        
-        if ((cuenta + Aux) <= 999 && Aux != -1) { //Si la cuenta no sobrepasa 99,9, la compra es correcta.
-            tp--;
-            ingresoProd(tp);
-            productoIngresado = tp; //Guardo el ultimo producto ingresado correctametne 
-            auxCuenta = cuenta;
-            cuenta += Aux;        
-            mostrarDigitos(cuenta);     
-            RA3 = 1; //Enciendo Led verde
-            __delay_ms(1000);
-            RA3 = 0; 
-     
-        }
-        else { //Cuenta >99,9: Enciendo led rojo
-        
-            RA5 = 1;
-            __delay_ms(1000);
-            RA5 = 0;    
-            
-        }
-    }
-    else {
-        //Checksum erroneo: Enciendo led rojo
-        RA5 = 1;
-        __delay_ms(1000);
-        RA5 = 0;
-        
-    }
-}
 
 void main(void) {
     
