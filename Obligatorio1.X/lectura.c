@@ -96,9 +96,42 @@ void lecturaMenos(){
     }
 }
 
+void lecturaConsulta() { //Recibi '?' en 1er byte: Verifico los siguientes.
+
+    if (codigoEntrada[1] == 0x0D || codigoEntrada[1] == 0x0A) {     //Consulta Estado
+        //Lei solo '?': consulta estado
+        if (cuenta != 0) {
+            //envioTx("Estado: Activo");
+        }
+        else {
+            //envioTx("Estado: En espera"); //falta el barra n que no encontre
+        }
+    }
+    else if(codigoEntrada[1] == 'L') {                              //Consulta Lote
+        //char cadena[] = "Lote"; //Ver como agregar caracteres a la cadena..
+
+        //envioTx(cadena); 
+
+    }
+    else if(codigoEntrada[1] == 'V') consultaVoltaje();             //Consulta voltaje
+    
+    else if( codigoEntrada[1] <= '9' && codigoEntrada[1] >= '0'     //Consulta Precio
+            && codigoEntrada[2] <= '9' && codigoEntrada[2] >= '0' ) { 
+
+        unsigned short int articulo = 10 (codigoEntrada[1] - '0')
+                            + (codigoEntrada[2] - '0');
+
+        consultaPrecio(articulo);
+
+    }
+    //else envioTx("Error de comando!");                              //Consulta erronea
+
+ 
+}
+
 void lecturaComando(){
     if(codigoEntrada[0] == '?'){
-        //lecturaConsulta();
+        lecturaConsulta();
     }
     else if(codigoEntrada[0] == '+'){
         lecturaMas();
