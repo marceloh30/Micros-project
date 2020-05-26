@@ -7,7 +7,12 @@
 
 #ifndef VARIABLESGLOBALES_H
 #define	VARIABLESGLOBALES_H
-#define _XTAL_FREQ 4000000 //Frec. de Cristal que usamos (cristal de un NTSC color television receivers)
+
+//Macros:
+#define _XTAL_FREQ 4000000  //Frec. de Cristal que usamos
+#define LARGO_ART 8         //Largo de cada artículo recibido(2-TP, 6-Codigo)
+#define LARGO_PRECIO 2      //Largo en EEPROM de precio de c/art.
+#define CANT_ART 13         //Cantidad de artículos
 
 //Defino variables estaticas (debido a que cruzan funciones)
 extern unsigned short int cuenta, auxCuenta;
