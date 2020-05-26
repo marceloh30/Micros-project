@@ -33,4 +33,4 @@ unsigned short int montosLote = 0;
 char nroLote = 1;
 unsigned char prodIngresados[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0}; //99 lugares para 99 productos (1 en c/bit)
 
-
+void main(void);
