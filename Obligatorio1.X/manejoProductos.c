@@ -19,11 +19,11 @@ unsigned int pow(unsigned int numero,unsigned int potencia){
 
 void ingresoProd(short int tp) {
 
-    for(short int i = 12; i>=0; i--) { //Busco el byte que corresponde para setear bandera de ese TP en 1
+    for(short char i = 12; i>=0; i--) { //Busco el byte que corresponde para setear bandera de ese TP en 1
         if( tp >= 8*i) {
 
             tp = tp - 8*i;
-            prodIngresados[i] = prodIngresados[i] | ((unsigned int)pow(2,tp));
+            prodIngresados[i] = prodIngresados[i] | pow(2,tp);
             i = 0;// lo pongo a 0 para salir (encontre su byte)
 
         }
@@ -32,11 +32,11 @@ void ingresoProd(short int tp) {
 
 char verificarProd(short int tp) {
     char ret = 0;
-    for(short int i = 12; i>=0; i--) { //Busco el byte que corresponde para setear bandera de ese TP en 1
+    for(short char i = 12; i>=0; i--) { //Busco el byte que corresponde para setear bandera de ese TP en 1
         if( tp >= 8*i) {
 
             tp = tp - 8*i;
-            if(prodIngresados[i] & ((unsigned int)pow(2,tp))) {
+            if(prodIngresados[i] & pow(2,tp)) {
                 ret = 1;
             }
             i = 0;// lo pongo a 0 para salir (encontre su byte)
@@ -48,11 +48,11 @@ char verificarProd(short int tp) {
 }
 
 void eliminarProd(short int tp){
-        for(short int i = 12; i>=0; i--) { //Busco el byte que corresponde para setear bandera de ese TP en 1
+        for(short char i = 12; i>=0; i--) { //Busco el byte que corresponde para setear bandera de ese TP en 1
         if( tp >= 8*i) {
 
             tp = tp - 8*i;
-            prodIngresados[i] = prodIngresados[i] ^ ((unsigned int)pow(2,tp));
+            prodIngresados[i] = prodIngresados[i] ^ pow(2,tp);
             i = 0;// lo pongo a 0 para salir (encontre su byte)
 
         }
