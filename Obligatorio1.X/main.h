@@ -8,12 +8,6 @@
 #pragma config WRT = OFF        // Flash Program Memory Write Enable bits (Write protection off; all program memory may be written to by EECON control)
 #pragma config CP = OFF         // Flash Program Memory Code Protection bit (Code protection off)
 
-//Macros:
-#define _XTAL_FREQ 4000000  //Frec. de Cristal que usamos
-#define LARGO_ART 8         //Largo de cada artículo recibido(2-TP, 6-Codigo)
-#define LARGO_PRECIO 2      //Largo en EEPROM de precio de c/art.
-#define CANT_ART 13         //Cantidad de artículos
-
 #include <xc.h>
 #include "variablesGlobales.h"
 #include "mostrarInicializar.h"
