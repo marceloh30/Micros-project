@@ -1,12 +1,6 @@
-#include <xc.h>
-#include "lectura.h"
-#include "manejarProductos.h"
-#include "mostrarInicializar.h"
-#include "variablesGlobales.h"
+#include "acciones.h"
 
-
-
-void accionesAceptar(){
+void accionesAceptar() {
     //Vuelvo todo a su estado "Original"
     ventasLote++;
     montosLote+=cuenta;
@@ -19,8 +13,8 @@ void accionesAceptar(){
     bailenLeds();
 }
 
-void accionesDeshacer(){
-    if (cuenta != auxCuenta){
+void accionesDeshacer() {
+    if (cuenta != auxCuenta) {
         cuenta = auxCuenta;
         //Elimino el ultimo producto ingresado correctamente de la lista de productos ingresados
         eliminarProd(productoIngresado); 
@@ -28,11 +22,11 @@ void accionesDeshacer(){
     }
 }
 
-void accionesPuertoSerial(){
-    if ((codigoEntrada[0] == '?') || (codigoEntrada[0] == '+') || (codigoEntrada[0] == '-')){
+void accionesPuertoSerial() {
+    if ((codigoEntrada[0] == '?') || (codigoEntrada[0] == '+') || (codigoEntrada[0] == '-')) {
         lecturaComando();
     }
-    else if(codigoEntrada[0] <= '9' && codigoEntrada[0] >= '0'){
+    else if(codigoEntrada[0] <= '9' && codigoEntrada[0] >= '0') {
         lecturaEtiqueta();
     }
     else{
