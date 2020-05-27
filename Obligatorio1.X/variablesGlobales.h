@@ -8,6 +8,8 @@
 #ifndef VARIABLESGLOBALES_H
 #define	VARIABLESGLOBALES_H
 
+#include <xc.h>
+
 //Macros:
 #define _XTAL_FREQ 4000000  //Frec. de Cristal que usamos
 #define LARGO_ART 8         //Largo de cada artículo recibido(2-TP, 6-Codigo)
