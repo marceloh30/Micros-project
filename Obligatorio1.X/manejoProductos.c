@@ -1,8 +1,4 @@
-#include <xc.h>
-#include "manejarProductos.h"
-#include "mostrarInicializar.h"
-#include "variablesGlobales.h"
-
+#include "manejoProductos.h"
 
 unsigned int pow(unsigned int numero,unsigned int potencia){
     unsigned int resultado = 0;
