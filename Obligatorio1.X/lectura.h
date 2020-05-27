@@ -1,13 +1,13 @@
-/* 
- * File:   lectura.h
- * Author: julia
- *
- * Created on 26 de mayo de 2020, 12:20 PM
- */
-
 #ifndef LECTURA_H
 #define	LECTURA_H
 
+//Librerias
+#include <xc.h>
+#include "manejarProductos.h"
+#include "mostrarInicializar.h"
+#include "variablesGlobales.h"
+
+//Firmas
 short int EEPROM_search(unsigned char tp);
 
 void lecturaEtiqueta(void);
