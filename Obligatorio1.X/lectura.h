@@ -4,12 +4,12 @@
 //Librerias
 #include <xc.h>
 #include <stdio.h>
-#include "manejarProductos.h"
+#include "manejoProductos.h"
 #include "mostrarInicializar.h"
 #include "variablesGlobales.h"
 
 //Macros
-#define strError "Ocurrio un error en la interpretacion. barran"
+#define strError "Ocurrio un error en la interpretacion.\n"
 
 //Firmas
 short int EEPROM_search(unsigned char tp);

@@ -3,6 +3,6 @@ main.c  \
 main.h  \
 variablesGlobales.h  \
 mostrarInicializar.h  \
-manejarProductos.h  \
+manejoProductos.h  \
 lectura.h  \
 acciones.h 

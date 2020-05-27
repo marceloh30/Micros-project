@@ -1,6 +1,7 @@
 build/default/production/acciones.p1:  \
 acciones.c  \
+acciones.h  \
 lectura.h  \
-manejarProductos.h  \
+manejoProductos.h  \
 mostrarInicializar.h  \
 variablesGlobales.h 

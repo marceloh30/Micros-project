@@ -3,22 +3,26 @@
 [d edition pro ]
 [d chip 16F877A ]
 [d frameptr 0 ]
-"9 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\acciones.c
+"3 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\acciones.c
 [v _accionesAceptar accionesAceptar `(v  1 e 1 0 ]
-"22
+"16
 [v _accionesDeshacer accionesDeshacer `(v  1 e 1 0 ]
-"31
+"25
 [v _accionesPuertoSerial accionesPuertoSerial `(v  1 e 1 0 ]
 "5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\awdiv.c
 [v ___awdiv __awdiv `(i  1 e 2 0 ]
 "5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
+"505 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\doprnt.c
+[v _sprintf sprintf `(i  1 e 2 0 ]
 "5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\lwdiv.c
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
 "5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\lwmod.c
 [v ___lwmod __lwmod `(ui  1 e 2 0 ]
 "10 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\sprcadd.c
 [v ___fladd __fladd `(d  1 e 4 0 ]
+"4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\strlen.c
+[v _strlen strlen `(ui  1 e 2 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
 "4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\Umul8.c
@@ -33,64 +37,70 @@
 [v _eeprom_read eeprom_read `(uc  1 e 1 0 ]
 "6 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\pic\__eewrite.c
 [v _eeprom_write eeprom_write `(v  1 e 1 0 ]
-"7 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\lectura.c
+"3 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\lectura.c
 [v _EEPROM_search EEPROM_search `(s  1 e 2 0 ]
-"22
+"17
 [v _lecturaEtiqueta lecturaEtiqueta `(v  1 e 1 0 ]
-"64
+"59
 [v _verificacionEntrada verificacionEntrada `(uc  1 e 1 0 ]
-"74
+"69
 [v _cierreDeLote cierreDeLote `(v  1 e 1 0 ]
-"84
+"83
 [v _lecturaMas lecturaMas `(v  1 e 1 0 ]
-"99
+"98
 [v _lecturaMenos lecturaMenos `(v  1 e 1 0 ]
-"109
+"108
+[v _consultaPrecio consultaPrecio `(v  1 e 1 0 ]
+"121
 [v _lecturaConsulta lecturaConsulta `(v  1 e 1 0 ]
-"141
+"155
 [v _lecturaComando lecturaComando `(v  1 e 1 0 ]
-"9 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
+"9 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"44
+"72
 [v _int_usart int_usart `II(v  1 e 1 0 ]
-"7 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\manejoProductos.c
+"3 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\manejoProductos.c
 [v _pow pow `(ui  1 e 2 0 ]
-"21
+"17
 [v _ingresoProd ingresoProd `(v  1 e 1 0 ]
-"34
+"30
 [v _verificarProd verificarProd `(uc  1 e 1 0 ]
-"51
+"47
 [v _eliminarProd eliminarProd `(v  1 e 1 0 ]
-"65
+"61
 [v _agregarModificarPrecio agregarModificarPrecio `(v  1 e 1 0 ]
-"17 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\mostrarInicializar.c
+"17 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\mostrarInicializar.c
 [v _mostrarDigitos mostrarDigitos `(v  1 e 1 0 ]
 "25
-[v _iniciar_usart iniciar_usart `(v  1 e 1 0 ]
-"32
 [v _bailenLeds bailenLeds `(v  1 e 1 0 ]
-"18 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X/main.h
+"39
+[v _envioTX envioTX `(v  1 e 1 0 ]
+"23 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X/main.h
 [v _cuenta cuenta `us  1 e 2 0 ]
 [v _auxCuenta auxCuenta `us  1 e 2 0 ]
-"19
-[v _huboInt huboInt `s  1 e 2 0 ]
-"20
-[v _serial serial `uc  1 e 1 0 ]
-"21
-[v _modoDebug modoDebug `uc  1 e 1 0 ]
-"22
-[v _productoIngresado productoIngresado `s  1 e 2 0 ]
 "24
-[v _codigoEntrada codigoEntrada `[10]uc  1 e 10 0 ]
+[v _huboInt huboInt `s  1 e 2 0 ]
 "25
-[v _ventasLote ventasLote `uc  1 e 1 0 ]
+[v _serial serial `uc  1 e 1 0 ]
 "26
-[v _montosLote montosLote `us  1 e 2 0 ]
+[v _modoDebug modoDebug `uc  1 e 1 0 ]
 "27
-[v _nroLote nroLote `uc  1 e 1 0 ]
+[v _productoIngresado productoIngresado `s  1 e 2 0 ]
 "29
+[v _codigoEntrada codigoEntrada `[10]uc  1 e 10 0 ]
+"30
+[v _ventasLote ventasLote `uc  1 e 1 0 ]
+"31
+[v _montosLote montosLote `us  1 e 2 0 ]
+"32
+[v _nroLote nroLote `uc  1 e 1 0 ]
+"33
+[v _cierreLotePedido cierreLotePedido `uc  1 e 1 0 ]
+"34
 [v _prodIngresados prodIngresados `[13]uc  1 e 13 0 ]
-[s S224 . 1 `uc 1 C 1 0 :1:0 
+"35
+[v _adresult adresult `us  1 e 2 0 ]
+[s S259 . 1 `uc 1 C 1 0 :1:0 
 `uc 1 DC 1 0 :1:1 
 `uc 1 Z 1 0 :1:2 
 `uc 1 nPD 1 0 :1:3 
@@ -99,23 +109,23 @@
 `uc 1 IRP 1 0 :1:7 
 ]
 "99 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
-[s S232 . 1 `uc 1 . 1 0 :5:0 
+[s S267 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 RP0 1 0 :1:5 
 `uc 1 RP1 1 0 :1:6 
 ]
-[s S236 . 1 `uc 1 CARRY 1 0 :1:0 
+[s S271 . 1 `uc 1 CARRY 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 ZERO 1 0 :1:2 
 ]
-[u S240 . 1 `S224 1 . 1 0 `S232 1 . 1 0 `S236 1 . 1 0 ]
-[v _STATUSbits STATUSbits `VES240  1 e 1 @3 ]
+[u S275 . 1 `S259 1 . 1 0 `S267 1 . 1 0 `S271 1 . 1 0 ]
+[v _STATUSbits STATUSbits `VES275  1 e 1 @3 ]
 "216
 [v _PORTB PORTB `VEuc  1 e 1 @6 ]
 "340
 [v _PORTD PORTD `VEuc  1 e 1 @8 ]
 "454
 [v _INTCON INTCON `VEuc  1 e 1 @11 ]
-[s S261 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S296 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INTF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -125,17 +135,23 @@
 `uc 1 GIE 1 0 :1:7 
 ]
 "477
-[s S270 . 1 `uc 1 . 1 0 :2:0 
+[s S305 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 T0IE 1 0 :1:5 
 ]
-[u S275 . 1 `S261 1 . 1 0 `S270 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES275  1 e 1 @11 ]
+[u S310 . 1 `S296 1 . 1 0 `S305 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES310  1 e 1 @11 ]
 "964
 [v _RCSTA RCSTA `VEuc  1 e 1 @24 ]
+"1059
+[v _TXREG TXREG `VEuc  1 e 1 @25 ]
 "1066
 [v _RCREG RCREG `VEuc  1 e 1 @26 ]
+"1152
+[v _ADRESH ADRESH `VEuc  1 e 1 @30 ]
+"1159
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @31 ]
 "1325
 [v _TRISA TRISA `VEuc  1 e 1 @133 ]
 "1375
@@ -144,10 +160,14 @@
 [v _TRISC TRISC `VEuc  1 e 1 @135 ]
 "1499
 [v _TRISD TRISD `VEuc  1 e 1 @136 ]
+"1561
+[v _TRISE TRISE `VEuc  1 e 1 @137 ]
 "1999
 [v _TXSTA TXSTA `VEuc  1 e 1 @152 ]
 "2080
 [v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
+"2222
+[v _ADRESL ADRESL `VEuc  1 e 1 @158 ]
 "2229
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @159 ]
 "2288
@@ -156,7 +176,7 @@
 [v _EEADR EEADR `VEuc  1 e 1 @269 ]
 "2316
 [v _EECON1 EECON1 `VEuc  1 e 1 @396 ]
-[s S204 . 1 `uc 1 RD 1 0 :1:0 
+[s S239 . 1 `uc 1 RD 1 0 :1:0 
 `uc 1 WR 1 0 :1:1 
 `uc 1 WREN 1 0 :1:2 
 `uc 1 WRERR 1 0 :1:3 
@@ -164,14 +184,16 @@
 `uc 1 EEPGD 1 0 :1:7 
 ]
 "2331
-[u S211 . 1 `S204 1 . 1 0 ]
-[v _EECON1bits EECON1bits `VES211  1 e 1 @396 ]
+[u S246 . 1 `S239 1 . 1 0 ]
+[v _EECON1bits EECON1bits `VES246  1 e 1 @396 ]
 "2361
 [v _EECON2 EECON2 `VEuc  1 e 1 @397 ]
-"2659
-[v _RA1 RA1 `VEb  1 e 0 @41 ]
-"2662
-[v _RA2 RA2 `VEb  1 e 0 @42 ]
+"2398
+[v _ADIE ADIE `VEb  1 e 0 @1126 ]
+"2401
+[v _ADIF ADIF `VEb  1 e 0 @102 ]
+"2578
+[v _GO_nDONE GO_nDONE `VEb  1 e 0 @250 ]
 "2665
 [v _RA3 RA3 `VEb  1 e 0 @43 ]
 "2671
@@ -180,42 +202,47 @@
 [v _RCIE RCIE `VEb  1 e 0 @1125 ]
 "2743
 [v _RCIF RCIF `VEb  1 e 0 @101 ]
-"4 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\mostrarInicializar.c
+"2773
+[v _RE0 RE0 `VEb  1 e 0 @72 ]
+"2776
+[v _RE1 RE1 `VEb  1 e 0 @73 ]
+"2779
+[v _RE2 RE2 `VEb  1 e 0 @74 ]
+"358 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\doprnt.c
+[v _dpowers dpowers `DC[5]ui  1 s 10 dpowers ]
+"4 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\mostrarInicializar.c
 [v _BMS BMS `DC[10]uc  1 s 10 BMS ]
-"9 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
+"9 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"41
+"60
+[v main@bufferMsj bufferMsj `[16]uc  1 a 16 5 ]
+"69
 } 0
-"25 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\mostrarInicializar.c
-[v _iniciar_usart iniciar_usart `(v  1 e 1 0 ]
-{
-"30
-} 0
-"31 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\acciones.c
+"25 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\acciones.c
 [v _accionesPuertoSerial accionesPuertoSerial `(v  1 e 1 0 ]
 {
-"45
+"39
 } 0
-"22 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\lectura.c
+"17 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\lectura.c
 [v _lecturaEtiqueta lecturaEtiqueta `(v  1 e 1 0 ]
 {
-"32
+"27
 [v lecturaEtiqueta@tp tp `uc  1 a 1 34 ]
-"26
+"21
 [v lecturaEtiqueta@i i `i  1 a 2 32 ]
-"23
+"18
 [v lecturaEtiqueta@Aux Aux `s  1 a 2 35 ]
-"62
+"57
 } 0
-"21 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\manejoProductos.c
+"17 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\manejoProductos.c
 [v _ingresoProd ingresoProd `(v  1 e 1 0 ]
 {
-"23
+"19
 [v ingresoProd@i i `s  1 a 2 17 ]
-"21
+"17
 [v ingresoProd@tp tp `s  1 p 2 12 ]
-"32
+"28
 } 0
 "5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
@@ -228,28 +255,28 @@
 [v ___awmod@dividend dividend `i  1 p 2 2 ]
 "34
 } 0
-"7 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\lectura.c
+"3 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\lectura.c
 [v _EEPROM_search EEPROM_search `(s  1 e 2 0 ]
 {
 [v EEPROM_search@tp tp `uc  1 a 1 wreg ]
-"9
+"5
 [v EEPROM_search@precio precio `s  1 a 2 26 ]
-"7
+"3
 [v EEPROM_search@tp tp `uc  1 a 1 wreg ]
-"10
+"6
 [v EEPROM_search@tp tp `uc  1 a 1 28 ]
-"20
+"15
 } 0
-"34 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\manejoProductos.c
+"30 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\manejoProductos.c
 [v _verificarProd verificarProd `(uc  1 e 1 0 ]
 {
-"36
+"32
 [v verificarProd@i i `s  1 a 2 18 ]
-"35
+"31
 [v verificarProd@ret ret `uc  1 a 1 17 ]
-"34
+"30
 [v verificarProd@tp tp `s  1 p 2 12 ]
-"49
+"45
 } 0
 "5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\awdiv.c
 [v ___awdiv __awdiv `(i  1 e 2 0 ]
@@ -264,47 +291,88 @@
 [v ___awdiv@dividend dividend `i  1 p 2 2 ]
 "41
 } 0
-"141 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\lectura.c
+"155 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\lectura.c
 [v _lecturaComando lecturaComando `(v  1 e 1 0 ]
 {
-"151
+"165
 } 0
-"99
+"98
 [v _lecturaMenos lecturaMenos `(v  1 e 1 0 ]
 {
-"107
+"106
 } 0
-"84
+"83
 [v _lecturaMas lecturaMas `(v  1 e 1 0 ]
 {
-"97
+"96
 } 0
-"64
+"59
 [v _verificacionEntrada verificacionEntrada `(uc  1 e 1 0 ]
 {
-"65
+"60
 [v verificacionEntrada@i i `uc  1 a 1 1 ]
-"66
+"61
 [v verificacionEntrada@ret ret `uc  1 a 1 0 ]
-"72
+"67
 } 0
-"74
+"69
 [v _cierreDeLote cierreDeLote `(v  1 e 1 0 ]
 {
-"82
+"72
+[v cierreDeLote@strLote strLote `[32]uc  1 a 32 30 ]
+"81
 } 0
-"65 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\manejoProductos.c
+"505 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\doprnt.c
+[v _sprintf sprintf `(i  1 e 2 0 ]
+{
+[v sprintf@sp sp `*.4uc  1 a 1 wreg ]
+"545
+[v sprintf@val val `ui  1 a 2 22 ]
+"512
+[v sprintf@c c `uc  1 a 1 25 ]
+"521
+[v sprintf@prec prec `c  1 a 1 21 ]
+"525
+[v sprintf@flag flag `uc  1 a 1 20 ]
+"507
+[v sprintf@ap ap `[1]*.4v  1 a 1 19 ]
+"505
+[v sprintf@sp sp `*.4uc  1 a 1 wreg ]
+[v sprintf@f f `*.24DCuc  1 p 1 12 ]
+"550
+[v sprintf@sp sp `*.4uc  1 a 1 24 ]
+"1567
+} 0
+"39 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\mostrarInicializar.c
+[v _envioTX envioTX `(v  1 e 1 0 ]
+{
+"40
+[v envioTX@i i `i  1 a 2 7 ]
+"39
+[v envioTX@mensaje mensaje `*.26uc  1 p 2 2 ]
+"45
+} 0
+"4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\strlen.c
+[v _strlen strlen `(ui  1 e 2 0 ]
+{
+"6
+[v strlen@cp cp `*.26DCuc  1 a 2 0 ]
+"4
+[v strlen@s s `*.26DCuc  1 p 2 4 ]
+"13
+} 0
+"61 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\manejoProductos.c
 [v _agregarModificarPrecio agregarModificarPrecio `(v  1 e 1 0 ]
 {
-"71
-[v agregarModificarPrecio@precio precio `s  1 a 2 16 ]
-"66
-[v agregarModificarPrecio@tp tp `uc  1 a 1 18 ]
-"68
-[v agregarModificarPrecio@upper_8bits upper_8bits `uc  1 a 1 15 ]
 "67
+[v agregarModificarPrecio@precio precio `s  1 a 2 16 ]
+"62
+[v agregarModificarPrecio@tp tp `uc  1 a 1 18 ]
+"64
+[v agregarModificarPrecio@upper_8bits upper_8bits `uc  1 a 1 15 ]
+"63
 [v agregarModificarPrecio@lower_8bits lower_8bits `uc  1 a 1 14 ]
-"89
+"85
 } 0
 "6 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\pic\__eewrite.c
 [v _eeprom_write eeprom_write `(v  1 e 1 0 ]
@@ -314,15 +382,6 @@
 [v eeprom_write@value value `uc  1 p 1 4 ]
 [v eeprom_write@addr addr `uc  1 a 1 0 ]
 "9
-} 0
-"6 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\pic\__eeread.c
-[v _eeprom_read eeprom_read `(uc  1 e 1 0 ]
-{
-[v eeprom_read@addr addr `uc  1 a 1 wreg ]
-[v eeprom_read@addr addr `uc  1 a 1 wreg ]
-"9
-[v eeprom_read@addr addr `uc  1 a 1 5 ]
-"19
 } 0
 "4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\Umul8.c
 [v ___bmul __bmul `(uc  1 e 1 0 ]
@@ -337,36 +396,53 @@
 [v ___bmul@multiplier multiplier `uc  1 a 1 1 ]
 "51
 } 0
-"109 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\lectura.c
+"121 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\lectura.c
 [v _lecturaConsulta lecturaConsulta `(v  1 e 1 0 ]
 {
-"139
+"145
+[v lecturaConsulta@articulo articulo `us  1 a 2 8 ]
+"153
 } 0
-"22 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\acciones.c
+"108
+[v _consultaPrecio consultaPrecio `(v  1 e 1 0 ]
+{
+[v consultaPrecio@articulo articulo `s  1 p 2 0 ]
+"119
+} 0
+"6 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\pic\__eeread.c
+[v _eeprom_read eeprom_read `(uc  1 e 1 0 ]
+{
+[v eeprom_read@addr addr `uc  1 a 1 wreg ]
+[v eeprom_read@addr addr `uc  1 a 1 wreg ]
+"9
+[v eeprom_read@addr addr `uc  1 a 1 5 ]
+"19
+} 0
+"16 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\acciones.c
 [v _accionesDeshacer accionesDeshacer `(v  1 e 1 0 ]
 {
-"29
+"23
 } 0
-"51 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\manejoProductos.c
+"47 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\manejoProductos.c
 [v _eliminarProd eliminarProd `(v  1 e 1 0 ]
 {
-"52
+"48
 [v eliminarProd@i i `s  1 a 2 17 ]
-"51
+"47
 [v eliminarProd@tp tp `s  1 p 2 12 ]
-"62
+"58
 } 0
-"7
+"3
 [v _pow pow `(ui  1 e 2 0 ]
 {
-"10
+"6
 [v pow@i i `i  1 a 2 8 ]
-"8
+"4
 [v pow@resultado resultado `ui  1 a 2 10 ]
-"7
+"3
 [v pow@numero numero `ui  1 p 2 4 ]
 [v pow@potencia potencia `ui  1 p 2 6 ]
-"19
+"15
 } 0
 "15 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
@@ -378,14 +454,14 @@
 [v ___wmul@multiplicand multiplicand `ui  1 p 2 2 ]
 "53
 } 0
-"9 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\acciones.c
+"3 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\acciones.c
 [v _accionesAceptar accionesAceptar `(v  1 e 1 0 ]
 {
-"15
+"9
 [v accionesAceptar@i i `s  1 a 2 17 ]
-"20
+"14
 } 0
-"17 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\mostrarInicializar.c
+"17 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\mostrarInicializar.c
 [v _mostrarDigitos mostrarDigitos `(v  1 e 1 0 ]
 {
 [v mostrarDigitos@num num `ui  1 p 2 12 ]
@@ -395,33 +471,33 @@
 [v ___lwmod __lwmod `(ui  1 e 2 0 ]
 {
 "10
-[v ___lwmod@counter counter `uc  1 a 1 5 ]
+[v ___lwmod@counter counter `uc  1 a 1 11 ]
 "5
-[v ___lwmod@divisor divisor `ui  1 p 2 0 ]
-[v ___lwmod@dividend dividend `ui  1 p 2 2 ]
+[v ___lwmod@divisor divisor `ui  1 p 2 7 ]
+[v ___lwmod@dividend dividend `ui  1 p 2 9 ]
 "25
 } 0
 "5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\lwdiv.c
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
 {
 "10
-[v ___lwdiv@quotient quotient `ui  1 a 2 9 ]
+[v ___lwdiv@quotient quotient `ui  1 a 2 5 ]
 "11
-[v ___lwdiv@counter counter `uc  1 a 1 11 ]
+[v ___lwdiv@counter counter `uc  1 a 1 4 ]
 "5
-[v ___lwdiv@divisor divisor `ui  1 p 2 4 ]
-[v ___lwdiv@dividend dividend `ui  1 p 2 6 ]
+[v ___lwdiv@divisor divisor `ui  1 p 2 0 ]
+[v ___lwdiv@dividend dividend `ui  1 p 2 2 ]
 "30
 } 0
-"32 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\mostrarInicializar.c
+"25 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\mostrarInicializar.c
 [v _bailenLeds bailenLeds `(v  1 e 1 0 ]
 {
-"34
+"27
 [v bailenLeds@i i `us  1 a 2 4 ]
-"44
+"37
 } 0
-"44 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
+"72 C:\Users\Chelo\MPLABXProjects\obl2\Obl1-Micros\Obligatorio1.X\main.c
 [v _int_usart int_usart `II(v  1 e 1 0 ]
 {
-"58
+"93
 } 0

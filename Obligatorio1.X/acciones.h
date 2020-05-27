@@ -4,7 +4,7 @@
 //Librerias
 #include <xc.h>
 #include "lectura.h"
-#include "manejarProductos.h"
+#include "manejoProductos.h"
 #include "mostrarInicializar.h"
 #include "variablesGlobales.h"
 

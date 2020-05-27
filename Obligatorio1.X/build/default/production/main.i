@@ -15,6 +15,9 @@
 
 # 1 "./main.h" 1
 
+
+
+
 #pragma config FOSC = XT
 #pragma config WDTE = OFF
 #pragma config PWRTE = OFF
@@ -23,6 +26,7 @@
 #pragma config CPD = OFF
 #pragma config WRT = OFF
 #pragma config CP = OFF
+
 
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
@@ -1738,10 +1742,10 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 11 "./main.h" 2
+# 15 "./main.h" 2
 
 # 1 "./variablesGlobales.h" 1
-# 20 "./variablesGlobales.h"
+# 22 "./variablesGlobales.h"
 extern unsigned short int cuenta, auxCuenta;
 extern short int huboInt;
 extern char serial;
@@ -1754,19 +1758,78 @@ extern unsigned short int montosLote;
 extern char nroLote;
 extern char cierreLotePedido;
 extern unsigned char prodIngresados[13];
-# 12 "./main.h" 2
+extern unsigned short int adresult;
+# 16 "./main.h" 2
 
 # 1 "./mostrarInicializar.h" 1
-# 11 "./mostrarInicializar.h"
+# 13 "./mostrarInicializar.h"
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 1 3
+
+
+
+
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\__size_t.h" 1 3
+
+
+
+typedef unsigned size_t;
+# 6 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 2 3
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\__null.h" 1 3
+# 7 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 2 3
+
+
+
+
+
+
+
+extern void * memcpy(void *, const void *, size_t);
+extern void * memmove(void *, const void *, size_t);
+extern void * memset(void *, int, size_t);
+# 36 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 3
+extern char * strcat(char *, const char *);
+extern char * strcpy(char *, const char *);
+extern char * strncat(char *, const char *, size_t);
+extern char * strncpy(char *, const char *, size_t);
+extern char * strdup(const char *);
+extern char * strtok(char *, const char *);
+
+
+extern int memcmp(const void *, const void *, size_t);
+extern int strcmp(const char *, const char *);
+extern int stricmp(const char *, const char *);
+extern int strncmp(const char *, const char *, size_t);
+extern int strnicmp(const char *, const char *, size_t);
+extern void * memchr(const void *, int, size_t);
+extern size_t strcspn(const char *, const char *);
+extern char * strpbrk(const char *, const char *);
+extern size_t strspn(const char *, const char *);
+extern char * strstr(const char *, const char *);
+extern char * stristr(const char *, const char *);
+extern char * strerror(int);
+extern size_t strlen(const char *);
+extern char * strchr(const char *, int);
+extern char * strichr(const char *, int);
+extern char * strrchr(const char *, int);
+extern char * strrichr(const char *, int);
+# 13 "./mostrarInicializar.h" 2
+
+
+
+
+
+
 void mostrarDigitos(unsigned int num);
 
-void iniciar_usart(void);
-
 void bailenLeds(void);
-# 13 "./main.h" 2
 
-# 1 "./manejarProductos.h" 1
-# 11 "./manejarProductos.h"
+void envioTX(char *mensaje);
+# 17 "./main.h" 2
+
+# 1 "./manejoProductos.h" 1
+# 10 "./manejoProductos.h"
 unsigned int pow(unsigned int numero,unsigned int potencia);
 
 void ingresoProd(short int tp);
@@ -1776,10 +1839,96 @@ char verificarProd(short int tp);
 void eliminarProd(short int tp);
 
 void agregarModificarPrecio(void);
-# 14 "./main.h" 2
+# 18 "./main.h" 2
 
 # 1 "./lectura.h" 1
-# 11 "./lectura.h"
+
+
+
+
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 1 3
+# 11 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdarg.h" 1 3
+
+
+
+
+
+
+typedef void * va_list[1];
+
+#pragma intrinsic(__va_start)
+extern void * __va_start(void);
+
+#pragma intrinsic(__va_arg)
+extern void * __va_arg(void *, ...);
+# 11 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 2 3
+# 43 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 3
+struct __prbuf
+{
+ char * ptr;
+ void (* func)(char);
+};
+# 85 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\conio.h" 1 3
+
+
+
+
+
+
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\errno.h" 1 3
+# 29 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\errno.h" 3
+extern int errno;
+# 8 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\conio.h" 2 3
+
+
+
+
+extern void init_uart(void);
+
+extern char getch(void);
+extern char getche(void);
+extern void putch(char);
+extern void ungetch(char);
+
+extern __bit kbhit(void);
+
+
+
+extern char * cgets(char *);
+extern void cputs(const char *);
+# 85 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 2 3
+
+
+
+extern int cprintf(char *, ...);
+#pragma printf_check(cprintf)
+
+
+
+extern int _doprnt(struct __prbuf *, const register char *, register va_list);
+# 180 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 3
+#pragma printf_check(vprintf) const
+#pragma printf_check(vsprintf) const
+
+extern char * gets(char *);
+extern int puts(const char *);
+extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
+extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
+extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
+extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
+extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
+extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
+
+#pragma printf_check(printf) const
+#pragma printf_check(sprintf) const
+extern int sprintf(char *, const char *, ...);
+extern int printf(const char *, ...);
+# 6 "./lectura.h" 2
+# 15 "./lectura.h"
 short int EEPROM_search(unsigned char tp);
 
 void lecturaEtiqueta(void);
@@ -1795,16 +1944,17 @@ void lecturaMenos(void);
 void lecturaConsulta(void);
 
 void lecturaComando(void);
-# 15 "./main.h" 2
+# 19 "./main.h" 2
 
 # 1 "./acciones.h" 1
-# 11 "./acciones.h"
+# 12 "./acciones.h"
 void accionesAceptar(void);
 
 void accionesDeshacer(void);
 
 void accionesPuertoSerial(void);
-# 16 "./main.h" 2
+# 20 "./main.h" 2
+
 
 
 unsigned short int cuenta, auxCuenta;
@@ -1819,6 +1969,8 @@ unsigned short int montosLote = 0;
 char nroLote = 1;
 char cierreLotePedido;
 unsigned char prodIngresados[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
+unsigned short int adresult = 0;
+
 
 void main(void);
 void __attribute__((picinterrupt(("")))) int_usart(void);
@@ -1828,13 +1980,27 @@ void __attribute__((picinterrupt(("")))) int_usart(void);
 void main(void) {
 
 
-    ADCON1 = 0b00000111;
-    TRISA = 0x06;
+
+    TRISA = 0x01;
+    TRISE = 0x07;
     TRISB = 0x00;
     TRISD = 0x00;
+
+
+    ADCON0 = 0b01000001;
+    ADCON1 = 0b00001110;
     INTCON = 0b11000000;
+
+
+    TRISC = 0b10000000;
+    TXSTA = 0b00100110;
+    RCSTA = 0b10010000;
+    SPBRG = 25;
+
+
+    ADIF = 0;
+    ADIE = 1;
     RCIE = 1;
-    iniciar_usart();
     cuenta = 0;
     auxCuenta = 0;
     mostrarDigitos(cuenta);
@@ -1843,18 +2009,32 @@ void main(void) {
 
     while(1) {
 
-        if(RA1) {
-            while(RA1);
+        if(RE1) {
+            while(RE1);
             accionesAceptar();
         }
-        else if(RA2) {
-            while(RA2);
+        else if(RE2) {
+            while(RE2);
             accionesDeshacer();
+        }
+        else if(RE0) {
+            while(RE0);
+            cierreLotePedido = 1;
         }
         else if(huboInt) {
             huboInt = 0;
             accionesPuertoSerial();
         }
+        else if(adresult > 0) {
+
+            adresult = adresult*1000*5/1024;
+            char bufferMsj[16];
+            sprintf(bufferMsj,"V=%d\n",adresult%1000);
+            envioTX(bufferMsj);
+            adresult = 0;
+        }
+
+
     }
 
 }
@@ -1862,7 +2042,7 @@ void main(void) {
 
 void __attribute__((picinterrupt(("")))) int_usart() {
 
-    if(RCIF == 1) {
+    if(RCIF) {
         if(RCREG != 0x0D && RCREG != 0x0A && serial < (10 -1)) {
             codigoEntrada[serial] = RCREG;
             serial++;
@@ -1873,5 +2053,12 @@ void __attribute__((picinterrupt(("")))) int_usart() {
         }
     }
 
+
+
+
+    else if(ADIF) {
+        ADIF = 0;
+        adresult = (ADRESH<<8)+ADRESL;
+    }
 
 }

@@ -1,9 +1,9 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"31 ./variablesGlobales.h
-[; ;./variablesGlobales.h: 31: extern unsigned char prodIngresados[13];
+"33 ./variablesGlobales.h
+[; ;./variablesGlobales.h: 33: extern unsigned char prodIngresados[13];
 [v _prodIngresados `uc ~T0 @X0 -> 0 `x e ]
-"26
-[; ;./variablesGlobales.h: 26: extern char codigoEntrada[10];
+"28
+[; ;./variablesGlobales.h: 28: extern char codigoEntrada[10];
 [v _codigoEntrada `uc ~T0 @X0 -> 0 `x e ]
 "115 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\eeprom_routines.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\eeprom_routines.h: 115: extern unsigned char eeprom_read(unsigned char addr);
@@ -191,73 +191,73 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2363
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2363: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"7 manejoProductos.c
-[; ;manejoProductos.c: 7: unsigned int pow(unsigned int numero,unsigned int potencia){
+"3 manejoProductos.c
+[; ;manejoProductos.c: 3: unsigned int pow(unsigned int numero,unsigned int potencia){
 [v _pow `(ui ~T0 @X0 1 ef2`ui`ui ]
 {
 [e :U _pow ]
 [v _numero `ui ~T0 @X0 1 r1 ]
 [v _potencia `ui ~T0 @X0 1 r2 ]
 [f ]
-"8
-[; ;manejoProductos.c: 8:     unsigned int resultado = 0;
+"4
+[; ;manejoProductos.c: 4:     unsigned int resultado = 0;
 [v _resultado `ui ~T0 @X0 1 a ]
 [e = _resultado -> -> 0 `i `ui ]
-"10
-[; ;manejoProductos.c: 10:     for (int i = 0; i <= potencia; i++){
+"6
+[; ;manejoProductos.c: 6:     for (int i = 0; i <= potencia; i++){
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
 [e $U 99  ]
 [e :U 96 ]
 {
-"11
-[; ;manejoProductos.c: 11:         if (i == 0){
+"7
+[; ;manejoProductos.c: 7:         if (i == 0){
 [e $ ! == _i -> 0 `i 100  ]
 {
-"12
-[; ;manejoProductos.c: 12:         resultado = 1;
+"8
+[; ;manejoProductos.c: 8:         resultado = 1;
 [e = _resultado -> -> 1 `i `ui ]
-"13
-[; ;manejoProductos.c: 13:         }
+"9
+[; ;manejoProductos.c: 9:         }
 }
 [e $U 101  ]
-"14
-[; ;manejoProductos.c: 14:         else{
+"10
+[; ;manejoProductos.c: 10:         else{
 [e :U 100 ]
 {
-"15
-[; ;manejoProductos.c: 15:             resultado = resultado * numero;
+"11
+[; ;manejoProductos.c: 11:             resultado = resultado * numero;
 [e = _resultado * _resultado _numero ]
-"16
-[; ;manejoProductos.c: 16:         }
+"12
+[; ;manejoProductos.c: 12:         }
 }
 [e :U 101 ]
-"17
-[; ;manejoProductos.c: 17:     }
+"13
+[; ;manejoProductos.c: 13:     }
 }
 [e ++ _i -> 1 `i ]
 [e :U 99 ]
 [e $ <= -> _i `ui _potencia 96  ]
 [e :U 97 ]
 }
-"18
-[; ;manejoProductos.c: 18:     return resultado;
+"14
+[; ;manejoProductos.c: 14:     return resultado;
 [e ) _resultado ]
 [e $UE 95  ]
-"19
-[; ;manejoProductos.c: 19: }
+"15
+[; ;manejoProductos.c: 15: }
 [e :UE 95 ]
 }
-"21
-[; ;manejoProductos.c: 21: void ingresoProd(short int tp) {
+"17
+[; ;manejoProductos.c: 17: void ingresoProd(short int tp) {
 [v _ingresoProd `(v ~T0 @X0 1 ef1`s ]
 {
 [e :U _ingresoProd ]
 [v _tp `s ~T0 @X0 1 r1 ]
 [f ]
-"23
-[; ;manejoProductos.c: 23:     for(short int i = 12; i>=0; i--) {
+"19
+[; ;manejoProductos.c: 19:     for(short int i = 12; i>=0; i--) {
 {
 [v _i `s ~T0 @X0 1 a ]
 [e = _i -> -> 12 `i `s ]
@@ -265,47 +265,47 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 104  ]
 [e :U 103 ]
 {
-"24
-[; ;manejoProductos.c: 24:         if( tp >= 8*i) {
+"20
+[; ;manejoProductos.c: 20:         if( tp >= 8*i) {
 [e $ ! >= -> _tp `i * -> 8 `i -> _i `i 106  ]
 {
-"26
-[; ;manejoProductos.c: 26:             tp = tp - 8*i;
+"22
+[; ;manejoProductos.c: 22:             tp = tp - 8*i;
 [e = _tp -> - -> _tp `i * -> 8 `i -> _i `i `s ]
-"27
-[; ;manejoProductos.c: 27:             prodIngresados[i] = prodIngresados[i] | pow(2,tp);
+"23
+[; ;manejoProductos.c: 23:             prodIngresados[i] = prodIngresados[i] | pow(2,tp);
 [e = *U + &U _prodIngresados * -> -> _i `us `ux -> -> # *U &U _prodIngresados `ui `ux -> | -> *U + &U _prodIngresados * -> -> _i `us `ux -> -> # *U &U _prodIngresados `ui `ux `ui ( _pow (2 , -> -> 2 `i `ui -> _tp `ui `uc ]
-"28
-[; ;manejoProductos.c: 28:             i = 0;
+"24
+[; ;manejoProductos.c: 24:             i = 0;
 [e = _i -> -> 0 `i `s ]
-"30
-[; ;manejoProductos.c: 30:         }
+"26
+[; ;manejoProductos.c: 26:         }
 }
 [e :U 106 ]
-"31
-[; ;manejoProductos.c: 31:     }
+"27
+[; ;manejoProductos.c: 27:     }
 }
 [e -- _i -> -> 1 `i `s ]
 [e $ >= -> _i `i -> 0 `i 103  ]
 [e :U 104 ]
 }
-"32
-[; ;manejoProductos.c: 32: }
+"28
+[; ;manejoProductos.c: 28: }
 [e :UE 102 ]
 }
-"34
-[; ;manejoProductos.c: 34: char verificarProd(short int tp) {
+"30
+[; ;manejoProductos.c: 30: char verificarProd(short int tp) {
 [v _verificarProd `(uc ~T0 @X0 1 ef1`s ]
 {
 [e :U _verificarProd ]
 [v _tp `s ~T0 @X0 1 r1 ]
 [f ]
-"35
-[; ;manejoProductos.c: 35:     char ret = 0;
+"31
+[; ;manejoProductos.c: 31:     char ret = 0;
 [v _ret `uc ~T0 @X0 1 a ]
 [e = _ret -> -> 0 `i `uc ]
-"36
-[; ;manejoProductos.c: 36:     for(short int i = 12; i>=0; i--) {
+"32
+[; ;manejoProductos.c: 32:     for(short int i = 12; i>=0; i--) {
 {
 [v _i `s ~T0 @X0 1 a ]
 [e = _i -> -> 12 `i `s ]
@@ -313,55 +313,55 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 109  ]
 [e :U 108 ]
 {
-"37
-[; ;manejoProductos.c: 37:         if( tp >= 8*i) {
+"33
+[; ;manejoProductos.c: 33:         if( tp >= 8*i) {
 [e $ ! >= -> _tp `i * -> 8 `i -> _i `i 111  ]
 {
-"39
-[; ;manejoProductos.c: 39:             tp = tp - 8*i;
+"35
+[; ;manejoProductos.c: 35:             tp = tp - 8*i;
 [e = _tp -> - -> _tp `i * -> 8 `i -> _i `i `s ]
-"40
-[; ;manejoProductos.c: 40:             if(prodIngresados[i] & pow(2,tp)) {
+"36
+[; ;manejoProductos.c: 36:             if(prodIngresados[i] & pow(2,tp)) {
 [e $ ! != & -> *U + &U _prodIngresados * -> -> _i `us `ux -> -> # *U &U _prodIngresados `ui `ux `ui ( _pow (2 , -> -> 2 `i `ui -> _tp `ui -> -> 0 `i `ui 112  ]
 {
-"41
-[; ;manejoProductos.c: 41:                 ret = 1;
+"37
+[; ;manejoProductos.c: 37:                 ret = 1;
 [e = _ret -> -> 1 `i `uc ]
-"42
-[; ;manejoProductos.c: 42:             }
+"38
+[; ;manejoProductos.c: 38:             }
 }
 [e :U 112 ]
-"43
-[; ;manejoProductos.c: 43:             i = 0;
+"39
+[; ;manejoProductos.c: 39:             i = 0;
 [e = _i -> -> 0 `i `s ]
-"45
-[; ;manejoProductos.c: 45:         }
+"41
+[; ;manejoProductos.c: 41:         }
 }
 [e :U 111 ]
-"46
-[; ;manejoProductos.c: 46:     }
+"42
+[; ;manejoProductos.c: 42:     }
 }
 [e -- _i -> -> 1 `i `s ]
 [e $ >= -> _i `i -> 0 `i 108  ]
 [e :U 109 ]
 }
-"48
-[; ;manejoProductos.c: 48:     return ret;
+"44
+[; ;manejoProductos.c: 44:     return ret;
 [e ) _ret ]
 [e $UE 107  ]
-"49
-[; ;manejoProductos.c: 49: }
+"45
+[; ;manejoProductos.c: 45: }
 [e :UE 107 ]
 }
-"51
-[; ;manejoProductos.c: 51: void eliminarProd(short int tp){
+"47
+[; ;manejoProductos.c: 47: void eliminarProd(short int tp){
 [v _eliminarProd `(v ~T0 @X0 1 ef1`s ]
 {
 [e :U _eliminarProd ]
 [v _tp `s ~T0 @X0 1 r1 ]
 [f ]
-"52
-[; ;manejoProductos.c: 52:         for(short int i = 12; i>=0; i--) {
+"48
+[; ;manejoProductos.c: 48:         for(short int i = 12; i>=0; i--) {
 {
 [v _i `s ~T0 @X0 1 a ]
 [e = _i -> -> 12 `i `s ]
@@ -369,107 +369,107 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 115  ]
 [e :U 114 ]
 {
-"53
-[; ;manejoProductos.c: 53:         if( tp >= 8*i) {
+"49
+[; ;manejoProductos.c: 49:         if( tp >= 8*i) {
 [e $ ! >= -> _tp `i * -> 8 `i -> _i `i 117  ]
 {
-"55
-[; ;manejoProductos.c: 55:             tp = tp - 8*i;
+"51
+[; ;manejoProductos.c: 51:             tp = tp - 8*i;
 [e = _tp -> - -> _tp `i * -> 8 `i -> _i `i `s ]
-"56
-[; ;manejoProductos.c: 56:             prodIngresados[i] = prodIngresados[i] ^ pow(2,tp);
+"52
+[; ;manejoProductos.c: 52:             prodIngresados[i] = prodIngresados[i] ^ pow(2,tp);
 [e = *U + &U _prodIngresados * -> -> _i `us `ux -> -> # *U &U _prodIngresados `ui `ux -> ^ -> *U + &U _prodIngresados * -> -> _i `us `ux -> -> # *U &U _prodIngresados `ui `ux `ui ( _pow (2 , -> -> 2 `i `ui -> _tp `ui `uc ]
-"57
-[; ;manejoProductos.c: 57:             i = 0;
+"53
+[; ;manejoProductos.c: 53:             i = 0;
 [e = _i -> -> 0 `i `s ]
-"59
-[; ;manejoProductos.c: 59:         }
+"55
+[; ;manejoProductos.c: 55:         }
 }
 [e :U 117 ]
-"60
-[; ;manejoProductos.c: 60:     }
+"56
+[; ;manejoProductos.c: 56:     }
 }
 [e -- _i -> -> 1 `i `s ]
 [e $ >= -> _i `i -> 0 `i 114  ]
 [e :U 115 ]
 }
-"62
-[; ;manejoProductos.c: 62: }
+"58
+[; ;manejoProductos.c: 58: }
 [e :UE 113 ]
 }
-"65
-[; ;manejoProductos.c: 65: void agregarModificarPrecio(){
+"61
+[; ;manejoProductos.c: 61: void agregarModificarPrecio(){
 [v _agregarModificarPrecio `(v ~T0 @X0 1 ef ]
 {
 [e :U _agregarModificarPrecio ]
 [f ]
-"66
-[; ;manejoProductos.c: 66:     unsigned char tp = 10*(codigoEntrada[0]-'0') + (codigoEntrada[1] - '0');
+"62
+[; ;manejoProductos.c: 62:     unsigned char tp = 10*(codigoEntrada[0]-'0') + (codigoEntrada[1] - '0');
 [v _tp `uc ~T0 @X0 1 a ]
 [e = _tp -> + * -> -> 10 `i `ui - -> *U + &U _codigoEntrada * -> -> -> 0 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui - -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui `uc ]
-"67
-[; ;manejoProductos.c: 67:     char lower_8bits;
+"63
+[; ;manejoProductos.c: 63:     char lower_8bits;
 [v _lower_8bits `uc ~T0 @X0 1 a ]
-"68
-[; ;manejoProductos.c: 68:     char upper_8bits;
+"64
+[; ;manejoProductos.c: 64:     char upper_8bits;
 [v _upper_8bits `uc ~T0 @X0 1 a ]
-"69
-[; ;manejoProductos.c: 69:     tp--;
+"65
+[; ;manejoProductos.c: 65:     tp--;
 [e -- _tp -> -> 1 `i `uc ]
-"70
-[; ;manejoProductos.c: 70:     tp = tp * 2;
+"66
+[; ;manejoProductos.c: 66:     tp = tp * 2;
 [e = _tp -> * -> _tp `i -> 2 `i `uc ]
-"71
-[; ;manejoProductos.c: 71:     short int precio = (eeprom_read(tp) << 8) | (eeprom_read(tp+1));
+"67
+[; ;manejoProductos.c: 67:     short int precio = (eeprom_read(tp) << 8) | (eeprom_read(tp+1));
 [v _precio `s ~T0 @X0 1 a ]
 [e = _precio -> | << -> ( _eeprom_read (1 _tp `i -> 8 `i -> ( _eeprom_read (1 -> + -> _tp `i -> 1 `i `uc `i `s ]
-"73
-[; ;manejoProductos.c: 73:     if( (precio < 0 || precio > 999) ) {
+"69
+[; ;manejoProductos.c: 69:     if( (precio < 0 || precio > 999) ) {
 [e $ ! || < -> _precio `i -> 0 `i > -> _precio `i -> 999 `i 119  ]
 {
-"74
-[; ;manejoProductos.c: 74:         precio = 100 * (codigoEntrada[3] - '0')+ 10 * (codigoEntrada[4] - '0') + (codigoEntrada[5] - '0');
+"70
+[; ;manejoProductos.c: 70:         precio = 100 * (codigoEntrada[3] - '0')+ 10 * (codigoEntrada[4] - '0') + (codigoEntrada[5] - '0');
 [e = _precio -> + + * -> -> 100 `i `ui - -> *U + &U _codigoEntrada * -> -> -> 3 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui * -> -> 10 `i `ui - -> *U + &U _codigoEntrada * -> -> -> 4 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui - -> *U + &U _codigoEntrada * -> -> -> 5 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui `s ]
-"75
-[; ;manejoProductos.c: 75:         lower_8bits = precio & 0xff;
+"71
+[; ;manejoProductos.c: 71:         lower_8bits = precio & 0xff;
 [e = _lower_8bits -> & -> _precio `i -> 255 `i `uc ]
-"76
-[; ;manejoProductos.c: 76:         upper_8bits = (precio >> 8) & 0xff;
+"72
+[; ;manejoProductos.c: 72:         upper_8bits = (precio >> 8) & 0xff;
 [e = _upper_8bits -> & >> -> _precio `i -> 8 `i -> 255 `i `uc ]
-"77
-[; ;manejoProductos.c: 77:         eeprom_write(tp ,upper_8bits);
+"73
+[; ;manejoProductos.c: 73:         eeprom_write(tp ,upper_8bits);
 [e ( _eeprom_write (2 , _tp -> _upper_8bits `uc ]
-"78
-[; ;manejoProductos.c: 78:         eeprom_write(tp + 1,lower_8bits);
+"74
+[; ;manejoProductos.c: 74:         eeprom_write(tp + 1,lower_8bits);
 [e ( _eeprom_write (2 , -> + -> _tp `i -> 1 `i `uc -> _lower_8bits `uc ]
-"80
-[; ;manejoProductos.c: 80:     }
+"76
+[; ;manejoProductos.c: 76:     }
 }
 [e $U 120  ]
-"81
-[; ;manejoProductos.c: 81:     else{
+"77
+[; ;manejoProductos.c: 77:     else{
 [e :U 119 ]
 {
-"82
-[; ;manejoProductos.c: 82:         precio = 100 * (codigoEntrada[3] - '0')+ 10 * (codigoEntrada[4] - '0') + (codigoEntrada[5] - '0');
+"78
+[; ;manejoProductos.c: 78:         precio = 100 * (codigoEntrada[3] - '0')+ 10 * (codigoEntrada[4] - '0') + (codigoEntrada[5] - '0');
 [e = _precio -> + + * -> -> 100 `i `ui - -> *U + &U _codigoEntrada * -> -> -> 3 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui * -> -> 10 `i `ui - -> *U + &U _codigoEntrada * -> -> -> 4 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui - -> *U + &U _codigoEntrada * -> -> -> 5 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui `s ]
-"83
-[; ;manejoProductos.c: 83:         lower_8bits = precio & 0xff;
+"79
+[; ;manejoProductos.c: 79:         lower_8bits = precio & 0xff;
 [e = _lower_8bits -> & -> _precio `i -> 255 `i `uc ]
-"84
-[; ;manejoProductos.c: 84:         upper_8bits = (precio >> 8) & 0xff;
+"80
+[; ;manejoProductos.c: 80:         upper_8bits = (precio >> 8) & 0xff;
 [e = _upper_8bits -> & >> -> _precio `i -> 8 `i -> 255 `i `uc ]
-"85
-[; ;manejoProductos.c: 85:         eeprom_write(tp ,upper_8bits);
+"81
+[; ;manejoProductos.c: 81:         eeprom_write(tp ,upper_8bits);
 [e ( _eeprom_write (2 , _tp -> _upper_8bits `uc ]
-"86
-[; ;manejoProductos.c: 86:         eeprom_write(tp + 1,lower_8bits);
+"82
+[; ;manejoProductos.c: 82:         eeprom_write(tp + 1,lower_8bits);
 [e ( _eeprom_write (2 , -> + -> _tp `i -> 1 `i `uc -> _lower_8bits `uc ]
-"88
-[; ;manejoProductos.c: 88:     }
+"84
+[; ;manejoProductos.c: 84:     }
 }
 [e :U 120 ]
-"89
-[; ;manejoProductos.c: 89: }
+"85
+[; ;manejoProductos.c: 85: }
 [e :UE 118 ]
 }

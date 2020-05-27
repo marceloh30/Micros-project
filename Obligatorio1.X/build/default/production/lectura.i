@@ -7,6 +7,11 @@
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "lectura.c" 2
+# 1 "./lectura.h" 1
+
+
+
+
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -1720,32 +1725,150 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 1 "lectura.c" 2
+# 5 "./lectura.h" 2
 
-# 1 "./manejarProductos.h" 1
-# 11 "./manejarProductos.h"
-unsigned int pow(unsigned int numero,unsigned int potencia);
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 1 3
 
-void ingresoProd(short int tp);
 
-char verificarProd(short int tp);
 
-void eliminarProd(short int tp);
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\__size_t.h" 1 3
 
-void agregarModificarPrecio(void);
-# 2 "lectura.c" 2
+
+
+typedef unsigned size_t;
+# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 2 3
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\__null.h" 1 3
+# 5 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 2 3
+
+
+
+
+
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdarg.h" 1 3
+
+
+
+
+
+
+typedef void * va_list[1];
+
+#pragma intrinsic(__va_start)
+extern void * __va_start(void);
+
+#pragma intrinsic(__va_arg)
+extern void * __va_arg(void *, ...);
+# 11 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 2 3
+# 43 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 3
+struct __prbuf
+{
+ char * ptr;
+ void (* func)(char);
+};
+# 85 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\conio.h" 1 3
+
+
+
+
+
+
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\errno.h" 1 3
+# 29 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\errno.h" 3
+extern int errno;
+# 8 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\conio.h" 2 3
+
+
+
+
+extern void init_uart(void);
+
+extern char getch(void);
+extern char getche(void);
+extern void putch(char);
+extern void ungetch(char);
+
+extern __bit kbhit(void);
+
+
+
+extern char * cgets(char *);
+extern void cputs(const char *);
+# 85 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 2 3
+
+
+
+extern int cprintf(char *, ...);
+#pragma printf_check(cprintf)
+
+
+
+extern int _doprnt(struct __prbuf *, const register char *, register va_list);
+# 180 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 3
+#pragma printf_check(vprintf) const
+#pragma printf_check(vsprintf) const
+
+extern char * gets(char *);
+extern int puts(const char *);
+extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
+extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
+extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
+extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
+extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
+extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
+
+#pragma printf_check(printf) const
+#pragma printf_check(sprintf) const
+extern int sprintf(char *, const char *, ...);
+extern int printf(const char *, ...);
+# 6 "./lectura.h" 2
+
+# 1 "./manejoProductos.h" 1
+
+
+
+
 
 # 1 "./mostrarInicializar.h" 1
-# 11 "./mostrarInicializar.h"
-void mostrarDigitos(unsigned int num);
+# 13 "./mostrarInicializar.h"
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 1 3
+# 14 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 3
+extern void * memcpy(void *, const void *, size_t);
+extern void * memmove(void *, const void *, size_t);
+extern void * memset(void *, int, size_t);
+# 36 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 3
+extern char * strcat(char *, const char *);
+extern char * strcpy(char *, const char *);
+extern char * strncat(char *, const char *, size_t);
+extern char * strncpy(char *, const char *, size_t);
+extern char * strdup(const char *);
+extern char * strtok(char *, const char *);
 
-void iniciar_usart(void);
 
-void bailenLeds(void);
-# 3 "lectura.c" 2
+extern int memcmp(const void *, const void *, size_t);
+extern int strcmp(const char *, const char *);
+extern int stricmp(const char *, const char *);
+extern int strncmp(const char *, const char *, size_t);
+extern int strnicmp(const char *, const char *, size_t);
+extern void * memchr(const void *, int, size_t);
+extern size_t strcspn(const char *, const char *);
+extern char * strpbrk(const char *, const char *);
+extern size_t strspn(const char *, const char *);
+extern char * strstr(const char *, const char *);
+extern char * stristr(const char *, const char *);
+extern char * strerror(int);
+extern size_t strlen(const char *);
+extern char * strchr(const char *, int);
+extern char * strichr(const char *, int);
+extern char * strrchr(const char *, int);
+extern char * strrichr(const char *, int);
+# 13 "./mostrarInicializar.h" 2
 
 # 1 "./variablesGlobales.h" 1
-# 20 "./variablesGlobales.h"
+# 22 "./variablesGlobales.h"
 extern unsigned short int cuenta, auxCuenta;
 extern short int huboInt;
 extern char serial;
@@ -1758,8 +1881,57 @@ extern unsigned short int montosLote;
 extern char nroLote;
 extern char cierreLotePedido;
 extern unsigned char prodIngresados[13];
-# 4 "lectura.c" 2
+extern unsigned short int adresult;
+# 14 "./mostrarInicializar.h" 2
 
+
+
+
+
+void mostrarDigitos(unsigned int num);
+
+void bailenLeds(void);
+
+void envioTX(char *mensaje);
+# 6 "./manejoProductos.h" 2
+
+
+
+
+unsigned int pow(unsigned int numero,unsigned int potencia);
+
+void ingresoProd(short int tp);
+
+char verificarProd(short int tp);
+
+void eliminarProd(short int tp);
+
+void agregarModificarPrecio(void);
+# 7 "./lectura.h" 2
+
+
+
+
+
+
+
+
+short int EEPROM_search(unsigned char tp);
+
+void lecturaEtiqueta(void);
+
+char verificacionEntrada(void);
+
+void cierreDeLote(void);
+
+void lecturaMas(void);
+
+void lecturaMenos(void);
+
+void lecturaConsulta(void);
+
+void lecturaComando(void);
+# 1 "lectura.c" 2
 
 
 short int EEPROM_search(unsigned char tp) {
@@ -1773,11 +1945,10 @@ short int EEPROM_search(unsigned char tp) {
         precio = -1;
     }
 
-
     return precio;
 }
 
-void lecturaEtiqueta(){
+void lecturaEtiqueta() {
     short int Aux = 0;
 
 
@@ -1819,7 +1990,7 @@ void lecturaEtiqueta(){
     }
 }
 
-char verificacionEntrada(){
+char verificacionEntrada() {
     char i = 1;
     char ret = 0;
     while( (((codigoEntrada[i] <= '9') && (codigoEntrada[i] >= '0')) || codigoEntrada[i] == '=') && (i<=6) ) {
@@ -1830,8 +2001,12 @@ char verificacionEntrada(){
 }
 
 void cierreDeLote() {
-    if (!cierreLotePedido){
 
+    if (cierreLotePedido == 0) {
+        char strLote[32];
+
+        sprintf(strLote,"L:%d,N:%d,T:%d\n",&nroLote,&ventasLote,&montosLote);
+        envioTX(strLote);
     }
 
     nroLote++;
@@ -1839,14 +2014,14 @@ void cierreDeLote() {
     montosLote=0;
 }
 
-void lecturaMas(){
-    if (codigoEntrada[1] == 'L'){
+void lecturaMas() {
+    if (codigoEntrada[1] == 'L') {
         cierreDeLote();
     }
     else if(verificacionEntrada() == 6){
         agregarModificarPrecio();
     }
-    else if(codigoEntrada[1] == 'D'){
+    else if(codigoEntrada[1] == 'D') {
         modoDebug = 1;
     }
     else{
@@ -1854,9 +2029,22 @@ void lecturaMas(){
     }
 }
 
-void lecturaMenos(){
-    if(codigoEntrada[1] == 'D'){
+void lecturaMenos() {
+    if(codigoEntrada[1] == 'D') {
         modoDebug = 0;
+
+    }
+    else{
+        envioTX("Ocurrio un error en la interpretacion.\n");
+    }
+}
+
+void consultaPrecio(short int articulo) {
+    articulo--;
+    articulo = articulo * 2;
+    short int precio = (eeprom_read(articulo) << 8) | (eeprom_read(articulo+1));
+
+    if (precio > 99 || precio < 0) {
 
     }
     else{
@@ -1881,14 +2069,16 @@ void lecturaConsulta() {
 
 
     }
+    else if(codigoEntrada[1] == 'V') {
 
+        GO_nDONE = 1;
+    }
 
-    else if( codigoEntrada[1] <= '9' && codigoEntrada[1] >= '0'
-            && codigoEntrada[2] <= '9' && codigoEntrada[2] >= '0' ) {
+    else if( codigoEntrada[1] <= '9' && codigoEntrada[1] >= '0' && codigoEntrada[2] <= '9' && codigoEntrada[2] >= '0' ) {
 
         unsigned short int articulo = 10*(codigoEntrada[1] - '0') + (codigoEntrada[2] - '0');
 
-
+        consultaPrecio(articulo);
 
     }
 
@@ -1896,11 +2086,11 @@ void lecturaConsulta() {
 
 }
 
-void lecturaComando(){
-    if(codigoEntrada[0] == '?'){
+void lecturaComando() {
+    if(codigoEntrada[0] == '?') {
         lecturaConsulta();
     }
-    else if(codigoEntrada[0] == '+'){
+    else if(codigoEntrada[0] == '+') {
         lecturaMas();
     }
     else{

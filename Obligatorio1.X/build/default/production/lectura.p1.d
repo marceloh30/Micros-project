@@ -1,5 +1,6 @@
 build/default/production/lectura.p1:  \
 lectura.c  \
-manejarProductos.h  \
+lectura.h  \
+manejoProductos.h  \
 mostrarInicializar.h  \
 variablesGlobales.h 

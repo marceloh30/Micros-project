@@ -5,18 +5,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "340
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 340: extern volatile unsigned char PORTD __attribute__((address(0x008)));
 [v _PORTD `Vuc ~T0 @X0 0 e@8 ]
-"1437
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1437: extern volatile unsigned char TRISC __attribute__((address(0x087)));
-[v _TRISC `Vuc ~T0 @X0 0 e@135 ]
-"1999
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1999: extern volatile unsigned char TXSTA __attribute__((address(0x098)));
-[v _TXSTA `Vuc ~T0 @X0 0 e@152 ]
-"964
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 964: extern volatile unsigned char RCSTA __attribute__((address(0x018)));
-[v _RCSTA `Vuc ~T0 @X0 0 e@24 ]
-"2080
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2080: extern volatile unsigned char SPBRG __attribute__((address(0x099)));
-[v _SPBRG `Vuc ~T0 @X0 0 e@153 ]
 "2665
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2665: extern volatile __bit RA3 __attribute__((address(0x2B)));
 [v _RA3 `Vb ~T0 @X0 0 e@43 ]
@@ -27,6 +15,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2671 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2671: extern volatile __bit RA5 __attribute__((address(0x2D)));
 [v _RA5 `Vb ~T0 @X0 0 e@45 ]
+"1059
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1059: extern volatile unsigned char TXREG __attribute__((address(0x019)));
+[v _TXREG `Vuc ~T0 @X0 0 e@25 ]
+"56 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\string.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\string.h: 56: extern size_t strlen(const char *);
+[v _strlen `(ui ~T0 @X0 0 ef1`*Cuc ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -245,73 +239,85 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 95 ]
 }
 "25
-[; ;mostrarInicializar.c: 25: void iniciar_usart(){
-[v _iniciar_usart `(v ~T0 @X0 1 ef ]
-{
-[e :U _iniciar_usart ]
-[f ]
-"26
-[; ;mostrarInicializar.c: 26:      TRISC = 0b10000000;
-[e = _TRISC -> -> 128 `i `uc ]
-"27
-[; ;mostrarInicializar.c: 27:      TXSTA = 0b00100110;
-[e = _TXSTA -> -> 38 `i `uc ]
-"28
-[; ;mostrarInicializar.c: 28:      RCSTA = 0b10010000;
-[e = _RCSTA -> -> 144 `i `uc ]
-"29
-[; ;mostrarInicializar.c: 29:      SPBRG = 25;
-[e = _SPBRG -> -> 25 `i `uc ]
-"30
-[; ;mostrarInicializar.c: 30: }
-[e :UE 96 ]
-}
-"32
-[; ;mostrarInicializar.c: 32: void bailenLeds() {
+[; ;mostrarInicializar.c: 25: void bailenLeds() {
 [v _bailenLeds `(v ~T0 @X0 1 ef ]
 {
 [e :U _bailenLeds ]
 [f ]
-"34
-[; ;mostrarInicializar.c: 34:     unsigned short int i;
+"27
+[; ;mostrarInicializar.c: 27:     unsigned short int i;
 [v _i `us ~T0 @X0 1 a ]
-"35
-[; ;mostrarInicializar.c: 35:     for (i = 0; i < 3; i++) {
+"28
+[; ;mostrarInicializar.c: 28:     for (i = 0; i < 3; i++) {
 {
 [e = _i -> -> 0 `i `us ]
-[e $ < -> _i `ui -> -> 3 `i `ui 98  ]
-[e $U 99  ]
-[e :U 98 ]
+[e $ < -> _i `ui -> -> 3 `i `ui 97  ]
+[e $U 98  ]
+[e :U 97 ]
 {
-"36
-[; ;mostrarInicializar.c: 36:         RA3 = 1;
+"29
+[; ;mostrarInicializar.c: 29:         RA3 = 1;
 [e = _RA3 -> -> 1 `i `b ]
-"37
-[; ;mostrarInicializar.c: 37:         _delay((unsigned long)((200)*(4000000/4000.0)));
+"30
+[; ;mostrarInicializar.c: 30:         _delay((unsigned long)((200)*(4000000/4000.0)));
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"38
-[; ;mostrarInicializar.c: 38:         RA5 = 1;
+"31
+[; ;mostrarInicializar.c: 31:         RA5 = 1;
 [e = _RA5 -> -> 1 `i `b ]
-"39
-[; ;mostrarInicializar.c: 39:         _delay((unsigned long)((200)*(4000000/4000.0)));
+"32
+[; ;mostrarInicializar.c: 32:         _delay((unsigned long)((200)*(4000000/4000.0)));
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"40
-[; ;mostrarInicializar.c: 40:         RA3 = 0;
+"33
+[; ;mostrarInicializar.c: 33:         RA3 = 0;
 [e = _RA3 -> -> 0 `i `b ]
-"41
-[; ;mostrarInicializar.c: 41:         _delay((unsigned long)((200)*(4000000/4000.0)));
+"34
+[; ;mostrarInicializar.c: 34:         _delay((unsigned long)((200)*(4000000/4000.0)));
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"42
-[; ;mostrarInicializar.c: 42:         RA5 = 0;
+"35
+[; ;mostrarInicializar.c: 35:         RA5 = 0;
 [e = _RA5 -> -> 0 `i `b ]
-"43
-[; ;mostrarInicializar.c: 43:     }
+"36
+[; ;mostrarInicializar.c: 36:     }
 }
 [e ++ _i -> -> 1 `i `us ]
-[e $ < -> _i `ui -> -> 3 `i `ui 98  ]
-[e :U 99 ]
+[e $ < -> _i `ui -> -> 3 `i `ui 97  ]
+[e :U 98 ]
 }
+"37
+[; ;mostrarInicializar.c: 37: }
+[e :UE 96 ]
+}
+"39
+[; ;mostrarInicializar.c: 39: void envioTX(char *mensaje){
+[v _envioTX `(v ~T0 @X0 1 ef1`*uc ]
+{
+[e :U _envioTX ]
+[v _mensaje `*uc ~T0 @X0 1 r1 ]
+[f ]
+"40
+[; ;mostrarInicializar.c: 40:     int i = 0;
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+"41
+[; ;mostrarInicializar.c: 41:     while(i < strlen((const char *)mensaje)) {
+[e $U 101  ]
+[e :U 102 ]
+{
+"42
+[; ;mostrarInicializar.c: 42:         TXREG = mensaje[i];
+[e = _TXREG -> *U + _mensaje * -> _i `x -> -> # *U _mensaje `i `x `uc ]
+"43
+[; ;mostrarInicializar.c: 43:         i++;
+[e ++ _i -> 1 `i ]
 "44
-[; ;mostrarInicializar.c: 44: }
-[e :UE 97 ]
+[; ;mostrarInicializar.c: 44:     }
+}
+[e :U 101 ]
+"41
+[; ;mostrarInicializar.c: 41:     while(i < strlen((const char *)mensaje)) {
+[e $ < -> _i `ui ( _strlen (1 -> _mensaje `*Cuc 102  ]
+[e :U 103 ]
+"45
+[; ;mostrarInicializar.c: 45: }
+[e :UE 100 ]
 }

@@ -67,10 +67,12 @@ char verificacionEntrada() { //Verifico el ingreso para modificar o agregar prec
 }
 
 void cierreDeLote() {
-    if (!cierreLotePedido){ //Si no se pidió cierre de lote, envio datos!? 
+    
+    if (cierreLotePedido == 0) { //Si no se pidio cierre de lote, envio datos 
+        char strLote[32];
         //ver como funciona la cadena para reservar los bytes necesarios: char *strLote=""??
-        sprintf(strLote,"L:%d,$:%d,N:%d barran",&nroLote,&ventasLote,&montosLote);
-        envioTx(strLote);
+        sprintf(strLote,"L:%d,N:%d,T:%d\n",&nroLote,&ventasLote,&montosLote);
+        envioTX(strLote);
     }
     //Aqui, cierro lote en ambos casos:
     nroLote++;
@@ -99,7 +101,7 @@ void lecturaMenos() {
         //Se podria enviar un mensaje que diga modo debug desactivado o algo del estilo 
     }
     else{
-        envioTx(strError);
+        envioTX(strError);
     }
 }
 
@@ -133,7 +135,10 @@ void lecturaConsulta() { //Recibi '?' en 1er byte: Verifico los siguientes.
         //envioTx(cadena); 
 
     }
-    //else if(codigoEntrada[1] == 'V') consultaVoltaje();             //Consulta voltaje
+    else if(codigoEntrada[1] == 'V') {                            //Consulta Voltaje
+        //Inicializo conversion:
+        GO_nDONE = 1;
+    }
     
     else if( codigoEntrada[1] <= '9' && codigoEntrada[1] >= '0' && codigoEntrada[2] <= '9' && codigoEntrada[2] >= '0' ) { //Consulta Precio
 

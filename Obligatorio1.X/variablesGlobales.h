@@ -31,6 +31,6 @@ extern unsigned short int montosLote;
 extern char nroLote;
 extern char cierreLotePedido;
 extern unsigned char prodIngresados[13]; //13 bytes para guardar datos/uso de 99 prod. en 99 bits!
-
+extern unsigned short int adresult;
 #endif	/* VARIABLESGLOBALES_H */
 
