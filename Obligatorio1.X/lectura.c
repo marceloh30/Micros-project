@@ -11,7 +11,7 @@ short int EEPROM_search(unsigned char tp) {
     tp = tp*LARGO_PRECIO;
     precio = (eeprom_read(tp) << LARGO_ART) | (eeprom_read(tp+1)); //FALTA AGREGAR Comprobante de tp=>0
     
-    if( (precio < 0 || precio > PRECIO_MAX) || verificarProd(tp/LARGO_PRECIO)) {
+    if( (precio < 0 || precio > PRECIOMAX) || verificarProd(tp/LARGO_PRECIO)) {
         precio = -1;
     }
     
@@ -32,7 +32,7 @@ void lecturaEtiqueta(){
         unsigned char tp = 10*(codigoEntrada[0]-'0') + (codigoEntrada[1] - '0'); //tomo el valor de tipo de producto
         Aux = EEPROM_search(tp); //Guardo precio del articulo ingresado
         
-        if ((cuenta + Aux) <= PRECIO_MAX && Aux != -1) { //Si la cuenta no sobrepasa 99,9, la compra es correcta.
+        if ((cuenta + Aux) <= PRECIOMAX && Aux != -1) { //Si la cuenta no sobrepasa 99,9, la compra es correcta.
             tp--;
             ingresoProd(tp);
             productoIngresado = tp; //Guardo el ultimo producto ingresado correctametne 
@@ -71,18 +71,28 @@ char verificacionEntrada(){ //Verifico el ingreso para modificar o agregar preci
     return ret;
 }
 
+void cierreDeLote() {
+    if (!cierreLotePedido){ //Si no se pidió cierre de lote, envio datos!? 
+        // envioTx(string de Datos de lote);
+    }
+    //Aqui, cierro lote en ambos casos:
+    nroLote++;
+    ventasLote=0;
+    montosLote=0;
+}
+
 void lecturaMas(){
     if (codigoEntrada[1] == 'L'){
-        //cierreLote()
+        cierreDeLote();//Fuerza cierre de lote
     }
     else if(verificacionEntrada() == 6){ //Es 6 para verificar por ejemplo 12=203: 6 caracteres!
-        //agregarModificarPrecio()
+        agregarModificarPrecio();
     }
     else if(codigoEntrada[1] == 'D'){
         modoDebug = 1;
     }
     else{
-        //codigoNoreconocido();
+        //envioTx(); CODIGO NO RECONOCIDO
     }
 }
 
@@ -92,8 +102,22 @@ void lecturaMenos(){
         //Se podria enviar un mensaje que diga modo debug desactivado o algo del estilo 
     }
     else{
-        //codigoNoreconocido();
+        //envioTx(); CODIGO NO RECONOCIDO
     }
+}
+
+void consultaPrecio(short int articulo){
+    articulo--;
+    articulo = articulo * LARGO_PRECIO;
+    short int precio = (eeprom_read(articulo) << LARGO_ART) | (eeprom_read(articulo+1));
+    
+    if (precio > 99 || precio < 0){
+        //envioTx() producto no encontrado
+    }
+    else{
+        //envioTx() producto y precio
+    }
+    
 }
 
 void lecturaConsulta() { //Recibi '?' en 1er byte: Verifico los siguientes.
@@ -113,13 +137,11 @@ void lecturaConsulta() { //Recibi '?' en 1er byte: Verifico los siguientes.
         //envioTx(cadena); 
 
     }
-    else if(codigoEntrada[1] == 'V') consultaVoltaje();             //Consulta voltaje
+    //else if(codigoEntrada[1] == 'V') consultaVoltaje();             //Consulta voltaje
     
-    else if( codigoEntrada[1] <= '9' && codigoEntrada[1] >= '0'     //Consulta Precio
-            && codigoEntrada[2] <= '9' && codigoEntrada[2] >= '0' ) { 
+    else if( codigoEntrada[1] <= '9' && codigoEntrada[1] >= '0' && codigoEntrada[2] <= '9' && codigoEntrada[2] >= '0' ) { //Consulta Precio
 
-        unsigned short int articulo = 10 (codigoEntrada[1] - '0')
-                            + (codigoEntrada[2] - '0');
+        unsigned short int articulo = 10*(codigoEntrada[1] - '0') + (codigoEntrada[2] - '0');
 
         consultaPrecio(articulo);
 

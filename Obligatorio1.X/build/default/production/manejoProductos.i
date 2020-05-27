@@ -1,4 +1,4 @@
-# 1 "main.c"
+# 1 "manejoProductos.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,25 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "main.c" 2
-
-
-
-
-
-
-# 1 "./main.h" 1
-
-#pragma config FOSC = XT
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config BOREN = ON
-#pragma config LVP = OFF
-#pragma config CPD = OFF
-#pragma config WRT = OFF
-#pragma config CP = OFF
-
-
+# 1 "manejoProductos.c" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -1738,7 +1720,29 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 11 "./main.h" 2
+# 1 "manejoProductos.c" 2
+
+# 1 "./manejarProductos.h" 1
+# 11 "./manejarProductos.h"
+unsigned int pow(unsigned int numero,unsigned int potencia);
+
+void ingresoProd(short int tp);
+
+char verificarProd(short int tp);
+
+void eliminarProd(short int tp);
+
+void agregarModificarPrecio(void);
+# 2 "manejoProductos.c" 2
+
+# 1 "./mostrarInicializar.h" 1
+# 11 "./mostrarInicializar.h"
+void mostrarDigitos(unsigned int num);
+
+void iniciar_usart(void);
+
+void bailenLeds(void);
+# 3 "manejoProductos.c" 2
 
 # 1 "./variablesGlobales.h" 1
 # 20 "./variablesGlobales.h"
@@ -1754,124 +1758,90 @@ extern unsigned short int montosLote;
 extern char nroLote;
 extern char cierreLotePedido;
 extern unsigned char prodIngresados[13];
-# 12 "./main.h" 2
-
-# 1 "./mostrarInicializar.h" 1
-# 11 "./mostrarInicializar.h"
-void mostrarDigitos(unsigned int num);
-
-void iniciar_usart(void);
-
-void bailenLeds(void);
-# 13 "./main.h" 2
-
-# 1 "./manejarProductos.h" 1
-# 11 "./manejarProductos.h"
-unsigned int pow(unsigned int numero,unsigned int potencia);
-
-void ingresoProd(short int tp);
-
-char verificarProd(short int tp);
-
-void eliminarProd(short int tp);
-
-void agregarModificarPrecio(void);
-# 14 "./main.h" 2
-
-# 1 "./lectura.h" 1
-# 11 "./lectura.h"
-short int EEPROM_search(unsigned char tp);
-
-void lecturaEtiqueta(void);
-
-char verificacionEntrada(void);
-
-void cierreDeLote(void);
-
-void lecturaMas(void);
-
-void lecturaMenos(void);
-
-void lecturaConsulta(void);
-
-void lecturaComando(void);
-# 15 "./main.h" 2
-
-# 1 "./acciones.h" 1
-# 11 "./acciones.h"
-void accionesAceptar(void);
-
-void accionesDeshacer(void);
-
-void accionesPuertoSerial(void);
-# 16 "./main.h" 2
-
-
-unsigned short int cuenta, auxCuenta;
-short int huboInt = 0;
-char serial = 0;
-char modoDebug = 0;
-short int productoIngresado;
-short int numProd;
-char codigoEntrada[10];
-unsigned char ventasLote = 0;
-unsigned short int montosLote = 0;
-char nroLote = 1;
-char cierreLotePedido;
-unsigned char prodIngresados[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
-
-void main(void);
-void __attribute__((picinterrupt(("")))) int_usart(void);
-# 7 "main.c" 2
-
-
-void main(void) {
-
-
-    ADCON1 = 0b00000111;
-    TRISA = 0x06;
-    TRISB = 0x00;
-    TRISD = 0x00;
-    INTCON = 0b11000000;
-    RCIE = 1;
-    iniciar_usart();
-    cuenta = 0;
-    auxCuenta = 0;
-    mostrarDigitos(cuenta);
+# 4 "manejoProductos.c" 2
 
 
 
-    while(1) {
+unsigned int pow(unsigned int numero,unsigned int potencia){
+    unsigned int resultado = 0;
 
-        if(RA1) {
-            while(RA1);
-            accionesAceptar();
+    for (int i = 0; i <= potencia; i++){
+        if (i == 0){
+        resultado = 1;
         }
-        else if(RA2) {
-            while(RA2);
-            accionesDeshacer();
+        else{
+            resultado = resultado * numero;
         }
-        else if(huboInt) {
-            huboInt = 0;
-            accionesPuertoSerial();
+    }
+    return resultado;
+}
+
+void ingresoProd(short int tp) {
+
+    for(short int i = 12; i>=0; i--) {
+        if( tp >= 8*i) {
+
+            tp = tp - 8*i;
+            prodIngresados[i] = prodIngresados[i] | pow(2,tp);
+            i = 0;
+
+        }
+    }
+}
+
+char verificarProd(short int tp) {
+    char ret = 0;
+    for(short int i = 12; i>=0; i--) {
+        if( tp >= 8*i) {
+
+            tp = tp - 8*i;
+            if(prodIngresados[i] & pow(2,tp)) {
+                ret = 1;
+            }
+            i = 0;
+
+        }
+    }
+
+    return ret;
+}
+
+void eliminarProd(short int tp){
+        for(short int i = 12; i>=0; i--) {
+        if( tp >= 8*i) {
+
+            tp = tp - 8*i;
+            prodIngresados[i] = prodIngresados[i] ^ pow(2,tp);
+            i = 0;
+
         }
     }
 
 }
 
 
-void __attribute__((picinterrupt(("")))) int_usart() {
+void agregarModificarPrecio(){
+    unsigned char tp = 10*(codigoEntrada[0]-'0') + (codigoEntrada[1] - '0');
+    char lower_8bits;
+    char upper_8bits;
+    tp--;
+    tp = tp * 2;
+    short int precio = (eeprom_read(tp) << 8) | (eeprom_read(tp+1));
 
-    if(RCIF == 1) {
-        if(RCREG != 0x0D && RCREG != 0x0A && serial < (10 -1)) {
-            codigoEntrada[serial] = RCREG;
-            serial++;
-        }
-        else{
-            serial = 0;
-            huboInt = 1;
-        }
+    if( (precio < 0 || precio > 999) ) {
+        precio = 100 * (codigoEntrada[3] - '0')+ 10 * (codigoEntrada[4] - '0') + (codigoEntrada[5] - '0');
+        lower_8bits = precio & 0xff;
+        upper_8bits = (precio >> 8) & 0xff;
+        eeprom_write(tp ,upper_8bits);
+        eeprom_write(tp + 1,lower_8bits);
+
     }
+    else{
+        precio = 100 * (codigoEntrada[3] - '0')+ 10 * (codigoEntrada[4] - '0') + (codigoEntrada[5] - '0');
+        lower_8bits = precio & 0xff;
+        upper_8bits = (precio >> 8) & 0xff;
+        eeprom_write(tp ,upper_8bits);
+        eeprom_write(tp + 1,lower_8bits);
 
-
+    }
 }

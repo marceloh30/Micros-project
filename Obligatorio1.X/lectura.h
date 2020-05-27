@@ -14,6 +14,8 @@ void lecturaEtiqueta(void);
 
 char verificacionEntrada(void);
 
+void cierreDeLote(void);
+
 void lecturaMas(void);
 
 void lecturaMenos(void);

@@ -42,3 +42,21 @@ void bailenLeds() {
         RA5 = 0;
     }
 }
+
+
+void analogicoDigital(){
+    
+    
+    
+    
+}
+
+
+void envioTX(char *mensaje){
+    int i;
+    while(i < strlen(mensaje)){
+        TXIE = 1;
+        TXREG = mensaje[i];
+        i++
+    }
+}

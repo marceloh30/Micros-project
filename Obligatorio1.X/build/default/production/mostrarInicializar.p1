@@ -1,68 +1,32 @@
 Version 4.0 HI-TECH Software Intermediate Code
-[p mainexit ]
-"2229 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2229: extern volatile unsigned char ADCON1 __attribute__((address(0x09F)));
-[v _ADCON1 `Vuc ~T0 @X0 0 e@159 ]
-"1325
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1325: extern volatile unsigned char TRISA __attribute__((address(0x085)));
-[v _TRISA `Vuc ~T0 @X0 0 e@133 ]
-"1375
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1375: extern volatile unsigned char TRISB __attribute__((address(0x086)));
-[v _TRISB `Vuc ~T0 @X0 0 e@134 ]
-"1499
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1499: extern volatile unsigned char TRISD __attribute__((address(0x088)));
-[v _TRISD `Vuc ~T0 @X0 0 e@136 ]
-"454
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 454: extern volatile unsigned char INTCON __attribute__((address(0x00B)));
-[v _INTCON `Vuc ~T0 @X0 0 e@11 ]
-"2740
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2740: extern volatile __bit RCIE __attribute__((address(0x465)));
-[v _RCIE `Vb ~T0 @X0 0 e@1125 ]
-"13 ./mostrarInicializar.h
-[; ;./mostrarInicializar.h: 13: void iniciar_usart(void);
-[v _iniciar_usart `(v ~T0 @X0 0 ef ]
-"11
-[; ;./mostrarInicializar.h: 11: void mostrarDigitos(unsigned int num);
-[v _mostrarDigitos `(v ~T0 @X0 0 ef1`ui ]
-"2659 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2659: extern volatile __bit RA1 __attribute__((address(0x29)));
-[v _RA1 `Vb ~T0 @X0 0 e@41 ]
-"11 ./acciones.h
-[; ;./acciones.h: 11: void accionesAceptar(void);
-[v _accionesAceptar `(v ~T0 @X0 0 ef ]
-"2662 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2662: extern volatile __bit RA2 __attribute__((address(0x2A)));
-[v _RA2 `Vb ~T0 @X0 0 e@42 ]
-"13 ./acciones.h
-[; ;./acciones.h: 13: void accionesDeshacer(void);
-[v _accionesDeshacer `(v ~T0 @X0 0 ef ]
-"15
-[; ;./acciones.h: 15: void accionesPuertoSerial(void);
-[v _accionesPuertoSerial `(v ~T0 @X0 0 ef ]
-[t ~ __interrupt . k ]
-[t T2 __interrupt ]
-"2743 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2743: extern volatile __bit RCIF __attribute__((address(0x65)));
-[v _RCIF `Vb ~T0 @X0 0 e@101 ]
-"1066
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1066: extern volatile unsigned char RCREG __attribute__((address(0x01A)));
-[v _RCREG `Vuc ~T0 @X0 0 e@26 ]
-"2 ./main.h
-[p x FOSC = XT ]
-"3
-[p x WDTE = OFF ]
-"4
-[p x PWRTE = OFF ]
-"5
-[p x BOREN = ON ]
-"6
-[p x LVP = OFF ]
-"7
-[p x CPD = OFF ]
-"8
-[p x WRT = OFF ]
-"9
-[p x CP = OFF ]
+"216 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 216: extern volatile unsigned char PORTB __attribute__((address(0x006)));
+[v _PORTB `Vuc ~T0 @X0 0 e@6 ]
+"340
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 340: extern volatile unsigned char PORTD __attribute__((address(0x008)));
+[v _PORTD `Vuc ~T0 @X0 0 e@8 ]
+"1437
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1437: extern volatile unsigned char TRISC __attribute__((address(0x087)));
+[v _TRISC `Vuc ~T0 @X0 0 e@135 ]
+"1999
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1999: extern volatile unsigned char TXSTA __attribute__((address(0x098)));
+[v _TXSTA `Vuc ~T0 @X0 0 e@152 ]
+"964
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 964: extern volatile unsigned char RCSTA __attribute__((address(0x018)));
+[v _RCSTA `Vuc ~T0 @X0 0 e@24 ]
+"2080
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2080: extern volatile unsigned char SPBRG __attribute__((address(0x099)));
+[v _SPBRG `Vuc ~T0 @X0 0 e@153 ]
+"2665
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2665: extern volatile __bit RA3 __attribute__((address(0x2B)));
+[v _RA3 `Vb ~T0 @X0 0 e@43 ]
+[v F842 `(v ~T0 @X0 1 tf1`ul ]
+"92 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic.h
+[v __delay `JF842 ~T0 @X0 0 e ]
+[p i __delay ]
+"2671 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2671: extern volatile __bit RA5 __attribute__((address(0x2D)));
+[v _RA5 `Vb ~T0 @X0 0 e@45 ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -243,227 +207,111 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2363
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2363: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"18 ./main.h
-[; ;./main.h: 18: unsigned short int cuenta, auxCuenta;
-[v _cuenta `us ~T0 @X0 1 e ]
-[v _auxCuenta `us ~T0 @X0 1 e ]
-"19
-[; ;./main.h: 19: short int huboInt = 0;
-[v _huboInt `s ~T0 @X0 1 e ]
-[i _huboInt
--> -> 0 `i `s
-]
-"20
-[; ;./main.h: 20: char serial = 0;
-[v _serial `uc ~T0 @X0 1 e ]
-[i _serial
--> -> 0 `i `uc
-]
-"21
-[; ;./main.h: 21: char modoDebug = 0;
-[v _modoDebug `uc ~T0 @X0 1 e ]
-[i _modoDebug
--> -> 0 `i `uc
-]
-"22
-[; ;./main.h: 22: short int productoIngresado;
-[v _productoIngresado `s ~T0 @X0 1 e ]
-"23
-[; ;./main.h: 23: short int numProd;
-[v _numProd `s ~T0 @X0 1 e ]
-"24
-[; ;./main.h: 24: char codigoEntrada[10];
-[v _codigoEntrada `uc ~T0 @X0 -> 10 `i e ]
-"25
-[; ;./main.h: 25: unsigned char ventasLote = 0;
-[v _ventasLote `uc ~T0 @X0 1 e ]
-[i _ventasLote
--> -> 0 `i `uc
-]
-"26
-[; ;./main.h: 26: unsigned short int montosLote = 0;
-[v _montosLote `us ~T0 @X0 1 e ]
-[i _montosLote
--> -> 0 `i `us
-]
-"27
-[; ;./main.h: 27: char nroLote = 1;
-[v _nroLote `uc ~T0 @X0 1 e ]
-[i _nroLote
--> -> 1 `i `uc
-]
-"28
-[; ;./main.h: 28: char cierreLotePedido;
-[v _cierreLotePedido `uc ~T0 @X0 1 e ]
-"29
-[; ;./main.h: 29: unsigned char prodIngresados[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
-[v _prodIngresados `uc ~T0 @X0 -> 13 `i e ]
-[i _prodIngresados
+"4 mostrarInicializar.c
+[; ;mostrarInicializar.c: 4: static unsigned const char BMS[] = {
+[v _BMS `Cuc ~T0 @X0 -> 10 `i s ]
+[i _BMS
 :U ..
 -> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
--> -> 0 `i `uc
+-> -> 16 `i `uc
+-> -> 32 `i `uc
+-> -> 48 `i `uc
+-> -> 64 `i `uc
+-> -> 80 `i `uc
+-> -> 96 `i `uc
+-> -> 112 `i `uc
+-> -> 128 `i `uc
+-> -> 144 `i `uc
 ..
 ]
-[v $root$_main `(v ~T0 @X0 0 e ]
-"9 main.c
-[; ;main.c: 9: void main(void) {
-[v _main `(v ~T0 @X0 1 ef ]
-{
-[e :U _main ]
-[f ]
-"12
-[; ;main.c: 12:     ADCON1 = 0b00000111;
-[e = _ADCON1 -> -> 7 `i `uc ]
-"13
-[; ;main.c: 13:     TRISA = 0x06;
-[e = _TRISA -> -> 6 `i `uc ]
-"14
-[; ;main.c: 14:     TRISB = 0x00;
-[e = _TRISB -> -> 0 `i `uc ]
-"15
-[; ;main.c: 15:     TRISD = 0x00;
-[e = _TRISD -> -> 0 `i `uc ]
-"16
-[; ;main.c: 16:     INTCON = 0b11000000;
-[e = _INTCON -> -> 192 `i `uc ]
 "17
-[; ;main.c: 17:     RCIE = 1;
-[e = _RCIE -> -> 1 `i `b ]
-"18
-[; ;main.c: 18:     iniciar_usart();
-[e ( _iniciar_usart ..  ]
+[; ;mostrarInicializar.c: 17: void mostrarDigitos(unsigned int num) {
+[v _mostrarDigitos `(v ~T0 @X0 1 ef1`ui ]
+{
+[e :U _mostrarDigitos ]
+[v _num `ui ~T0 @X0 1 r1 ]
+[f ]
 "19
-[; ;main.c: 19:     cuenta = 0;
-[e = _cuenta -> -> 0 `i `us ]
+[; ;mostrarInicializar.c: 19:     PORTB = BMS[num/100];
+[e = _PORTB *U + &U _BMS * -> / _num -> -> 100 `i `ui `ux -> -> # *U &U _BMS `ui `ux ]
 "20
-[; ;main.c: 20:     auxCuenta = 0;
-[e = _auxCuenta -> -> 0 `i `us ]
+[; ;mostrarInicializar.c: 20:     PORTB = PORTB | ((num%100)/10);
+[e = _PORTB -> | -> _PORTB `ui / % _num -> -> 100 `i `ui -> -> 10 `i `ui `uc ]
 "21
-[; ;main.c: 21:     mostrarDigitos(cuenta);
-[e ( _mostrarDigitos (1 -> _cuenta `ui ]
-"25
-[; ;main.c: 25:     while(1) {
-[e :U 97 ]
-{
-"27
-[; ;main.c: 27:         if(RA1) {
-[e $ ! _RA1 99  ]
-{
-"28
-[; ;main.c: 28:             while(RA1);
-[e $U 100  ]
-[e :U 101 ]
-[e :U 100 ]
-[e $ _RA1 101  ]
-[e :U 102 ]
-"29
-[; ;main.c: 29:             accionesAceptar();
-[e ( _accionesAceptar ..  ]
-"30
-[; ;main.c: 30:         }
-}
-[e $U 103  ]
-"31
-[; ;main.c: 31:         else if(RA2) {
-[e :U 99 ]
-[e $ ! _RA2 104  ]
-{
-"32
-[; ;main.c: 32:             while(RA2);
-[e $U 105  ]
-[e :U 106 ]
-[e :U 105 ]
-[e $ _RA2 106  ]
-[e :U 107 ]
-"33
-[; ;main.c: 33:             accionesDeshacer();
-[e ( _accionesDeshacer ..  ]
-"34
-[; ;main.c: 34:         }
-}
-[e $U 108  ]
-"35
-[; ;main.c: 35:         else if(huboInt) {
-[e :U 104 ]
-[e $ ! != -> _huboInt `i -> 0 `i 109  ]
-{
-"36
-[; ;main.c: 36:             huboInt = 0;
-[e = _huboInt -> -> 0 `i `s ]
-"37
-[; ;main.c: 37:             accionesPuertoSerial();
-[e ( _accionesPuertoSerial ..  ]
-"38
-[; ;main.c: 38:         }
-}
-[e :U 109 ]
-[e :U 108 ]
-[e :U 103 ]
-"39
-[; ;main.c: 39:     }
-}
-[e :U 96 ]
-[e $U 97  ]
-[e :U 98 ]
-"41
-[; ;main.c: 41: }
+[; ;mostrarInicializar.c: 21:     PORTD = BMS[(num%100)%10];
+[e = _PORTD *U + &U _BMS * -> % % _num -> -> 100 `i `ui -> -> 10 `i `ui `ux -> -> # *U &U _BMS `ui `ux ]
+"23
+[; ;mostrarInicializar.c: 23: }
 [e :UE 95 ]
 }
-[v $root$_int_usart `(v ~T0 @X0 0 e ]
-"44
-[; ;main.c: 44: void __attribute__((picinterrupt(("")))) int_usart() {
-[v _int_usart `(v ~T2 @X0 1 ef ]
+"25
+[; ;mostrarInicializar.c: 25: void iniciar_usart(){
+[v _iniciar_usart `(v ~T0 @X0 1 ef ]
 {
-[e :U _int_usart ]
+[e :U _iniciar_usart ]
 [f ]
-"46
-[; ;main.c: 46:     if(RCIF == 1) {
-[e $ ! == -> _RCIF `i -> 1 `i 111  ]
-{
-"47
-[; ;main.c: 47:         if(RCREG != 0x0D && RCREG != 0x0A && serial < (10 -1)) {
-[e $ ! && && != -> _RCREG `i -> 13 `i != -> _RCREG `i -> 10 `i < -> _serial `i - -> 10 `i -> 1 `i 112  ]
-{
-"48
-[; ;main.c: 48:             codigoEntrada[serial] = RCREG;
-[e = *U + &U _codigoEntrada * -> _serial `ux -> -> # *U &U _codigoEntrada `ui `ux -> _RCREG `uc ]
-"49
-[; ;main.c: 49:             serial++;
-[e ++ _serial -> -> 1 `i `uc ]
-"50
-[; ;main.c: 50:         }
+"26
+[; ;mostrarInicializar.c: 26:      TRISC = 0b10000000;
+[e = _TRISC -> -> 128 `i `uc ]
+"27
+[; ;mostrarInicializar.c: 27:      TXSTA = 0b00100110;
+[e = _TXSTA -> -> 38 `i `uc ]
+"28
+[; ;mostrarInicializar.c: 28:      RCSTA = 0b10010000;
+[e = _RCSTA -> -> 144 `i `uc ]
+"29
+[; ;mostrarInicializar.c: 29:      SPBRG = 25;
+[e = _SPBRG -> -> 25 `i `uc ]
+"30
+[; ;mostrarInicializar.c: 30: }
+[e :UE 96 ]
 }
-[e $U 113  ]
-"51
-[; ;main.c: 51:         else{
-[e :U 112 ]
+"32
+[; ;mostrarInicializar.c: 32: void bailenLeds() {
+[v _bailenLeds `(v ~T0 @X0 1 ef ]
 {
-"52
-[; ;main.c: 52:             serial = 0;
-[e = _serial -> -> 0 `i `uc ]
-"53
-[; ;main.c: 53:             huboInt = 1;
-[e = _huboInt -> -> 1 `i `s ]
-"54
-[; ;main.c: 54:         }
+[e :U _bailenLeds ]
+[f ]
+"34
+[; ;mostrarInicializar.c: 34:     unsigned short int i;
+[v _i `us ~T0 @X0 1 a ]
+"35
+[; ;mostrarInicializar.c: 35:     for (i = 0; i < 3; i++) {
+{
+[e = _i -> -> 0 `i `us ]
+[e $ < -> _i `ui -> -> 3 `i `ui 98  ]
+[e $U 99  ]
+[e :U 98 ]
+{
+"36
+[; ;mostrarInicializar.c: 36:         RA3 = 1;
+[e = _RA3 -> -> 1 `i `b ]
+"37
+[; ;mostrarInicializar.c: 37:         _delay((unsigned long)((200)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"38
+[; ;mostrarInicializar.c: 38:         RA5 = 1;
+[e = _RA5 -> -> 1 `i `b ]
+"39
+[; ;mostrarInicializar.c: 39:         _delay((unsigned long)((200)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"40
+[; ;mostrarInicializar.c: 40:         RA3 = 0;
+[e = _RA3 -> -> 0 `i `b ]
+"41
+[; ;mostrarInicializar.c: 41:         _delay((unsigned long)((200)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"42
+[; ;mostrarInicializar.c: 42:         RA5 = 0;
+[e = _RA5 -> -> 0 `i `b ]
+"43
+[; ;mostrarInicializar.c: 43:     }
 }
-[e :U 113 ]
-"55
-[; ;main.c: 55:     }
+[e ++ _i -> -> 1 `i `us ]
+[e $ < -> _i `ui -> -> 3 `i `ui 98  ]
+[e :U 99 ]
 }
-[e :U 111 ]
-"58
-[; ;main.c: 58: }
-[e :UE 110 ]
+"44
+[; ;mostrarInicializar.c: 44: }
+[e :UE 97 ]
 }

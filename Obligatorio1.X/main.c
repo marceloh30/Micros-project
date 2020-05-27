@@ -14,7 +14,7 @@ void main(void) {
     TRISB = 0x00; //Defino PORTC como salidas (Unidades)
     TRISD = 0x00; //Defino PORTD como salidas (Decenas)
     INTCON = 0b11000000;    //Habilito las interupciones
-    RCIE = 1;        //habilita interrupción por recepción.  
+    RCIE = 1;        //habilita interrupción por recepción. 
     iniciar_usart();        //inicia el módulo USART PIC (uso de puerto serial)
     cuenta = 0;
     auxCuenta = 0;
@@ -52,6 +52,9 @@ void __interrupt() int_usart() {
             serial = 0;
             huboInt = 1;
         }
+    }
+    else if(TXIF == 1){
+        TXIE = 0;
     }
     
     

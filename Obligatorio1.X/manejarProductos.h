@@ -16,5 +16,7 @@ char verificarProd(short int tp);
 
 void eliminarProd(short int tp);
 
+void agregarModificarPrecio(void);
+
 #endif	/* MANEJARPRODUCTOS_H */
 

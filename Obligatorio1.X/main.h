@@ -22,10 +22,11 @@ char modoDebug = 0;
 short int productoIngresado;
 short int numProd;
 char codigoEntrada[10];
-char ventasLote = 0;
+unsigned char ventasLote = 0;
 unsigned short int montosLote = 0;
 char nroLote = 1;
+char cierreLotePedido;
 unsigned char prodIngresados[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0}; //99 lugares para 99 productos (1 en c/bit)
 
 void main(void);
-void __interrupt(void) int_usart(void);
+void __interrupt() int_usart(void);
