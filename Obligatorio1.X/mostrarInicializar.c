@@ -1,4 +1,4 @@
-#include <xc.h>
+#include "mostrarInicializar.h"
 #include "variablesGlobales.h"
 
 static unsigned const char BMS[] = {
