@@ -68,7 +68,9 @@ char verificacionEntrada() { //Verifico el ingreso para modificar o agregar prec
 
 void cierreDeLote() {
     if (!cierreLotePedido){ //Si no se pidió cierre de lote, envio datos!? 
-        // envioTx(string de Datos de lote);
+        //ver como funciona la cadena para reservar los bytes necesarios: char *strLote=""??
+        sprintf(strLote,"L:%d,$:%d,N:%d barran",&nroLote,&ventasLote,&montosLote);
+        envioTx(strLote);
     }
     //Aqui, cierro lote en ambos casos:
     nroLote++;
@@ -97,7 +99,7 @@ void lecturaMenos() {
         //Se podria enviar un mensaje que diga modo debug desactivado o algo del estilo 
     }
     else{
-        //envioTx(); CODIGO NO RECONOCIDO
+        envioTx(strError);
     }
 }
 
