@@ -1,3 +1,6 @@
+#ifndef MAIN_H
+#define MAIN_H
+
 // Seteo de Bits de Configuración del PIC:
 #pragma config FOSC = XT        // Oscillator Selection bits (XT oscillator)
 #pragma config WDTE = OFF       // Watchdog Timer Enable bit (WDT disabled)
@@ -8,13 +11,15 @@
 #pragma config WRT = OFF        // Flash Program Memory Write Enable bits (Write protection off; all program memory may be written to by EECON control)
 #pragma config CP = OFF         // Flash Program Memory Code Protection bit (Code protection off)
 
+//Librerias
 #include <xc.h>
 #include "variablesGlobales.h"
 #include "mostrarInicializar.h"
 #include "manejarProductos.h"
 #include "lectura.h"
 #include "acciones.h"
-//Defino variables estaticas (debido a que cruzan funciones)
+
+//Redefino variables extern creadas en variablesGlobales.h
 unsigned short int cuenta, auxCuenta;
 short int huboInt = 0;
 char serial = 0;
@@ -28,5 +33,8 @@ char nroLote = 1;
 char cierreLotePedido;
 unsigned char prodIngresados[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0}; //99 lugares para 99 productos (1 en c/bit)
 
+//Firmas:
 void main(void);
 void __interrupt() int_usart(void);
+
+#endif /* MAIN_H */
