@@ -1,13 +1,12 @@
-/* 
- * File:   manejarProductos.h
- * Author: julia
- *
- * Created on 26 de mayo de 2020, 12:22 PM
- */
-
 #ifndef MANEJARPRODUCTOS_H
 #define	MANEJARPRODUCTOS_H
 
+//Librerias
+#include <xc.h>
+#include "mostrarInicializar.h"
+#include "variablesGlobales.h"
+
+//Firmas
 unsigned int pow(unsigned int numero,unsigned int potencia);
 
 void ingresoProd(short int tp);
