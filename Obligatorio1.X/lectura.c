@@ -1,8 +1,4 @@
-#include <xc.h>
-#include "manejarProductos.h"
-#include "mostrarInicializar.h"
-#include "variablesGlobales.h"
-
+#include "lectura.h"
 
 short int EEPROM_search(unsigned char tp) { 
     
@@ -15,11 +11,10 @@ short int EEPROM_search(unsigned char tp) {
         precio = -1;
     }
     
-    
     return precio;
 }
 
-void lecturaEtiqueta(){
+void lecturaEtiqueta() {
     short int Aux = 0;
     
     //Realizo suma para checksum
@@ -61,7 +56,7 @@ void lecturaEtiqueta(){
     }
 }
 
-char verificacionEntrada(){ //Verifico el ingreso para modificar o agregar precio (luego del '+' espero:"NN=NNN", N=Numero del 0 al 9)
+char verificacionEntrada() { //Verifico el ingreso para modificar o agregar precio (luego del '+' espero:"NN=NNN", N=Numero del 0 al 9)
     char i = 1;
     char ret = 0;
     while( (((codigoEntrada[i] <= '9') && (codigoEntrada[i] >= '0')) || codigoEntrada[i] == '=') && (i<=6) ) {
@@ -72,7 +67,7 @@ char verificacionEntrada(){ //Verifico el ingreso para modificar o agregar preci
 }
 
 void cierreDeLote() {
-    if (!cierreLotePedido){ //Si no se pidió cierre de lote, envio datos!? 
+    if (!cierreLotePedido){ //Si no se pidiÃ³ cierre de lote, envio datos!? 
         // envioTx(string de Datos de lote);
     }
     //Aqui, cierro lote en ambos casos:
@@ -81,14 +76,14 @@ void cierreDeLote() {
     montosLote=0;
 }
 
-void lecturaMas(){
-    if (codigoEntrada[1] == 'L'){
+void lecturaMas() {
+    if (codigoEntrada[1] == 'L') {
         cierreDeLote();//Fuerza cierre de lote
     }
     else if(verificacionEntrada() == 6){ //Es 6 para verificar por ejemplo 12=203: 6 caracteres!
         agregarModificarPrecio();
     }
-    else if(codigoEntrada[1] == 'D'){
+    else if(codigoEntrada[1] == 'D') {
         modoDebug = 1;
     }
     else{
@@ -96,8 +91,8 @@ void lecturaMas(){
     }
 }
 
-void lecturaMenos(){
-    if(codigoEntrada[1] == 'D'){
+void lecturaMenos() {
+    if(codigoEntrada[1] == 'D') {
         modoDebug = 0;
         //Se podria enviar un mensaje que diga modo debug desactivado o algo del estilo 
     }
@@ -106,18 +101,17 @@ void lecturaMenos(){
     }
 }
 
-void consultaPrecio(short int articulo){
+void consultaPrecio(short int articulo) {
     articulo--;
     articulo = articulo * LARGO_PRECIO;
     short int precio = (eeprom_read(articulo) << LARGO_ART) | (eeprom_read(articulo+1));
     
-    if (precio > 99 || precio < 0){
+    if (precio > 99 || precio < 0) {
         //envioTx() producto no encontrado
     }
     else{
         //envioTx() producto y precio
     }
-    
 }
 
 void lecturaConsulta() { //Recibi '?' en 1er byte: Verifico los siguientes.
@@ -151,11 +145,11 @@ void lecturaConsulta() { //Recibi '?' en 1er byte: Verifico los siguientes.
  
 }
 
-void lecturaComando(){
-    if(codigoEntrada[0] == '?'){
+void lecturaComando() {
+    if(codigoEntrada[0] == '?') {
         lecturaConsulta();
     }
-    else if(codigoEntrada[0] == '+'){
+    else if(codigoEntrada[0] == '+') {
         lecturaMas();
     }
     else{ //Ya verifique que fuese uno de los 3 ('?','+' o '-')
