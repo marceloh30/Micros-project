@@ -18,9 +18,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "1059
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1059: extern volatile unsigned char TXREG __attribute__((address(0x019)));
 [v _TXREG `Vuc ~T0 @X0 0 e@25 ]
-"56 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\string.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\string.h: 56: extern size_t strlen(const char *);
-[v _strlen `(ui ~T0 @X0 0 ef1`*Cuc ]
+"3037
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 3037: extern volatile __bit TXIF __attribute__((address(0x64)));
+[v _TXIF `Vb ~T0 @X0 0 e@100 ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -299,25 +299,55 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
 "41
-[; ;mostrarInicializar.c: 41:     while(i < strlen((const char *)mensaje)) {
+[; ;mostrarInicializar.c: 41:     char transmitir=1;
+[v _transmitir `uc ~T0 @X0 1 a ]
+[e = _transmitir -> -> 1 `i `uc ]
+"42
+[; ;mostrarInicializar.c: 42:  while(transmitir){
 [e $U 101  ]
 [e :U 102 ]
 {
-"42
-[; ;mostrarInicializar.c: 42:         TXREG = mensaje[i];
-[e = _TXREG -> *U + _mensaje * -> _i `x -> -> # *U _mensaje `i `x `uc ]
 "43
-[; ;mostrarInicializar.c: 43:         i++;
-[e ++ _i -> 1 `i ]
+[; ;mostrarInicializar.c: 43:   TXREG = mensaje[i];
+[e = _TXREG -> *U + _mensaje * -> _i `x -> -> # *U _mensaje `i `x `uc ]
 "44
-[; ;mostrarInicializar.c: 44:     }
+[; ;mostrarInicializar.c: 44:   if (TXREG==0){
+[e $ ! == -> _TXREG `i -> 0 `i 104  ]
+{
+"45
+[; ;mostrarInicializar.c: 45:    transmitir=0;
+[e = _transmitir -> -> 0 `i `uc ]
+"46
+[; ;mostrarInicializar.c: 46:         }
+}
+[e $U 105  ]
+"47
+[; ;mostrarInicializar.c: 47:         else{
+[e :U 104 ]
+{
+"48
+[; ;mostrarInicializar.c: 48:    i++;
+[e ++ _i -> 1 `i ]
+"49
+[; ;mostrarInicializar.c: 49:         }
+}
+[e :U 105 ]
+"50
+[; ;mostrarInicializar.c: 50:   while(TXIF==0);
+[e $U 106  ]
+[e :U 107 ]
+[e :U 106 ]
+[e $ == -> _TXIF `i -> 0 `i 107  ]
+[e :U 108 ]
+"51
+[; ;mostrarInicializar.c: 51:  }
 }
 [e :U 101 ]
-"41
-[; ;mostrarInicializar.c: 41:     while(i < strlen((const char *)mensaje)) {
-[e $ < -> _i `ui ( _strlen (1 -> _mensaje `*Cuc 102  ]
+"42
+[; ;mostrarInicializar.c: 42:  while(transmitir){
+[e $ != -> _transmitir `i -> 0 `i 102  ]
 [e :U 103 ]
-"45
-[; ;mostrarInicializar.c: 45: }
+"53
+[; ;mostrarInicializar.c: 53: }
 [e :UE 100 ]
 }

@@ -18,8 +18,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "21
 [; ;./mostrarInicializar.h: 21: void bailenLeds(void);
 [v _bailenLeds `(v ~T0 @X0 0 ef ]
-"16 ./manejoProductos.h
-[; ;./manejoProductos.h: 16: void eliminarProd(short int tp);
+"17 ./manejoProductos.h
+[; ;./manejoProductos.h: 17: void eliminarProd(short int tp);
 [v _eliminarProd `(v ~T0 @X0 0 ef1`s ]
 "26 ./variablesGlobales.h
 [; ;./variablesGlobales.h: 26: extern short int productoIngresado;

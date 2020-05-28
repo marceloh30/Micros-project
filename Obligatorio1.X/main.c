@@ -38,21 +38,24 @@ void main(void) {
    
     while(1) {
         
-        if(RE1) {       //Boton aceptar
-            while(RE1);
+        if(RE0) {       //Boton aceptar
+            while(RE0);
             accionesAceptar();
         }
-        else if(RE2) {  //Boton deshacer
-            while(RE2);
+        else if(RE1) {  //Boton deshacer
+            while(RE1);
             accionesDeshacer();
         }
-        else if(RE0) {  //Boton lote
-            while(RE0);
+        else if(RE2) {  //Boton lote
+            while(RE2);
             cierreLotePedido = 1;
         }                
         else if(huboInt) {
             huboInt = 0; 
             accionesPuertoSerial();
+            for(char i = 0; i < SERIALMAX; i++){
+                codigoEntrada[i] = 0;
+            }
         }
         else if(adresult > 0) {
             
@@ -72,8 +75,7 @@ void main(void) {
 void __interrupt() int_usart() {
     
     if(RCIF) {
-        if(RCREG != 0x0D && RCREG != 0x0A && serial < (SERIALMAX-1)) { //Verifico que no me sobrepase de los datos esperados! 
-            codigoEntrada[serial] = RCREG;
+        if((codigoEntrada[serial] = RCREG) != 0x0D && (codigoEntrada[serial]) != 0x0A && serial < (SERIALMAX-1)) { //Verifico que no me sobrepase de los datos esperados! 
             serial++;
         }
         else{

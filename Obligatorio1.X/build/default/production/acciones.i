@@ -1838,6 +1838,7 @@ extern int printf(const char *, ...);
 
 
 
+
 # 1 "./mostrarInicializar.h" 1
 # 13 "./mostrarInicializar.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 1 3
@@ -1899,7 +1900,7 @@ void mostrarDigitos(unsigned int num);
 void bailenLeds(void);
 
 void envioTX(char *mensaje);
-# 6 "./manejoProductos.h" 2
+# 7 "./manejoProductos.h" 2
 
 
 

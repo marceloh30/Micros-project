@@ -1832,6 +1832,7 @@ extern int printf(const char *, ...);
 
 
 
+
 # 1 "./mostrarInicializar.h" 1
 # 13 "./mostrarInicializar.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 1 3
@@ -1893,7 +1894,7 @@ void mostrarDigitos(unsigned int num);
 void bailenLeds(void);
 
 void envioTX(char *mensaje);
-# 6 "./manejoProductos.h" 2
+# 7 "./manejoProductos.h" 2
 
 
 
@@ -2005,7 +2006,7 @@ void cierreDeLote() {
     if (cierreLotePedido == 0) {
         char strLote[32];
 
-        sprintf(strLote,"L:%d,N:%d,T:%d\n",&nroLote,&ventasLote,&montosLote);
+        sprintf(strLote,"\nL:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
         envioTX(strLote);
     }
 
@@ -2040,15 +2041,18 @@ void lecturaMenos() {
 }
 
 void consultaPrecio(short int articulo) {
+    char mensaje[26];
     articulo--;
     articulo = articulo * 2;
     short int precio = (eeprom_read(articulo) << 8) | (eeprom_read(articulo+1));
 
-    if (precio > 99 || precio < 0) {
-
+    if (precio > 999 || precio < 0) {
+        sprintf(mensaje, "\nProducto no encontrado\n");
+        envioTX(mensaje);
     }
     else{
-
+        sprintf(mensaje, "\nTP: %d P: ?%d,%d\n", articulo/2 + 1, precio/10, precio%10);
+        envioTX(mensaje);
     }
 }
 
@@ -2057,16 +2061,17 @@ void lecturaConsulta() {
     if (codigoEntrada[1] == 0x0D || codigoEntrada[1] == 0x0A) {
 
         if (cuenta != 0) {
-
+            envioTX("\nEstado: Activo\n");
         }
         else {
-
+            envioTX("\nEstado: En espera\n");
         }
     }
     else if(codigoEntrada[1] == 'L') {
+        char strLote[32];
 
-
-
+        sprintf(strLote,"\nL:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+        envioTX(strLote);
 
     }
     else if(codigoEntrada[1] == 'V') {

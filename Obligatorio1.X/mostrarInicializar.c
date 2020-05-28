@@ -38,8 +38,16 @@ void bailenLeds() {
 
 void envioTX(char *mensaje){
     int i = 0;
-    while(i < strlen((const char *)mensaje)) {        
-        TXREG = mensaje[i];
-        i++;
-    }
+    char transmitir=1;
+	while(transmitir){
+		TXREG = mensaje[i];
+		if (TXREG==0){
+			transmitir=0;
+        }
+        else{
+			i++;
+        }
+		while(TXIF==0); //me quedo esperando a que termine el byte
+	}
+
 }

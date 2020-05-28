@@ -2,8 +2,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "115 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\eeprom_routines.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\eeprom_routines.h: 115: extern unsigned char eeprom_read(unsigned char addr);
 [v _eeprom_read `(uc ~T0 @X0 0 ef1`uc ]
-"14 ./manejoProductos.h
-[; ;./manejoProductos.h: 14: char verificarProd(short int tp);
+"15 ./manejoProductos.h
+[; ;./manejoProductos.h: 15: char verificarProd(short int tp);
 [v _verificarProd `(uc ~T0 @X0 0 ef1`s ]
 "28 ./variablesGlobales.h
 [; ;./variablesGlobales.h: 28: extern char codigoEntrada[10];
@@ -11,8 +11,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "22
 [; ;./variablesGlobales.h: 22: extern unsigned short int cuenta, auxCuenta;
 [v _cuenta `us ~T0 @X0 0 e ]
-"12 ./manejoProductos.h
-[; ;./manejoProductos.h: 12: void ingresoProd(short int tp);
+"13 ./manejoProductos.h
+[; ;./manejoProductos.h: 13: void ingresoProd(short int tp);
 [v _ingresoProd `(v ~T0 @X0 0 ef1`s ]
 "26 ./variablesGlobales.h
 [; ;./variablesGlobales.h: 26: extern short int productoIngresado;
@@ -50,8 +50,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "23 ./mostrarInicializar.h
 [; ;./mostrarInicializar.h: 23: void envioTX(char *mensaje);
 [v _envioTX `(v ~T0 @X0 0 ef1`*uc ]
-"18 ./manejoProductos.h
-[; ;./manejoProductos.h: 18: void agregarModificarPrecio(void);
+"19 ./manejoProductos.h
+[; ;./manejoProductos.h: 19: void agregarModificarPrecio(void);
 [v _agregarModificarPrecio `(v ~T0 @X0 0 ef ]
 "25 ./variablesGlobales.h
 [; ;./variablesGlobales.h: 25: extern char modoDebug;
@@ -449,8 +449,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;lectura.c: 72:         char strLote[32];
 [v _strLote `uc ~T0 @X0 -> 32 `i a ]
 "74
-[; ;lectura.c: 74:         sprintf(strLote,"L:%d,N:%d,T:%d\n",&nroLote,&ventasLote,&montosLote);
-[e ( _sprintf (1 , , , (. , &U _strLote :s 1C &U _nroLote &U _ventasLote &U _montosLote ]
+[; ;lectura.c: 74:         sprintf(strLote,"\nL:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+[e ( _sprintf (1 , , , (. , &U _strLote :s 1C -> _nroLote `i -> _ventasLote `i -> _montosLote `ui ]
 "75
 [; ;lectura.c: 75:         envioTX(strLote);
 [e ( _envioTX (1 &U _strLote ]
@@ -566,154 +566,189 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _articulo `s ~T0 @X0 1 r1 ]
 [f ]
 "109
-[; ;lectura.c: 109:     articulo--;
-[e -- _articulo -> -> 1 `i `s ]
+[; ;lectura.c: 109:     char mensaje[26];
+[v _mensaje `uc ~T0 @X0 -> 26 `i a ]
 "110
-[; ;lectura.c: 110:     articulo = articulo * 2;
-[e = _articulo -> * -> _articulo `i -> 2 `i `s ]
+[; ;lectura.c: 110:     articulo--;
+[e -- _articulo -> -> 1 `i `s ]
 "111
-[; ;lectura.c: 111:     short int precio = (eeprom_read(articulo) << 8) | (eeprom_read(articulo+1));
+[; ;lectura.c: 111:     articulo = articulo * 2;
+[e = _articulo -> * -> _articulo `i -> 2 `i `s ]
+"112
+[; ;lectura.c: 112:     short int precio = (eeprom_read(articulo) << 8) | (eeprom_read(articulo+1));
 [v _precio `s ~T0 @X0 1 a ]
 [e = _precio -> | << -> ( _eeprom_read (1 -> _articulo `uc `i -> 8 `i -> ( _eeprom_read (1 -> + -> _articulo `i -> 1 `i `uc `i `s ]
-"113
-[; ;lectura.c: 113:     if (precio > 99 || precio < 0) {
-[e $ ! || > -> _precio `i -> 99 `i < -> _precio `i -> 0 `i 123  ]
+"114
+[; ;lectura.c: 114:     if (precio > 999 || precio < 0) {
+[e $ ! || > -> _precio `i -> 999 `i < -> _precio `i -> 0 `i 123  ]
 {
 "115
-[; ;lectura.c: 115:     }
+[; ;lectura.c: 115:         sprintf(mensaje, "\nProducto no encontrado\n");
+[e ( _sprintf (1 , &U _mensaje :s 3C ]
+"116
+[; ;lectura.c: 116:         envioTX(mensaje);
+[e ( _envioTX (1 &U _mensaje ]
+"117
+[; ;lectura.c: 117:     }
 }
 [e $U 124  ]
-"116
-[; ;lectura.c: 116:     else{
+"118
+[; ;lectura.c: 118:     else{
 [e :U 123 ]
 {
-"118
-[; ;lectura.c: 118:     }
+"119
+[; ;lectura.c: 119:         sprintf(mensaje, "\nTP: %d P: ?%d,%d\n", articulo/2 + 1, precio/10, precio%10);
+[e ( _sprintf (1 , , , (. , &U _mensaje :s 4C + / -> _articulo `i -> 2 `i -> 1 `i / -> _precio `i -> 10 `i % -> _precio `i -> 10 `i ]
+"120
+[; ;lectura.c: 120:         envioTX(mensaje);
+[e ( _envioTX (1 &U _mensaje ]
+"121
+[; ;lectura.c: 121:     }
 }
 [e :U 124 ]
-"119
-[; ;lectura.c: 119: }
+"122
+[; ;lectura.c: 122: }
 [e :UE 122 ]
 }
-"121
-[; ;lectura.c: 121: void lecturaConsulta() {
+"124
+[; ;lectura.c: 124: void lecturaConsulta() {
 [v _lecturaConsulta `(v ~T0 @X0 1 ef ]
 {
 [e :U _lecturaConsulta ]
 [f ]
-"123
-[; ;lectura.c: 123:     if (codigoEntrada[1] == 0x0D || codigoEntrada[1] == 0x0A) {
+"126
+[; ;lectura.c: 126:     if (codigoEntrada[1] == 0x0D || codigoEntrada[1] == 0x0A) {
 [e $ ! || == -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `i -> 13 `i == -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `i -> 10 `i 126  ]
 {
-"125
-[; ;lectura.c: 125:         if (cuenta != 0) {
+"128
+[; ;lectura.c: 128:         if (cuenta != 0) {
 [e $ ! != -> _cuenta `ui -> -> 0 `i `ui 127  ]
 {
-"127
-[; ;lectura.c: 127:         }
-}
-[e $U 128  ]
-"128
-[; ;lectura.c: 128:         else {
-[e :U 127 ]
-{
+"129
+[; ;lectura.c: 129:             envioTX("\nEstado: Activo\n");
+[e ( _envioTX (1 :s 5C ]
 "130
 [; ;lectura.c: 130:         }
 }
-[e :U 128 ]
+[e $U 128  ]
 "131
-[; ;lectura.c: 131:     }
+[; ;lectura.c: 131:         else {
+[e :U 127 ]
+{
+"132
+[; ;lectura.c: 132:             envioTX("\nEstado: En espera\n");
+[e ( _envioTX (1 :s 6C ]
+"133
+[; ;lectura.c: 133:         }
+}
+[e :U 128 ]
+"134
+[; ;lectura.c: 134:     }
 }
 [e $U 129  ]
-"132
-[; ;lectura.c: 132:     else if(codigoEntrada[1] == 'L') {
+"135
+[; ;lectura.c: 135:     else if(codigoEntrada[1] == 'L') {
 [e :U 126 ]
 [e $ ! == -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 76 `ui 130  ]
 {
-"137
-[; ;lectura.c: 137:     }
-}
-[e $U 131  ]
+"136
+[; ;lectura.c: 136:         char strLote[32];
+[v _strLote `uc ~T0 @X0 -> 32 `i a ]
 "138
-[; ;lectura.c: 138:     else if(codigoEntrada[1] == 'V') {
-[e :U 130 ]
-[e $ ! == -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 86 `ui 132  ]
-{
-"140
-[; ;lectura.c: 140:         GO_nDONE = 1;
-[e = _GO_nDONE -> -> 1 `i `b ]
+[; ;lectura.c: 138:         sprintf(strLote,"\nL:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+[e ( _sprintf (1 , , , (. , &U _strLote :s 7C -> _nroLote `i -> _ventasLote `i -> _montosLote `ui ]
+"139
+[; ;lectura.c: 139:         envioTX(strLote);
+[e ( _envioTX (1 &U _strLote ]
 "141
 [; ;lectura.c: 141:     }
 }
+[e $U 131  ]
+"142
+[; ;lectura.c: 142:     else if(codigoEntrada[1] == 'V') {
+[e :U 130 ]
+[e $ ! == -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 86 `ui 132  ]
+{
+"144
+[; ;lectura.c: 144:         GO_nDONE = 1;
+[e = _GO_nDONE -> -> 1 `i `b ]
+"145
+[; ;lectura.c: 145:     }
+}
 [e $U 133  ]
-"143
-[; ;lectura.c: 143:     else if( codigoEntrada[1] <= '9' && codigoEntrada[1] >= '0' && codigoEntrada[2] <= '9' && codigoEntrada[2] >= '0' ) {
+"147
+[; ;lectura.c: 147:     else if( codigoEntrada[1] <= '9' && codigoEntrada[1] >= '0' && codigoEntrada[2] <= '9' && codigoEntrada[2] >= '0' ) {
 [e :U 132 ]
 [e $ ! && && && <= -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 57 `ui >= -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui <= -> *U + &U _codigoEntrada * -> -> -> 2 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 57 `ui >= -> *U + &U _codigoEntrada * -> -> -> 2 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui 134  ]
 {
-"145
-[; ;lectura.c: 145:         unsigned short int articulo = 10*(codigoEntrada[1] - '0') + (codigoEntrada[2] - '0');
+"149
+[; ;lectura.c: 149:         unsigned short int articulo = 10*(codigoEntrada[1] - '0') + (codigoEntrada[2] - '0');
 [v _articulo `us ~T0 @X0 1 a ]
 [e = _articulo -> + * -> -> 10 `i `ui - -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui - -> *U + &U _codigoEntrada * -> -> -> 2 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui `us ]
-"147
-[; ;lectura.c: 147:         consultaPrecio(articulo);
+"151
+[; ;lectura.c: 151:         consultaPrecio(articulo);
 [e ( _consultaPrecio (1 -> _articulo `s ]
-"149
-[; ;lectura.c: 149:     }
+"153
+[; ;lectura.c: 153:     }
 }
 [e :U 134 ]
 [e :U 133 ]
 [e :U 131 ]
 [e :U 129 ]
-"153
-[; ;lectura.c: 153: }
+"157
+[; ;lectura.c: 157: }
 [e :UE 125 ]
 }
-"155
-[; ;lectura.c: 155: void lecturaComando() {
+"159
+[; ;lectura.c: 159: void lecturaComando() {
 [v _lecturaComando `(v ~T0 @X0 1 ef ]
 {
 [e :U _lecturaComando ]
 [f ]
-"156
-[; ;lectura.c: 156:     if(codigoEntrada[0] == '?') {
+"160
+[; ;lectura.c: 160:     if(codigoEntrada[0] == '?') {
 [e $ ! == -> *U + &U _codigoEntrada * -> -> -> 0 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 63 `ui 136  ]
 {
-"157
-[; ;lectura.c: 157:         lecturaConsulta();
+"161
+[; ;lectura.c: 161:         lecturaConsulta();
 [e ( _lecturaConsulta ..  ]
-"158
-[; ;lectura.c: 158:     }
+"162
+[; ;lectura.c: 162:     }
 }
 [e $U 137  ]
-"159
-[; ;lectura.c: 159:     else if(codigoEntrada[0] == '+') {
+"163
+[; ;lectura.c: 163:     else if(codigoEntrada[0] == '+') {
 [e :U 136 ]
 [e $ ! == -> *U + &U _codigoEntrada * -> -> -> 0 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 43 `ui 138  ]
 {
-"160
-[; ;lectura.c: 160:         lecturaMas();
+"164
+[; ;lectura.c: 164:         lecturaMas();
 [e ( _lecturaMas ..  ]
-"161
-[; ;lectura.c: 161:     }
+"165
+[; ;lectura.c: 165:     }
 }
 [e $U 139  ]
-"162
-[; ;lectura.c: 162:     else{
+"166
+[; ;lectura.c: 166:     else{
 [e :U 138 ]
 {
-"163
-[; ;lectura.c: 163:         lecturaMenos();
+"167
+[; ;lectura.c: 167:         lecturaMenos();
 [e ( _lecturaMenos ..  ]
-"164
-[; ;lectura.c: 164:     }
+"168
+[; ;lectura.c: 168:     }
 }
 [e :U 139 ]
 [e :U 137 ]
-"165
-[; ;lectura.c: 165: }
+"169
+[; ;lectura.c: 169: }
 [e :UE 135 ]
 }
 [p f _sprintf 8388736 ]
-[a 1C 76 58 37 100 44 78 58 37 100 44 84 58 37 100 10 0 ]
+[a 5C 10 69 115 116 97 100 111 58 32 65 99 116 105 118 111 10 0 ]
+[a 3C 10 80 114 111 100 117 99 116 111 32 110 111 32 101 110 99 111 110 116 114 97 100 111 10 0 ]
+[a 1C 10 76 58 37 100 44 78 58 37 100 44 84 58 37 100 10 0 ]
+[a 7C 10 76 58 37 100 44 78 58 37 100 44 84 58 37 100 10 0 ]
+[a 4C 10 84 80 58 32 37 100 32 80 58 32 63 37 100 44 37 100 10 0 ]
+[a 6C 10 69 115 116 97 100 111 58 32 69 110 32 101 115 112 101 114 97 10 0 ]
 [a 2C 79 99 117 114 114 105 111 32 117 110 32 101 114 114 111 114 32 101 110 32 108 97 32 105 110 116 101 114 112 114 101 116 97 99 105 111 110 46 10 0 ]

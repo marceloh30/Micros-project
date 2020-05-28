@@ -71,7 +71,7 @@ void cierreDeLote() {
     if (cierreLotePedido == 0) { //Si no se pidio cierre de lote, envio datos 
         char strLote[32];
         //ver como funciona la cadena para reservar los bytes necesarios: char *strLote=""??
-        sprintf(strLote,"L:%d,N:%d,T:%d\n",&nroLote,&ventasLote,&montosLote);
+        sprintf(strLote,"\nL:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
         envioTX(strLote);
     }
     //Aqui, cierro lote en ambos casos:
@@ -106,15 +106,18 @@ void lecturaMenos() {
 }
 
 void consultaPrecio(short int articulo) {
+    char mensaje[26];
     articulo--;
     articulo = articulo * LARGO_PRECIO;
     short int precio = (eeprom_read(articulo) << LARGO_ART) | (eeprom_read(articulo+1));
     
-    if (precio > 99 || precio < 0) {
-        //envioTx() producto no encontrado
+    if (precio > PRECIOMAX || precio < 0) {
+        sprintf(mensaje, "\nProducto no encontrado\n");
+        envioTX(mensaje);// producto no encontrado
     }
     else{
-        //envioTx() producto y precio
+        sprintf(mensaje, "\nTP: %d P: ?%d,%d\n", articulo/LARGO_PRECIO + 1, precio/10, precio%10);
+        envioTX(mensaje);// producto y precio
     }
 }
 
@@ -123,16 +126,17 @@ void lecturaConsulta() { //Recibi '?' en 1er byte: Verifico los siguientes.
     if (codigoEntrada[1] == 0x0D || codigoEntrada[1] == 0x0A) {     //Consulta Estado
         //Lei solo '?': consulta estado
         if (cuenta != 0) {
-            //envioTx("Estado: Activo");
+            envioTX("\nEstado: Activo\n");
         }
         else {
-            //envioTx("Estado: En espera"); //falta el barra n que no encontre
+            envioTX("\nEstado: En espera\n"); //falta el barra n que no encontre
         }
     }
     else if(codigoEntrada[1] == 'L') {                              //Consulta Lote
-        //char cadena[] = "Lote"; //Ver como agregar caracteres a la cadena..
-
-        //envioTx(cadena); 
+        char strLote[32];
+        //ver como funciona la cadena para reservar los bytes necesarios: char *strLote=""??
+        sprintf(strLote,"\nL:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+        envioTX(strLote);
 
     }
     else if(codigoEntrada[1] == 'V') {                            //Consulta Voltaje

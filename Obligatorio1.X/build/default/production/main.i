@@ -1829,19 +1829,6 @@ void envioTX(char *mensaje);
 # 17 "./main.h" 2
 
 # 1 "./manejoProductos.h" 1
-# 10 "./manejoProductos.h"
-unsigned int pow(unsigned int numero,unsigned int potencia);
-
-void ingresoProd(short int tp);
-
-char verificarProd(short int tp);
-
-void eliminarProd(short int tp);
-
-void agregarModificarPrecio(void);
-# 18 "./main.h" 2
-
-# 1 "./lectura.h" 1
 
 
 
@@ -1927,7 +1914,24 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 #pragma printf_check(sprintf) const
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
-# 6 "./lectura.h" 2
+# 6 "./manejoProductos.h" 2
+
+
+
+
+
+unsigned int pow(unsigned int numero,unsigned int potencia);
+
+void ingresoProd(short int tp);
+
+char verificarProd(short int tp);
+
+void eliminarProd(short int tp);
+
+void agregarModificarPrecio(void);
+# 18 "./main.h" 2
+
+# 1 "./lectura.h" 1
 # 15 "./lectura.h"
 short int EEPROM_search(unsigned char tp);
 
@@ -2009,21 +2013,24 @@ void main(void) {
 
     while(1) {
 
-        if(RE1) {
-            while(RE1);
+        if(RE0) {
+            while(RE0);
             accionesAceptar();
+        }
+        else if(RE1) {
+            while(RE1);
+            accionesDeshacer();
         }
         else if(RE2) {
             while(RE2);
-            accionesDeshacer();
-        }
-        else if(RE0) {
-            while(RE0);
             cierreLotePedido = 1;
         }
         else if(huboInt) {
             huboInt = 0;
             accionesPuertoSerial();
+            for(char i = 0; i < 10; i++){
+                codigoEntrada[i] = 0;
+            }
         }
         else if(adresult > 0) {
 
@@ -2043,8 +2050,7 @@ void main(void) {
 void __attribute__((picinterrupt(("")))) int_usart() {
 
     if(RCIF) {
-        if(RCREG != 0x0D && RCREG != 0x0A && serial < (10 -1)) {
-            codigoEntrada[serial] = RCREG;
+        if((codigoEntrada[serial] = RCREG) != 0x0D && (codigoEntrada[serial]) != 0x0A && serial < (10 -1)) {
             serial++;
         }
         else{

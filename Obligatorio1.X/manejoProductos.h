@@ -3,6 +3,7 @@
 
 //Librerias
 #include <xc.h>
+#include <stdio.h>
 #include "mostrarInicializar.h"
 #include "variablesGlobales.h"
 

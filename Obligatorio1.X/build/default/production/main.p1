@@ -45,21 +45,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 "19 ./mostrarInicializar.h
 [; ;./mostrarInicializar.h: 19: void mostrarDigitos(unsigned int num);
 [v _mostrarDigitos `(v ~T0 @X0 0 ef1`ui ]
-"2776 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2776: extern volatile __bit RE1 __attribute__((address(0x49)));
-[v _RE1 `Vb ~T0 @X0 0 e@73 ]
-"12 ./acciones.h
-[; ;./acciones.h: 12: void accionesAceptar(void);
-[v _accionesAceptar `(v ~T0 @X0 0 ef ]
-"2779 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2779: extern volatile __bit RE2 __attribute__((address(0x4A)));
-[v _RE2 `Vb ~T0 @X0 0 e@74 ]
-"14 ./acciones.h
-[; ;./acciones.h: 14: void accionesDeshacer(void);
-[v _accionesDeshacer `(v ~T0 @X0 0 ef ]
 "2773 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2773: extern volatile __bit RE0 __attribute__((address(0x48)));
 [v _RE0 `Vb ~T0 @X0 0 e@72 ]
+"12 ./acciones.h
+[; ;./acciones.h: 12: void accionesAceptar(void);
+[v _accionesAceptar `(v ~T0 @X0 0 ef ]
+"2776 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2776: extern volatile __bit RE1 __attribute__((address(0x49)));
+[v _RE1 `Vb ~T0 @X0 0 e@73 ]
+"14 ./acciones.h
+[; ;./acciones.h: 14: void accionesDeshacer(void);
+[v _accionesDeshacer `(v ~T0 @X0 0 ef ]
+"2779 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2779: extern volatile __bit RE2 __attribute__((address(0x4A)));
+[v _RE2 `Vb ~T0 @X0 0 e@74 ]
 "16 ./acciones.h
 [; ;./acciones.h: 16: void accionesPuertoSerial(void);
 [v _accionesPuertoSerial `(v ~T0 @X0 0 ef ]
@@ -419,15 +419,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 98 ]
 {
 "41
-[; ;main.c: 41:         if(RE1) {
-[e $ ! _RE1 100  ]
+[; ;main.c: 41:         if(RE0) {
+[e $ ! _RE0 100  ]
 {
 "42
-[; ;main.c: 42:             while(RE1);
+[; ;main.c: 42:             while(RE0);
 [e $U 101  ]
 [e :U 102 ]
 [e :U 101 ]
-[e $ _RE1 102  ]
+[e $ _RE0 102  ]
 [e :U 103 ]
 "43
 [; ;main.c: 43:             accionesAceptar();
@@ -437,16 +437,16 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e $U 104  ]
 "45
-[; ;main.c: 45:         else if(RE2) {
+[; ;main.c: 45:         else if(RE1) {
 [e :U 100 ]
-[e $ ! _RE2 105  ]
+[e $ ! _RE1 105  ]
 {
 "46
-[; ;main.c: 46:             while(RE2);
+[; ;main.c: 46:             while(RE1);
 [e $U 106  ]
 [e :U 107 ]
 [e :U 106 ]
-[e $ _RE2 107  ]
+[e $ _RE1 107  ]
 [e :U 108 ]
 "47
 [; ;main.c: 47:             accionesDeshacer();
@@ -456,16 +456,16 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e $U 109  ]
 "49
-[; ;main.c: 49:         else if(RE0) {
+[; ;main.c: 49:         else if(RE2) {
 [e :U 105 ]
-[e $ ! _RE0 110  ]
+[e $ ! _RE2 110  ]
 {
 "50
-[; ;main.c: 50:             while(RE0);
+[; ;main.c: 50:             while(RE2);
 [e $U 111  ]
 [e :U 112 ]
 [e :U 111 ]
-[e $ _RE0 112  ]
+[e $ _RE2 112  ]
 [e :U 113 ]
 "51
 [; ;main.c: 51:             cierreLotePedido = 1;
@@ -486,109 +486,125 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 55:             accionesPuertoSerial();
 [e ( _accionesPuertoSerial ..  ]
 "56
-[; ;main.c: 56:         }
-}
-[e $U 116  ]
-"57
-[; ;main.c: 57:         else if(adresult > 0) {
-[e :U 115 ]
-[e $ ! > -> _adresult `ui -> -> 0 `i `ui 117  ]
+[; ;main.c: 56:             for(char i = 0; i < 10; i++){
 {
-"59
-[; ;main.c: 59:             adresult = adresult*1000*5/1024;
-[e = _adresult -> / * * -> _adresult `ui -> -> 1000 `i `ui -> -> 5 `i `ui -> -> 1024 `i `ui `us ]
-"60
-[; ;main.c: 60:             char bufferMsj[16];
-[v _bufferMsj `uc ~T0 @X0 -> 16 `i a ]
-"61
-[; ;main.c: 61:             sprintf(bufferMsj,"V=%d\n",adresult%1000);
-[e ( _sprintf (1 , (. , &U _bufferMsj :s 1C % -> _adresult `ui -> -> 1000 `i `ui ]
-"62
-[; ;main.c: 62:             envioTX(bufferMsj);
-[e ( _envioTX (1 &U _bufferMsj ]
-"63
-[; ;main.c: 63:             adresult = 0;
-[e = _adresult -> -> 0 `i `us ]
-"64
-[; ;main.c: 64:         }
-}
-[e :U 117 ]
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 10 `i 116  ]
+[e $U 117  ]
 [e :U 116 ]
+{
+"57
+[; ;main.c: 57:                 codigoEntrada[i] = 0;
+[e = *U + &U _codigoEntrada * -> _i `ux -> -> # *U &U _codigoEntrada `ui `ux -> -> 0 `i `uc ]
+"58
+[; ;main.c: 58:             }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 10 `i 116  ]
+[e :U 117 ]
+}
+"59
+[; ;main.c: 59:         }
+}
+[e $U 119  ]
+"60
+[; ;main.c: 60:         else if(adresult > 0) {
+[e :U 115 ]
+[e $ ! > -> _adresult `ui -> -> 0 `i `ui 120  ]
+{
+"62
+[; ;main.c: 62:             adresult = adresult*1000*5/1024;
+[e = _adresult -> / * * -> _adresult `ui -> -> 1000 `i `ui -> -> 5 `i `ui -> -> 1024 `i `ui `us ]
+"63
+[; ;main.c: 63:             char bufferMsj[16];
+[v _bufferMsj `uc ~T0 @X0 -> 16 `i a ]
+"64
+[; ;main.c: 64:             sprintf(bufferMsj,"V=%d\n",adresult%1000);
+[e ( _sprintf (1 , (. , &U _bufferMsj :s 1C % -> _adresult `ui -> -> 1000 `i `ui ]
+"65
+[; ;main.c: 65:             envioTX(bufferMsj);
+[e ( _envioTX (1 &U _bufferMsj ]
+"66
+[; ;main.c: 66:             adresult = 0;
+[e = _adresult -> -> 0 `i `us ]
+"67
+[; ;main.c: 67:         }
+}
+[e :U 120 ]
+[e :U 119 ]
 [e :U 114 ]
 [e :U 109 ]
 [e :U 104 ]
-"67
-[; ;main.c: 67:     }
+"70
+[; ;main.c: 70:     }
 }
 [e :U 97 ]
 [e $U 98  ]
 [e :U 99 ]
-"69
-[; ;main.c: 69: }
+"72
+[; ;main.c: 72: }
 [e :UE 96 ]
 }
 [v $root$_int_usart `(v ~T0 @X0 0 e ]
-"72
-[; ;main.c: 72: void __attribute__((picinterrupt(("")))) int_usart() {
+"75
+[; ;main.c: 75: void __attribute__((picinterrupt(("")))) int_usart() {
 [v _int_usart `(v ~T2 @X0 1 ef ]
 {
 [e :U _int_usart ]
 [f ]
-"74
-[; ;main.c: 74:     if(RCIF) {
-[e $ ! _RCIF 119  ]
-{
-"75
-[; ;main.c: 75:         if(RCREG != 0x0D && RCREG != 0x0A && serial < (10 -1)) {
-[e $ ! && && != -> _RCREG `i -> 13 `i != -> _RCREG `i -> 10 `i < -> _serial `i - -> 10 `i -> 1 `i 120  ]
-{
-"76
-[; ;main.c: 76:             codigoEntrada[serial] = RCREG;
-[e = *U + &U _codigoEntrada * -> _serial `ux -> -> # *U &U _codigoEntrada `ui `ux -> _RCREG `uc ]
 "77
-[; ;main.c: 77:             serial++;
-[e ++ _serial -> -> 1 `i `uc ]
+[; ;main.c: 77:     if(RCIF) {
+[e $ ! _RCIF 122  ]
+{
 "78
-[; ;main.c: 78:         }
-}
-[e $U 121  ]
+[; ;main.c: 78:         if((codigoEntrada[serial] = RCREG) != 0x0D && (codigoEntrada[serial]) != 0x0A && serial < (10 -1)) {
+[e $ ! && && != -> = *U + &U _codigoEntrada * -> _serial `ux -> -> # *U &U _codigoEntrada `ui `ux -> _RCREG `uc `i -> 13 `i != -> *U + &U _codigoEntrada * -> _serial `ux -> -> # *U &U _codigoEntrada `ui `ux `i -> 10 `i < -> _serial `i - -> 10 `i -> 1 `i 123  ]
+{
 "79
-[; ;main.c: 79:         else{
-[e :U 120 ]
-{
+[; ;main.c: 79:             serial++;
+[e ++ _serial -> -> 1 `i `uc ]
 "80
-[; ;main.c: 80:             serial = 0;
-[e = _serial -> -> 0 `i `uc ]
+[; ;main.c: 80:         }
+}
+[e $U 124  ]
 "81
-[; ;main.c: 81:             huboInt = 1;
-[e = _huboInt -> -> 1 `i `s ]
-"82
-[; ;main.c: 82:         }
-}
-[e :U 121 ]
-"83
-[; ;main.c: 83:     }
-}
-[e $U 122  ]
-"88
-[; ;main.c: 88:     else if(ADIF) {
-[e :U 119 ]
-[e $ ! _ADIF 123  ]
-{
-"89
-[; ;main.c: 89:         ADIF = 0;
-[e = _ADIF -> -> 0 `i `b ]
-"90
-[; ;main.c: 90:         adresult = (ADRESH<<8)+ADRESL;
-[e = _adresult -> + << -> _ADRESH `i -> 8 `i -> _ADRESL `i `us ]
-"91
-[; ;main.c: 91:     }
-}
+[; ;main.c: 81:         else{
 [e :U 123 ]
+{
+"82
+[; ;main.c: 82:             serial = 0;
+[e = _serial -> -> 0 `i `uc ]
+"83
+[; ;main.c: 83:             huboInt = 1;
+[e = _huboInt -> -> 1 `i `s ]
+"84
+[; ;main.c: 84:         }
+}
+[e :U 124 ]
+"85
+[; ;main.c: 85:     }
+}
+[e $U 125  ]
+"90
+[; ;main.c: 90:     else if(ADIF) {
 [e :U 122 ]
+[e $ ! _ADIF 126  ]
+{
+"91
+[; ;main.c: 91:         ADIF = 0;
+[e = _ADIF -> -> 0 `i `b ]
+"92
+[; ;main.c: 92:         adresult = (ADRESH<<8)+ADRESL;
+[e = _adresult -> + << -> _ADRESH `i -> 8 `i -> _ADRESL `i `us ]
 "93
-[; ;main.c: 93: }
-[e :UE 118 ]
+[; ;main.c: 93:     }
+}
+[e :U 126 ]
+[e :U 125 ]
+"95
+[; ;main.c: 95: }
+[e :UE 121 ]
 }
 [p f _sprintf 8388736 ]
 [a 1C 86 61 37 100 10 0 ]

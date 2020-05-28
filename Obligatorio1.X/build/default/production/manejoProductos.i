@@ -1727,11 +1727,7 @@ extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
 # 5 "./manejoProductos.h" 2
 
-# 1 "./mostrarInicializar.h" 1
-# 13 "./mostrarInicializar.h"
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 1 3
-
-
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 1 3
 
 
 
@@ -1740,10 +1736,39 @@ extern __bank0 __bit __timeout;
 
 
 typedef unsigned size_t;
-# 6 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 2 3
+# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 2 3
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\__null.h" 1 3
-# 7 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 2 3
+# 5 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 2 3
+
+
+
+
+
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdarg.h" 1 3
+
+
+
+
+
+
+typedef void * va_list[1];
+
+#pragma intrinsic(__va_start)
+extern void * __va_start(void);
+
+#pragma intrinsic(__va_arg)
+extern void * __va_arg(void *, ...);
+# 11 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 2 3
+# 43 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 3
+struct __prbuf
+{
+ char * ptr;
+ void (* func)(char);
+};
+# 85 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\conio.h" 1 3
 
 
 
@@ -1751,6 +1776,60 @@ typedef unsigned size_t;
 
 
 
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\errno.h" 1 3
+# 29 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\errno.h" 3
+extern int errno;
+# 8 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\conio.h" 2 3
+
+
+
+
+extern void init_uart(void);
+
+extern char getch(void);
+extern char getche(void);
+extern void putch(char);
+extern void ungetch(char);
+
+extern __bit kbhit(void);
+
+
+
+extern char * cgets(char *);
+extern void cputs(const char *);
+# 85 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 2 3
+
+
+
+extern int cprintf(char *, ...);
+#pragma printf_check(cprintf)
+
+
+
+extern int _doprnt(struct __prbuf *, const register char *, register va_list);
+# 180 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 3
+#pragma printf_check(vprintf) const
+#pragma printf_check(vsprintf) const
+
+extern char * gets(char *);
+extern int puts(const char *);
+extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
+extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
+extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
+extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
+extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
+extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
+
+#pragma printf_check(printf) const
+#pragma printf_check(sprintf) const
+extern int sprintf(char *, const char *, ...);
+extern int printf(const char *, ...);
+# 6 "./manejoProductos.h" 2
+
+# 1 "./mostrarInicializar.h" 1
+# 13 "./mostrarInicializar.h"
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 1 3
+# 14 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 3
 extern void * memcpy(void *, const void *, size_t);
 extern void * memmove(void *, const void *, size_t);
 extern void * memset(void *, int, size_t);
@@ -1808,7 +1887,7 @@ void mostrarDigitos(unsigned int num);
 void bailenLeds(void);
 
 void envioTX(char *mensaje);
-# 6 "./manejoProductos.h" 2
+# 7 "./manejoProductos.h" 2
 
 
 
@@ -1884,27 +1963,20 @@ void eliminarProd(short int tp){
 
 
 void agregarModificarPrecio(){
-    unsigned char tp = 10*(codigoEntrada[0]-'0') + (codigoEntrada[1] - '0');
+    unsigned char tp = 10*(codigoEntrada[1]-'0') + (codigoEntrada[2] - '0');
     char lower_8bits;
     char upper_8bits;
+    char mensaje[10];
     tp--;
     tp = tp * 2;
     short int precio = (eeprom_read(tp) << 8) | (eeprom_read(tp+1));
 
-    if( (precio < 0 || precio > 999) ) {
-        precio = 100 * (codigoEntrada[3] - '0')+ 10 * (codigoEntrada[4] - '0') + (codigoEntrada[5] - '0');
-        lower_8bits = precio & 0xff;
-        upper_8bits = (precio >> 8) & 0xff;
-        eeprom_write(tp ,upper_8bits);
-        eeprom_write(tp + 1,lower_8bits);
 
-    }
-    else{
-        precio = 100 * (codigoEntrada[3] - '0')+ 10 * (codigoEntrada[4] - '0') + (codigoEntrada[5] - '0');
-        lower_8bits = precio & 0xff;
-        upper_8bits = (precio >> 8) & 0xff;
-        eeprom_write(tp ,upper_8bits);
-        eeprom_write(tp + 1,lower_8bits);
-
-    }
+    precio = 100 * (codigoEntrada[4] - '0')+ 10 * (codigoEntrada[5] - '0') + (codigoEntrada[6] - '0');
+    lower_8bits = precio & 0xff;
+    upper_8bits = (precio >> 8) & 0xff;
+    eeprom_write(tp ,upper_8bits);
+    eeprom_write(tp + 1,lower_8bits);
+    sprintf(mensaje, "\nP%d=%d\n", tp/2 + 1, precio);
+    envioTX(mensaje);
 }

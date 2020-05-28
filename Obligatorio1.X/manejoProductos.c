@@ -59,27 +59,20 @@ void eliminarProd(short int tp){
 
 
 void agregarModificarPrecio(){
-    unsigned char tp = 10*(codigoEntrada[0]-'0') + (codigoEntrada[1] - '0');
+    unsigned char tp = 10*(codigoEntrada[1]-'0') + (codigoEntrada[2] - '0');
     char lower_8bits;
     char upper_8bits;
+    char mensaje[10];
     tp--;
     tp = tp * LARGO_PRECIO;
     short int precio = (eeprom_read(tp) << LARGO_ART) | (eeprom_read(tp+1));
     
-    if( (precio < 0 || precio > PRECIOMAX) ) { //Si me da en un valor no conocido el precio, es una posicion con producto no registrado
-        precio = 100 * (codigoEntrada[3] - '0')+ 10 * (codigoEntrada[4] - '0') + (codigoEntrada[5]  - '0');
-        lower_8bits = precio & 0xff;
-        upper_8bits = (precio >> 8) & 0xff;
-        eeprom_write(tp ,upper_8bits);
-        eeprom_write(tp + 1,lower_8bits);
-        //EnvioTx(producto registrado)
-    }
-    else{ //Si el precio esta entre 0 y 99 el precio se actualiza
-        precio = 100 * (codigoEntrada[3] - '0')+ 10 * (codigoEntrada[4] - '0') + (codigoEntrada[5]  - '0');
-        lower_8bits = precio & 0xff;
-        upper_8bits = (precio >> 8) & 0xff;
-        eeprom_write(tp ,upper_8bits);
-        eeprom_write(tp + 1,lower_8bits);
-        //EnvioTx(producto registrado)
-    }
+    //agrego o modifico precio de producto
+    precio = 100 * (codigoEntrada[4] - '0')+ 10 * (codigoEntrada[5] - '0') + (codigoEntrada[6]  - '0');
+    lower_8bits = precio & 0xff;
+    upper_8bits = (precio >> 8) & 0xff;
+    eeprom_write(tp ,upper_8bits);
+    eeprom_write(tp + 1,lower_8bits);
+    sprintf(mensaje, "\nP%d=%d\n", tp/LARGO_PRECIO + 1, precio);
+    envioTX(mensaje);
 }
