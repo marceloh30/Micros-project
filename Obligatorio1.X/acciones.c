@@ -1,4 +1,5 @@
 #include "acciones.h"
+#include "main.h"
 
 void accionesAceptar() {
     //Vuelvo todo a su estado "Original"
@@ -8,6 +9,12 @@ void accionesAceptar() {
     auxCuenta = 0;
     for(short int i = 0; i < 13; i++){
         prodIngresados[i] = 0;
+    }
+    if(modoDebug){
+        char strLote[32];
+        //ver como funciona la cadena para reservar los bytes necesarios: char *strLote=""??
+        sprintf(strLote,"\nL:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+        envioTX(strLote);
     }
     mostrarDigitos(cuenta);
     bailenLeds();
@@ -20,6 +27,9 @@ void accionesDeshacer() {
         eliminarProd(productoIngresado); 
         mostrarDigitos(cuenta);
     }
+    if (modoDebug){
+        envioTX("Producto cancelado");
+    }
 }
 
 void accionesPuertoSerial() {
@@ -27,6 +37,11 @@ void accionesPuertoSerial() {
         lecturaComando();
     }
     else if(codigoEntrada[0] <= '9' && codigoEntrada[0] >= '0') {
+        if (modoDebug){
+            char mensaje[12];
+            sprintf(mensaje,"E:%s", codigoEntrada);
+            envioTX(mensaje);
+        }
         lecturaEtiqueta();
     }
     else{

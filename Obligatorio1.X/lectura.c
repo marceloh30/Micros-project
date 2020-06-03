@@ -28,6 +28,9 @@ void lecturaEtiqueta() {
         Aux = EEPROM_search(tp); //Guardo precio del articulo ingresado
         
         if ((cuenta + Aux) <= PRECIOMAX && Aux != -1) { //Si la cuenta no sobrepasa 99,9, la compra es correcta.
+            if(modoDebug){
+                envioTX("Producto ingresado\n");
+            }
             tp--;
             ingresoProd(tp);
             productoIngresado = tp; //Guardo el ultimo producto ingresado correctametne 
@@ -71,8 +74,11 @@ void cierreDeLote() {
     if (cierreLotePedido == 0) { //Si no se pidio cierre de lote, envio datos 
         char strLote[32];
         //ver como funciona la cadena para reservar los bytes necesarios: char *strLote=""??
-        sprintf(strLote,"\nL:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+        sprintf(strLote,"\nCierre,L:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
         envioTX(strLote);
+    }
+    else{
+        cierreLotePedido = 0;
     }
     //Aqui, cierro lote en ambos casos:
     nroLote++;
@@ -91,7 +97,7 @@ void lecturaMas() {
         modoDebug = 1;
     }
     else{
-        //envioTx(); CODIGO NO RECONOCIDO
+        envioTX("\nProducto no encontrado\n");// producto no encontrado
     }
 }
 

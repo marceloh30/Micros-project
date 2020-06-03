@@ -1758,7 +1758,7 @@ extern unsigned short int montosLote;
 extern char nroLote;
 extern char cierreLotePedido;
 extern unsigned char prodIngresados[13];
-extern unsigned short int adresult;
+extern unsigned int adresult;
 # 16 "./main.h" 2
 
 # 1 "./mostrarInicializar.h" 1
@@ -1971,9 +1971,9 @@ char codigoEntrada[10];
 unsigned char ventasLote = 0;
 unsigned short int montosLote = 0;
 char nroLote = 1;
-char cierreLotePedido;
+char cierreLotePedido = 0;
 unsigned char prodIngresados[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
-unsigned short int adresult = 0;
+unsigned int adresult = 0;
 
 
 void main(void);
@@ -1991,8 +1991,8 @@ void main(void) {
     TRISD = 0x00;
 
 
-    ADCON0 = 0b01000001;
-    ADCON1 = 0b00001110;
+    ADCON0 = 0b10000001;
+    ADCON1 = 0b10001110;
     INTCON = 0b11000000;
 
 
@@ -2023,7 +2023,15 @@ void main(void) {
         }
         else if(RE2) {
             while(RE2);
-            cierreLotePedido = 1;
+            if (cuenta == 0){
+                cierreLotePedido = 1;
+                char strLote[32];
+                sprintf(strLote,"\nCierre, L:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+                envioTX(strLote);
+                for(char i = 0; i<10; i++){
+                    _delay((unsigned long)((100)*(4000000/4000.0)));
+                }
+            }
         }
         else if(huboInt) {
             huboInt = 0;
@@ -2032,11 +2040,11 @@ void main(void) {
                 codigoEntrada[i] = 0;
             }
         }
-        else if(adresult > 0) {
+        else if (adresult > 0) {
 
-            adresult = adresult*1000*5/1024;
+            adresult = adresult*10*5/1023;
             char bufferMsj[16];
-            sprintf(bufferMsj,"V=%d\n",adresult%1000);
+            sprintf(bufferMsj,"V=%d.%dV\n", adresult/10, adresult%10);
             envioTX(bufferMsj);
             adresult = 0;
         }
@@ -2049,6 +2057,13 @@ void main(void) {
 
 void __attribute__((picinterrupt(("")))) int_usart() {
 
+    if(RCSTAbits.FERR){
+        char basura = RCREG;
+    }
+    if (RCSTAbits.OERR){
+        RCSTAbits.CREN=0;
+        RCSTAbits.CREN=1;
+    }
     if(RCIF) {
         if((codigoEntrada[serial] = RCREG) != 0x0D && (codigoEntrada[serial]) != 0x0A && serial < (10 -1)) {
             serial++;
@@ -2058,11 +2073,7 @@ void __attribute__((picinterrupt(("")))) int_usart() {
             huboInt = 1;
         }
     }
-
-
-
-
-    else if(ADIF) {
+    if(ADIF) {
         ADIF = 0;
         adresult = (ADRESH<<8)+ADRESL;
     }

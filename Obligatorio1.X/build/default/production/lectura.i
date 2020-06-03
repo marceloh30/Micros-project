@@ -1882,7 +1882,7 @@ extern unsigned short int montosLote;
 extern char nroLote;
 extern char cierreLotePedido;
 extern unsigned char prodIngresados[13];
-extern unsigned short int adresult;
+extern unsigned int adresult;
 # 14 "./mostrarInicializar.h" 2
 
 
@@ -1963,6 +1963,9 @@ void lecturaEtiqueta() {
         Aux = EEPROM_search(tp);
 
         if ((cuenta + Aux) <= 999 && Aux != -1) {
+            if(modoDebug){
+                envioTX("Producto ingresado\n");
+            }
             tp--;
             ingresoProd(tp);
             productoIngresado = tp;
@@ -2006,8 +2009,11 @@ void cierreDeLote() {
     if (cierreLotePedido == 0) {
         char strLote[32];
 
-        sprintf(strLote,"\nL:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+        sprintf(strLote,"\nCierre,L:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
         envioTX(strLote);
+    }
+    else{
+        cierreLotePedido = 0;
     }
 
     nroLote++;
@@ -2026,7 +2032,7 @@ void lecturaMas() {
         modoDebug = 1;
     }
     else{
-
+        envioTX("\nProducto no encontrado\n");
     }
 }
 

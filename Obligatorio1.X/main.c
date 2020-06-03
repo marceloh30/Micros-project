@@ -16,8 +16,8 @@ void main(void) {
     TRISD = 0x00; //Defino PORTD como salidas (Decenas)
     
     //Configuraciones iniciales
-    ADCON0 = 0b01000001; //Config para obtener lecturas de A0 a f=Fosc/8 y modulo A/D encendido
-    ADCON1 = 0b00001110; //Config para una salida/entrada analogica y las demas digitales    
+    ADCON0 = 0b10000001; //Config para obtener lecturas de A0 a f=Fosc/8 y modulo A/D encendido
+    ADCON1 = 0b10001110; //Config para una salida/entrada analogica y las demas digitales    
     INTCON = 0b11000000; //Habilito las interupciones: serial y A/D
     
     //Inicializacion modulo USART PIC
@@ -48,7 +48,15 @@ void main(void) {
         }
         else if(RE2) {  //Boton lote
             while(RE2);
-            cierreLotePedido = 1;
+            if (cuenta == 0){
+                cierreLotePedido = 1;
+                char strLote[32];
+                sprintf(strLote,"\nCierre, L:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+                envioTX(strLote);
+                for(char i = 0; i<10; i++){
+                    __delay_ms(100);//Preguntar a diego asegurar que no apague las interupciones
+                }
+            }
         }                
         else if(huboInt) {
             huboInt = 0; 
@@ -57,11 +65,11 @@ void main(void) {
                 codigoEntrada[i] = 0;
             }
         }
-        else if(adresult > 0) {
-            
-            adresult = adresult*1000*5/1024; //convierto resultado A/D en voltios (5V equivale a 1024)
+        else if (adresult > 0) {
+
+            adresult = adresult*10*5/1023; //convierto resultado A/D en voltios (5V equivale a 1024)
             char bufferMsj[16];
-            sprintf(bufferMsj,"V=%d\n",adresult%1000); //conversionVoltaje reinicia adresult y devuelve valor en Voltios
+            sprintf(bufferMsj,"V=%d.%dV\n", adresult/10, adresult%10); //conversionVoltaje reinicia adresult y devuelve valor en Voltios
             envioTX(bufferMsj); 
             adresult = 0;
         }
@@ -74,6 +82,13 @@ void main(void) {
 //rutina de atencion a la interrupcion por Rx serial
 void __interrupt() int_usart() {
     
+    if(RCSTAbits.FERR){
+        char basura = RCREG;
+    }
+    if (RCSTAbits.OERR){ // check for overrun.
+        RCSTAbits.CREN=0; // clear receiver
+        RCSTAbits.CREN=1; // re-enable
+    }
     if(RCIF) {
         if((codigoEntrada[serial] = RCREG) != 0x0D && (codigoEntrada[serial]) != 0x0A && serial < (SERIALMAX-1)) { //Verifico que no me sobrepase de los datos esperados! 
             serial++;
@@ -82,12 +97,8 @@ void __interrupt() int_usart() {
             serial = 0;
             huboInt = 1;
         }
-    }/*
-    else if(TXIF){
-        TXIE = 0;
     }
-    */
-    else if(ADIF) {       
+    if(ADIF) {       
         ADIF = 0; //Limpio flag
         adresult = (ADRESH<<8)+ADRESL;
     }

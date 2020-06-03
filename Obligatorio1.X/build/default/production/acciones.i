@@ -1888,7 +1888,7 @@ extern unsigned short int montosLote;
 extern char nroLote;
 extern char cierreLotePedido;
 extern unsigned char prodIngresados[13];
-extern unsigned short int adresult;
+extern unsigned int adresult;
 # 14 "./mostrarInicializar.h" 2
 
 
@@ -1952,6 +1952,39 @@ void accionesDeshacer(void);
 void accionesPuertoSerial(void);
 # 1 "acciones.c" 2
 
+# 1 "./main.h" 1
+
+
+
+
+#pragma config FOSC = XT
+#pragma config WDTE = OFF
+#pragma config PWRTE = OFF
+#pragma config BOREN = ON
+#pragma config LVP = OFF
+#pragma config CPD = OFF
+#pragma config WRT = OFF
+#pragma config CP = OFF
+# 23 "./main.h"
+unsigned short int cuenta, auxCuenta;
+short int huboInt = 0;
+char serial = 0;
+char modoDebug = 0;
+short int productoIngresado;
+short int numProd;
+char codigoEntrada[10];
+unsigned char ventasLote = 0;
+unsigned short int montosLote = 0;
+char nroLote = 1;
+char cierreLotePedido = 0;
+unsigned char prodIngresados[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
+unsigned int adresult = 0;
+
+
+void main(void);
+void __attribute__((picinterrupt(("")))) int_usart(void);
+# 2 "acciones.c" 2
+
 
 void accionesAceptar() {
 
@@ -1961,6 +1994,12 @@ void accionesAceptar() {
     auxCuenta = 0;
     for(short int i = 0; i < 13; i++){
         prodIngresados[i] = 0;
+    }
+    if(modoDebug){
+        char strLote[32];
+
+        sprintf(strLote,"\nL:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+        envioTX(strLote);
     }
     mostrarDigitos(cuenta);
     bailenLeds();
@@ -1973,6 +2012,9 @@ void accionesDeshacer() {
         eliminarProd(productoIngresado);
         mostrarDigitos(cuenta);
     }
+    if (modoDebug){
+        envioTX("Producto cancelado");
+    }
 }
 
 void accionesPuertoSerial() {
@@ -1980,6 +2022,11 @@ void accionesPuertoSerial() {
         lecturaComando();
     }
     else if(codigoEntrada[0] <= '9' && codigoEntrada[0] >= '0') {
+        if (modoDebug){
+            char mensaje[12];
+            sprintf(mensaje,"E:%s", codigoEntrada);
+            envioTX(mensaje);
+        }
         lecturaEtiqueta();
     }
     else{

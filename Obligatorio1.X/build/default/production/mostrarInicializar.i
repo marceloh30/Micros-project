@@ -1791,7 +1791,7 @@ extern unsigned short int montosLote;
 extern char nroLote;
 extern char cierreLotePedido;
 extern unsigned char prodIngresados[13];
-extern unsigned short int adresult;
+extern unsigned int adresult;
 # 14 "./mostrarInicializar.h" 2
 
 

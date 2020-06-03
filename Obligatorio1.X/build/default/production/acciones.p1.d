@@ -4,4 +4,5 @@ acciones.h  \
 lectura.h  \
 manejoProductos.h  \
 mostrarInicializar.h  \
-variablesGlobales.h 
+variablesGlobales.h  \
+main.h 

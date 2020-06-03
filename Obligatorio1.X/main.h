@@ -30,9 +30,9 @@ char codigoEntrada[10];
 unsigned char ventasLote = 0;
 unsigned short int montosLote = 0;
 char nroLote = 1;
-char cierreLotePedido;
+char cierreLotePedido = 0;
 unsigned char prodIngresados[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0}; //99 lugares para 99 productos (1 en c/bit)
-unsigned short int adresult = 0;
+unsigned int adresult = 0;
 
 //Firmas:
 void main(void);
