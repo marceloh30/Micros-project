@@ -1,4 +1,4 @@
-# 1 "main.c"
+# 1 "acciones.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,26 +6,9 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "main.c" 2
+# 1 "acciones.c" 2
+# 1 "./acciones.h" 1
 
-
-
-
-
-
-# 1 "./main.h" 1
-
-
-
-
-#pragma config FOSC = XT
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config BOREN = ON
-#pragma config LVP = OFF
-#pragma config CPD = OFF
-#pragma config WRT = OFF
-#pragma config CP = OFF
 
 
 
@@ -1742,30 +1725,15 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 15 "./main.h" 2
+# 5 "./acciones.h" 2
 
-# 1 "./variablesGlobales.h" 1
-# 22 "./variablesGlobales.h"
-extern unsigned short int cuenta, auxCuenta;
-extern short int huboInt;
-extern char serial;
-extern char modoDebug;
-extern short int productoIngresado;
-extern short int numProd;
-extern char codigoEntrada[10];
-extern unsigned char ventasLote;
-extern unsigned short int montosLote;
-extern char nroLote;
-extern char cierreLotePedido;
-extern unsigned char prodIngresados[13];
-extern unsigned int adresult;
-# 16 "./main.h" 2
-
-# 1 "./mostrarInicializar.h" 1
-# 13 "./mostrarInicializar.h"
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 1 3
+# 1 "./lectura.h" 1
 
 
+
+
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 1 3
 
 
 
@@ -1774,68 +1742,16 @@ extern unsigned int adresult;
 
 
 typedef unsigned size_t;
-# 6 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 2 3
+# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 2 3
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\__null.h" 1 3
-# 7 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 2 3
+# 5 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 2 3
 
 
 
 
 
 
-
-extern void * memcpy(void *, const void *, size_t);
-extern void * memmove(void *, const void *, size_t);
-extern void * memset(void *, int, size_t);
-# 36 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 3
-extern char * strcat(char *, const char *);
-extern char * strcpy(char *, const char *);
-extern char * strncat(char *, const char *, size_t);
-extern char * strncpy(char *, const char *, size_t);
-extern char * strdup(const char *);
-extern char * strtok(char *, const char *);
-
-
-extern int memcmp(const void *, const void *, size_t);
-extern int strcmp(const char *, const char *);
-extern int stricmp(const char *, const char *);
-extern int strncmp(const char *, const char *, size_t);
-extern int strnicmp(const char *, const char *, size_t);
-extern void * memchr(const void *, int, size_t);
-extern size_t strcspn(const char *, const char *);
-extern char * strpbrk(const char *, const char *);
-extern size_t strspn(const char *, const char *);
-extern char * strstr(const char *, const char *);
-extern char * stristr(const char *, const char *);
-extern char * strerror(int);
-extern size_t strlen(const char *);
-extern char * strchr(const char *, int);
-extern char * strichr(const char *, int);
-extern char * strrchr(const char *, int);
-extern char * strrichr(const char *, int);
-# 13 "./mostrarInicializar.h" 2
-
-
-
-
-
-
-void mostrarDigitos(unsigned int num);
-
-void bailenLeds(void);
-
-void envioTX(char *mensaje);
-# 17 "./main.h" 2
-
-# 1 "./manejoProductos.h" 1
-
-
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 1 3
-# 11 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdio.h" 3
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdarg.h" 1 3
 
 
@@ -1914,8 +1830,77 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 #pragma printf_check(sprintf) const
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
-# 6 "./manejoProductos.h" 2
+# 6 "./lectura.h" 2
 
+# 1 "./manejoProductos.h" 1
+
+
+
+
+
+
+# 1 "./mostrarInicializar.h" 1
+# 13 "./mostrarInicializar.h"
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 1 3
+# 14 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 3
+extern void * memcpy(void *, const void *, size_t);
+extern void * memmove(void *, const void *, size_t);
+extern void * memset(void *, int, size_t);
+# 36 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\string.h" 3
+extern char * strcat(char *, const char *);
+extern char * strcpy(char *, const char *);
+extern char * strncat(char *, const char *, size_t);
+extern char * strncpy(char *, const char *, size_t);
+extern char * strdup(const char *);
+extern char * strtok(char *, const char *);
+
+
+extern int memcmp(const void *, const void *, size_t);
+extern int strcmp(const char *, const char *);
+extern int stricmp(const char *, const char *);
+extern int strncmp(const char *, const char *, size_t);
+extern int strnicmp(const char *, const char *, size_t);
+extern void * memchr(const void *, int, size_t);
+extern size_t strcspn(const char *, const char *);
+extern char * strpbrk(const char *, const char *);
+extern size_t strspn(const char *, const char *);
+extern char * strstr(const char *, const char *);
+extern char * stristr(const char *, const char *);
+extern char * strerror(int);
+extern size_t strlen(const char *);
+extern char * strchr(const char *, int);
+extern char * strichr(const char *, int);
+extern char * strrchr(const char *, int);
+extern char * strrichr(const char *, int);
+# 13 "./mostrarInicializar.h" 2
+
+# 1 "./variablesGlobales.h" 1
+# 22 "./variablesGlobales.h"
+extern unsigned short int cuenta, auxCuenta;
+extern short int huboInt;
+extern char serial;
+extern char modoDebug;
+extern short int productoIngresado;
+extern short int numProd;
+extern char codigoEntrada[10];
+extern unsigned char ventasLote;
+extern unsigned short int montosLote;
+extern char nroLote;
+extern char cierreLotePedido;
+extern unsigned char prodIngresados[13];
+extern unsigned int adresult;
+# 14 "./mostrarInicializar.h" 2
+
+
+
+
+
+void mostrarDigitos(unsigned int num);
+
+void bailenLeds(void);
+
+void envioTX(char *mensaje);
+# 7 "./manejoProductos.h" 2
 
 
 
@@ -1929,10 +1914,15 @@ char verificarProd(short int tp);
 void eliminarProd(short int tp);
 
 void agregarModificarPrecio(void);
-# 18 "./main.h" 2
+# 7 "./lectura.h" 2
 
-# 1 "./lectura.h" 1
-# 15 "./lectura.h"
+
+
+
+
+
+
+
 short int EEPROM_search(unsigned char tp);
 
 void lecturaEtiqueta(void);
@@ -1948,19 +1938,34 @@ void lecturaMenos(void);
 void lecturaConsulta(void);
 
 void lecturaComando(void);
-# 19 "./main.h" 2
+# 6 "./acciones.h" 2
 
-# 1 "./acciones.h" 1
-# 12 "./acciones.h"
+
+
+
+
+
 void accionesAceptar(void);
 
 void accionesDeshacer(void);
 
 void accionesPuertoSerial(void);
-# 20 "./main.h" 2
+# 1 "acciones.c" 2
+
+# 1 "./main.h" 1
 
 
 
+
+#pragma config FOSC = XT
+#pragma config WDTE = OFF
+#pragma config PWRTE = OFF
+#pragma config BOREN = ON
+#pragma config LVP = OFF
+#pragma config CPD = OFF
+#pragma config WRT = OFF
+#pragma config CP = OFF
+# 23 "./main.h"
 unsigned short int cuenta, auxCuenta;
 short int huboInt = 0;
 char serial = 0;
@@ -1978,104 +1983,57 @@ unsigned int adresult = 0;
 
 void main(void);
 void __attribute__((picinterrupt(("")))) int_usart(void);
-# 7 "main.c" 2
+# 2 "acciones.c" 2
 
 
-void main(void) {
+void accionesAceptar() {
 
-
-
-    TRISA = 0x01;
-    TRISE = 0x07;
-    TRISB = 0x00;
-    TRISD = 0x00;
-
-
-    ADCON0 = 0b10000001;
-    ADCON1 = 0b10001110;
-    INTCON = 0b11000000;
-
-
-    TRISC = 0b10000000;
-    TXSTA = 0b00100110;
-    RCSTA = 0b10010000;
-    SPBRG = 25;
-
-
-    ADIF = 0;
-    ADIE = 1;
-    RCIE = 1;
+    ventasLote++;
+    montosLote+=cuenta;
     cuenta = 0;
     auxCuenta = 0;
-    mostrarDigitos(cuenta);
-
-
-
-    while(1) {
-
-        if(RE0) {
-            while(RE0);
-            accionesAceptar();
-        }
-        else if(RE1) {
-            while(RE1);
-            accionesDeshacer();
-        }
-        else if(RE2) {
-            while(RE2);
-            if (cuenta == 0){
-                cierreLotePedido = 1;
-                char strLote[32];
-                sprintf(strLote,"\nCierre, L:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
-                envioTX(strLote);
-                for(char i = 0; i<10; i++){
-                    _delay((unsigned long)((100)*(4000000/4000.0)));
-                }
-            }
-        }
-        else if(huboInt) {
-            huboInt = 0;
-            accionesPuertoSerial();
-            for(char i = 0; i < 10; i++){
-                codigoEntrada[i] = 0;
-            }
-        }
-        else if (adresult > 0) {
-
-            adresult = adresult*10*5/1023;
-            char bufferMsj[16];
-            sprintf(bufferMsj,"V=%d.%dV\n", adresult/10, adresult%10);
-            envioTX(bufferMsj);
-            adresult = 0;
-        }
-
-
+    for(short int i = 0; i < 13; i++){
+        prodIngresados[i] = 0;
     }
+    if(modoDebug){
+        char strLote[32];
 
+        sprintf(strLote,"\nL:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+        envioTX(strLote);
+    }
+    mostrarDigitos(cuenta);
+    bailenLeds();
 }
 
+void accionesDeshacer() {
+    if (cuenta != auxCuenta) {
+        cuenta = auxCuenta;
 
-void __attribute__((picinterrupt(("")))) int_usart() {
+        eliminarProd(productoIngresado);
+        mostrarDigitos(cuenta);
+    }
+    if (modoDebug){
+        envioTX("Producto cancelado");
+    }
+}
 
-    if(RCSTAbits.FERR){
-        char basura = RCREG;
+void accionesPuertoSerial() {
+    if ((codigoEntrada[0] == '?') || (codigoEntrada[0] == '+') || (codigoEntrada[0] == '-')) {
+        lecturaComando();
     }
-    if (RCSTAbits.OERR){
-        RCSTAbits.CREN=0;
-        RCSTAbits.CREN=1;
-    }
-    if(RCIF) {
-        if((codigoEntrada[serial] = RCREG) != 0x0D && (codigoEntrada[serial]) != 0x0A && serial < (10 -1)) {
-            serial++;
+    else if(codigoEntrada[0] <= '9' && codigoEntrada[0] >= '0') {
+        if (modoDebug){
+            char mensaje[12];
+            sprintf(mensaje,"E:%s", codigoEntrada);
+            envioTX(mensaje);
         }
-        else{
-            serial = 0;
-            huboInt = 1;
-        }
+        lecturaEtiqueta();
     }
-    if(ADIF) {
-        ADIF = 0;
-        adresult = (ADRESH<<8)+ADRESL;
+    else{
+
+        RA5 = 1;
+        _delay((unsigned long)((1000)*(4000000/4000.0)));
+        RA5 = 0;
     }
 
 }
