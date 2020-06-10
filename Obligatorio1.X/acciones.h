@@ -15,5 +15,7 @@ void accionesDeshacer(void);
 
 void accionesPuertoSerial(void);
 
+void escrituraDeCierre(void);
+
 #endif	/* ACCIONES_H */
 

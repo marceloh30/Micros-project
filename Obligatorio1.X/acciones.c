@@ -53,3 +53,15 @@ void accionesPuertoSerial() {
         
 }
 
+void escrituraDeCierre(){
+    
+    char lower_8bits;
+    char upper_8bits;
+    lower_8bits = montosLote & 0xff;
+    upper_8bits = (montosLote >> 8) & 0xff;
+    eeprom_write(252, upper_8bits);
+    eeprom_write(253, lower_8bits);
+    eeprom_write(254, ventasLote);
+    eeprom_write(255, nroLote);
+}
+

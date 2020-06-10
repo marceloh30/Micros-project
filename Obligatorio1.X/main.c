@@ -5,21 +5,27 @@
  * Created on 15 de abril de 2020, 06:59 PM
  */
 #include "main.h"
-
 void main(void) {
     
-
+    
+    if(eeprom_read(255) != 0xFF){
+        montosLote = (eeprom_read(252) << LARGO_ART) | (eeprom_read(253));
+        ventasLote = eeprom_read(254);
+        nroLote = eeprom_read(255);
+    }
+    
     //Seteo de entradas y salidas
     TRISA = 0x01; //una entrada analogica RA0-AN0(Voltaje) y el resto salidas digitales
     TRISE = 0x07; //Defino PORTE con RE1(Aceptar),RE2(deshacer) y RE0(lote) como entradas (botones
     TRISB = 0x00; //Defino PORTC como salidas (Unidades)
     TRISD = 0x00; //Defino PORTD como salidas (Decenas)
-    
+    T1CON = 0b00010001;
+    TMR1 = 15536;
     //Configuraciones iniciales
-    ADCON0 = 0b10000001; //Config para obtener lecturas de A0 a f=Fosc/8 y modulo A/D encendido
+    ADCON0 = 0b01000001; //Config para obtener lecturas de A0 a f=Fosc/8 y modulo A/D encendido
     ADCON1 = 0b10001110; //Config para una salida/entrada analogica y las demas digitales    
     INTCON = 0b11000000; //Habilito las interupciones: serial y A/D
-    
+
     //Inicializacion modulo USART PIC
     TRISC = 0b10000000; //pin RX como una entrada digital pin TX como una salida digital
     TXSTA = 0b00100110; //8bits, transmision habilitada, asincrono, alta velocidad
@@ -28,8 +34,9 @@ void main(void) {
     
     //Otras Inicializaciones
     ADIF = 0;
-    ADIE = 1;            //Habilito int. A/D
-    RCIE = 1;            //habilita interrupcion por recepcion.     
+    PIE1bits.ADIE = 1;            //Habilito int. A/D
+    PIE1bits.RCIE = 1;            //habilita interrupcion por recepcion.
+    PIE1bits.TMR1IE = 0;
     cuenta = 0;
     auxCuenta = 0;
     mostrarDigitos(cuenta);
@@ -66,15 +73,18 @@ void main(void) {
             }
         }
         else if (adresult > 0) {
-
-            adresult = adresult*10*5/1023; //convierto resultado A/D en voltios (5V equivale a 1024)
-            char bufferMsj[16];
-            sprintf(bufferMsj,"V=%d.%dV\n", adresult/10, adresult%10); //conversionVoltaje reinicia adresult y devuelve valor en Voltios
-            envioTX(bufferMsj); 
-            adresult = 0;
+            adresult = 2*(adresult*10*5/1023); //convierto resultado A/D en voltios (5V equivale a 1024)
+            if(adresult < 75){ //Como esta multiplicado por 10 comparo contra 7.5V
+                escrituraDeCierre();
+            }
+            if(pedidoVoltaje){
+                char bufferMsj[16];
+                sprintf(bufferMsj,"V=%d.%dV\n", adresult/10, adresult%10); //conversionVoltaje reinicia adresult y devuelve valor en Voltios
+                envioTX(bufferMsj); 
+                adresult = 0;
+                pedidoVoltaje = 0;
+            }
         }
-        
-        
     }
     
 }
@@ -82,6 +92,11 @@ void main(void) {
 //rutina de atencion a la interrupcion por Rx serial
 void __interrupt() int_usart() {
     
+    if(TMR1IF){
+        GO_nDONE = 1; // Inicializo convercion para ver si tengo que guardar en EEPROM
+        TMR1 = 15536;
+        TMR1IF = 0; 
+    }
     if(RCSTAbits.FERR){
         char basura = RCREG;
     }

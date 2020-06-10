@@ -5,10 +5,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "28
 [; ;./variablesGlobales.h: 28: extern char codigoEntrada[10];
 [v _codigoEntrada `uc ~T0 @X0 -> 0 `x e ]
-"115 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\eeprom_routines.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\eeprom_routines.h: 115: extern unsigned char eeprom_read(unsigned char addr);
-[v _eeprom_read `(uc ~T0 @X0 0 ef1`uc ]
-"114
+"114 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\eeprom_routines.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\eeprom_routines.h: 114: extern void eeprom_write(unsigned char addr, unsigned char value);
 [v _eeprom_write `(v ~T0 @X0 0 ef2`uc`uc ]
 "194 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\stdio.h
@@ -413,48 +410,67 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _tp `uc ~T0 @X0 1 a ]
 [e = _tp -> + * -> -> 10 `i `ui - -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui - -> *U + &U _codigoEntrada * -> -> -> 2 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui `uc ]
 "63
-[; ;manejoProductos.c: 63:     char lower_8bits;
-[v _lower_8bits `uc ~T0 @X0 1 a ]
+[; ;manejoProductos.c: 63:     if (tp > 0){
+[e $ ! > -> _tp `i -> 0 `i 120  ]
+{
 "64
-[; ;manejoProductos.c: 64:     char upper_8bits;
-[v _upper_8bits `uc ~T0 @X0 1 a ]
+[; ;manejoProductos.c: 64:         char lower_8bits;
+[v _lower_8bits `uc ~T0 @X0 1 a ]
 "65
-[; ;manejoProductos.c: 65:     char mensaje[10];
-[v _mensaje `uc ~T0 @X0 -> 10 `i a ]
+[; ;manejoProductos.c: 65:         char upper_8bits;
+[v _upper_8bits `uc ~T0 @X0 1 a ]
 "66
-[; ;manejoProductos.c: 66:     tp--;
-[e -- _tp -> -> 1 `i `uc ]
+[; ;manejoProductos.c: 66:         char mensaje[10];
+[v _mensaje `uc ~T0 @X0 -> 10 `i a ]
 "67
-[; ;manejoProductos.c: 67:     tp = tp * 2;
-[e = _tp -> * -> _tp `i -> 2 `i `uc ]
+[; ;manejoProductos.c: 67:         tp--;
+[e -- _tp -> -> 1 `i `uc ]
 "68
-[; ;manejoProductos.c: 68:     short int precio = (eeprom_read(tp) << 8) | (eeprom_read(tp+1));
+[; ;manejoProductos.c: 68:         tp = tp * 2;
+[e = _tp -> * -> _tp `i -> 2 `i `uc ]
+"69
+[; ;manejoProductos.c: 69:         short int precio;
 [v _precio `s ~T0 @X0 1 a ]
-[e = _precio -> | << -> ( _eeprom_read (1 _tp `i -> 8 `i -> ( _eeprom_read (1 -> + -> _tp `i -> 1 `i `uc `i `s ]
-"71
-[; ;manejoProductos.c: 71:     precio = 100 * (codigoEntrada[4] - '0')+ 10 * (codigoEntrada[5] - '0') + (codigoEntrada[6] - '0');
-[e = _precio -> + + * -> -> 100 `i `ui - -> *U + &U _codigoEntrada * -> -> -> 4 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui * -> -> 10 `i `ui - -> *U + &U _codigoEntrada * -> -> -> 5 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui - -> *U + &U _codigoEntrada * -> -> -> 6 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui `s ]
 "72
-[; ;manejoProductos.c: 72:     lower_8bits = precio & 0xff;
-[e = _lower_8bits -> & -> _precio `i -> 255 `i `uc ]
+[; ;manejoProductos.c: 72:         precio = 100 * (codigoEntrada[4] - '0')+ 10 * (codigoEntrada[5] - '0') + (codigoEntrada[6] - '0');
+[e = _precio -> + + * -> -> 100 `i `ui - -> *U + &U _codigoEntrada * -> -> -> 4 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui * -> -> 10 `i `ui - -> *U + &U _codigoEntrada * -> -> -> 5 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui - -> *U + &U _codigoEntrada * -> -> -> 6 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui `s ]
 "73
-[; ;manejoProductos.c: 73:     upper_8bits = (precio >> 8) & 0xff;
-[e = _upper_8bits -> & >> -> _precio `i -> 8 `i -> 255 `i `uc ]
+[; ;manejoProductos.c: 73:         lower_8bits = precio & 0xff;
+[e = _lower_8bits -> & -> _precio `i -> 255 `i `uc ]
 "74
-[; ;manejoProductos.c: 74:     eeprom_write(tp ,upper_8bits);
-[e ( _eeprom_write (2 , _tp -> _upper_8bits `uc ]
+[; ;manejoProductos.c: 74:         upper_8bits = (precio >> 8) & 0xff;
+[e = _upper_8bits -> & >> -> _precio `i -> 8 `i -> 255 `i `uc ]
 "75
-[; ;manejoProductos.c: 75:     eeprom_write(tp + 1,lower_8bits);
-[e ( _eeprom_write (2 , -> + -> _tp `i -> 1 `i `uc -> _lower_8bits `uc ]
+[; ;manejoProductos.c: 75:         eeprom_write(tp ,upper_8bits);
+[e ( _eeprom_write (2 , _tp -> _upper_8bits `uc ]
 "76
-[; ;manejoProductos.c: 76:     sprintf(mensaje, "\nP%d=%d\n", tp/2 + 1, precio);
-[e ( _sprintf (1 , , (. , &U _mensaje :s 1C + / -> _tp `i -> 2 `i -> 1 `i -> _precio `i ]
+[; ;manejoProductos.c: 76:         eeprom_write(tp + 1,lower_8bits);
+[e ( _eeprom_write (2 , -> + -> _tp `i -> 1 `i `uc -> _lower_8bits `uc ]
 "77
-[; ;manejoProductos.c: 77:     envioTX(mensaje);
-[e ( _envioTX (1 &U _mensaje ]
+[; ;manejoProductos.c: 77:         sprintf(mensaje, "\nP%d=%d\n", tp/2 + 1, precio);
+[e ( _sprintf (1 , , (. , &U _mensaje :s 1C + / -> _tp `i -> 2 `i -> 1 `i -> _precio `i ]
 "78
-[; ;manejoProductos.c: 78: }
+[; ;manejoProductos.c: 78:         envioTX(mensaje);
+[e ( _envioTX (1 &U _mensaje ]
+"79
+[; ;manejoProductos.c: 79:     }
+}
+[e $U 121  ]
+"80
+[; ;manejoProductos.c: 80:     else{
+[e :U 120 ]
+{
+"81
+[; ;manejoProductos.c: 81:         envioTX("No hay producto 00");
+[e ( _envioTX (1 :s 2C ]
+"82
+[; ;manejoProductos.c: 82:     }
+}
+[e :U 121 ]
+"83
+[; ;manejoProductos.c: 83: }
 [e :UE 119 ]
 }
 [p f _sprintf 8388736 ]
+[a 2C 78 111 32 104 97 121 32 112 114 111 100 117 99 116 111 32 48 48 0 ]
 [a 1C 10 80 37 100 61 37 100 10 0 ]

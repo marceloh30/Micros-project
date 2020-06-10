@@ -45,7 +45,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "194 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\c90\stdio.h
 [v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
 "31 ./variablesGlobales.h
-[; ;./variablesGlobales.h: 31: extern char nroLote;
+[; ;./variablesGlobales.h: 31: extern unsigned char nroLote;
 [v _nroLote `uc ~T0 @X0 0 e ]
 "29
 [; ;./variablesGlobales.h: 29: extern unsigned char ventasLote;
@@ -59,6 +59,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2578 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2578: extern volatile __bit GO_nDONE __attribute__((address(0xFA)));
 [v _GO_nDONE `Vb ~T0 @X0 0 e@250 ]
+"35 ./variablesGlobales.h
+[; ;./variablesGlobales.h: 35: extern unsigned char pedidoVoltaje;
+[v _pedidoVoltaje `uc ~T0 @X0 0 e ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -539,7 +542,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 119 ]
 {
 "100
-[; ;lectura.c: 100:         envioTX("\nProducto no encontrado\n");
+[; ;lectura.c: 100:         envioTX("Ocurrio un error en la interpretacion.\n");
 [e ( _envioTX (1 :s 3C ]
 "101
 [; ;lectura.c: 101:     }
@@ -594,188 +597,223 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;lectura.c: 115:     char mensaje[26];
 [v _mensaje `uc ~T0 @X0 -> 26 `i a ]
 "116
-[; ;lectura.c: 116:     articulo--;
-[e -- _articulo -> -> 1 `i `s ]
+[; ;lectura.c: 116:     if(articulo > 0){
+[e $ ! > -> _articulo `i -> 0 `i 125  ]
+{
 "117
-[; ;lectura.c: 117:     articulo = articulo * 2;
-[e = _articulo -> * -> _articulo `i -> 2 `i `s ]
+[; ;lectura.c: 117:         articulo--;
+[e -- _articulo -> -> 1 `i `s ]
 "118
-[; ;lectura.c: 118:     short int precio = (eeprom_read(articulo) << 8) | (eeprom_read(articulo+1));
+[; ;lectura.c: 118:         articulo = articulo * 2;
+[e = _articulo -> * -> _articulo `i -> 2 `i `s ]
+"119
+[; ;lectura.c: 119:         short int precio = (eeprom_read(articulo) << 8) | (eeprom_read(articulo+1));
 [v _precio `s ~T0 @X0 1 a ]
 [e = _precio -> | << -> ( _eeprom_read (1 -> _articulo `uc `i -> 8 `i -> ( _eeprom_read (1 -> + -> _articulo `i -> 1 `i `uc `i `s ]
-"120
-[; ;lectura.c: 120:     if (precio > 999 || precio < 0) {
-[e $ ! || > -> _precio `i -> 999 `i < -> _precio `i -> 0 `i 125  ]
-{
 "121
-[; ;lectura.c: 121:         sprintf(mensaje, "\nProducto no encontrado\n");
-[e ( _sprintf (1 , &U _mensaje :s 5C ]
+[; ;lectura.c: 121:         if (precio > 999 || precio < 0) {
+[e $ ! || > -> _precio `i -> 999 `i < -> _precio `i -> 0 `i 126  ]
+{
 "122
-[; ;lectura.c: 122:         envioTX(mensaje);
-[e ( _envioTX (1 &U _mensaje ]
+[; ;lectura.c: 122:             sprintf(mensaje, "\nProducto no encontrado\n");
+[e ( _sprintf (1 , &U _mensaje :s 5C ]
 "123
-[; ;lectura.c: 123:     }
-}
-[e $U 126  ]
+[; ;lectura.c: 123:             envioTX(mensaje);
+[e ( _envioTX (1 &U _mensaje ]
 "124
-[; ;lectura.c: 124:     else{
+[; ;lectura.c: 124:         }
+}
+[e $U 127  ]
+"125
+[; ;lectura.c: 125:         else{
+[e :U 126 ]
+{
+"126
+[; ;lectura.c: 126:             sprintf(mensaje, "TP: %d P: %d,%d Euros", articulo/2 + 1, precio/10, precio%10);
+[e ( _sprintf (1 , , , (. , &U _mensaje :s 6C + / -> _articulo `i -> 2 `i -> 1 `i / -> _precio `i -> 10 `i % -> _precio `i -> 10 `i ]
+"127
+[; ;lectura.c: 127:             envioTX(mensaje);
+[e ( _envioTX (1 &U _mensaje ]
+"128
+[; ;lectura.c: 128:         }
+}
+[e :U 127 ]
+"129
+[; ;lectura.c: 129:     }
+}
+[e $U 128  ]
+"130
+[; ;lectura.c: 130:     else{
 [e :U 125 ]
 {
-"125
-[; ;lectura.c: 125:         sprintf(mensaje, "\nTP: %d P: ?%d,%d\n", articulo/2 + 1, precio/10, precio%10);
-[e ( _sprintf (1 , , , (. , &U _mensaje :s 6C + / -> _articulo `i -> 2 `i -> 1 `i / -> _precio `i -> 10 `i % -> _precio `i -> 10 `i ]
-"126
-[; ;lectura.c: 126:         envioTX(mensaje);
-[e ( _envioTX (1 &U _mensaje ]
-"127
-[; ;lectura.c: 127:     }
+"131
+[; ;lectura.c: 131:         envioTX("No existe producto 00");
+[e ( _envioTX (1 :s 7C ]
+"132
+[; ;lectura.c: 132:     }
 }
-[e :U 126 ]
-"128
-[; ;lectura.c: 128: }
+[e :U 128 ]
+"134
+[; ;lectura.c: 134: }
 [e :UE 124 ]
 }
-"130
-[; ;lectura.c: 130: void lecturaConsulta() {
+"136
+[; ;lectura.c: 136: void lecturaConsulta() {
 [v _lecturaConsulta `(v ~T0 @X0 1 ef ]
 {
 [e :U _lecturaConsulta ]
 [f ]
-"132
-[; ;lectura.c: 132:     if (codigoEntrada[1] == 0x0D || codigoEntrada[1] == 0x0A) {
-[e $ ! || == -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `i -> 13 `i == -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `i -> 10 `i 128  ]
-{
-"134
-[; ;lectura.c: 134:         if (cuenta != 0) {
-[e $ ! != -> _cuenta `ui -> -> 0 `i `ui 129  ]
-{
-"135
-[; ;lectura.c: 135:             envioTX("\nEstado: Activo\n");
-[e ( _envioTX (1 :s 7C ]
-"136
-[; ;lectura.c: 136:         }
-}
-[e $U 130  ]
-"137
-[; ;lectura.c: 137:         else {
-[e :U 129 ]
-{
 "138
-[; ;lectura.c: 138:             envioTX("\nEstado: En espera\n");
-[e ( _envioTX (1 :s 8C ]
-"139
-[; ;lectura.c: 139:         }
-}
-[e :U 130 ]
-"140
-[; ;lectura.c: 140:     }
-}
-[e $U 131  ]
-"141
-[; ;lectura.c: 141:     else if(codigoEntrada[1] == 'L') {
-[e :U 128 ]
-[e $ ! == -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 76 `ui 132  ]
+[; ;lectura.c: 138:     if (codigoEntrada[1] == 0x0D || codigoEntrada[1] == 0x0A) {
+[e $ ! || == -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `i -> 13 `i == -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `i -> 10 `i 130  ]
 {
+"140
+[; ;lectura.c: 140:         if (cuenta != 0) {
+[e $ ! != -> _cuenta `ui -> -> 0 `i `ui 131  ]
+{
+"141
+[; ;lectura.c: 141:             envioTX("\nEstado: Activo\n");
+[e ( _envioTX (1 :s 8C ]
 "142
-[; ;lectura.c: 142:         char strLote[32];
-[v _strLote `uc ~T0 @X0 -> 32 `i a ]
+[; ;lectura.c: 142:         }
+}
+[e $U 132  ]
+"143
+[; ;lectura.c: 143:         else {
+[e :U 131 ]
+{
 "144
-[; ;lectura.c: 144:         sprintf(strLote,"\nL:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
-[e ( _sprintf (1 , , , (. , &U _strLote :s 9C -> _nroLote `i -> _ventasLote `i -> _montosLote `ui ]
+[; ;lectura.c: 144:             envioTX("\nEstado: En espera\n");
+[e ( _envioTX (1 :s 9C ]
 "145
-[; ;lectura.c: 145:         envioTX(strLote);
-[e ( _envioTX (1 &U _strLote ]
-"147
-[; ;lectura.c: 147:     }
+[; ;lectura.c: 145:         }
+}
+[e :U 132 ]
+"146
+[; ;lectura.c: 146:     }
 }
 [e $U 133  ]
-"148
-[; ;lectura.c: 148:     else if(codigoEntrada[1] == 'V') {
-[e :U 132 ]
-[e $ ! == -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 86 `ui 134  ]
+"147
+[; ;lectura.c: 147:     else if(codigoEntrada[1] == 'L') {
+[e :U 130 ]
+[e $ ! == -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 76 `ui 134  ]
 {
+"148
+[; ;lectura.c: 148:         char strLote[32];
+[v _strLote `uc ~T0 @X0 -> 32 `i a ]
 "150
-[; ;lectura.c: 150:         GO_nDONE = 1;
-[e = _GO_nDONE -> -> 1 `i `b ]
+[; ;lectura.c: 150:         sprintf(strLote,"\nL:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+[e ( _sprintf (1 , , , (. , &U _strLote :s 10C -> _nroLote `i -> _ventasLote `i -> _montosLote `ui ]
 "151
-[; ;lectura.c: 151:     }
+[; ;lectura.c: 151:         envioTX(strLote);
+[e ( _envioTX (1 &U _strLote ]
+"153
+[; ;lectura.c: 153:     }
 }
 [e $U 135  ]
-"153
-[; ;lectura.c: 153:     else if( codigoEntrada[1] <= '9' && codigoEntrada[1] >= '0' && codigoEntrada[2] <= '9' && codigoEntrada[2] >= '0' ) {
+"154
+[; ;lectura.c: 154:     else if(codigoEntrada[1] == 'V') {
 [e :U 134 ]
-[e $ ! && && && <= -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 57 `ui >= -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui <= -> *U + &U _codigoEntrada * -> -> -> 2 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 57 `ui >= -> *U + &U _codigoEntrada * -> -> -> 2 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui 136  ]
+[e $ ! == -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 86 `ui 136  ]
 {
-"155
-[; ;lectura.c: 155:         unsigned short int articulo = 10*(codigoEntrada[1] - '0') + (codigoEntrada[2] - '0');
+"156
+[; ;lectura.c: 156:         GO_nDONE = 1;
+[e = _GO_nDONE -> -> 1 `i `b ]
+"157
+[; ;lectura.c: 157:         pedidoVoltaje = 1;
+[e = _pedidoVoltaje -> -> 1 `i `uc ]
+"158
+[; ;lectura.c: 158:     }
+}
+[e $U 137  ]
+"160
+[; ;lectura.c: 160:     else if( codigoEntrada[1] <= '9' && codigoEntrada[1] >= '0' && codigoEntrada[2] <= '9' && codigoEntrada[2] >= '0' ) {
+[e :U 136 ]
+[e $ ! && && && <= -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 57 `ui >= -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui <= -> *U + &U _codigoEntrada * -> -> -> 2 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 57 `ui >= -> *U + &U _codigoEntrada * -> -> -> 2 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui 138  ]
+{
+"162
+[; ;lectura.c: 162:         unsigned short int articulo = 10*(codigoEntrada[1] - '0') + (codigoEntrada[2] - '0');
 [v _articulo `us ~T0 @X0 1 a ]
 [e = _articulo -> + * -> -> 10 `i `ui - -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui - -> *U + &U _codigoEntrada * -> -> -> 2 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui `us ]
-"157
-[; ;lectura.c: 157:         consultaPrecio(articulo);
+"164
+[; ;lectura.c: 164:         consultaPrecio(articulo);
 [e ( _consultaPrecio (1 -> _articulo `s ]
-"159
-[; ;lectura.c: 159:     }
+"166
+[; ;lectura.c: 166:     }
 }
-[e :U 136 ]
+[e $U 139  ]
+"167
+[; ;lectura.c: 167:     else {
+[e :U 138 ]
+{
+"168
+[; ;lectura.c: 168:         envioTX("Ocurrio un error en la interpretacion.\n");
+[e ( _envioTX (1 :s 11C ]
+"169
+[; ;lectura.c: 169:     }
+}
+[e :U 139 ]
+[e :U 137 ]
 [e :U 135 ]
 [e :U 133 ]
-[e :U 131 ]
-"163
-[; ;lectura.c: 163: }
-[e :UE 127 ]
+"172
+[; ;lectura.c: 172: }
+[e :UE 129 ]
 }
-"165
-[; ;lectura.c: 165: void lecturaComando() {
+"174
+[; ;lectura.c: 174: void lecturaComando() {
 [v _lecturaComando `(v ~T0 @X0 1 ef ]
 {
 [e :U _lecturaComando ]
 [f ]
-"166
-[; ;lectura.c: 166:     if(codigoEntrada[0] == '?') {
-[e $ ! == -> *U + &U _codigoEntrada * -> -> -> 0 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 63 `ui 138  ]
-{
-"167
-[; ;lectura.c: 167:         lecturaConsulta();
-[e ( _lecturaConsulta ..  ]
-"168
-[; ;lectura.c: 168:     }
-}
-[e $U 139  ]
-"169
-[; ;lectura.c: 169:     else if(codigoEntrada[0] == '+') {
-[e :U 138 ]
-[e $ ! == -> *U + &U _codigoEntrada * -> -> -> 0 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 43 `ui 140  ]
-{
-"170
-[; ;lectura.c: 170:         lecturaMas();
-[e ( _lecturaMas ..  ]
-"171
-[; ;lectura.c: 171:     }
-}
-[e $U 141  ]
-"172
-[; ;lectura.c: 172:     else{
-[e :U 140 ]
-{
-"173
-[; ;lectura.c: 173:         lecturaMenos();
-[e ( _lecturaMenos ..  ]
-"174
-[; ;lectura.c: 174:     }
-}
-[e :U 141 ]
-[e :U 139 ]
 "175
-[; ;lectura.c: 175: }
-[e :UE 137 ]
+[; ;lectura.c: 175:     if(codigoEntrada[0] == '?') {
+[e $ ! == -> *U + &U _codigoEntrada * -> -> -> 0 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 63 `ui 141  ]
+{
+"176
+[; ;lectura.c: 176:         lecturaConsulta();
+[e ( _lecturaConsulta ..  ]
+"177
+[; ;lectura.c: 177:     }
+}
+[e $U 142  ]
+"178
+[; ;lectura.c: 178:     else if(codigoEntrada[0] == '+') {
+[e :U 141 ]
+[e $ ! == -> *U + &U _codigoEntrada * -> -> -> 0 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 43 `ui 143  ]
+{
+"179
+[; ;lectura.c: 179:         lecturaMas();
+[e ( _lecturaMas ..  ]
+"180
+[; ;lectura.c: 180:     }
+}
+[e $U 144  ]
+"181
+[; ;lectura.c: 181:     else{
+[e :U 143 ]
+{
+"182
+[; ;lectura.c: 182:         lecturaMenos();
+[e ( _lecturaMenos ..  ]
+"183
+[; ;lectura.c: 183:     }
+}
+[e :U 144 ]
+[e :U 142 ]
+"184
+[; ;lectura.c: 184: }
+[e :UE 140 ]
 }
 [p f _sprintf 8388736 ]
-[a 7C 10 69 115 116 97 100 111 58 32 65 99 116 105 118 111 10 0 ]
+[a 6C 84 80 58 32 37 100 32 80 58 32 37 100 44 37 100 32 69 117 114 111 115 0 ]
+[a 7C 78 111 32 101 120 105 115 116 101 32 112 114 111 100 117 99 116 111 32 48 48 0 ]
+[a 8C 10 69 115 116 97 100 111 58 32 65 99 116 105 118 111 10 0 ]
 [a 1C 80 114 111 100 117 99 116 111 32 105 110 103 114 101 115 97 100 111 10 0 ]
-[a 3C 10 80 114 111 100 117 99 116 111 32 110 111 32 101 110 99 111 110 116 114 97 100 111 10 0 ]
 [a 5C 10 80 114 111 100 117 99 116 111 32 110 111 32 101 110 99 111 110 116 114 97 100 111 10 0 ]
 [a 2C 10 67 105 101 114 114 101 44 76 58 37 100 44 78 58 37 100 44 84 58 37 100 10 0 ]
-[a 9C 10 76 58 37 100 44 78 58 37 100 44 84 58 37 100 10 0 ]
-[a 6C 10 84 80 58 32 37 100 32 80 58 32 63 37 100 44 37 100 10 0 ]
-[a 8C 10 69 115 116 97 100 111 58 32 69 110 32 101 115 112 101 114 97 10 0 ]
+[a 10C 10 76 58 37 100 44 78 58 37 100 44 84 58 37 100 10 0 ]
+[a 9C 10 69 115 116 97 100 111 58 32 69 110 32 101 115 112 101 114 97 10 0 ]
+[a 3C 79 99 117 114 114 105 111 32 117 110 32 101 114 114 111 114 32 101 110 32 108 97 32 105 110 116 101 114 112 114 101 116 97 99 105 111 110 46 10 0 ]
 [a 4C 79 99 117 114 114 105 111 32 117 110 32 101 114 114 111 114 32 101 110 32 108 97 32 105 110 116 101 114 112 114 101 116 97 99 105 111 110 46 10 0 ]
+[a 11C 79 99 117 114 114 105 111 32 117 110 32 101 114 114 111 114 32 101 110 32 108 97 32 105 110 116 101 114 112 114 101 116 97 99 105 111 110 46 10 0 ]

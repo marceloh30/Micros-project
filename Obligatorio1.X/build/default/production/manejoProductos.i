@@ -1872,10 +1872,11 @@ extern short int numProd;
 extern char codigoEntrada[10];
 extern unsigned char ventasLote;
 extern unsigned short int montosLote;
-extern char nroLote;
+extern unsigned char nroLote;
 extern char cierreLotePedido;
 extern unsigned char prodIngresados[13];
 extern unsigned int adresult;
+extern unsigned char pedidoVoltaje;
 # 14 "./mostrarInicializar.h" 2
 
 
@@ -1964,19 +1965,24 @@ void eliminarProd(short int tp){
 
 void agregarModificarPrecio(){
     unsigned char tp = 10*(codigoEntrada[1]-'0') + (codigoEntrada[2] - '0');
-    char lower_8bits;
-    char upper_8bits;
-    char mensaje[10];
-    tp--;
-    tp = tp * 2;
-    short int precio = (eeprom_read(tp) << 8) | (eeprom_read(tp+1));
+    if (tp > 0){
+        char lower_8bits;
+        char upper_8bits;
+        char mensaje[10];
+        tp--;
+        tp = tp * 2;
+        short int precio;
 
 
-    precio = 100 * (codigoEntrada[4] - '0')+ 10 * (codigoEntrada[5] - '0') + (codigoEntrada[6] - '0');
-    lower_8bits = precio & 0xff;
-    upper_8bits = (precio >> 8) & 0xff;
-    eeprom_write(tp ,upper_8bits);
-    eeprom_write(tp + 1,lower_8bits);
-    sprintf(mensaje, "\nP%d=%d\n", tp/2 + 1, precio);
-    envioTX(mensaje);
+        precio = 100 * (codigoEntrada[4] - '0')+ 10 * (codigoEntrada[5] - '0') + (codigoEntrada[6] - '0');
+        lower_8bits = precio & 0xff;
+        upper_8bits = (precio >> 8) & 0xff;
+        eeprom_write(tp ,upper_8bits);
+        eeprom_write(tp + 1,lower_8bits);
+        sprintf(mensaje, "\nP%d=%d\n", tp/2 + 1, precio);
+        envioTX(mensaje);
+    }
+    else{
+        envioTX("No hay producto 00");
+    }
 }

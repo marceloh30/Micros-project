@@ -26,6 +26,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "92 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic.h
 [v __delay `JF842 ~T0 @X0 0 e ]
 [p i __delay ]
+"114 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\eeprom_routines.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\eeprom_routines.h: 114: extern void eeprom_write(unsigned char addr, unsigned char value);
+[v _eeprom_write `(v ~T0 @X0 0 ef2`uc`uc ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -266,7 +269,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> -> 0 `i `us
 ]
 "32
-[; ;./main.h: 32: char nroLote = 1;
+[; ;./main.h: 32: unsigned char nroLote = 1;
 [v _nroLote `uc ~T0 @X0 1 e ]
 [i _nroLote
 -> -> 1 `i `uc
@@ -302,6 +305,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _adresult `ui ~T0 @X0 1 e ]
 [i _adresult
 -> -> 0 `i `ui
+]
+"36
+[; ;./main.h: 36: unsigned char pedidoVoltaje = 0;
+[v _pedidoVoltaje `uc ~T0 @X0 1 e ]
+[i _pedidoVoltaje
+-> -> 0 `i `uc
 ]
 "4 acciones.c
 [; ;acciones.c: 4: void accionesAceptar() {
@@ -472,6 +481,40 @@ Version 4.0 HI-TECH Software Intermediate Code
 "54
 [; ;acciones.c: 54: }
 [e :UE 104 ]
+}
+"56
+[; ;acciones.c: 56: void escrituraDeCierre(){
+[v _escrituraDeCierre `(v ~T0 @X0 1 ef ]
+{
+[e :U _escrituraDeCierre ]
+[f ]
+"58
+[; ;acciones.c: 58:     char lower_8bits;
+[v _lower_8bits `uc ~T0 @X0 1 a ]
+"59
+[; ;acciones.c: 59:     char upper_8bits;
+[v _upper_8bits `uc ~T0 @X0 1 a ]
+"60
+[; ;acciones.c: 60:     lower_8bits = montosLote & 0xff;
+[e = _lower_8bits -> & -> _montosLote `ui -> -> 255 `i `ui `uc ]
+"61
+[; ;acciones.c: 61:     upper_8bits = (montosLote >> 8) & 0xff;
+[e = _upper_8bits -> & >> -> _montosLote `ui -> 8 `i -> -> 255 `i `ui `uc ]
+"62
+[; ;acciones.c: 62:     eeprom_write(252, upper_8bits);
+[e ( _eeprom_write (2 , -> -> 252 `i `uc -> _upper_8bits `uc ]
+"63
+[; ;acciones.c: 63:     eeprom_write(253, lower_8bits);
+[e ( _eeprom_write (2 , -> -> 253 `i `uc -> _lower_8bits `uc ]
+"64
+[; ;acciones.c: 64:     eeprom_write(254, ventasLote);
+[e ( _eeprom_write (2 , -> -> 254 `i `uc _ventasLote ]
+"65
+[; ;acciones.c: 65:     eeprom_write(255, nroLote);
+[e ( _eeprom_write (2 , -> -> 255 `i `uc _nroLote ]
+"66
+[; ;acciones.c: 66: }
+[e :UE 110 ]
 }
 [p f _sprintf 8650880 ]
 [a 3C 69 58 37 115 0 ]

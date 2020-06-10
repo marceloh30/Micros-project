@@ -202,9 +202,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2363: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
 "4 mostrarInicializar.c
-[; ;mostrarInicializar.c: 4: static unsigned const char BMS[] = {
-[v _BMS `Cuc ~T0 @X0 -> 10 `i s ]
-[i _BMS
+[; ;mostrarInicializar.c: 4: static unsigned const char BS[] = {
+[v _BS `Cuc ~T0 @X0 -> 10 `i s ]
+[i _BS
 :U ..
 -> -> 0 `i `uc
 -> -> 16 `i `uc
@@ -226,14 +226,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _num `ui ~T0 @X0 1 r1 ]
 [f ]
 "19
-[; ;mostrarInicializar.c: 19:     PORTB = BMS[num/100];
-[e = _PORTB *U + &U _BMS * -> / _num -> -> 100 `i `ui `ux -> -> # *U &U _BMS `ui `ux ]
+[; ;mostrarInicializar.c: 19:     PORTB = BS[num/100];
+[e = _PORTB *U + &U _BS * -> / _num -> -> 100 `i `ui `ux -> -> # *U &U _BS `ui `ux ]
 "20
 [; ;mostrarInicializar.c: 20:     PORTB = PORTB | ((num%100)/10);
 [e = _PORTB -> | -> _PORTB `ui / % _num -> -> 100 `i `ui -> -> 10 `i `ui `uc ]
 "21
-[; ;mostrarInicializar.c: 21:     PORTD = BMS[(num%100)%10];
-[e = _PORTD *U + &U _BMS * -> % % _num -> -> 100 `i `ui -> -> 10 `i `ui `ux -> -> # *U &U _BMS `ui `ux ]
+[; ;mostrarInicializar.c: 21:     PORTD = BS[(num%100)%10];
+[e = _PORTD *U + &U _BS * -> % % _num -> -> 100 `i `ui -> -> 10 `i `ui `ux -> -> # *U &U _BS `ui `ux ]
 "23
 [; ;mostrarInicializar.c: 23: }
 [e :UE 95 ]
@@ -348,6 +348,16 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ != -> _transmitir `i -> 0 `i 102  ]
 [e :U 103 ]
 "53
-[; ;mostrarInicializar.c: 53: }
+[; ;mostrarInicializar.c: 53:     TXREG = 13;
+[e = _TXREG -> -> 13 `i `uc ]
+"54
+[; ;mostrarInicializar.c: 54:     while(TXIF == 0);
+[e $U 109  ]
+[e :U 110 ]
+[e :U 109 ]
+[e $ == -> _TXIF `i -> 0 `i 110  ]
+[e :U 111 ]
+"56
+[; ;mostrarInicializar.c: 56: }
 [e :UE 100 ]
 }

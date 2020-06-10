@@ -1885,10 +1885,11 @@ extern short int numProd;
 extern char codigoEntrada[10];
 extern unsigned char ventasLote;
 extern unsigned short int montosLote;
-extern char nroLote;
+extern unsigned char nroLote;
 extern char cierreLotePedido;
 extern unsigned char prodIngresados[13];
 extern unsigned int adresult;
+extern unsigned char pedidoVoltaje;
 # 14 "./mostrarInicializar.h" 2
 
 
@@ -1950,6 +1951,8 @@ void accionesAceptar(void);
 void accionesDeshacer(void);
 
 void accionesPuertoSerial(void);
+
+void escrituraDeCierre(void);
 # 1 "acciones.c" 2
 
 # 1 "./main.h" 1
@@ -1975,10 +1978,11 @@ short int numProd;
 char codigoEntrada[10];
 unsigned char ventasLote = 0;
 unsigned short int montosLote = 0;
-char nroLote = 1;
+unsigned char nroLote = 1;
 char cierreLotePedido = 0;
 unsigned char prodIngresados[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
 unsigned int adresult = 0;
+unsigned char pedidoVoltaje = 0;
 
 
 void main(void);
@@ -2036,4 +2040,16 @@ void accionesPuertoSerial() {
         RA5 = 0;
     }
 
+}
+
+void escrituraDeCierre(){
+
+    char lower_8bits;
+    char upper_8bits;
+    lower_8bits = montosLote & 0xff;
+    upper_8bits = (montosLote >> 8) & 0xff;
+    eeprom_write(252, upper_8bits);
+    eeprom_write(253, lower_8bits);
+    eeprom_write(254, ventasLote);
+    eeprom_write(255, nroLote);
 }

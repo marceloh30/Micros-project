@@ -1879,10 +1879,11 @@ extern short int numProd;
 extern char codigoEntrada[10];
 extern unsigned char ventasLote;
 extern unsigned short int montosLote;
-extern char nroLote;
+extern unsigned char nroLote;
 extern char cierreLotePedido;
 extern unsigned char prodIngresados[13];
 extern unsigned int adresult;
+extern unsigned char pedidoVoltaje;
 # 14 "./mostrarInicializar.h" 2
 
 
@@ -2032,7 +2033,7 @@ void lecturaMas() {
         modoDebug = 1;
     }
     else{
-        envioTX("\nProducto no encontrado\n");
+        envioTX("Ocurrio un error en la interpretacion.\n");
     }
 }
 
@@ -2048,18 +2049,24 @@ void lecturaMenos() {
 
 void consultaPrecio(short int articulo) {
     char mensaje[26];
-    articulo--;
-    articulo = articulo * 2;
-    short int precio = (eeprom_read(articulo) << 8) | (eeprom_read(articulo+1));
+    if(articulo > 0){
+        articulo--;
+        articulo = articulo * 2;
+        short int precio = (eeprom_read(articulo) << 8) | (eeprom_read(articulo+1));
 
-    if (precio > 999 || precio < 0) {
-        sprintf(mensaje, "\nProducto no encontrado\n");
-        envioTX(mensaje);
+        if (precio > 999 || precio < 0) {
+            sprintf(mensaje, "\nProducto no encontrado\n");
+            envioTX(mensaje);
+        }
+        else{
+            sprintf(mensaje, "TP: %d P: %d,%d Euros", articulo/2 + 1, precio/10, precio%10);
+            envioTX(mensaje);
+        }
     }
     else{
-        sprintf(mensaje, "\nTP: %d P: ?%d,%d\n", articulo/2 + 1, precio/10, precio%10);
-        envioTX(mensaje);
+        envioTX("No existe producto 00");
     }
+
 }
 
 void lecturaConsulta() {
@@ -2083,6 +2090,7 @@ void lecturaConsulta() {
     else if(codigoEntrada[1] == 'V') {
 
         GO_nDONE = 1;
+        pedidoVoltaje = 1;
     }
 
     else if( codigoEntrada[1] <= '9' && codigoEntrada[1] >= '0' && codigoEntrada[2] <= '9' && codigoEntrada[2] >= '0' ) {
@@ -2092,7 +2100,9 @@ void lecturaConsulta() {
         consultaPrecio(articulo);
 
     }
-
+    else {
+        envioTX("Ocurrio un error en la interpretacion.\n");
+    }
 
 
 }

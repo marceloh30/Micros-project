@@ -1788,10 +1788,11 @@ extern short int numProd;
 extern char codigoEntrada[10];
 extern unsigned char ventasLote;
 extern unsigned short int montosLote;
-extern char nroLote;
+extern unsigned char nroLote;
 extern char cierreLotePedido;
 extern unsigned char prodIngresados[13];
 extern unsigned int adresult;
+extern unsigned char pedidoVoltaje;
 # 14 "./mostrarInicializar.h" 2
 
 
@@ -1807,7 +1808,7 @@ void envioTX(char *mensaje);
 
 
 
-static unsigned const char BMS[] = {
+static unsigned const char BS[] = {
     0b00000000,
     0b00010000,
     0b00100000,
@@ -1822,9 +1823,9 @@ static unsigned const char BMS[] = {
 
 void mostrarDigitos(unsigned int num) {
 
-    PORTB = BMS[num/100];
+    PORTB = BS[num/100];
     PORTB = PORTB | ((num%100)/10);
-    PORTD = BMS[(num%100)%10];
+    PORTD = BS[(num%100)%10];
 
 }
 
@@ -1855,5 +1856,8 @@ void envioTX(char *mensaje){
         }
   while(TXIF==0);
  }
+
+    TXREG = 13;
+    while(TXIF == 0);
 
 }

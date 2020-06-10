@@ -60,19 +60,24 @@ void eliminarProd(short int tp){
 
 void agregarModificarPrecio(){
     unsigned char tp = 10*(codigoEntrada[1]-'0') + (codigoEntrada[2] - '0');
-    char lower_8bits;
-    char upper_8bits;
-    char mensaje[10];
-    tp--;
-    tp = tp * LARGO_PRECIO;
-    short int precio = (eeprom_read(tp) << LARGO_ART) | (eeprom_read(tp+1));
-    
-    //agrego o modifico precio de producto
-    precio = 100 * (codigoEntrada[4] - '0')+ 10 * (codigoEntrada[5] - '0') + (codigoEntrada[6]  - '0');
-    lower_8bits = precio & 0xff;
-    upper_8bits = (precio >> 8) & 0xff;
-    eeprom_write(tp ,upper_8bits);
-    eeprom_write(tp + 1,lower_8bits);
-    sprintf(mensaje, "\nP%d=%d\n", tp/LARGO_PRECIO + 1, precio);
-    envioTX(mensaje);
+    if (tp > 0){
+        char lower_8bits;
+        char upper_8bits;
+        char mensaje[10];
+        tp--;
+        tp = tp * LARGO_PRECIO;
+        short int precio;
+
+        //agrego o modifico precio de producto
+        precio = 100 * (codigoEntrada[4] - '0')+ 10 * (codigoEntrada[5] - '0') + (codigoEntrada[6]  - '0');
+        lower_8bits = precio & 0xff;
+        upper_8bits = (precio >> 8) & 0xff;
+        eeprom_write(tp ,upper_8bits);
+        eeprom_write(tp + 1,lower_8bits);
+        sprintf(mensaje, "\nP%d=%d\n", tp/LARGO_PRECIO + 1, precio);
+        envioTX(mensaje);
+    }
+    else{
+        envioTX("No hay producto 00");
+    }
 }

@@ -1,7 +1,7 @@
 #include "mostrarInicializar.h"
 
 //Variables
-static unsigned const char BMS[] = {
+static unsigned const char BS[] = {//BS=Binario a conversor bcd a 7 segementos 
     0b00000000,
     0b00010000,
     0b00100000,
@@ -16,9 +16,9 @@ static unsigned const char BMS[] = {
 
 void mostrarDigitos(unsigned int num) { //num debe ser el numero entero (por ej. 99,1 --> 99)
     //Verifico si puedo redondear el numero 
-    PORTB = BMS[num/100]; // Tomo las decenas
+    PORTB = BS[num/100]; // Tomo las decenas
     PORTB = PORTB | ((num%100)/10); // Tomo la unidad
-    PORTD = BMS[(num%100)%10]; // Tomo la decima
+    PORTD = BS[(num%100)%10]; // Tomo la decima
      
 }
 
@@ -49,5 +49,8 @@ void envioTX(char *mensaje){
         }
 		while(TXIF==0); //me quedo esperando a que termine el byte
 	}
+    //Envio salto de linea
+    TXREG = 13; 
+    while(TXIF == 0);
 
 }

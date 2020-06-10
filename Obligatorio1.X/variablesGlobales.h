@@ -28,9 +28,10 @@ extern short int numProd;
 extern char codigoEntrada[SERIALMAX];
 extern unsigned char ventasLote;
 extern unsigned short int montosLote;
-extern char nroLote;
+extern unsigned char nroLote;
 extern char cierreLotePedido;
 extern unsigned char prodIngresados[13]; //13 bytes para guardar datos/uso de 99 prod. en 99 bits!
 extern unsigned int adresult;
+extern unsigned char pedidoVoltaje;
 #endif	/* VARIABLESGLOBALES_H */
 

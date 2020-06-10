@@ -97,7 +97,7 @@ void lecturaMas() {
         modoDebug = 1;
     }
     else{
-        envioTX("\nProducto no encontrado\n");// producto no encontrado
+        envioTX(strError);// producto no encontrado
     }
 }
 
@@ -113,18 +113,24 @@ void lecturaMenos() {
 
 void consultaPrecio(short int articulo) {
     char mensaje[26];
-    articulo--;
-    articulo = articulo * LARGO_PRECIO;
-    short int precio = (eeprom_read(articulo) << LARGO_ART) | (eeprom_read(articulo+1));
-    
-    if (precio > PRECIOMAX || precio < 0) {
-        sprintf(mensaje, "\nProducto no encontrado\n");
-        envioTX(mensaje);// producto no encontrado
+    if(articulo > 0){
+        articulo--;
+        articulo = articulo * LARGO_PRECIO;
+        short int precio = (eeprom_read(articulo) << LARGO_ART) | (eeprom_read(articulo+1));
+
+        if (precio > PRECIOMAX || precio < 0) {
+            sprintf(mensaje, "\nProducto no encontrado\n");
+            envioTX(mensaje);// producto no encontrado
+        }
+        else{
+            sprintf(mensaje, "TP: %d P: %d,%d Euros", articulo/LARGO_PRECIO + 1, precio/10, precio%10);
+            envioTX(mensaje);// producto y precio
+        }
     }
     else{
-        sprintf(mensaje, "\nTP: %d P: ?%d,%d\n", articulo/LARGO_PRECIO + 1, precio/10, precio%10);
-        envioTX(mensaje);// producto y precio
+        envioTX("No existe producto 00");
     }
+    
 }
 
 void lecturaConsulta() { //Recibi '?' en 1er byte: Verifico los siguientes.
@@ -148,6 +154,7 @@ void lecturaConsulta() { //Recibi '?' en 1er byte: Verifico los siguientes.
     else if(codigoEntrada[1] == 'V') {                            //Consulta Voltaje
         //Inicializo conversion:
         GO_nDONE = 1;
+        pedidoVoltaje = 1;
     }
     
     else if( codigoEntrada[1] <= '9' && codigoEntrada[1] >= '0' && codigoEntrada[2] <= '9' && codigoEntrada[2] >= '0' ) { //Consulta Precio
@@ -157,7 +164,9 @@ void lecturaConsulta() { //Recibi '?' en 1er byte: Verifico los siguientes.
         consultaPrecio(articulo);
 
     }
-    //else envioTx("Error de comando!");                              //Consulta erronea
+    else {
+        envioTX(strError);//Consulta erronea
+    }                              
 
  
 }

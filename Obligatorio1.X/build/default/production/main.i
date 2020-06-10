@@ -1755,10 +1755,11 @@ extern short int numProd;
 extern char codigoEntrada[10];
 extern unsigned char ventasLote;
 extern unsigned short int montosLote;
-extern char nroLote;
+extern unsigned char nroLote;
 extern char cierreLotePedido;
 extern unsigned char prodIngresados[13];
 extern unsigned int adresult;
+extern unsigned char pedidoVoltaje;
 # 16 "./main.h" 2
 
 # 1 "./mostrarInicializar.h" 1
@@ -1957,6 +1958,8 @@ void accionesAceptar(void);
 void accionesDeshacer(void);
 
 void accionesPuertoSerial(void);
+
+void escrituraDeCierre(void);
 # 20 "./main.h" 2
 
 
@@ -1970,28 +1973,35 @@ short int numProd;
 char codigoEntrada[10];
 unsigned char ventasLote = 0;
 unsigned short int montosLote = 0;
-char nroLote = 1;
+unsigned char nroLote = 1;
 char cierreLotePedido = 0;
 unsigned char prodIngresados[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
 unsigned int adresult = 0;
+unsigned char pedidoVoltaje = 0;
 
 
 void main(void);
 void __attribute__((picinterrupt(("")))) int_usart(void);
 # 7 "main.c" 2
 
-
 void main(void) {
 
+
+    if(eeprom_read(255) != 0xFF){
+        montosLote = (eeprom_read(252) << 8) | (eeprom_read(253));
+        ventasLote = eeprom_read(254);
+        nroLote = eeprom_read(255);
+    }
 
 
     TRISA = 0x01;
     TRISE = 0x07;
     TRISB = 0x00;
     TRISD = 0x00;
+    T1CON = 0b00010001;
+    TMR1 = 15536;
 
-
-    ADCON0 = 0b10000001;
+    ADCON0 = 0b01000001;
     ADCON1 = 0b10001110;
     INTCON = 0b11000000;
 
@@ -2003,8 +2013,9 @@ void main(void) {
 
 
     ADIF = 0;
-    ADIE = 1;
-    RCIE = 1;
+    PIE1bits.ADIE = 1;
+    PIE1bits.RCIE = 1;
+    PIE1bits.TMR1IE = 0;
     cuenta = 0;
     auxCuenta = 0;
     mostrarDigitos(cuenta);
@@ -2041,15 +2052,18 @@ void main(void) {
             }
         }
         else if (adresult > 0) {
-
-            adresult = adresult*10*5/1023;
-            char bufferMsj[16];
-            sprintf(bufferMsj,"V=%d.%dV\n", adresult/10, adresult%10);
-            envioTX(bufferMsj);
-            adresult = 0;
+            adresult = 2*(adresult*10*5/1023);
+            if(adresult < 75){
+                escrituraDeCierre();
+            }
+            if(pedidoVoltaje){
+                char bufferMsj[16];
+                sprintf(bufferMsj,"V=%d.%dV\n", adresult/10, adresult%10);
+                envioTX(bufferMsj);
+                adresult = 0;
+                pedidoVoltaje = 0;
+            }
         }
-
-
     }
 
 }
@@ -2057,6 +2071,11 @@ void main(void) {
 
 void __attribute__((picinterrupt(("")))) int_usart() {
 
+    if(TMR1IF){
+        GO_nDONE = 1;
+        TMR1 = 15536;
+        TMR1IF = 0;
+    }
     if(RCSTAbits.FERR){
         char basura = RCREG;
     }
