@@ -1952,13 +1952,19 @@ short int EEPROM_search(unsigned char tp) {
 
 void lecturaEtiqueta() {
     short int Aux = 0;
+    unsigned char letra = 0;
 
 
     for (int i = 0; i < 8; i++ ) {
-        Aux += (codigoEntrada[i] - '0');
+        if(codigoEntrada[i] >= '0' && codigoEntrada[i] <= '9'){
+            Aux += (codigoEntrada[i] - '0');
+        }
+        else{
+            letra = 1;
+        }
     }
 
-    if ( (Aux%10) == (codigoEntrada[8] - '0')) {
+    if ( ((Aux%10) == (codigoEntrada[8] - '0')) && letra == 0) {
 
         unsigned char tp = 10*(codigoEntrada[0]-'0') + (codigoEntrada[1] - '0');
         Aux = EEPROM_search(tp);
@@ -1998,7 +2004,7 @@ void lecturaEtiqueta() {
 char verificacionEntrada() {
     char i = 1;
     char ret = 0;
-    while( (((codigoEntrada[i] <= '9') && (codigoEntrada[i] >= '0')) || codigoEntrada[i] == '=') && (i<=6) ) {
+    while( (((codigoEntrada[i] <= '9') && (codigoEntrada[i] >= '0')) || (codigoEntrada[i] == '=' && i == 3)) && (i<=6) ) {
         i++;
         ret++;
     }
@@ -2089,7 +2095,6 @@ void lecturaConsulta() {
     }
     else if(codigoEntrada[1] == 'V') {
 
-        GO_nDONE = 1;
         pedidoVoltaje = 1;
     }
 

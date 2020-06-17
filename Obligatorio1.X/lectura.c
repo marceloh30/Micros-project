@@ -16,13 +16,19 @@ short int EEPROM_search(unsigned char tp) {
 
 void lecturaEtiqueta() {
     short int Aux = 0;
+    unsigned char letra = 0;
     
     //Realizo suma para checksum
     for (int i = 0; i < LARGO_ART; i++ ) {
-        Aux += (codigoEntrada[i] - '0');
+        if(codigoEntrada[i] >= '0' && codigoEntrada[i] <= '9'){
+            Aux += (codigoEntrada[i] - '0');
+        }
+        else{
+            letra = 1;
+        }
     }
     //Verifico checksum
-    if ( (Aux%10) == (codigoEntrada[8] - '0')) {         
+    if ( ((Aux%10) == (codigoEntrada[8] - '0')) && letra == 0) {         
         //Busco precio en eeprom, sumo y muestro nueva cuenta (utilizo Aux para utilizar la menor memoria posible)
         unsigned char tp = 10*(codigoEntrada[0]-'0') + (codigoEntrada[1] - '0'); //tomo el valor de tipo de producto
         Aux = EEPROM_search(tp); //Guardo precio del articulo ingresado
@@ -62,7 +68,7 @@ void lecturaEtiqueta() {
 char verificacionEntrada() { //Verifico el ingreso para modificar o agregar precio (luego del '+' espero:"NN=NNN", N=Numero del 0 al 9)
     char i = 1;
     char ret = 0;
-    while( (((codigoEntrada[i] <= '9') && (codigoEntrada[i] >= '0')) || codigoEntrada[i] == '=') && (i<=6) ) {
+    while( (((codigoEntrada[i] <= '9') && (codigoEntrada[i] >= '0')) || (codigoEntrada[i] == '=' && i == 3)) && (i<=6) ) {
         i++;
         ret++;
     }
@@ -153,7 +159,6 @@ void lecturaConsulta() { //Recibi '?' en 1er byte: Verifico los siguientes.
     }
     else if(codigoEntrada[1] == 'V') {                            //Consulta Voltaje
         //Inicializo conversion:
-        GO_nDONE = 1;
         pedidoVoltaje = 1;
     }
     

@@ -23,7 +23,7 @@ void main(void) {
     TMR1 = 15536;
     //Configuraciones iniciales
     ADCON0 = 0b01000001; //Config para obtener lecturas de A0 a f=Fosc/8 y modulo A/D encendido
-    ADCON1 = 0b10001110; //Config para una salida/entrada analogica y las demas digitales    
+    ADCON1 = 0b10001110; //Config para una salida/entrada analogica Foscy las demas digitales    
     INTCON = 0b11000000; //Habilito las interupciones: serial y A/D
 
     //Inicializacion modulo USART PIC
@@ -36,10 +36,11 @@ void main(void) {
     ADIF = 0;
     PIE1bits.ADIE = 1;            //Habilito int. A/D
     PIE1bits.RCIE = 1;            //habilita interrupcion por recepcion.
-    PIE1bits.TMR1IE = 0;
+    PIE1bits.TMR1IE = 1;
     cuenta = 0;
     auxCuenta = 0;
     mostrarDigitos(cuenta);
+    RC0 = 0;
         
     //Bucle principal del programa
    
@@ -64,6 +65,11 @@ void main(void) {
                     __delay_ms(100);//Preguntar a diego asegurar que no apague las interupciones
                 }
             }
+            else{//No puedo cerrar el lote se prende led rojo
+                RA5 = 1;
+                __delay_ms(1000);
+                RA5 = 0;
+            }
         }                
         else if(huboInt) {
             huboInt = 0; 
@@ -81,9 +87,9 @@ void main(void) {
                 char bufferMsj[16];
                 sprintf(bufferMsj,"V=%d.%dV\n", adresult/10, adresult%10); //conversionVoltaje reinicia adresult y devuelve valor en Voltios
                 envioTX(bufferMsj); 
-                adresult = 0;
                 pedidoVoltaje = 0;
             }
+            adresult = 0;
         }
     }
     

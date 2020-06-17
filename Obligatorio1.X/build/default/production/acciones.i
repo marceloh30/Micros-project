@@ -2052,4 +2052,5 @@ void escrituraDeCierre(){
     eeprom_write(253, lower_8bits);
     eeprom_write(254, ventasLote);
     eeprom_write(255, nroLote);
+    RC0 = 1;
 }

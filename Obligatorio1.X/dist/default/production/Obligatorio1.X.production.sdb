@@ -41,23 +41,23 @@
 [v _EEPROM_search EEPROM_search `(s  1 e 2 0 ]
 "17
 [v _lecturaEtiqueta lecturaEtiqueta `(v  1 e 1 0 ]
-"62
+"68
 [v _verificacionEntrada verificacionEntrada `(uc  1 e 1 0 ]
-"72
+"78
 [v _cierreDeLote cierreDeLote `(v  1 e 1 0 ]
-"89
+"95
 [v _lecturaMas lecturaMas `(v  1 e 1 0 ]
-"104
+"110
 [v _lecturaMenos lecturaMenos `(v  1 e 1 0 ]
-"114
+"120
 [v _consultaPrecio consultaPrecio `(v  1 e 1 0 ]
-"136
+"142
 [v _lecturaConsulta lecturaConsulta `(v  1 e 1 0 ]
-"174
+"179
 [v _lecturaComando lecturaComando `(v  1 e 1 0 ]
 "8 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"93
+"99
 [v _int_usart int_usart `II(v  1 e 1 0 ]
 "3 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\manejoProductos.c
 [v _pow pow `(ui  1 e 2 0 ]
@@ -102,7 +102,7 @@
 [v _adresult adresult `ui  1 e 2 0 ]
 "36
 [v _pedidoVoltaje pedidoVoltaje `uc  1 e 1 0 ]
-[s S388 . 1 `uc 1 C 1 0 :1:0 
+[s S391 . 1 `uc 1 C 1 0 :1:0 
 `uc 1 DC 1 0 :1:1 
 `uc 1 Z 1 0 :1:2 
 `uc 1 nPD 1 0 :1:3 
@@ -111,23 +111,23 @@
 `uc 1 IRP 1 0 :1:7 
 ]
 "99 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
-[s S396 . 1 `uc 1 . 1 0 :5:0 
+[s S399 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 RP0 1 0 :1:5 
 `uc 1 RP1 1 0 :1:6 
 ]
-[s S400 . 1 `uc 1 CARRY 1 0 :1:0 
+[s S403 . 1 `uc 1 CARRY 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 ZERO 1 0 :1:2 
 ]
-[u S404 . 1 `S388 1 . 1 0 `S396 1 . 1 0 `S400 1 . 1 0 ]
-[v _STATUSbits STATUSbits `VES404  1 e 1 @3 ]
+[u S407 . 1 `S391 1 . 1 0 `S399 1 . 1 0 `S403 1 . 1 0 ]
+[v _STATUSbits STATUSbits `VES407  1 e 1 @3 ]
 "216
 [v _PORTB PORTB `VEuc  1 e 1 @6 ]
 "340
 [v _PORTD PORTD `VEuc  1 e 1 @8 ]
 "454
 [v _INTCON INTCON `VEuc  1 e 1 @11 ]
-[s S425 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S428 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INTF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -137,20 +137,20 @@
 `uc 1 GIE 1 0 :1:7 
 ]
 "477
-[s S434 . 1 `uc 1 . 1 0 :2:0 
+[s S437 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 T0IE 1 0 :1:5 
 ]
-[u S439 . 1 `S425 1 . 1 0 `S434 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES439  1 e 1 @11 ]
+[u S442 . 1 `S428 1 . 1 0 `S437 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES442  1 e 1 @11 ]
 "634
 [v _TMR1 TMR1 `VEus  1 e 2 @14 ]
 "655
 [v _T1CON T1CON `VEuc  1 e 1 @16 ]
 "964
 [v _RCSTA RCSTA `VEuc  1 e 1 @24 ]
-[s S222 . 1 `uc 1 RX9D 1 0 :1:0 
+[s S225 . 1 `uc 1 RX9D 1 0 :1:0 
 `uc 1 OERR 1 0 :1:1 
 `uc 1 FERR 1 0 :1:2 
 `uc 1 ADDEN 1 0 :1:3 
@@ -160,18 +160,18 @@
 `uc 1 SPEN 1 0 :1:7 
 ]
 "994
-[s S231 . 1 `uc 1 RCD8 1 0 :1:0 
+[s S234 . 1 `uc 1 RCD8 1 0 :1:0 
 `uc 1 . 1 0 :5:1 
 `uc 1 RC9 1 0 :1:6 
 ]
-[s S235 . 1 `uc 1 . 1 0 :6:0 
+[s S238 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 nRC8 1 0 :1:6 
 ]
-[s S238 . 1 `uc 1 . 1 0 :6:0 
+[s S241 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 RC8_9 1 0 :1:6 
 ]
-[u S241 . 1 `S222 1 . 1 0 `S231 1 . 1 0 `S235 1 . 1 0 `S238 1 . 1 0 ]
-[v _RCSTAbits RCSTAbits `VES241  1 e 1 @24 ]
+[u S244 . 1 `S225 1 . 1 0 `S234 1 . 1 0 `S238 1 . 1 0 `S241 1 . 1 0 ]
+[v _RCSTAbits RCSTAbits `VES244  1 e 1 @24 ]
 "1059
 [v _TXREG TXREG `VEuc  1 e 1 @25 ]
 "1066
@@ -190,7 +190,7 @@
 [v _TRISD TRISD `VEuc  1 e 1 @136 ]
 "1561
 [v _TRISE TRISE `VEuc  1 e 1 @137 ]
-[s S187 . 1 `uc 1 TMR1IE 1 0 :1:0 
+[s S188 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
 `uc 1 SSPIE 1 0 :1:3 
@@ -200,8 +200,8 @@
 `uc 1 PSPIE 1 0 :1:7 
 ]
 "1635
-[u S196 . 1 `S187 1 . 1 0 ]
-[v _PIE1bits PIE1bits `VES196  1 e 1 @140 ]
+[u S197 . 1 `S188 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES197  1 e 1 @140 ]
 "1999
 [v _TXSTA TXSTA `VEuc  1 e 1 @152 ]
 "2080
@@ -216,7 +216,7 @@
 [v _EEADR EEADR `VEuc  1 e 1 @269 ]
 "2316
 [v _EECON1 EECON1 `VEuc  1 e 1 @396 ]
-[s S368 . 1 `uc 1 RD 1 0 :1:0 
+[s S371 . 1 `uc 1 RD 1 0 :1:0 
 `uc 1 WR 1 0 :1:1 
 `uc 1 WREN 1 0 :1:2 
 `uc 1 WRERR 1 0 :1:3 
@@ -224,8 +224,8 @@
 `uc 1 EEPGD 1 0 :1:7 
 ]
 "2331
-[u S375 . 1 `S368 1 . 1 0 ]
-[v _EECON1bits EECON1bits `VES375  1 e 1 @396 ]
+[u S378 . 1 `S371 1 . 1 0 ]
+[v _EECON1bits EECON1bits `VES378  1 e 1 @396 ]
 "2361
 [v _EECON2 EECON2 `VEuc  1 e 1 @397 ]
 "2401
@@ -236,6 +236,8 @@
 [v _RA3 RA3 `VEb  1 e 0 @43 ]
 "2671
 [v _RA5 RA5 `VEb  1 e 0 @45 ]
+"2704
+[v _RC0 RC0 `VEb  1 e 0 @56 ]
 "2743
 [v _RCIF RCIF `VEb  1 e 0 @101 ]
 "2773
@@ -255,15 +257,15 @@
 "8 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"63
+"64
 [v main@i i `uc  1 a 1 64 ]
-"81
+"87
 [v main@bufferMsj bufferMsj `[16]uc  1 a 16 44 ]
-"71
-[v main@i_304 i `uc  1 a 1 65 ]
-"60
+"77
+[v main@i_307 i `uc  1 a 1 65 ]
+"61
 [v main@strLote strLote `[32]uc  1 a 32 12 ]
-"90
+"96
 } 0
 "56 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\acciones.c
 [v _escrituraDeCierre escrituraDeCierre `(v  1 e 1 0 ]
@@ -272,7 +274,7 @@
 [v escrituraDeCierre@upper_8bits upper_8bits `uc  1 a 1 5 ]
 "58
 [v escrituraDeCierre@lower_8bits lower_8bits `uc  1 a 1 4 ]
-"66
+"67
 } 0
 "35
 [v _accionesPuertoSerial accionesPuertoSerial `(v  1 e 1 0 ]
@@ -284,13 +286,15 @@
 "17 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\lectura.c
 [v _lecturaEtiqueta lecturaEtiqueta `(v  1 e 1 0 ]
 {
-"27
-[v lecturaEtiqueta@tp tp `uc  1 a 1 36 ]
-"21
-[v lecturaEtiqueta@i i `i  1 a 2 34 ]
+"33
+[v lecturaEtiqueta@tp tp `uc  1 a 1 35 ]
+"22
+[v lecturaEtiqueta@i i `i  1 a 2 38 ]
 "18
-[v lecturaEtiqueta@Aux Aux `s  1 a 2 37 ]
-"60
+[v lecturaEtiqueta@Aux Aux `s  1 a 2 36 ]
+"19
+[v lecturaEtiqueta@letra letra `uc  1 a 1 34 ]
+"66
 } 0
 "17 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\manejoProductos.c
 [v _ingresoProd ingresoProd `(v  1 e 1 0 ]
@@ -324,36 +328,36 @@
 [v verificarProd@tp tp `s  1 p 2 14 ]
 "45
 } 0
-"174 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\lectura.c
+"179 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\lectura.c
 [v _lecturaComando lecturaComando `(v  1 e 1 0 ]
 {
-"184
+"189
 } 0
-"104
+"110
 [v _lecturaMenos lecturaMenos `(v  1 e 1 0 ]
 {
-"112
+"118
 } 0
-"89
+"95
 [v _lecturaMas lecturaMas `(v  1 e 1 0 ]
 {
-"102
+"108
 } 0
-"62
+"68
 [v _verificacionEntrada verificacionEntrada `(uc  1 e 1 0 ]
 {
-"63
+"69
 [v verificacionEntrada@i i `uc  1 a 1 2 ]
-"64
-[v verificacionEntrada@ret ret `uc  1 a 1 1 ]
 "70
+[v verificacionEntrada@ret ret `uc  1 a 1 1 ]
+"76
 } 0
-"72
+"78
 [v _cierreDeLote cierreDeLote `(v  1 e 1 0 ]
 {
-"75
+"81
 [v cierreDeLote@strLote strLote `[32]uc  1 a 32 46 ]
-"87
+"93
 } 0
 "61 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\manejoProductos.c
 [v _agregarModificarPrecio agregarModificarPrecio `(v  1 e 1 0 ]
@@ -392,25 +396,25 @@
 [v ___bmul@multiplier multiplier `uc  1 a 1 3 ]
 "51
 } 0
-"136 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\lectura.c
+"142 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\lectura.c
 [v _lecturaConsulta lecturaConsulta `(v  1 e 1 0 ]
 {
-"162
+"167
 [v lecturaConsulta@articulo articulo `us  1 a 2 36 ]
-"148
+"154
 [v lecturaConsulta@strLote strLote `[32]uc  1 a 32 4 ]
-"172
+"177
 } 0
-"114
+"120
 [v _consultaPrecio consultaPrecio `(v  1 e 1 0 ]
 {
-"119
+"125
 [v consultaPrecio@precio precio `s  1 a 2 74 ]
-"115
+"121
 [v consultaPrecio@mensaje mensaje `[26]uc  1 a 26 48 ]
-"114
+"120
 [v consultaPrecio@articulo articulo `s  1 p 2 42 ]
-"134
+"140
 } 0
 "6 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\pic\__eeread.c
 [v _eeprom_read eeprom_read `(uc  1 e 1 0 ]
@@ -556,8 +560,8 @@
 [v bailenLeds@i i `us  1 a 2 3 ]
 "37
 } 0
-"93 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
+"99 C:\Users\julia\OneDrive\Documentos\GitHub\Obl1-Micros\Obligatorio1.X\main.c
 [v _int_usart int_usart `II(v  1 e 1 0 ]
 {
-"121
+"127
 } 0

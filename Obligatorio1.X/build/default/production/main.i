@@ -2015,10 +2015,11 @@ void main(void) {
     ADIF = 0;
     PIE1bits.ADIE = 1;
     PIE1bits.RCIE = 1;
-    PIE1bits.TMR1IE = 0;
+    PIE1bits.TMR1IE = 1;
     cuenta = 0;
     auxCuenta = 0;
     mostrarDigitos(cuenta);
+    RC0 = 0;
 
 
 
@@ -2043,6 +2044,11 @@ void main(void) {
                     _delay((unsigned long)((100)*(4000000/4000.0)));
                 }
             }
+            else{
+                RA5 = 1;
+                _delay((unsigned long)((1000)*(4000000/4000.0)));
+                RA5 = 0;
+            }
         }
         else if(huboInt) {
             huboInt = 0;
@@ -2060,9 +2066,9 @@ void main(void) {
                 char bufferMsj[16];
                 sprintf(bufferMsj,"V=%d.%dV\n", adresult/10, adresult%10);
                 envioTX(bufferMsj);
-                adresult = 0;
                 pedidoVoltaje = 0;
             }
+            adresult = 0;
         }
     }
 
