@@ -145,8 +145,8 @@ void consultaPrecio(short int articulo) {
 }
 
 void lecturaConsulta() { //Recibi '?' en 1er byte: Verifico los siguientes.
-
-    if (codigoEntrada[1] == 0x0D || codigoEntrada[1] == 0x0A) {     //Consulta Estado
+    //Consulta Estado
+    if (codigoEntrada[1] == 0x0D || codigoEntrada[1] == 0x0A) {     
         //Lei solo '?': consulta estado
         if (cuenta != 0) {
             envioTX("Estado: Activo");
@@ -155,27 +155,30 @@ void lecturaConsulta() { //Recibi '?' en 1er byte: Verifico los siguientes.
             envioTX("Estado: En espera"); 
         }
     }
-    else if(codigoEntrada[1] == 'L') {                              //Consulta Lote
+    //Consulta Lote
+    else if(codigoEntrada[1] == 'L') {                              
         char strLote[32];
-        //ver como funciona la cadena para reservar los bytes necesarios: char *strLote=""??
+        
         sprintf(strLote,"L:%d,N:%d,T:%d", nroLote, ventasLote, montosLote);
         envioTX(strLote);
 
     }
-    else if(codigoEntrada[1] == 'V') {                            //Consulta Voltaje
+    //Consulta Voltaje
+    else if(codigoEntrada[1] == 'V') {                            
         //Inicializo conversion:
         pedidoVoltaje = 1;
     }
-    
-    else if( codigoEntrada[1] <= '9' && codigoEntrada[1] >= '0' && codigoEntrada[2] <= '9' && codigoEntrada[2] >= '0' ) { //Consulta Precio
+    //Consulta Precio
+    else if( codigoEntrada[1] <= '9' && codigoEntrada[1] >= '0' && codigoEntrada[2] <= '9' && codigoEntrada[2] >= '0' ) { 
 
         unsigned short int articulo = 10*(codigoEntrada[1] - '0') + (codigoEntrada[2] - '0');
 
         consultaPrecio(articulo);
 
     }
-    else {
-        envioTX(strError);//Consulta erronea
+    //Consulta erronea
+    else { 
+        envioTX(strError);
     }                              
 
  
