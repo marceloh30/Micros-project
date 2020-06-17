@@ -3,11 +3,16 @@
 short int EEPROM_search(unsigned char tp) { 
     
     short int precio;
-    tp--;
-    tp = tp*LARGO_PRECIO;
-    precio = (eeprom_read(tp) << LARGO_ART) | (eeprom_read(tp+1)); //FALTA AGREGAR Comprobante de tp=>0
-    
-    if( (precio < 0 || precio > PRECIOMAX) || verificarProd(tp/LARGO_PRECIO)) {
+    if(tp != 0){
+        tp--;
+        tp = tp*LARGO_PRECIO;
+        precio = (eeprom_read(tp) << LARGO_ART) | (eeprom_read(tp+1)); //FALTA AGREGAR Comprobante de tp=>0
+
+        if( (precio < 0 || precio > PRECIOMAX) || verificarProd(tp/LARGO_PRECIO)) {
+            precio = -1;
+        }
+    }
+    else{
         precio = -1;
     }
     
