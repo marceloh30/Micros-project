@@ -79,8 +79,8 @@ void cierreDeLote() {
     
     if (cierreLotePedido == 0) { //Si no se pidio cierre de lote, envio datos 
         char strLote[32];
-        //ver como funciona la cadena para reservar los bytes necesarios: char *strLote=""??
-        sprintf(strLote,"\nCierre,L:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+        //Envio datos de lote
+        sprintf(strLote,"Cierre,L:%d,N:%d,T:%d", nroLote, ventasLote, montosLote);
         envioTX(strLote);
     }
     else{
@@ -125,7 +125,7 @@ void consultaPrecio(short int articulo) {
         short int precio = (eeprom_read(articulo) << LARGO_ART) | (eeprom_read(articulo+1));
 
         if (precio > PRECIOMAX || precio < 0) {
-            sprintf(mensaje, "\nProducto no encontrado\n");
+            sprintf(mensaje, "Producto no encontrado");
             envioTX(mensaje);// producto no encontrado
         }
         else{
@@ -144,16 +144,16 @@ void lecturaConsulta() { //Recibi '?' en 1er byte: Verifico los siguientes.
     if (codigoEntrada[1] == 0x0D || codigoEntrada[1] == 0x0A) {     //Consulta Estado
         //Lei solo '?': consulta estado
         if (cuenta != 0) {
-            envioTX("\nEstado: Activo\n");
+            envioTX("Estado: Activo");
         }
         else {
-            envioTX("\nEstado: En espera\n"); //falta el barra n que no encontre
+            envioTX("Estado: En espera");
         }
     }
     else if(codigoEntrada[1] == 'L') {                              //Consulta Lote
         char strLote[32];
         //ver como funciona la cadena para reservar los bytes necesarios: char *strLote=""??
-        sprintf(strLote,"\nL:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+        sprintf(strLote,"L:%d,N:%d,T:%d", nroLote, ventasLote, montosLote);
         envioTX(strLote);
 
     }
