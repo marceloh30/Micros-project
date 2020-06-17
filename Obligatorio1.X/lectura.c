@@ -5,7 +5,7 @@ short int EEPROM_search(unsigned char tp) {
     short int precio;
     tp--;
     tp = tp*LARGO_PRECIO;
-    precio = (eeprom_read(tp) << LARGO_ART) | (eeprom_read(tp+1)); //FALTA AGREGAR Comprobante de tp=>0
+    precio = (eeprom_read(tp) << LARGO_ART) | (eeprom_read(tp+1));
     
     if( (precio < 0 || precio > PRECIOMAX) || verificarProd(tp/LARGO_PRECIO)) {
         precio = -1;
@@ -48,7 +48,7 @@ void lecturaEtiqueta() {
             RA3 = 0; 
      
         }
-        else { //Cuenta > PRECIO_MAX o caso erroneo: Enciendo led rojo
+        else { //Llego aqui si Cuenta > PRECIO_MAX o algun otro caso erroneo: Enciendo led rojo
         
             RA5 = 1;
             __delay_ms(1000);
@@ -68,7 +68,7 @@ void lecturaEtiqueta() {
 char verificacionEntrada() { //Verifico el ingreso para modificar o agregar precio (luego del '+' espero:"NN=NNN", N=Numero del 0 al 9)
     char i = 1;
     char ret = 0;
-    while( (((codigoEntrada[i] <= '9') && (codigoEntrada[i] >= '0')) || (codigoEntrada[i] == '=' && i == 3)) && (i<=6) ) {
+    while( ( ((codigoEntrada[i] <= '9') && (codigoEntrada[i] >= '0')) || (codigoEntrada[i] == '=' && i == 3) ) && (i<=6) ) {
         i++;
         ret++;
     }
