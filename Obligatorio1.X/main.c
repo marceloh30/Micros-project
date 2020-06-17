@@ -9,7 +9,7 @@ void main(void) {
     
     
     if(eeprom_read(255) != 0xFF){
-        montosLote = (eeprom_read(252) << LARGO_ART) | (eeprom_read(253));
+        montosLote = (eeprom_read(252) << 8) | (eeprom_read(253));
         ventasLote = eeprom_read(254);
         nroLote = eeprom_read(255);
     }
