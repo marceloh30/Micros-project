@@ -165,7 +165,7 @@ void lecturaConsulta() { //Recibi '?' en 1er byte: Verifico los siguientes.
     }
     //Consulta Voltaje
     else if(codigoEntrada[1] == 'V') {                            
-        //Inicializo conversion:
+        //Dejo pedidoVoltaje en 1 para cuando haya conversion se haga envioTX
         pedidoVoltaje = 1;
     }
     //Consulta Precio
