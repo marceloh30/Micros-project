@@ -7,8 +7,8 @@ short int EEPROM_search(unsigned char tp) {
         tp--;
         tp = tp*LARGO_PRECIO;
         precio = (eeprom_read(tp) << LARGO_ART) | (eeprom_read(tp+1)); 
-
-        if( (precio < 0 || precio > PRECIOMAX) || verificarProd(tp/LARGO_PRECIO)) {
+        //si el precio es 0 también lo ignoro (prod. Eliminado)
+        if( (precio <= 0 || precio > PRECIOMAX) || verificarProd(tp/LARGO_PRECIO)) {
             precio = -1;
         }
     }
@@ -129,7 +129,7 @@ void consultaPrecio(short int articulo) {
         articulo = articulo * LARGO_PRECIO;
         short int precio = (eeprom_read(articulo) << LARGO_ART) | (eeprom_read(articulo+1));
 
-        if (precio > PRECIOMAX || precio < 0) {
+        if (precio > PRECIOMAX || precio < 1) { //si el precio es 0 el prod. fue eliminado
             sprintf(mensaje, "Producto no encontrado");
             envioTX(mensaje);// producto no encontrado
         }
