@@ -129,7 +129,8 @@ void consultaPrecio(short int articulo) {
         articulo = articulo * LARGO_PRECIO;
         short int precio = (eeprom_read(articulo) << LARGO_ART) | (eeprom_read(articulo+1));
 
-        if (precio > PRECIOMAX || precio < 1) { //si el precio es 0 el prod. fue eliminado
+        if (precio > PRECIOMAX || precio <= 0) { //si el precio es 0 el prod. fue eliminado
+            
             sprintf(mensaje, "Producto no encontrado");
             envioTX(mensaje);// producto no encontrado
         }

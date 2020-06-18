@@ -55,6 +55,7 @@ void accionesPuertoSerial() {
 
 void escrituraDeCierre(){
     
+    RC0 = 1;//Primero apago el RC0 para ahorrar energia y luego hago escritura
     char lower_8bits;
     char upper_8bits;
     lower_8bits = montosLote & 0xff;
@@ -63,6 +64,6 @@ void escrituraDeCierre(){
     eeprom_write(253, lower_8bits);
     eeprom_write(254, ventasLote);
     eeprom_write(255, nroLote);
-    RC0 = 1;
+    
 }
 

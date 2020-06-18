@@ -74,8 +74,15 @@ void agregarModificarPrecio(){
         upper_8bits = (precio >> 8) & 0xff;
         eeprom_write(tp ,upper_8bits);
         eeprom_write(tp + 1,lower_8bits);
-        sprintf(mensaje, "P%d=%d", tp/LARGO_PRECIO + 1, precio);
-        envioTX(mensaje);
+        if (precio == 0){
+            sprintf(mensaje, "P%d=%d (Se tomara como eliminado)", tp/LARGO_PRECIO + 1, precio);
+            envioTX(mensaje);
+        }
+        else{
+            sprintf(mensaje, "P%d=%d", tp/LARGO_PRECIO + 1, precio);
+            envioTX(mensaje);
+        }
+
     }
     else{
         envioTX("No hay producto 00");
