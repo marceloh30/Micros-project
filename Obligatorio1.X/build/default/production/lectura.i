@@ -1939,11 +1939,16 @@ void lecturaComando(void);
 short int EEPROM_search(unsigned char tp) {
 
     short int precio;
-    tp--;
-    tp = tp*2;
-    precio = (eeprom_read(tp) << 8) | (eeprom_read(tp+1));
+    if(tp != 0){
+        tp--;
+        tp = tp*2;
+        precio = (eeprom_read(tp) << 8) | (eeprom_read(tp+1));
 
-    if( (precio < 0 || precio > 999) || verificarProd(tp/2)) {
+        if( (precio < 0 || precio > 999) || verificarProd(tp/2)) {
+            precio = -1;
+        }
+    }
+    else{
         precio = -1;
     }
 

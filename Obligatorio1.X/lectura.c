@@ -3,11 +3,16 @@
 short int EEPROM_search(unsigned char tp) { 
     
     short int precio;
-    tp--;
-    tp = tp*LARGO_PRECIO;
-    precio = (eeprom_read(tp) << LARGO_ART) | (eeprom_read(tp+1)); //FALTA AGREGAR Comprobante de tp=>0
-    
-    if( (precio < 0 || precio > PRECIOMAX) || verificarProd(tp/LARGO_PRECIO)) {
+    if(tp > 0) {
+        tp--;
+        tp = tp*LARGO_PRECIO;
+        precio = (eeprom_read(tp) << LARGO_ART) | (eeprom_read(tp+1)); 
+
+        if( (precio < 0 || precio > PRECIOMAX) || verificarProd(tp/LARGO_PRECIO)) {
+            precio = -1;
+        }
+    }
+    else{
         precio = -1;
     }
     
@@ -20,7 +25,7 @@ void lecturaEtiqueta() {
     
     //Realizo suma para checksum
     for (int i = 0; i < LARGO_ART; i++ ) {
-        if(codigoEntrada[i] >= '0' && codigoEntrada[i] <= '9'){
+        if(codigoEntrada[i] >= '0' && codigoEntrada[i] <= '9') {
             Aux += (codigoEntrada[i] - '0');
         }
         else{
@@ -35,10 +40,10 @@ void lecturaEtiqueta() {
         
         if ((cuenta + Aux) <= PRECIOMAX && Aux != -1) { //Si la cuenta no sobrepasa 99,9, la compra es correcta.
             if(modoDebug){
-                envioTX("Producto ingresado\n");
+                envioTX("Producto ingresado");
             }
             tp--;
-            ingresoProd(tp);
+            ingresoProd(tp); //Seteo el bit correspondiente al prod. 
             productoIngresado = tp; //Guardo el ultimo producto ingresado correctametne 
             auxCuenta = cuenta;
             cuenta += Aux;        
@@ -79,8 +84,8 @@ void cierreDeLote() {
     
     if (cierreLotePedido == 0) { //Si no se pidio cierre de lote, envio datos 
         char strLote[32];
-        //Envio datos de lote
-        sprintf(strLote,"Cierre,L:%d,N:%d,T:%d", nroLote, ventasLote, montosLote);
+        
+        sprintf(strLote,"\nCierre,L:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
         envioTX(strLote);
     }
     else{
@@ -103,14 +108,14 @@ void lecturaMas() {
         modoDebug = 1;
     }
     else{
-        envioTX(strError);// producto no encontrado
+        envioTX(strError);// Comando desconocido o erroneo
     }
 }
 
 void lecturaMenos() {
     if(codigoEntrada[1] == 'D') {
         modoDebug = 0;
-        //Se podria enviar un mensaje que diga modo debug desactivado o algo del estilo 
+        envioTX("Modo Debug desactivado");
     }
     else{
         envioTX(strError);
@@ -140,37 +145,40 @@ void consultaPrecio(short int articulo) {
 }
 
 void lecturaConsulta() { //Recibi '?' en 1er byte: Verifico los siguientes.
-
-    if (codigoEntrada[1] == 0x0D || codigoEntrada[1] == 0x0A) {     //Consulta Estado
+    //Consulta Estado
+    if (codigoEntrada[1] == 0x0D || codigoEntrada[1] == 0x0A) {     
         //Lei solo '?': consulta estado
         if (cuenta != 0) {
             envioTX("Estado: Activo");
         }
         else {
-            envioTX("Estado: En espera");
+            envioTX("Estado: En espera"); 
         }
     }
-    else if(codigoEntrada[1] == 'L') {                              //Consulta Lote
+    //Consulta Lote
+    else if(codigoEntrada[1] == 'L') {                              
         char strLote[32];
-        //ver como funciona la cadena para reservar los bytes necesarios: char *strLote=""??
+        
         sprintf(strLote,"L:%d,N:%d,T:%d", nroLote, ventasLote, montosLote);
         envioTX(strLote);
 
     }
-    else if(codigoEntrada[1] == 'V') {                            //Consulta Voltaje
-        //Inicializo conversion:
+    //Consulta Voltaje
+    else if(codigoEntrada[1] == 'V') {                            
+        //Dejo pedidoVoltaje en 1 para cuando haya conversion se haga envioTX
         pedidoVoltaje = 1;
     }
-    
-    else if( codigoEntrada[1] <= '9' && codigoEntrada[1] >= '0' && codigoEntrada[2] <= '9' && codigoEntrada[2] >= '0' ) { //Consulta Precio
+    //Consulta Precio
+    else if( codigoEntrada[1] <= '9' && codigoEntrada[1] >= '0' && codigoEntrada[2] <= '9' && codigoEntrada[2] >= '0' ) { 
 
         unsigned short int articulo = 10*(codigoEntrada[1] - '0') + (codigoEntrada[2] - '0');
 
         consultaPrecio(articulo);
 
     }
-    else {
-        envioTX(strError);//Consulta erronea
+    //Consulta erronea
+    else { 
+        envioTX(strError);
     }                              
 
  
@@ -183,7 +191,7 @@ void lecturaComando() {
     else if(codigoEntrada[0] == '+') {
         lecturaMas();
     }
-    else{ //Ya verifique que fuese uno de los 3 ('?','+' o '-')
+    else{ //Ya verifique que fuese uno de los 3 ('?' y '+', queda '-')
         lecturaMenos();
     }
 }

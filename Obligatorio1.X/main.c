@@ -9,7 +9,7 @@ void main(void) {
     
     
     if(eeprom_read(255) != 0xFF){
-        montosLote = (eeprom_read(252) << LARGO_ART) | (eeprom_read(253));
+        montosLote = (eeprom_read(252) << 8) | (eeprom_read(253));
         ventasLote = eeprom_read(254);
         nroLote = eeprom_read(255);
     }
@@ -61,11 +61,11 @@ void main(void) {
                 char strLote[32];
                 sprintf(strLote,"\nCierre, L:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
                 envioTX(strLote);
-                for(char i = 0; i<10; i++){
-                    __delay_ms(100);//Preguntar a diego asegurar que no apague las interupciones
+                for(char i = 0; i<20; i++){ //Espero 2seg a recibir confirmacion
+                    __delay_ms(100);
                 }
             }
-            else{//No puedo cerrar el lote se prende led rojo
+            else{//No puedo cerrar el lote (compra en curso): se prende led rojo
                 RA5 = 1;
                 __delay_ms(1000);
                 RA5 = 0;
@@ -79,13 +79,13 @@ void main(void) {
             }
         }
         else if (adresult > 0) {
-            adresult = 2*(adresult*10*5/1023); //convierto resultado A/D en voltios (5V equivale a 1024)
+            adresult = 2*(adresult*10*5/1023); //convierto resultado A/D en voltios (5V equivale a 1024-1)
             if(adresult < 75){ //Como esta multiplicado por 10 comparo contra 7.5V
                 escrituraDeCierre();
             }
             if(pedidoVoltaje){
                 char bufferMsj[16];
-                sprintf(bufferMsj,"V=%d.%dV\n", adresult/10, adresult%10); //conversionVoltaje reinicia adresult y devuelve valor en Voltios
+                sprintf(bufferMsj,"V=%d.%dV\n", adresult/10, adresult%10); 
                 envioTX(bufferMsj); 
                 pedidoVoltaje = 0;
             }
@@ -99,7 +99,7 @@ void main(void) {
 void __interrupt() int_usart() {
     
     if(TMR1IF){
-        GO_nDONE = 1; // Inicializo convercion para ver si tengo que guardar en EEPROM
+        GO_nDONE = 1; // Inicializo conversion para controlar apagado inminente
         TMR1 = 15536;
         TMR1IF = 0; 
     }
