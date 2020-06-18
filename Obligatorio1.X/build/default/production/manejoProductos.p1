@@ -206,7 +206,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _resultado `ui ~T0 @X0 1 a ]
 [e = _resultado -> -> 0 `i `ui ]
 "6
-[; ;manejoProductos.c: 6:     for (int i = 0; i <= potencia; i++){
+[; ;manejoProductos.c: 6:     for (int i = 0; i <= potencia; i++) {
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
@@ -214,18 +214,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 97 ]
 {
 "7
-[; ;manejoProductos.c: 7:         if (i == 0){
+[; ;manejoProductos.c: 7:         if (i == 0) {
 [e $ ! == _i -> 0 `i 101  ]
 {
 "8
-[; ;manejoProductos.c: 8:         resultado = 1;
+[; ;manejoProductos.c: 8:             resultado = 1;
 [e = _resultado -> -> 1 `i `ui ]
 "9
 [; ;manejoProductos.c: 9:         }
 }
 [e $U 102  ]
 "10
-[; ;manejoProductos.c: 10:         else{
+[; ;manejoProductos.c: 10:         else {
 [e :U 101 ]
 {
 "11
@@ -447,7 +447,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;manejoProductos.c: 76:         eeprom_write(tp + 1,lower_8bits);
 [e ( _eeprom_write (2 , -> + -> _tp `i -> 1 `i `uc -> _lower_8bits `uc ]
 "77
-[; ;manejoProductos.c: 77:         sprintf(mensaje, "\nP%d=%d\n", tp/2 + 1, precio);
+[; ;manejoProductos.c: 77:         sprintf(mensaje, "P%d=%d", tp/2 + 1, precio);
 [e ( _sprintf (1 , , (. , &U _mensaje :s 1C + / -> _tp `i -> 2 `i -> 1 `i -> _precio `i ]
 "78
 [; ;manejoProductos.c: 78:         envioTX(mensaje);
@@ -472,5 +472,5 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 119 ]
 }
 [p f _sprintf 8388736 ]
+[a 1C 80 37 100 61 37 100 0 ]
 [a 2C 78 111 32 104 97 121 32 112 114 111 100 117 99 116 111 32 48 48 0 ]
-[a 1C 10 80 37 100 61 37 100 10 0 ]

@@ -572,17 +572,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 61:                 char strLote[32];
 [v _strLote `uc ~T0 @X0 -> 32 `i a ]
 "62
-[; ;main.c: 62:                 sprintf(strLote,"\nCierre, L:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+[; ;main.c: 62:                 sprintf(strLote,"Cierre, L:%u,N:%u,T:%u", nroLote, ventasLote, montosLote);
 [e ( _sprintf (1 , , , (. , &U _strLote :s 1C -> _nroLote `i -> _ventasLote `i -> _montosLote `ui ]
 "63
 [; ;main.c: 63:                 envioTX(strLote);
 [e ( _envioTX (1 &U _strLote ]
 "64
-[; ;main.c: 64:                 for(char i = 0; i<10; i++){
+[; ;main.c: 64:                 for(char i = 0; i<20; i++){
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 10 `i 116  ]
+[e $ < -> _i `i -> 20 `i 116  ]
 [e $U 117  ]
 [e :U 116 ]
 {
@@ -593,7 +593,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 66:                 }
 }
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 10 `i 116  ]
+[e $ < -> _i `i -> 20 `i 116  ]
 [e :U 117 ]
 }
 "67
@@ -816,6 +816,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 127: }
 [e :UE 129 ]
 }
-[p f _sprintf 8388736 ]
-[a 1C 10 67 105 101 114 114 101 44 32 76 58 37 100 44 78 58 37 100 44 84 58 37 100 10 0 ]
+[p f _sprintf 8389760 ]
+[a 1C 67 105 101 114 114 101 44 32 76 58 37 117 44 78 58 37 117 44 84 58 37 117 0 ]
 [a 2C 86 61 37 100 46 37 100 86 10 0 ]

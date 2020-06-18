@@ -1,6 +1,6 @@
 
 Memory Summary:
-    Program space        used   FD5h (  4053) of  2000h words   ( 49.5%)
+    Program space        used   FEFh (  4079) of  2000h words   ( 49.8%)
     Data space           used    EEh (   238) of   170h bytes   ( 64.7%)
     EEPROM space         used     0h (     0) of   100h bytes   (  0.0%)
     Data stack space     used     0h (     0) of    60h bytes   (  0.0%)

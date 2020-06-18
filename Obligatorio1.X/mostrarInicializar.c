@@ -1,7 +1,7 @@
 #include "mostrarInicializar.h"
 
 //Variables
-static unsigned const char BS[] = {//BS=Binario a conversor bcd a 7 segementos 
+static unsigned const char BS[] = {//BS=Binario a conversor bcd a 7 Segementos 
     0b00000000,
     0b00010000,
     0b00100000,

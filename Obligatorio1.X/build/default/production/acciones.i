@@ -2001,8 +2001,7 @@ void accionesAceptar() {
     }
     if(modoDebug){
         char strLote[32];
-
-        sprintf(strLote,"\nL:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+        sprintf(strLote,"L:%u,N:%u,T:%u", nroLote, ventasLote, montosLote);
         envioTX(strLote);
     }
     mostrarDigitos(cuenta);

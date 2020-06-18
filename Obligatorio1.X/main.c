@@ -59,7 +59,7 @@ void main(void) {
             if (cuenta == 0){
                 cierreLotePedido = 1;
                 char strLote[32];
-                sprintf(strLote,"\nCierre, L:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+                sprintf(strLote,"Cierre, L:%u,N:%u,T:%u", nroLote, ventasLote, montosLote);
                 envioTX(strLote);
                 for(char i = 0; i<20; i++){ //Espero 2seg a recibir confirmacion
                     __delay_ms(100);

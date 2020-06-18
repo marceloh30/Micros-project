@@ -3,11 +3,11 @@
 unsigned int pow(unsigned int numero,unsigned int potencia){
     unsigned int resultado = 0;
     
-    for (int i = 0; i <= potencia; i++){
-        if (i == 0){
-        resultado = 1;
+    for (int i = 0; i <= potencia; i++) {
+        if (i == 0) {
+            resultado = 1;
         }
-        else{
+        else {
             resultado = resultado * numero;
         }
     }
@@ -74,7 +74,7 @@ void agregarModificarPrecio(){
         upper_8bits = (precio >> 8) & 0xff;
         eeprom_write(tp ,upper_8bits);
         eeprom_write(tp + 1,lower_8bits);
-        sprintf(mensaje, "\nP%d=%d\n", tp/LARGO_PRECIO + 1, precio);
+        sprintf(mensaje, "P%d=%d", tp/LARGO_PRECIO + 1, precio);
         envioTX(mensaje);
     }
     else{

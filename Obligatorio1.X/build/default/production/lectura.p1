@@ -250,8 +250,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;lectura.c: 5:     short int precio;
 [v _precio `s ~T0 @X0 1 a ]
 "6
-[; ;lectura.c: 6:     if(tp != 0){
-[e $ ! != -> _tp `i -> 0 `i 97  ]
+[; ;lectura.c: 6:     if(tp > 0) {
+[e $ ! > -> _tp `i -> 0 `i 97  ]
 {
 "7
 [; ;lectura.c: 7:         tp--;
@@ -320,7 +320,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 101 ]
 {
 "28
-[; ;lectura.c: 28:         if(codigoEntrada[i] >= '0' && codigoEntrada[i] <= '9'){
+[; ;lectura.c: 28:         if(codigoEntrada[i] >= '0' && codigoEntrada[i] <= '9') {
 [e $ ! && >= -> *U + &U _codigoEntrada * -> -> _i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui <= -> *U + &U _codigoEntrada * -> -> _i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 57 `ui 104  ]
 {
 "29
@@ -368,7 +368,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! != -> _modoDebug `i -> 0 `i 108  ]
 {
 "43
-[; ;lectura.c: 43:                 envioTX("Producto ingresado\n");
+[; ;lectura.c: 43:                 envioTX("Producto ingresado");
 [e ( _envioTX (1 :s 1C ]
 "44
 [; ;lectura.c: 44:             }
@@ -502,7 +502,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;lectura.c: 86:         char strLote[32];
 [v _strLote `uc ~T0 @X0 -> 32 `i a ]
 "88
-[; ;lectura.c: 88:         sprintf(strLote,"\nCierre,L:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+[; ;lectura.c: 88:         sprintf(strLote,"Cierre,L:%u,N:%u,T:%u", nroLote, ventasLote, montosLote);
 [e ( _sprintf (1 , , , (. , &U _strLote :s 2C -> _nroLote `i -> _ventasLote `i -> _montosLote `ui ]
 "89
 [; ;lectura.c: 89:         envioTX(strLote);
@@ -606,6 +606,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "117
 [; ;lectura.c: 117:         modoDebug = 0;
 [e = _modoDebug -> -> 0 `i `uc ]
+"118
+[; ;lectura.c: 118:         envioTX("Modo Debug desactivado");
+[e ( _envioTX (1 :s 4C ]
 "119
 [; ;lectura.c: 119:     }
 }
@@ -616,7 +619,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "121
 [; ;lectura.c: 121:         envioTX("Ocurrio un error en la interpretacion.\n");
-[e ( _envioTX (1 :s 4C ]
+[e ( _envioTX (1 :s 5C ]
 "122
 [; ;lectura.c: 122:     }
 }
@@ -654,8 +657,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! || > -> _precio `i -> 999 `i < -> _precio `i -> 0 `i 130  ]
 {
 "133
-[; ;lectura.c: 133:             sprintf(mensaje, "\nProducto no encontrado\n");
-[e ( _sprintf (1 , &U _mensaje :s 5C ]
+[; ;lectura.c: 133:             sprintf(mensaje, "Producto no encontrado");
+[e ( _sprintf (1 , &U _mensaje :s 6C ]
 "134
 [; ;lectura.c: 134:             envioTX(mensaje);
 [e ( _envioTX (1 &U _mensaje ]
@@ -669,7 +672,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "137
 [; ;lectura.c: 137:             sprintf(mensaje, "TP: %d P: %d,%d Euros", articulo/2 + 1, precio/10, precio%10);
-[e ( _sprintf (1 , , , (. , &U _mensaje :s 6C + / -> _articulo `i -> 2 `i -> 1 `i / -> _precio `i -> 10 `i % -> _precio `i -> 10 `i ]
+[e ( _sprintf (1 , , , (. , &U _mensaje :s 7C + / -> _articulo `i -> 2 `i -> 1 `i / -> _precio `i -> 10 `i % -> _precio `i -> 10 `i ]
 "138
 [; ;lectura.c: 138:             envioTX(mensaje);
 [e ( _envioTX (1 &U _mensaje ]
@@ -687,7 +690,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "142
 [; ;lectura.c: 142:         envioTX("No existe producto 00");
-[e ( _envioTX (1 :s 7C ]
+[e ( _envioTX (1 :s 8C ]
 "143
 [; ;lectura.c: 143:     }
 }
@@ -711,8 +714,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! != -> _cuenta `ui -> -> 0 `i `ui 135  ]
 {
 "152
-[; ;lectura.c: 152:             envioTX("\nEstado: Activo\n");
-[e ( _envioTX (1 :s 8C ]
+[; ;lectura.c: 152:             envioTX("Estado: Activo");
+[e ( _envioTX (1 :s 9C ]
 "153
 [; ;lectura.c: 153:         }
 }
@@ -722,8 +725,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 135 ]
 {
 "155
-[; ;lectura.c: 155:             envioTX("\nEstado: En espera\n");
-[e ( _envioTX (1 :s 9C ]
+[; ;lectura.c: 155:             envioTX("Estado: En espera");
+[e ( _envioTX (1 :s 10C ]
 "156
 [; ;lectura.c: 156:         }
 }
@@ -732,124 +735,125 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;lectura.c: 157:     }
 }
 [e $U 137  ]
-"158
-[; ;lectura.c: 158:     else if(codigoEntrada[1] == 'L') {
+"159
+[; ;lectura.c: 159:     else if(codigoEntrada[1] == 'L') {
 [e :U 134 ]
 [e $ ! == -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 76 `ui 138  ]
 {
-"159
-[; ;lectura.c: 159:         char strLote[32];
+"160
+[; ;lectura.c: 160:         char strLote[32];
 [v _strLote `uc ~T0 @X0 -> 32 `i a ]
-"161
-[; ;lectura.c: 161:         sprintf(strLote,"\nL:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
-[e ( _sprintf (1 , , , (. , &U _strLote :s 10C -> _nroLote `i -> _ventasLote `i -> _montosLote `ui ]
 "162
-[; ;lectura.c: 162:         envioTX(strLote);
+[; ;lectura.c: 162:         sprintf(strLote,"L:%u,N:%u,T:%u", nroLote, ventasLote, montosLote);
+[e ( _sprintf (1 , , , (. , &U _strLote :s 11C -> _nroLote `i -> _ventasLote `i -> _montosLote `ui ]
+"163
+[; ;lectura.c: 163:         envioTX(strLote);
 [e ( _envioTX (1 &U _strLote ]
-"164
-[; ;lectura.c: 164:     }
+"165
+[; ;lectura.c: 165:     }
 }
 [e $U 139  ]
-"165
-[; ;lectura.c: 165:     else if(codigoEntrada[1] == 'V') {
+"167
+[; ;lectura.c: 167:     else if(codigoEntrada[1] == 'V') {
 [e :U 138 ]
 [e $ ! == -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 86 `ui 140  ]
 {
-"167
-[; ;lectura.c: 167:         pedidoVoltaje = 1;
+"169
+[; ;lectura.c: 169:         pedidoVoltaje = 1;
 [e = _pedidoVoltaje -> -> 1 `i `uc ]
-"168
-[; ;lectura.c: 168:     }
+"170
+[; ;lectura.c: 170:     }
 }
 [e $U 141  ]
-"170
-[; ;lectura.c: 170:     else if( codigoEntrada[1] <= '9' && codigoEntrada[1] >= '0' && codigoEntrada[2] <= '9' && codigoEntrada[2] >= '0' ) {
+"172
+[; ;lectura.c: 172:     else if( codigoEntrada[1] <= '9' && codigoEntrada[1] >= '0' && codigoEntrada[2] <= '9' && codigoEntrada[2] >= '0' ) {
 [e :U 140 ]
 [e $ ! && && && <= -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 57 `ui >= -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui <= -> *U + &U _codigoEntrada * -> -> -> 2 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 57 `ui >= -> *U + &U _codigoEntrada * -> -> -> 2 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui 142  ]
 {
-"172
-[; ;lectura.c: 172:         unsigned short int articulo = 10*(codigoEntrada[1] - '0') + (codigoEntrada[2] - '0');
+"174
+[; ;lectura.c: 174:         unsigned short int articulo = 10*(codigoEntrada[1] - '0') + (codigoEntrada[2] - '0');
 [v _articulo `us ~T0 @X0 1 a ]
 [e = _articulo -> + * -> -> 10 `i `ui - -> *U + &U _codigoEntrada * -> -> -> 1 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui - -> *U + &U _codigoEntrada * -> -> -> 2 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui `us ]
-"174
-[; ;lectura.c: 174:         consultaPrecio(articulo);
-[e ( _consultaPrecio (1 -> _articulo `s ]
 "176
-[; ;lectura.c: 176:     }
+[; ;lectura.c: 176:         consultaPrecio(articulo);
+[e ( _consultaPrecio (1 -> _articulo `s ]
+"178
+[; ;lectura.c: 178:     }
 }
 [e $U 143  ]
-"177
-[; ;lectura.c: 177:     else {
+"180
+[; ;lectura.c: 180:     else {
 [e :U 142 ]
 {
-"178
-[; ;lectura.c: 178:         envioTX("Ocurrio un error en la interpretacion.\n");
-[e ( _envioTX (1 :s 11C ]
-"179
-[; ;lectura.c: 179:     }
+"181
+[; ;lectura.c: 181:         envioTX("Ocurrio un error en la interpretacion.\n");
+[e ( _envioTX (1 :s 12C ]
+"182
+[; ;lectura.c: 182:     }
 }
 [e :U 143 ]
 [e :U 141 ]
 [e :U 139 ]
 [e :U 137 ]
-"182
-[; ;lectura.c: 182: }
+"185
+[; ;lectura.c: 185: }
 [e :UE 133 ]
 }
-"184
-[; ;lectura.c: 184: void lecturaComando() {
+"187
+[; ;lectura.c: 187: void lecturaComando() {
 [v _lecturaComando `(v ~T0 @X0 1 ef ]
 {
 [e :U _lecturaComando ]
 [f ]
-"185
-[; ;lectura.c: 185:     if(codigoEntrada[0] == '?') {
+"188
+[; ;lectura.c: 188:     if(codigoEntrada[0] == '?') {
 [e $ ! == -> *U + &U _codigoEntrada * -> -> -> 0 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 63 `ui 145  ]
 {
-"186
-[; ;lectura.c: 186:         lecturaConsulta();
-[e ( _lecturaConsulta ..  ]
-"187
-[; ;lectura.c: 187:     }
-}
-[e $U 146  ]
-"188
-[; ;lectura.c: 188:     else if(codigoEntrada[0] == '+') {
-[e :U 145 ]
-[e $ ! == -> *U + &U _codigoEntrada * -> -> -> 0 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 43 `ui 147  ]
-{
 "189
-[; ;lectura.c: 189:         lecturaMas();
-[e ( _lecturaMas ..  ]
+[; ;lectura.c: 189:         lecturaConsulta();
+[e ( _lecturaConsulta ..  ]
 "190
 [; ;lectura.c: 190:     }
 }
-[e $U 148  ]
+[e $U 146  ]
 "191
-[; ;lectura.c: 191:     else{
-[e :U 147 ]
+[; ;lectura.c: 191:     else if(codigoEntrada[0] == '+') {
+[e :U 145 ]
+[e $ ! == -> *U + &U _codigoEntrada * -> -> -> 0 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 43 `ui 147  ]
 {
 "192
-[; ;lectura.c: 192:         lecturaMenos();
-[e ( _lecturaMenos ..  ]
+[; ;lectura.c: 192:         lecturaMas();
+[e ( _lecturaMas ..  ]
 "193
 [; ;lectura.c: 193:     }
 }
+[e $U 148  ]
+"194
+[; ;lectura.c: 194:     else{
+[e :U 147 ]
+{
+"195
+[; ;lectura.c: 195:         lecturaMenos();
+[e ( _lecturaMenos ..  ]
+"196
+[; ;lectura.c: 196:     }
+}
 [e :U 148 ]
 [e :U 146 ]
-"194
-[; ;lectura.c: 194: }
+"197
+[; ;lectura.c: 197: }
 [e :UE 144 ]
 }
-[p f _sprintf 8388736 ]
-[a 6C 84 80 58 32 37 100 32 80 58 32 37 100 44 37 100 32 69 117 114 111 115 0 ]
-[a 7C 78 111 32 101 120 105 115 116 101 32 112 114 111 100 117 99 116 111 32 48 48 0 ]
-[a 8C 10 69 115 116 97 100 111 58 32 65 99 116 105 118 111 10 0 ]
-[a 1C 80 114 111 100 117 99 116 111 32 105 110 103 114 101 115 97 100 111 10 0 ]
-[a 5C 10 80 114 111 100 117 99 116 111 32 110 111 32 101 110 99 111 110 116 114 97 100 111 10 0 ]
-[a 2C 10 67 105 101 114 114 101 44 76 58 37 100 44 78 58 37 100 44 84 58 37 100 10 0 ]
-[a 10C 10 76 58 37 100 44 78 58 37 100 44 84 58 37 100 10 0 ]
-[a 9C 10 69 115 116 97 100 111 58 32 69 110 32 101 115 112 101 114 97 10 0 ]
+[p f _sprintf 8389760 ]
+[a 2C 67 105 101 114 114 101 44 76 58 37 117 44 78 58 37 117 44 84 58 37 117 0 ]
+[a 11C 76 58 37 117 44 78 58 37 117 44 84 58 37 117 0 ]
+[a 7C 84 80 58 32 37 100 32 80 58 32 37 100 44 37 100 32 69 117 114 111 115 0 ]
+[a 9C 69 115 116 97 100 111 58 32 65 99 116 105 118 111 0 ]
+[a 4C 77 111 100 111 32 68 101 98 117 103 32 100 101 115 97 99 116 105 118 97 100 111 0 ]
+[a 1C 80 114 111 100 117 99 116 111 32 105 110 103 114 101 115 97 100 111 0 ]
+[a 6C 80 114 111 100 117 99 116 111 32 110 111 32 101 110 99 111 110 116 114 97 100 111 0 ]
+[a 10C 69 115 116 97 100 111 58 32 69 110 32 101 115 112 101 114 97 0 ]
+[a 8C 78 111 32 101 120 105 115 116 101 32 112 114 111 100 117 99 116 111 32 48 48 0 ]
 [a 3C 79 99 117 114 114 105 111 32 117 110 32 101 114 114 111 114 32 101 110 32 108 97 32 105 110 116 101 114 112 114 101 116 97 99 105 111 110 46 10 0 ]
-[a 4C 79 99 117 114 114 105 111 32 117 110 32 101 114 114 111 114 32 101 110 32 108 97 32 105 110 116 101 114 112 114 101 116 97 99 105 111 110 46 10 0 ]
-[a 11C 79 99 117 114 114 105 111 32 117 110 32 101 114 114 111 114 32 101 110 32 108 97 32 105 110 116 101 114 112 114 101 116 97 99 105 111 110 46 10 0 ]
+[a 5C 79 99 117 114 114 105 111 32 117 110 32 101 114 114 111 114 32 101 110 32 108 97 32 105 110 116 101 114 112 114 101 116 97 99 105 111 110 46 10 0 ]
+[a 12C 79 99 117 114 114 105 111 32 117 110 32 101 114 114 111 114 32 101 110 32 108 97 32 105 110 116 101 114 112 114 101 116 97 99 105 111 110 46 10 0 ]

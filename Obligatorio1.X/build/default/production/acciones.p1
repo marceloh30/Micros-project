@@ -359,170 +359,170 @@ Version 4.0 HI-TECH Software Intermediate Code
 "14
 [; ;acciones.c: 14:         char strLote[32];
 [v _strLote `uc ~T0 @X0 -> 32 `i a ]
-"16
-[; ;acciones.c: 16:         sprintf(strLote,"\nL:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+"15
+[; ;acciones.c: 15:         sprintf(strLote,"L:%u,N:%u,T:%u", nroLote, ventasLote, montosLote);
 [e ( _sprintf (1 , , , (. , &U _strLote :s 1C -> _nroLote `i -> _ventasLote `i -> _montosLote `ui ]
-"17
-[; ;acciones.c: 17:         envioTX(strLote);
+"16
+[; ;acciones.c: 16:         envioTX(strLote);
 [e ( _envioTX (1 &U _strLote ]
-"18
-[; ;acciones.c: 18:     }
+"17
+[; ;acciones.c: 17:     }
 }
 [e :U 100 ]
-"19
-[; ;acciones.c: 19:     mostrarDigitos(cuenta);
+"18
+[; ;acciones.c: 18:     mostrarDigitos(cuenta);
 [e ( _mostrarDigitos (1 -> _cuenta `ui ]
-"20
-[; ;acciones.c: 20:     bailenLeds();
+"19
+[; ;acciones.c: 19:     bailenLeds();
 [e ( _bailenLeds ..  ]
-"21
-[; ;acciones.c: 21: }
+"20
+[; ;acciones.c: 20: }
 [e :UE 96 ]
 }
-"23
-[; ;acciones.c: 23: void accionesDeshacer() {
+"22
+[; ;acciones.c: 22: void accionesDeshacer() {
 [v _accionesDeshacer `(v ~T0 @X0 1 ef ]
 {
 [e :U _accionesDeshacer ]
 [f ]
-"24
-[; ;acciones.c: 24:     if (cuenta != auxCuenta) {
+"23
+[; ;acciones.c: 23:     if (cuenta != auxCuenta) {
 [e $ ! != -> _cuenta `ui -> _auxCuenta `ui 102  ]
 {
-"25
-[; ;acciones.c: 25:         cuenta = auxCuenta;
+"24
+[; ;acciones.c: 24:         cuenta = auxCuenta;
 [e = _cuenta _auxCuenta ]
-"27
-[; ;acciones.c: 27:         eliminarProd(productoIngresado);
+"26
+[; ;acciones.c: 26:         eliminarProd(productoIngresado);
 [e ( _eliminarProd (1 _productoIngresado ]
-"28
-[; ;acciones.c: 28:         mostrarDigitos(cuenta);
+"27
+[; ;acciones.c: 27:         mostrarDigitos(cuenta);
 [e ( _mostrarDigitos (1 -> _cuenta `ui ]
-"29
-[; ;acciones.c: 29:     }
+"28
+[; ;acciones.c: 28:     }
 }
 [e :U 102 ]
-"30
-[; ;acciones.c: 30:     if (modoDebug){
+"29
+[; ;acciones.c: 29:     if (modoDebug){
 [e $ ! != -> _modoDebug `i -> 0 `i 103  ]
 {
-"31
-[; ;acciones.c: 31:         envioTX("Producto cancelado");
+"30
+[; ;acciones.c: 30:         envioTX("Producto cancelado");
 [e ( _envioTX (1 :s 2C ]
-"32
-[; ;acciones.c: 32:     }
+"31
+[; ;acciones.c: 31:     }
 }
 [e :U 103 ]
-"33
-[; ;acciones.c: 33: }
+"32
+[; ;acciones.c: 32: }
 [e :UE 101 ]
 }
-"35
-[; ;acciones.c: 35: void accionesPuertoSerial() {
+"34
+[; ;acciones.c: 34: void accionesPuertoSerial() {
 [v _accionesPuertoSerial `(v ~T0 @X0 1 ef ]
 {
 [e :U _accionesPuertoSerial ]
 [f ]
-"36
-[; ;acciones.c: 36:     if ((codigoEntrada[0] == '?') || (codigoEntrada[0] == '+') || (codigoEntrada[0] == '-')) {
+"35
+[; ;acciones.c: 35:     if ((codigoEntrada[0] == '?') || (codigoEntrada[0] == '+') || (codigoEntrada[0] == '-')) {
 [e $ ! || || == -> *U + &U _codigoEntrada * -> -> -> 0 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 63 `ui == -> *U + &U _codigoEntrada * -> -> -> 0 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 43 `ui == -> *U + &U _codigoEntrada * -> -> -> 0 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 45 `ui 105  ]
 {
-"37
-[; ;acciones.c: 37:         lecturaComando();
+"36
+[; ;acciones.c: 36:         lecturaComando();
 [e ( _lecturaComando ..  ]
-"38
-[; ;acciones.c: 38:     }
+"37
+[; ;acciones.c: 37:     }
 }
 [e $U 106  ]
-"39
-[; ;acciones.c: 39:     else if(codigoEntrada[0] <= '9' && codigoEntrada[0] >= '0') {
+"38
+[; ;acciones.c: 38:     else if(codigoEntrada[0] <= '9' && codigoEntrada[0] >= '0') {
 [e :U 105 ]
 [e $ ! && <= -> *U + &U _codigoEntrada * -> -> -> 0 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 57 `ui >= -> *U + &U _codigoEntrada * -> -> -> 0 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui 107  ]
 {
-"40
-[; ;acciones.c: 40:         if (modoDebug){
+"39
+[; ;acciones.c: 39:         if (modoDebug){
 [e $ ! != -> _modoDebug `i -> 0 `i 108  ]
 {
-"41
-[; ;acciones.c: 41:             char mensaje[12];
+"40
+[; ;acciones.c: 40:             char mensaje[12];
 [v _mensaje `uc ~T0 @X0 -> 12 `i a ]
-"42
-[; ;acciones.c: 42:             sprintf(mensaje,"E:%s", codigoEntrada);
+"41
+[; ;acciones.c: 41:             sprintf(mensaje,"E:%s", codigoEntrada);
 [e ( _sprintf (1 , (. , &U _mensaje :s 3C &U _codigoEntrada ]
-"43
-[; ;acciones.c: 43:             envioTX(mensaje);
+"42
+[; ;acciones.c: 42:             envioTX(mensaje);
 [e ( _envioTX (1 &U _mensaje ]
-"44
-[; ;acciones.c: 44:         }
+"43
+[; ;acciones.c: 43:         }
 }
 [e :U 108 ]
-"45
-[; ;acciones.c: 45:         lecturaEtiqueta();
+"44
+[; ;acciones.c: 44:         lecturaEtiqueta();
 [e ( _lecturaEtiqueta ..  ]
-"46
-[; ;acciones.c: 46:     }
+"45
+[; ;acciones.c: 45:     }
 }
 [e $U 109  ]
-"47
-[; ;acciones.c: 47:     else{
+"46
+[; ;acciones.c: 46:     else{
 [e :U 107 ]
 {
-"49
-[; ;acciones.c: 49:         RA5 = 1;
+"48
+[; ;acciones.c: 48:         RA5 = 1;
 [e = _RA5 -> -> 1 `i `b ]
-"50
-[; ;acciones.c: 50:         _delay((unsigned long)((1000)*(4000000/4000.0)));
+"49
+[; ;acciones.c: 49:         _delay((unsigned long)((1000)*(4000000/4000.0)));
 [e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"51
-[; ;acciones.c: 51:         RA5 = 0;
+"50
+[; ;acciones.c: 50:         RA5 = 0;
 [e = _RA5 -> -> 0 `i `b ]
-"52
-[; ;acciones.c: 52:     }
+"51
+[; ;acciones.c: 51:     }
 }
 [e :U 109 ]
 [e :U 106 ]
-"54
-[; ;acciones.c: 54: }
+"53
+[; ;acciones.c: 53: }
 [e :UE 104 ]
 }
-"56
-[; ;acciones.c: 56: void escrituraDeCierre(){
+"55
+[; ;acciones.c: 55: void escrituraDeCierre(){
 [v _escrituraDeCierre `(v ~T0 @X0 1 ef ]
 {
 [e :U _escrituraDeCierre ]
 [f ]
-"58
-[; ;acciones.c: 58:     char lower_8bits;
+"57
+[; ;acciones.c: 57:     char lower_8bits;
 [v _lower_8bits `uc ~T0 @X0 1 a ]
-"59
-[; ;acciones.c: 59:     char upper_8bits;
+"58
+[; ;acciones.c: 58:     char upper_8bits;
 [v _upper_8bits `uc ~T0 @X0 1 a ]
-"60
-[; ;acciones.c: 60:     lower_8bits = montosLote & 0xff;
+"59
+[; ;acciones.c: 59:     lower_8bits = montosLote & 0xff;
 [e = _lower_8bits -> & -> _montosLote `ui -> -> 255 `i `ui `uc ]
-"61
-[; ;acciones.c: 61:     upper_8bits = (montosLote >> 8) & 0xff;
+"60
+[; ;acciones.c: 60:     upper_8bits = (montosLote >> 8) & 0xff;
 [e = _upper_8bits -> & >> -> _montosLote `ui -> 8 `i -> -> 255 `i `ui `uc ]
-"62
-[; ;acciones.c: 62:     eeprom_write(252, upper_8bits);
+"61
+[; ;acciones.c: 61:     eeprom_write(252, upper_8bits);
 [e ( _eeprom_write (2 , -> -> 252 `i `uc -> _upper_8bits `uc ]
-"63
-[; ;acciones.c: 63:     eeprom_write(253, lower_8bits);
+"62
+[; ;acciones.c: 62:     eeprom_write(253, lower_8bits);
 [e ( _eeprom_write (2 , -> -> 253 `i `uc -> _lower_8bits `uc ]
-"64
-[; ;acciones.c: 64:     eeprom_write(254, ventasLote);
+"63
+[; ;acciones.c: 63:     eeprom_write(254, ventasLote);
 [e ( _eeprom_write (2 , -> -> 254 `i `uc _ventasLote ]
-"65
-[; ;acciones.c: 65:     eeprom_write(255, nroLote);
+"64
+[; ;acciones.c: 64:     eeprom_write(255, nroLote);
 [e ( _eeprom_write (2 , -> -> 255 `i `uc _nroLote ]
-"66
-[; ;acciones.c: 66:     RC0 = 1;
+"65
+[; ;acciones.c: 65:     RC0 = 1;
 [e = _RC0 -> -> 1 `i `b ]
-"67
-[; ;acciones.c: 67: }
+"66
+[; ;acciones.c: 66: }
 [e :UE 110 ]
 }
-[p f _sprintf 8650880 ]
+[p f _sprintf 8651776 ]
+[a 1C 76 58 37 117 44 78 58 37 117 44 84 58 37 117 0 ]
 [a 3C 69 58 37 115 0 ]
 [a 2C 80 114 111 100 117 99 116 111 32 99 97 110 99 101 108 97 100 111 0 ]
-[a 1C 10 76 58 37 100 44 78 58 37 100 44 84 58 37 100 10 0 ]

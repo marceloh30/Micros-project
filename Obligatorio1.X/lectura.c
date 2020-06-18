@@ -85,7 +85,7 @@ void cierreDeLote() {
     if (cierreLotePedido == 0) { //Si no se pidio cierre de lote, envio datos 
         char strLote[32];
         
-        sprintf(strLote,"\nCierre,L:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+        sprintf(strLote,"Cierre,L:%u,N:%u,T:%u", nroLote, ventasLote, montosLote);
         envioTX(strLote);
     }
     else{
@@ -159,7 +159,7 @@ void lecturaConsulta() { //Recibi '?' en 1er byte: Verifico los siguientes.
     else if(codigoEntrada[1] == 'L') {                              
         char strLote[32];
         
-        sprintf(strLote,"L:%d,N:%d,T:%d", nroLote, ventasLote, montosLote);
+        sprintf(strLote,"L:%u,N:%u,T:%u", nroLote, ventasLote, montosLote);
         envioTX(strLote);
 
     }

@@ -1939,7 +1939,7 @@ void lecturaComando(void);
 short int EEPROM_search(unsigned char tp) {
 
     short int precio;
-    if(tp != 0){
+    if(tp > 0) {
         tp--;
         tp = tp*2;
         precio = (eeprom_read(tp) << 8) | (eeprom_read(tp+1));
@@ -1961,7 +1961,7 @@ void lecturaEtiqueta() {
 
 
     for (int i = 0; i < 8; i++ ) {
-        if(codigoEntrada[i] >= '0' && codigoEntrada[i] <= '9'){
+        if(codigoEntrada[i] >= '0' && codigoEntrada[i] <= '9') {
             Aux += (codigoEntrada[i] - '0');
         }
         else{
@@ -1976,7 +1976,7 @@ void lecturaEtiqueta() {
 
         if ((cuenta + Aux) <= 999 && Aux != -1) {
             if(modoDebug){
-                envioTX("Producto ingresado\n");
+                envioTX("Producto ingresado");
             }
             tp--;
             ingresoProd(tp);
@@ -2021,7 +2021,7 @@ void cierreDeLote() {
     if (cierreLotePedido == 0) {
         char strLote[32];
 
-        sprintf(strLote,"\nCierre,L:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+        sprintf(strLote,"Cierre,L:%u,N:%u,T:%u", nroLote, ventasLote, montosLote);
         envioTX(strLote);
     }
     else{
@@ -2051,7 +2051,7 @@ void lecturaMas() {
 void lecturaMenos() {
     if(codigoEntrada[1] == 'D') {
         modoDebug = 0;
-
+        envioTX("Modo Debug desactivado");
     }
     else{
         envioTX("Ocurrio un error en la interpretacion.\n");
@@ -2066,7 +2066,7 @@ void consultaPrecio(short int articulo) {
         short int precio = (eeprom_read(articulo) << 8) | (eeprom_read(articulo+1));
 
         if (precio > 999 || precio < 0) {
-            sprintf(mensaje, "\nProducto no encontrado\n");
+            sprintf(mensaje, "Producto no encontrado");
             envioTX(mensaje);
         }
         else{
@@ -2085,19 +2085,21 @@ void lecturaConsulta() {
     if (codigoEntrada[1] == 0x0D || codigoEntrada[1] == 0x0A) {
 
         if (cuenta != 0) {
-            envioTX("\nEstado: Activo\n");
+            envioTX("Estado: Activo");
         }
         else {
-            envioTX("\nEstado: En espera\n");
+            envioTX("Estado: En espera");
         }
     }
+
     else if(codigoEntrada[1] == 'L') {
         char strLote[32];
 
-        sprintf(strLote,"\nL:%d,N:%d,T:%d\n", nroLote, ventasLote, montosLote);
+        sprintf(strLote,"L:%u,N:%u,T:%u", nroLote, ventasLote, montosLote);
         envioTX(strLote);
 
     }
+
     else if(codigoEntrada[1] == 'V') {
 
         pedidoVoltaje = 1;
@@ -2110,6 +2112,7 @@ void lecturaConsulta() {
         consultaPrecio(articulo);
 
     }
+
     else {
         envioTX("Ocurrio un error en la interpretacion.\n");
     }
