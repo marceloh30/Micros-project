@@ -399,127 +399,127 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;acciones.c: 27:         mostrarDigitos(cuenta);
 [e ( _mostrarDigitos (1 -> _cuenta `ui ]
 "28
-[; ;acciones.c: 28:     }
-}
-[e :U 102 ]
-"29
-[; ;acciones.c: 29:     if (modoDebug){
+[; ;acciones.c: 28:         if (modoDebug){
 [e $ ! != -> _modoDebug `i -> 0 `i 103  ]
 {
-"30
-[; ;acciones.c: 30:         envioTX("Producto cancelado");
+"29
+[; ;acciones.c: 29:             envioTX("Producto cancelado");
 [e ( _envioTX (1 :s 2C ]
+"30
+[; ;acciones.c: 30:         }
+}
+[e :U 103 ]
 "31
 [; ;acciones.c: 31:     }
 }
-[e :U 103 ]
-"32
-[; ;acciones.c: 32: }
+[e :U 102 ]
+"33
+[; ;acciones.c: 33: }
 [e :UE 101 ]
 }
-"34
-[; ;acciones.c: 34: void accionesPuertoSerial() {
+"35
+[; ;acciones.c: 35: void accionesPuertoSerial() {
 [v _accionesPuertoSerial `(v ~T0 @X0 1 ef ]
 {
 [e :U _accionesPuertoSerial ]
 [f ]
-"35
-[; ;acciones.c: 35:     if ((codigoEntrada[0] == '?') || (codigoEntrada[0] == '+') || (codigoEntrada[0] == '-')) {
+"36
+[; ;acciones.c: 36:     if ((codigoEntrada[0] == '?') || (codigoEntrada[0] == '+') || (codigoEntrada[0] == '-')) {
 [e $ ! || || == -> *U + &U _codigoEntrada * -> -> -> 0 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 63 `ui == -> *U + &U _codigoEntrada * -> -> -> 0 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 43 `ui == -> *U + &U _codigoEntrada * -> -> -> 0 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 45 `ui 105  ]
 {
-"36
-[; ;acciones.c: 36:         lecturaComando();
-[e ( _lecturaComando ..  ]
 "37
-[; ;acciones.c: 37:     }
+[; ;acciones.c: 37:         lecturaComando();
+[e ( _lecturaComando ..  ]
+"38
+[; ;acciones.c: 38:     }
 }
 [e $U 106  ]
-"38
-[; ;acciones.c: 38:     else if(codigoEntrada[0] <= '9' && codigoEntrada[0] >= '0') {
+"39
+[; ;acciones.c: 39:     else if(codigoEntrada[0] <= '9' && codigoEntrada[0] >= '0') {
 [e :U 105 ]
 [e $ ! && <= -> *U + &U _codigoEntrada * -> -> -> 0 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 57 `ui >= -> *U + &U _codigoEntrada * -> -> -> 0 `i `ui `ux -> -> # *U &U _codigoEntrada `ui `ux `ui -> 48 `ui 107  ]
 {
-"39
-[; ;acciones.c: 39:         if (modoDebug){
+"40
+[; ;acciones.c: 40:         if (modoDebug){
 [e $ ! != -> _modoDebug `i -> 0 `i 108  ]
 {
-"40
-[; ;acciones.c: 40:             char mensaje[12];
-[v _mensaje `uc ~T0 @X0 -> 12 `i a ]
 "41
-[; ;acciones.c: 41:             sprintf(mensaje,"E:%s", codigoEntrada);
-[e ( _sprintf (1 , (. , &U _mensaje :s 3C &U _codigoEntrada ]
+[; ;acciones.c: 41:             char mensaje[12];
+[v _mensaje `uc ~T0 @X0 -> 12 `i a ]
 "42
-[; ;acciones.c: 42:             envioTX(mensaje);
-[e ( _envioTX (1 &U _mensaje ]
+[; ;acciones.c: 42:             sprintf(mensaje,"E:%s", codigoEntrada);
+[e ( _sprintf (1 , (. , &U _mensaje :s 3C &U _codigoEntrada ]
 "43
-[; ;acciones.c: 43:         }
+[; ;acciones.c: 43:             envioTX(mensaje);
+[e ( _envioTX (1 &U _mensaje ]
+"44
+[; ;acciones.c: 44:         }
 }
 [e :U 108 ]
-"44
-[; ;acciones.c: 44:         lecturaEtiqueta();
-[e ( _lecturaEtiqueta ..  ]
 "45
-[; ;acciones.c: 45:     }
+[; ;acciones.c: 45:         lecturaEtiqueta();
+[e ( _lecturaEtiqueta ..  ]
+"46
+[; ;acciones.c: 46:     }
 }
 [e $U 109  ]
-"46
-[; ;acciones.c: 46:     else{
+"47
+[; ;acciones.c: 47:     else{
 [e :U 107 ]
 {
-"48
-[; ;acciones.c: 48:         RA5 = 1;
-[e = _RA5 -> -> 1 `i `b ]
 "49
-[; ;acciones.c: 49:         _delay((unsigned long)((1000)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+[; ;acciones.c: 49:         RA5 = 1;
+[e = _RA5 -> -> 1 `i `b ]
 "50
-[; ;acciones.c: 50:         RA5 = 0;
-[e = _RA5 -> -> 0 `i `b ]
+[; ;acciones.c: 50:         _delay((unsigned long)((1000)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "51
-[; ;acciones.c: 51:     }
+[; ;acciones.c: 51:         RA5 = 0;
+[e = _RA5 -> -> 0 `i `b ]
+"52
+[; ;acciones.c: 52:     }
 }
 [e :U 109 ]
 [e :U 106 ]
-"53
-[; ;acciones.c: 53: }
+"54
+[; ;acciones.c: 54: }
 [e :UE 104 ]
 }
-"55
-[; ;acciones.c: 55: void escrituraDeCierre(){
+"56
+[; ;acciones.c: 56: void escrituraDeCierre(){
 [v _escrituraDeCierre `(v ~T0 @X0 1 ef ]
 {
 [e :U _escrituraDeCierre ]
 [f ]
-"57
-[; ;acciones.c: 57:     char lower_8bits;
-[v _lower_8bits `uc ~T0 @X0 1 a ]
 "58
-[; ;acciones.c: 58:     char upper_8bits;
-[v _upper_8bits `uc ~T0 @X0 1 a ]
+[; ;acciones.c: 58:     char lower_8bits;
+[v _lower_8bits `uc ~T0 @X0 1 a ]
 "59
-[; ;acciones.c: 59:     lower_8bits = montosLote & 0xff;
-[e = _lower_8bits -> & -> _montosLote `ui -> -> 255 `i `ui `uc ]
+[; ;acciones.c: 59:     char upper_8bits;
+[v _upper_8bits `uc ~T0 @X0 1 a ]
 "60
-[; ;acciones.c: 60:     upper_8bits = (montosLote >> 8) & 0xff;
-[e = _upper_8bits -> & >> -> _montosLote `ui -> 8 `i -> -> 255 `i `ui `uc ]
+[; ;acciones.c: 60:     lower_8bits = montosLote & 0xff;
+[e = _lower_8bits -> & -> _montosLote `ui -> -> 255 `i `ui `uc ]
 "61
-[; ;acciones.c: 61:     eeprom_write(252, upper_8bits);
-[e ( _eeprom_write (2 , -> -> 252 `i `uc -> _upper_8bits `uc ]
+[; ;acciones.c: 61:     upper_8bits = (montosLote >> 8) & 0xff;
+[e = _upper_8bits -> & >> -> _montosLote `ui -> 8 `i -> -> 255 `i `ui `uc ]
 "62
-[; ;acciones.c: 62:     eeprom_write(253, lower_8bits);
-[e ( _eeprom_write (2 , -> -> 253 `i `uc -> _lower_8bits `uc ]
+[; ;acciones.c: 62:     eeprom_write(252, upper_8bits);
+[e ( _eeprom_write (2 , -> -> 252 `i `uc -> _upper_8bits `uc ]
 "63
-[; ;acciones.c: 63:     eeprom_write(254, ventasLote);
-[e ( _eeprom_write (2 , -> -> 254 `i `uc _ventasLote ]
+[; ;acciones.c: 63:     eeprom_write(253, lower_8bits);
+[e ( _eeprom_write (2 , -> -> 253 `i `uc -> _lower_8bits `uc ]
 "64
-[; ;acciones.c: 64:     eeprom_write(255, nroLote);
-[e ( _eeprom_write (2 , -> -> 255 `i `uc _nroLote ]
+[; ;acciones.c: 64:     eeprom_write(254, ventasLote);
+[e ( _eeprom_write (2 , -> -> 254 `i `uc _ventasLote ]
 "65
-[; ;acciones.c: 65:     RC0 = 1;
-[e = _RC0 -> -> 1 `i `b ]
+[; ;acciones.c: 65:     eeprom_write(255, nroLote);
+[e ( _eeprom_write (2 , -> -> 255 `i `uc _nroLote ]
 "66
-[; ;acciones.c: 66: }
+[; ;acciones.c: 66:     RC0 = 1;
+[e = _RC0 -> -> 1 `i `b ]
+"67
+[; ;acciones.c: 67: }
 [e :UE 110 ]
 }
 [p f _sprintf 8651776 ]

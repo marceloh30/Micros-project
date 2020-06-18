@@ -25,10 +25,11 @@ void accionesDeshacer() {
         //Elimino el ultimo producto ingresado correctamente de la lista de productos ingresados
         eliminarProd(productoIngresado); 
         mostrarDigitos(cuenta);
+        if (modoDebug){
+            envioTX("Producto cancelado");
+        }
     }
-    if (modoDebug){
-        envioTX("Producto cancelado");
-    }
+    
 }
 
 void accionesPuertoSerial() {

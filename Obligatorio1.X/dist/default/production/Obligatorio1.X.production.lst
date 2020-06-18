@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.10 build 88905656 
-                                                                                               Wed Jun 17 23:00:14 2020
+                                                                                               Wed Jun 17 23:49:03 2020
 
 Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1 
      1                           	processor	16F877A
@@ -2312,7 +2312,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   2294  0A08                     __ptext1:	
   2295 ;; *************** function _escrituraDeCierre *****************
   2296 ;; Defined at:
-  2297 ;;		line 55 in file "acciones.c"
+  2297 ;;		line 56 in file "acciones.c"
   2298 ;; Parameters:    Size  Location     Type
   2299 ;;		None
   2300 ;; Auto vars:     Size  Location     Type
@@ -2349,8 +2349,8 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   2331                           ; Regs used in _escrituraDeCierre: [wreg+status,2+status,0+pclath+cstack]
   2332                           
   2333                           
-  2334                           ;acciones.c: 57:     char lower_8bits;;acciones.c: 58:     char upper_8bits;;acciones.c:
-      +                           59:     lower_8bits = montosLote & 0xff;
+  2334                           ;acciones.c: 58:     char lower_8bits;;acciones.c: 59:     char upper_8bits;;acciones.c:
+      +                           60:     lower_8bits = montosLote & 0xff;
   2335  0A08  1683               	bsf	3,5	;RP0=1, select bank1
   2336  0A09  1303               	bcf	3,6	;RP1=0, select bank1
   2337  0A0A  085A               	movf	_montosLote^(0+128),w
@@ -2361,7 +2361,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   2342  0A0F  00A4               	movwf	escrituraDeCierre@lower_8bits
   2343  0A10                     l3394:	
   2344                           
-  2345                           ;acciones.c: 60:     upper_8bits = (montosLote >> 8) & 0xff;
+  2345                           ;acciones.c: 61:     upper_8bits = (montosLote >> 8) & 0xff;
   2346  0A10  1683               	bsf	3,5	;RP0=1, select bank1
   2347  0A11  1303               	bcf	3,6	;RP1=0, select bank1
   2348  0A12  085B               	movf	(_montosLote+1)^(0+128),w
@@ -2372,7 +2372,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   2353  0A17  00A5               	movwf	escrituraDeCierre@upper_8bits
   2354  0A18                     l3396:	
   2355                           
-  2356                           ;acciones.c: 61:     eeprom_write(252, upper_8bits);
+  2356                           ;acciones.c: 62:     eeprom_write(252, upper_8bits);
   2357  0A18  0825               	movf	escrituraDeCierre@upper_8bits,w
   2358  0A19  00A3               	movwf	??_escrituraDeCierre
   2359  0A1A  0823               	movf	??_escrituraDeCierre,w
@@ -2381,7 +2381,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   2362  0A1D  120A  158A  20E7  120A  158A  	fcall	_eeprom_write
   2363  0A22                     l3398:	
   2364                           
-  2365                           ;acciones.c: 62:     eeprom_write(253, lower_8bits);
+  2365                           ;acciones.c: 63:     eeprom_write(253, lower_8bits);
   2366  0A22  1283               	bcf	3,5	;RP0=0, select bank0
   2367  0A23  1303               	bcf	3,6	;RP1=0, select bank0
   2368  0A24  0824               	movf	escrituraDeCierre@lower_8bits,w
@@ -2392,7 +2392,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   2373  0A29  120A  158A  20E7  120A  158A  	fcall	_eeprom_write
   2374  0A2E                     l3400:	
   2375                           
-  2376                           ;acciones.c: 63:     eeprom_write(254, ventasLote);
+  2376                           ;acciones.c: 64:     eeprom_write(254, ventasLote);
   2377  0A2E  1283               	bcf	3,5	;RP0=0, select bank0
   2378  0A2F  1303               	bcf	3,6	;RP1=0, select bank0
   2379  0A30  086E               	movf	_ventasLote,w
@@ -2403,7 +2403,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   2384  0A35  120A  158A  20E7  120A  158A  	fcall	_eeprom_write
   2385  0A3A                     l3402:	
   2386                           
-  2387                           ;acciones.c: 64:     eeprom_write(255, nroLote);
+  2387                           ;acciones.c: 65:     eeprom_write(255, nroLote);
   2388  0A3A  0878               	movf	_nroLote,w
   2389  0A3B  1283               	bcf	3,5	;RP0=0, select bank0
   2390  0A3C  1303               	bcf	3,6	;RP1=0, select bank0
@@ -2414,7 +2414,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   2395  0A41  120A  158A  20E7  120A  158A  	fcall	_eeprom_write
   2396  0A46                     l3404:	
   2397                           
-  2398                           ;acciones.c: 65:     RC0 = 1;
+  2398                           ;acciones.c: 66:     RC0 = 1;
   2399  0A46  1283               	bcf	3,5	;RP0=0, select bank0
   2400  0A47  1303               	bcf	3,6	;RP1=0, select bank0
   2401  0A48  1407               	bsf	7,0	;volatile
@@ -2426,7 +2426,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   2407  0CBA                     __ptext2:	
   2408 ;; *************** function _accionesPuertoSerial *****************
   2409 ;; Defined at:
-  2410 ;;		line 34 in file "acciones.c"
+  2410 ;;		line 35 in file "acciones.c"
   2411 ;; Parameters:    Size  Location     Type
   2412 ;;		None
   2413 ;; Auto vars:     Size  Location     Type
@@ -2466,7 +2466,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
       +                          k]
   2447                           
   2448                           
-  2449                           ;acciones.c: 35:     if ((codigoEntrada[0] == '?') || (codigoEntrada[0] == '+') || (codi
+  2449                           ;acciones.c: 36:     if ((codigoEntrada[0] == '?') || (codigoEntrada[0] == '+') || (codi
       +                          goEntrada[0] == '-')) {
   2450  0CBA  303F               	movlw	63
   2451  0CBB  1683               	bsf	3,5	;RP0=1, select bank1
@@ -2498,10 +2498,10 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   2477  0CCE                     u3830:	
   2478  0CCE                     l3378:	
   2479                           
-  2480                           ;acciones.c: 36:         lecturaComando();
+  2480                           ;acciones.c: 37:         lecturaComando();
   2481  0CCE  120A  158A  204A  120A  158A  	fcall	_lecturaComando
   2482                           
-  2483                           ;acciones.c: 37:     }
+  2483                           ;acciones.c: 38:     }
   2484  0CD3  2D1D               	goto	l73
   2485  0CD4                     l3380:	
   2486  0CD4  303A               	movlw	58
@@ -2523,7 +2523,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   2502  0CE0                     u3850:	
   2503  0CE0                     l3384:	
   2504                           
-  2505                           ;acciones.c: 39:         if (modoDebug){
+  2505                           ;acciones.c: 40:         if (modoDebug){
   2506  0CE0  0872               	movf	_modoDebug,w
   2507  0CE1  1903               	btfsc	3,2
   2508  0CE2  2CE4               	goto	u3861
@@ -2533,7 +2533,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   2512  0CE5                     u3860:	
   2513  0CE5                     l3386:	
   2514                           
-  2515                           ;acciones.c: 40:             char mensaje[12];;acciones.c: 41:             sprintf(mensa
+  2515                           ;acciones.c: 41:             char mensaje[12];;acciones.c: 42:             sprintf(mensa
       +                          je,"E:%s", codigoEntrada);
   2516  0CE5  3090               	movlw	(low (accionesPuertoSerial@mensaje| (0+256)))& (0+255)
   2517  0CE6  1283               	bcf	3,5	;RP0=0, select bank0
@@ -2551,7 +2551,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   2529  0CF2  00B9               	movwf	(low ((?_sprintf| 0+4))+1)
   2530  0CF3  120A  118A  224B  120A  158A  	fcall	_sprintf
   2531                           
-  2532                           ;acciones.c: 42:             envioTX(mensaje);
+  2532                           ;acciones.c: 43:             envioTX(mensaje);
   2533  0CF8  3090               	movlw	(low (accionesPuertoSerial@mensaje| (0+256)))& (0+255)
   2534  0CF9  1283               	bcf	3,5	;RP0=0, select bank0
   2535  0CFA  1303               	bcf	3,6	;RP1=0, select bank0
@@ -2560,25 +2560,25 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   2538  0CFD  00A1               	movwf	envioTX@mensaje+1
   2539  0CFE  120A  158A  2190  120A  158A  	fcall	_envioTX
   2540  0D03                     l71:	
-  2541                           ;acciones.c: 43:         }
+  2541                           ;acciones.c: 44:         }
   2542                           
   2543                           
-  2544                           ;acciones.c: 44:         lecturaEtiqueta();
+  2544                           ;acciones.c: 45:         lecturaEtiqueta();
   2545  0D03  120A  118A  254C  120A  158A  	fcall	_lecturaEtiqueta
   2546                           
-  2547                           ;acciones.c: 45:     }
+  2547                           ;acciones.c: 46:     }
   2548  0D08  2D1D               	goto	l73
   2549  0D09                     l70:	
-  2550                           ;acciones.c: 46:     else{
+  2550                           ;acciones.c: 47:     else{
   2551                           
   2552                           
-  2553                           ;acciones.c: 48:         RA5 = 1;
+  2553                           ;acciones.c: 49:         RA5 = 1;
   2554  0D09  1283               	bcf	3,5	;RP0=0, select bank0
   2555  0D0A  1303               	bcf	3,6	;RP1=0, select bank0
   2556  0D0B  1685               	bsf	5,5	;volatile
   2557  0D0C                     l3388:	
   2558                           
-  2559                           ;acciones.c: 49:         _delay((unsigned long)((1000)*(4000000/4000.0)));
+  2559                           ;acciones.c: 50:         _delay((unsigned long)((1000)*(4000000/4000.0)));
   2560  0D0C  3006               	movlw	6
   2561  0D0D  1683               	bsf	3,5	;RP0=1, select bank1
   2562  0D0E  1303               	bcf	3,6	;RP1=0, select bank1
@@ -2596,7 +2596,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   2574  0D19  2D14               	goto	u4037
   2575  0D1A                     l3390:	
   2576                           
-  2577                           ;acciones.c: 50:         RA5 = 0;
+  2577                           ;acciones.c: 51:         RA5 = 0;
   2578  0D1A  1283               	bcf	3,5	;RP0=0, select bank0
   2579  0D1B  1303               	bcf	3,6	;RP1=0, select bank0
   2580  0D1C  1285               	bcf	5,5	;volatile
@@ -5589,7 +5589,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   5542  07C8  2FCA               	goto	u3791
   5543  07C9  2FCB               	goto	u3790
   5544  07CA                     u3791:	
-  5545  07CA  2FEB               	goto	l3368
+  5545  07CA  2FFB               	goto	l63
   5546  07CB                     u3790:	
   5547  07CB                     l3362:	
   5548                           
@@ -5626,7 +5626,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   5579  07E6  120A  158A  25F5  120A  118A  	fcall	_mostrarDigitos
   5580  07EB                     l3368:	
   5581                           
-  5582                           ;acciones.c: 29:     if (modoDebug){
+  5582                           ;acciones.c: 28:         if (modoDebug){
   5583  07EB  0872               	movf	_modoDebug,w
   5584  07EC  1903               	btfsc	3,2
   5585  07ED  2FEF               	goto	u3801
@@ -5636,7 +5636,7 @@ Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1
   5589  07F0                     u3800:	
   5590  07F0                     l3370:	
   5591                           
-  5592                           ;acciones.c: 30:         envioTX("Producto cancelado");
+  5592                           ;acciones.c: 29:             envioTX("Producto cancelado");
   5593  07F0  30FB               	movlw	low (STR_2| (0+32768))
   5594  07F1  1283               	bcf	3,5	;RP0=0, select bank0
   5595  07F2  1303               	bcf	3,6	;RP1=0, select bank0
@@ -8170,7 +8170,7 @@ EEDATA             100      0       0       0        0.0%
 
 
 Microchip Technology PIC Macro Assembler V2.10 build 88905656 
-Symbol Table                                                                                   Wed Jun 17 23:00:14 2020
+Symbol Table                                                                                   Wed Jun 17 23:49:03 2020
 
                  ?_lecturaConsulta 0074                      ?_eliminarProd 002E  
                                 pc 0002                     ___bmul@product 0022  
