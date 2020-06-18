@@ -1,10 +1,3 @@
-/* 
- * File:   variablesGlobales.h
- * Author: julia
- *
- * Created on 26 de mayo de 2020, 03:38 PM
- */
-
 #ifndef VARIABLESGLOBALES_H
 #define	VARIABLESGLOBALES_H
 

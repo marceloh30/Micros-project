@@ -7,7 +7,7 @@ short int EEPROM_search(unsigned char tp) {
         tp--;
         tp = tp*LARGO_PRECIO;
         precio = (eeprom_read(tp) << LARGO_ART) | (eeprom_read(tp+1)); 
-        //si el precio es 0 también lo ignoro (prod. Eliminado)
+        //si el precio es 0 tambien lo ignoro (prod. Eliminado)
         if( (precio <= 0 || precio > PRECIOMAX) || verificarProd(tp/LARGO_PRECIO)) {
             precio = -1;
         }
